@@ -12,7 +12,7 @@
 
 ## Android APK
 
-Use **Brainrot Planet → 2. Build Android APK**. Unity Android Build Support, SDK, NDK and OpenJDK must be installed in Unity Hub. The result is `Builds/Android/BrainrotPlanet-v0.1.apk`.
+Run **BUILD_ANDROID.cmd** on Windows, or use **Brainrot Planet → 2. Build Android APK** inside Unity. Unity Android Build Support, SDK, NDK and OpenJDK must be installed in Unity Hub. The result is `Builds/Android/BrainrotPlanet-v0.1.apk`.
 
 Alternatively, close the Editor and run:
 
