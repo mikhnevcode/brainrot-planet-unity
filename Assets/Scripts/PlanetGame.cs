@@ -117,7 +117,7 @@ namespace BrainrotPlanet
                 pathRenderers[team]=renderer;
                 Effects.Burst(motor.transform.position,Colors.Team(team),45,4f);
             }
-            orbitCamera.Target=Player.transform;
+            orbitCamera.BeginDescent(Player.transform);
             var gems=new GameObject("Crystal pickups").AddComponent<CrystalSystem>();
             gems.transform.SetParent(worldRoot);
             gems.Configure(this);
@@ -215,6 +215,11 @@ namespace BrainrotPlanet
         {
             if(State!=MatchState.Playing)return;
             float dt=Time.deltaTime;
+            if(orbitCamera!=null && orbitCamera.IsDescending)
+            {
+                if(Player!=null)Player.Wish=Vector3.zero;
+                return;
+            }
             matchTime-=dt;skillCooldown=Mathf.Max(0,skillCooldown-dt);
             annTime=Mathf.Max(0,annTime-dt);
             HandleInput();
@@ -339,7 +344,12 @@ namespace BrainrotPlanet
                 GUI.Label(new Rect(15,42,logicalW-30,37),
                     " "+scores[1].ToString("F1")+"%    "+scores[2].ToString("F1")+"%    "+scores[3].ToString("F1")+"%"+
                     "\n "+lives+"     ⏱ "+Mathf.CeilToInt(matchTime)+" сек",smallStyle);
-                if(annTime>0)
+                if(orbitCamera != null && orbitCamera.IsDescending)
+                {
+                    Plate(new Rect(25,96,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
+                    GUI.Label(new Rect(25,99,logicalW-50,34),"ПРИБЛИЖЕНИЕ К ПЛАНЕТЕ...",smallStyle);
+                }
+                else if(annTime>0)
                 {
                     Plate(new Rect(25,96,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
                     GUI.Label(new Rect(25,99,logicalW-50,34),announcement,smallStyle);
@@ -362,7 +372,7 @@ namespace BrainrotPlanet
                     "Твоя территория: "+scores[1].ToString("F1")+"%\nПобедитель: "+(winner==1?"ТЫ":("КОМАНДА "+winner)),menuStyle);
                 if(GUI.Button(new Rect(26,logicalH/2+14,logicalW-52,64),"ИГРАТЬ ЕЩЁ",buttonStyle))StartGame();
                 if(GUI.Button(new Rect(26,logicalH/2+89,logicalW-52,57),"ВЫБРАТЬ ГЕРОЯ",buttonStyle))
-                {if(worldRoot!=null)Destroy(worldRoot.gameObject);State=MatchState.Menu;orbitCamera.Target=null;}
+                {if(worldRoot!=null)Destroy(worldRoot.gameObject);State=MatchState.Menu;orbitCamera.ClearTarget();}
             }
             GUI.matrix=old;
         }
