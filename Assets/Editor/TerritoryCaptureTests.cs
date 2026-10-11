@@ -59,6 +59,25 @@ namespace BrainrotPlanet.Editor
                 if(after-before<.1f || notifications<1 || !insidePainted)
                     Debug.LogError("TERRITORY_TEST_FAIL " + Names[k]);
             }
+            // A captured area must be opaque: two different terrain colours
+            // must become the exact same team colour (no underlying patches).
+            RuntimeShaderAssets.Ensure();
+            var holder=new GameObject("Paint colour regression");
+            var painted=holder.AddComponent<PlanetSurface>();
+            painted.Build();
+            var owners=new byte[PlanetMath.CellCount];
+            owners[1000]=1;
+            owners[18432]=1;
+            painted.PaintTexture(owners,null);
+            var pixels=painted.MapTexture.GetPixels32();
+            Color32 p0=pixels[1000],p1=pixels[18432];
+            bool opaque=p0.r==p1.r && p0.g==p1.g && p0.b==p1.b &&
+                        p0.a==255 && p1.a==255;
+            Debug.Log("TERRITORY_OPAQUE_TEST result="+opaque+
+                      " A="+p0.r+","+p0.g+","+p0.b+
+                      " B="+p1.r+","+p1.g+","+p1.b);
+            if(!opaque)Debug.LogError("TERRITORY_OPAQUE_FAIL");
+            UnityEngine.Object.DestroyImmediate(holder);
             Debug.Log("TERRITORY_SMOKE_DONE");
         }
         private static Vector3 kinematicsLast;

@@ -100,7 +100,7 @@ namespace BrainrotPlanet
                 Color baseColor=unpainted[cell];
                 byte owner=owners==null ? (byte)0 : owners[cell];
                 if(owner>0 && owner<teamColors.Length)
-                    baseColor=Color.Lerp(baseColor,(Color)teamColors[owner],.88f);
+                    baseColor=(Color)teamColors[owner]; // Opaque paint: no underlying terrain patches.
                 if(trails!=null)
                 {
                     for(int team=1;team<trails.Length;team++)

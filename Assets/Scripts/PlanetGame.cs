@@ -27,6 +27,9 @@ namespace BrainrotPlanet
         private Camera worldCamera;
         private float guiScale=1f;
         private Vector2 movement;
+        private Vector2 savedSteering;
+        private bool autoMoving;
+        private float nextInputDiagnostic;
         private int steerFinger=-1;
         private Vector2 steerOrigin;
         private Rect skillArea,jumpArea;
@@ -78,7 +81,8 @@ namespace BrainrotPlanet
             players.Clear();lives=3;
             matchTime=145f;skillCooldown=0f;scoreTick=0f;
             playerLandingGrace=12f;
-            movement=Vector2.zero;steerFinger=-1;
+            movement=Vector2.zero;savedSteering=Vector2.zero;autoMoving=false;steerFinger=-1;
+            nextInputDiagnostic=0f;
             var gameObjectRoot=new GameObject("ONE PLANET / ONE MATCH");
             worldRoot=gameObjectRoot.transform;
             var globe=new GameObject("Spherical walkable planet");globe.transform.SetParent(worldRoot);
@@ -265,9 +269,15 @@ namespace BrainrotPlanet
         }
         private void HandleInput()
         {
-            movement=new Vector2(
+            Vector2 keyboard=new Vector2(
                 (Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow)?1:0)-(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow)?1:0),
                 (Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.UpArrow)?1:0)-(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.DownArrow)?1:0));
+            if(keyboard.sqrMagnitude>.01f)
+            {
+                savedSteering=keyboard.normalized;
+                autoMoving=true;
+            }
+            movement=autoMoving ? savedSteering : Vector2.zero;
             if(Input.GetKeyDown(KeyCode.Space))Player.Jump();
             if(Input.GetKeyDown(KeyCode.E))UseSkill();
             float unit=GameScale();
@@ -284,23 +294,40 @@ namespace BrainrotPlanet
                     {
                         if(skillArea.Contains(p)){UseSkill();continue;}
                         if(jumpArea.Contains(p)){Player.Jump();continue;}
-                        if(p.x<230&&p.y>virtualH-255){steerFinger=touch.fingerId;steerOrigin=p;}
+                        if(steerFinger<0){steerFinger=touch.fingerId;steerOrigin=p;}
                     }
                     if(touch.fingerId==steerFinger)
                     {
                         if(touch.phase==TouchPhase.Canceled||touch.phase==TouchPhase.Ended)
-                          {steerFinger=-1;movement=Vector2.zero;}
-                        else movement=Vector2.ClampMagnitude((p-steerOrigin)/54f,1f)*new Vector2(1,-1);
+                          {steerFinger=-1; /* Keep heading after release. */}
+                        else
+                        {
+                            Vector2 swipe=p-steerOrigin;
+                            if(swipe.sqrMagnitude>=64f)
+                            {
+                                savedSteering=new Vector2(swipe.x,-swipe.y).normalized;
+                                if(!autoMoving)Debug.Log("AUTO_MOVE_STARTED");
+                                autoMoving=true;
+                                movement=savedSteering;
+                            }
+                        }
                     }
                 }
             }
-            else if(steerFinger!=-1){steerFinger=-1;movement=Vector2.zero;}
+            else if(steerFinger!=-1){steerFinger=-1; /* Motion continues without a finger. */}
             if(Player!=null&&worldCamera!=null)
             {
                 Vector3 radial=Player.transform.position.normalized;
                 Vector3 right=Vector3.ProjectOnPlane(worldCamera.transform.right,radial).normalized;
                 Vector3 up=Vector3.ProjectOnPlane(worldCamera.transform.up,radial).normalized;
-                Player.Wish=right*movement.x+up*movement.y;
+                Player.Wish=(right*movement.x+up*movement.y).normalized;
+                if(autoMoving && Debug.isDebugBuild && Time.unscaledTime>=nextInputDiagnostic)
+                {
+                    nextInputDiagnostic=Time.unscaledTime+1.2f;
+                    Debug.Log(string.Format("AUTOMOVE actor=({0:F2},{1:F2},{2:F2}) input=({3:F2},{4:F2}) finger={5}",
+                        Player.transform.position.x,Player.transform.position.y,Player.transform.position.z,
+                        savedSteering.x,savedSteering.y,steerFinger));
+                }
             }
         }
         private void Finish()
@@ -366,15 +393,16 @@ namespace BrainrotPlanet
                     Plate(new Rect(25,96,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
                     GUI.Label(new Rect(25,99,logicalW-50,34),announcement,smallStyle);
                 }
-                Plate(new Rect(15,logicalH-158,136,136),new Color(.13f,.15f,.28f,.48f));
-                GUI.Label(new Rect(15,logicalH-146,136,30),"ДВИЖЕНИЕ",smallStyle);
+                // Floating steering input replaces the fixed bottom-left joystick.
+                GUI.Label(new Rect(12,logicalH-65,logicalW-135,36),"СВАЙП: МЕНЯЙ НАПРАВЛЕНИЕ",smallStyle);
                 if(Territory!=null && Territory.HasTrail(1))
                 {
                     Plate(new Rect(25,145,logicalW-50,41),new Color(.80f,.17f,.42f,.75f));
                     GUI.Label(new Rect(30,149,logicalW-60,34),
                         "ЗАМКНИ ПЕТЛЮ: ВЕРНИСЬ НА РОЗОВУЮ ЗОНУ",smallStyle);
                 }
-                if(steerFinger>=0)GUI.Label(new Rect(15,logicalH-110,136,66),"●",headerStyle);
+                if(steerFinger>=0)
+                    GUI.Label(new Rect(steerOrigin.x-25,steerOrigin.y-25,50,50),"+",headerStyle);
                 Plate(skillArea,skillCooldown<=0?new Color(.91f,.31f,.56f,.90f):new Color(.37f,.39f,.53f,.83f));
                 GUI.Label(skillArea,skillCooldown>0?skillNames[selectedHero]+"\n"+Mathf.CeilToInt(skillCooldown)+" сек":skillNames[selectedHero],smallStyle);
                 Plate(jumpArea,new Color(.21f,.62f,.89f,.91f));

@@ -147,13 +147,12 @@ namespace BrainrotPlanet
             int changed=0, enclosed=0;
             Vector3 effectCenter=Vector3.zero;
             foreach(int i in Trails[team])
-                if(!ProtectedByOtherCore(team,i)&&owner[i]!=team)
+                if(owner[i]!=team)
                 {owner[i]=(byte)team;changed++;}
             if(enclosedCells!=null)
             {
                 foreach(int i in enclosedCells)
                 {
-                    if(ProtectedByOtherCore(team,i))continue;
                     if(owner[i]!=team)
                     {
                         owner[i]=(byte)team;
