@@ -13,6 +13,8 @@ namespace BrainrotPlanet
         private readonly byte[] seen = new byte[PlanetMath.CellCount];
         private readonly float[] territoryArea = new float[5];
         public readonly HashSet<int>[] Trails = new HashSet<int>[5];
+        // Visible centreline is not the same thing as the thick flood-fill wall.
+        private readonly HashSet<int>[] trailCenters = new HashSet<int>[5];
         private readonly List<int>[] trailOrder = new List<int>[5];
         private readonly Vector3[] lastPosition = new Vector3[5];
         private readonly bool[] hasLast = new bool[5];
@@ -25,7 +27,7 @@ namespace BrainrotPlanet
         public TerritorySystem(PlanetSurface surface)
         {
             this.surface=surface;
-            for(int i=0;i<5;i++){Trails[i]=new HashSet<int>();trailOrder[i]=new List<int>();}
+            for(int i=0;i<5;i++){Trails[i]=new HashSet<int>();trailCenters[i]=new HashSet<int>();trailOrder[i]=new List<int>();}
         }
         public void Seed(int team,Vector3 direction)
         {
@@ -84,12 +86,13 @@ namespace BrainrotPlanet
                 else if(trailOrder[team].Count>0)ClearTrail(team);
                 return;
             }
-            if(Trails[team].Add(id))
+            if(trailCenters[team].Add(id))
             {
-                // Render only centerline, but use a thicker connected digital wall
+                // Render the true path. Keep a thicker and connected digital wall
                 // so diagonal steps do not leak during the 4-neighbor flood fill.
                 trailOrder[team].Add(id);
                 int x=id%PlanetMath.Width,y=id/PlanetMath.Width;
+                Trails[team].Add(id);
                 Trails[team].Add(y*PlanetMath.Width+(x+1)%PlanetMath.Width);
                 Trails[team].Add(y*PlanetMath.Width+(x+PlanetMath.Width-1)%PlanetMath.Width);
                 if(y>0)Trails[team].Add(id-PlanetMath.Width);
@@ -100,7 +103,7 @@ namespace BrainrotPlanet
         }
         private void ClearTrail(int team)
         {
-            Trails[team].Clear();trailOrder[team].Clear();dirty=true;
+            Trails[team].Clear();trailCenters[team].Clear();trailOrder[team].Clear();dirty=true;
         }
         public void ResetTrail(int team){ClearTrail(team);hasLast[team]=false;}
 
@@ -135,18 +138,96 @@ namespace BrainrotPlanet
                 float best=float.MaxValue;
                 for(int i=0;i<components.Count;i++)if(weights[i]<best){selected=i;best=weights[i];}
             }
-            int changed=0;
-            foreach(int i in Trails[team])if(!ProtectedByOtherCore(team,i)&&owner[i]!=team){owner[i]=(byte)team;changed++;}
-            if(selected>=0)
+            // Even with high-speed or diagonal cell transitions, a visible closed
+            // loop should create a filled area. Fall back to a local tangent-plane
+            // polygon if the discrete 4-neighbor wall failed to separate the sphere.
+            List<int> polygonCells=PolygonFallback(team);
+            List<int> enclosedCells = polygonCells!=null ? polygonCells :
+                (selected>=0 ? components[selected] : null);
+            int changed=0, enclosed=0;
+            Vector3 effectCenter=Vector3.zero;
+            foreach(int i in Trails[team])
+                if(!ProtectedByOtherCore(team,i)&&owner[i]!=team)
+                {owner[i]=(byte)team;changed++;}
+            if(enclosedCells!=null)
             {
-                foreach(int i in components[selected])
+                foreach(int i in enclosedCells)
                 {
                     if(ProtectedByOtherCore(team,i))continue;
-                    if(owner[i]!=team){owner[i]=(byte)team;changed++;}
+                    if(owner[i]!=team)
+                    {
+                        owner[i]=(byte)team;
+                        effectCenter+=PlanetMath.CellDirection(i)*PlanetMath.CellAreaWeight(i);
+                        changed++;enclosed++;
+                    }
                 }
             }
-            ClearTrail(team);dirty=true;
-            if(changed>3) OnCapture?.Invoke(team,changed,hit);
+            ClearTrail(team);
+            dirty=true;
+            // Apply the full closed area in the same frame as the end of the trail.
+            if(surface!=null)
+            {
+                surface.PaintTexture(owner,Trails);
+                dirty=false;renderTimer=.18f;
+            }
+            Debug.Log("TERRITORY_CAPTURE team="+team+" areaCells="+enclosed+
+                " totalNewCells="+changed+" selection="+
+                (polygonCells!=null?"polygon":selected>=0?"flood":"none"));
+            if(changed>3)
+                OnCapture?.Invoke(team,changed,
+                    effectCenter.sqrMagnitude>.001f ? effectCenter.normalized : hit);
+        }
+
+        // Robust local approximation for relatively short planetary loops. Unlike
+        // longitude/latitude polygons, this projection has no 0/360-degree seam.
+        private List<int> PolygonFallback(int team)
+        {
+            List<int> path=trailOrder[team];
+            if(path.Count<6)return null;
+            Vector3 centre=Vector3.zero;
+            foreach(int id in path)centre+=PlanetMath.CellDirection(id);
+            if(centre.sqrMagnitude<.00001f)return null;
+            centre.Normalize();
+            Vector3 east=Vector3.Cross(centre,Vector3.up);
+            if(east.sqrMagnitude<.001f)east=Vector3.Cross(centre,Vector3.forward);
+            east.Normalize();
+            Vector3 north=Vector3.Cross(centre,east).normalized;
+            var polygon=new List<Vector2>(path.Count);
+            float minX=float.MaxValue,maxX=float.MinValue,minY=float.MaxValue,maxY=float.MinValue;
+            int skip=Mathf.Max(1,Mathf.CeilToInt(path.Count/260f));
+            for(int index=0;index<path.Count;index+=skip)
+            {
+                int id=path[index];
+                Vector3 normal=PlanetMath.CellDirection(id);
+                float depth=Vector3.Dot(normal,centre);
+                if(depth<.35f)return null;
+                Vector2 point=new Vector2(Vector3.Dot(normal,east)/depth,
+                                           Vector3.Dot(normal,north)/depth);
+                polygon.Add(point);
+                minX=Mathf.Min(minX,point.x);maxX=Mathf.Max(maxX,point.x);
+                minY=Mathf.Min(minY,point.y);maxY=Mathf.Max(maxY,point.y);
+            }
+            if((maxX-minX)*(maxY-minY)<.00004f)return null;
+            var filled=new List<int>();
+            for(int id=0;id<owner.Length;id++)
+            {
+                if(owner[id]==team||Trails[team].Contains(id))continue;
+                Vector3 normal=PlanetMath.CellDirection(id);
+                float depth=Vector3.Dot(normal,centre);
+                if(depth<.35f)continue;
+                float x=Vector3.Dot(normal,east)/depth;
+                float y=Vector3.Dot(normal,north)/depth;
+                if(x<minX||x>maxX||y<minY||y>maxY)continue;
+                bool inside=false;
+                for(int i=0,j=polygon.Count-1;i<polygon.Count;j=i++)
+                {
+                    Vector2 a=polygon[i],b=polygon[j];
+                    if((a.y>y)!=(b.y>y) && x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)
+                        inside=!inside;
+                }
+                if(inside)filled.Add(id);
+            }
+            return filled.Count>0 ? filled : null;
         }
         private void Visit(int id,int team,ref int tail)
         {

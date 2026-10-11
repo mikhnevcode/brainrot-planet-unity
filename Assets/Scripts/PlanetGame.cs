@@ -165,7 +165,10 @@ namespace BrainrotPlanet
             Effects.CaptureFlash(direction,Colors.Team(team),changed);
             if(team==1)
             {
-                if(changed>180)Announce(" БОЛЬШОЙ ЗАХВАТ!");
+                float before=scores[1];
+                scores[1]=Territory.Percentage(1);
+                float gain=Mathf.Max(0f,scores[1]-before);
+                Announce((changed>180?" БОЛЬШОЙ ЗАХВАТ! +":" ОБЛАСТЬ ЗАКРАШЕНА! +")+gain.ToString("F1")+"%");
                 skillCooldown=Mathf.Max(0f,skillCooldown-Mathf.Min(1.5f,changed/450f));
             }
         }
@@ -365,6 +368,12 @@ namespace BrainrotPlanet
                 }
                 Plate(new Rect(15,logicalH-158,136,136),new Color(.13f,.15f,.28f,.48f));
                 GUI.Label(new Rect(15,logicalH-146,136,30),"ДВИЖЕНИЕ",smallStyle);
+                if(Territory!=null && Territory.HasTrail(1))
+                {
+                    Plate(new Rect(25,145,logicalW-50,41),new Color(.80f,.17f,.42f,.75f));
+                    GUI.Label(new Rect(30,149,logicalW-60,34),
+                        "ЗАМКНИ ПЕТЛЮ: ВЕРНИСЬ НА РОЗОВУЮ ЗОНУ",smallStyle);
+                }
                 if(steerFinger>=0)GUI.Label(new Rect(15,logicalH-110,136,66),"●",headerStyle);
                 Plate(skillArea,skillCooldown<=0?new Color(.91f,.31f,.56f,.90f):new Color(.37f,.39f,.53f,.83f));
                 GUI.Label(skillArea,skillCooldown>0?skillNames[selectedHero]+"\n"+Mathf.CeilToInt(skillCooldown)+" сек":skillNames[selectedHero],smallStyle);
