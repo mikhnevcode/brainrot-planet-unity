@@ -18,6 +18,7 @@ namespace BrainrotPlanet
         private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА"};
         private int selectedHero=0;
         private float matchTime,skillCooldown,annTime,scoreTick;
+        private float playerLandingGrace;
         private float[] scores = new float[5];
         private int lives=3;
         private string announcement="";
@@ -75,6 +76,7 @@ namespace BrainrotPlanet
             Array.Clear(pathRenderers,0,pathRenderers.Length);
             players.Clear();lives=3;
             matchTime=145f;skillCooldown=0f;scoreTick=0f;
+            playerLandingGrace=12f;
             movement=Vector2.zero;steerFinger=-1;
             var gameObjectRoot=new GameObject("ONE PLANET / ONE MATCH");
             worldRoot=gameObjectRoot.transform;
@@ -168,6 +170,11 @@ namespace BrainrotPlanet
         }
         private void HandleTrailLost(int team,Vector3 direction)
         {
+            if(team==1 && playerLandingGrace>0f)
+            {
+                // Player is invulnerable to trail hits while landing and learning to move.
+                return;
+            }
             PlanetActor actor=players.Find(p=>p.Team==team);
             if(actor!=null)actor.HitTrail();
         }
@@ -215,6 +222,7 @@ namespace BrainrotPlanet
         {
             if(State!=MatchState.Playing)return;
             float dt=Time.deltaTime;
+            playerLandingGrace=Mathf.Max(0f,playerLandingGrace-dt);
             if(orbitCamera!=null && orbitCamera.IsDescending)
             {
                 if(Player!=null)Player.Wish=Vector3.zero;

@@ -67,15 +67,33 @@ namespace BrainrotPlanet
             damageCooldown=Mathf.Max(0,damageCooldown-dt);
             SlowSeconds=Mathf.Max(0,SlowSeconds-dt);
             SpeedSeconds=Mathf.Max(0,SpeedSeconds-dt);
+            // Keep the body outside the deformed spherical ground even on mobile
+            // devices where a concave MeshCollider contact can be missed.
+            if(body.position.sqrMagnitude < 1f)
+            {
+                body.position=PlanetSurface.Point(SpawnDirection,.85f);
+                body.linearVelocity=Vector3.zero;
+            }
             Vector3 n=body.position.normalized;
+            float radialGround=PlanetMath.Radius+PlanetSurface.Elevation(n)+.72f;
+            float currentRadius=body.position.magnitude;
+            bool radialContact=currentRadius <= radialGround+.10f;
+            if(currentRadius<radialGround)
+            {
+                body.position=n*radialGround;
+                Vector3 velocity=body.linearVelocity;
+                float towardCenter=Vector3.Dot(velocity,n);
+                if(towardCenter<0f)body.linearVelocity=velocity-n*towardCenter;
+            }
             body.AddForce(-n*23f,ForceMode.Acceleration);
             RaycastHit ground;
-            Grounded=Physics.Raycast(body.position+n*.15f,-n,out ground,1.15f,1<<8,QueryTriggerInteraction.Ignore);
+            bool colliderContact=Physics.Raycast(body.position+n*.15f,-n,out ground,1.15f,1<<8,QueryTriggerInteraction.Ignore);
+            Grounded=radialContact||colliderContact;
             Vector3 walk=Vector3.ProjectOnPlane(Wish,n).normalized;
             float speed=(Team==1?6.5f:5.4f)*(SlowSeconds>0?.46f:1f)*(SpeedSeconds>0?1.85f:1f);
             if(Grounded)
             {
-                float incline=Vector3.Angle(ground.normal,n);
+                float incline=colliderContact?Vector3.Angle(ground.normal,n):0f;
                 Vector3 uphill=-Vector3.ProjectOnPlane(ground.normal,n).normalized;
                 if(incline>45f && Vector3.Dot(walk,uphill)>.02f)walk=Vector3.zero;
                 // Ramps / bumps cause little jumps instead of glued-to-ground movement.

@@ -25,6 +25,7 @@ namespace BrainrotPlanet
         private Vector3 landingFocus;
         private Vector3 positionVelocity;
         private Vector3 smoothedGround;
+        private float nextDiagnostics;
 
         private void Awake()
         {
@@ -54,7 +55,7 @@ namespace BrainrotPlanet
             positionVelocity = Vector3.zero;
             smoothedGround = PlanetSurface.Point(surfaceNormal, .65f);
             transform.position = landingStart;
-            transform.rotation = Quaternion.LookRotation(landingFocus - landingStart, surfaceNormal);
+            transform.rotation = Quaternion.LookRotation(landingFocus - landingStart, travelForward);
             if (view != null) view.fieldOfView = 50f;
         }
 
@@ -95,8 +96,9 @@ namespace BrainrotPlanet
                 float ease = t * t * (3f - 2f * t);
                 transform.position = Vector3.Lerp(landingStart, targetPosition, ease);
                 Vector3 focus = Vector3.Lerp(landingFocus, targetFocus, ease);
-                transform.rotation = Quaternion.LookRotation(focus - transform.position, smoothedNormal);
+                transform.rotation = Quaternion.LookRotation(focus - transform.position, travelForward);
                 view.fieldOfView = Mathf.Lerp(50f, 57f, ease);
+                LogDiagnostics();
                 if (descentTime >= DescentDuration)
                     positionVelocity = Vector3.zero;
                 return;
@@ -106,10 +108,22 @@ namespace BrainrotPlanet
             // on the spot never makes the planet revolve on the screen.
             transform.position = Vector3.SmoothDamp(
                 transform.position, targetPosition, ref positionVelocity, .25f, 100f, dt);
-            Quaternion ideal = Quaternion.LookRotation(targetFocus - transform.position, smoothedNormal);
+            Quaternion ideal = Quaternion.LookRotation(targetFocus - transform.position, travelForward);
             float rotate = 1f - Mathf.Exp(-FollowSharpness * dt);
             transform.rotation = Quaternion.Slerp(transform.rotation, ideal, rotate);
             view.fieldOfView = Mathf.Lerp(view.fieldOfView, 57f, rotate);
+            LogDiagnostics();
+        }
+
+        private void LogDiagnostics()
+        {
+            if(!Debug.isDebugBuild || Time.unscaledTime < nextDiagnostics || Target == null) return;
+            nextDiagnostics = Time.unscaledTime + 1.0f;
+            Vector3 viewport = view.WorldToViewportPoint(Target.position);
+            Debug.Log(string.Format("CAMQA stage={0} actorR={1:F2} camR={2:F2} actorScreen=({3:F2},{4:F2},{5:F2}) camToActor={6:F2} heading={7:F1}",
+                IsDescending ? "descent" : "ground", Target.position.magnitude, transform.position.magnitude,
+                viewport.x, viewport.y, viewport.z, Vector3.Distance(transform.position, Target.position),
+                Vector3.Angle(previousNormal, Target.position.normalized)));
         }
 
         public void ClearTarget()
