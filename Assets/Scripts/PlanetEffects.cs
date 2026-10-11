@@ -19,7 +19,7 @@ namespace BrainrotPlanet
             var emission=particle.emission;emission.rateOverTime=0f;
             var shape=particle.shape;shape.shapeType=ParticleSystemShapeType.Sphere;shape.radius=.4f;
             var renderer=particle.GetComponent<ParticleSystemRenderer>();
-            renderer.material=new Material(Shader.Find("Particles/Standard Unlit"));
+            renderer.material=Colors.FromResource("PlanetParticles");
             renderer.material.SetColor("_Color",color);
             particle.Play();particle.Emit(amount);
             Destroy(go,2.4f);
@@ -48,7 +48,7 @@ namespace BrainrotPlanet
             maxRadius=max;lifetime=duration;color=waveColor;
             line=gameObject.AddComponent<LineRenderer>();
             line.loop=true;line.positionCount=65;
-            line.material=new Material(Shader.Find("Sprites/Default"));
+            line.material=Colors.FromResource("PlanetSprite");
             line.numCapVertices=3;line.startColor=color;line.endColor=color;
         }
         private void Update()

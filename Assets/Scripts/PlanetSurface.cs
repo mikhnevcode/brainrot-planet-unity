@@ -74,7 +74,7 @@ namespace BrainrotPlanet
             pixels=new Color32[PlanetMath.CellCount];
             unpainted=new Color32[PlanetMath.CellCount];
             PrepareBaseColors();
-            var mat = new Material(Shader.Find("Standard"));mat.name="Planet paint / relief";
+            var mat = Colors.New(Color.white);mat.name="Planet paint / relief";
             mat.SetFloat("_Glossiness",.18f);mat.SetTexture("_MainTex",MapTexture);
             gameObject.AddComponent<MeshRenderer>().sharedMaterial=mat;
             PaintTexture(null,null);
@@ -133,9 +133,18 @@ namespace BrainrotPlanet
     }
     public static class Colors
     {
+        public static Material FromResource(string assetName)
+        {
+            Material template = Resources.Load<Material>(assetName);
+            if (template == null)
+                throw new System.InvalidOperationException("Unity material missing from Resources: " + assetName);
+            return new Material(template);
+        }
         public static Material New(Color color, bool glow=false)
         {
-            var material=new Material(Shader.Find("Standard"));
+            var reference=Resources.Load<Material>("PlanetStandard");
+            if(reference==null)throw new System.InvalidOperationException("PlanetStandard material missing from Resources");
+            var material=new Material(reference);
             material.color=color;material.SetFloat("_Glossiness",.42f);
             if(glow){material.EnableKeyword("_EMISSION");material.SetColor("_EmissionColor",color*.65f);}
             return material;

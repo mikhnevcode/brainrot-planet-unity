@@ -65,7 +65,7 @@ namespace BrainrotPlanet
             Destroy(beam.GetComponent<Collider>());
             beam.GetComponent<Renderer>().sharedMaterial=Colors.New(rare?Color.yellow:Color.cyan,true);
             items.Add(new Crystal{obj=obj,n=n,rare=rare});
-            if(rare)game.Announce("⭐ РЕДКИЙ КРИСТАЛЛ ПОЯВИЛСЯ!");
+            if(rare)game.Announce(" РЕДКИЙ КРИСТАЛЛ ПОЯВИЛСЯ!");
         }
         private void Collect(Crystal c,int team)
         {
@@ -74,7 +74,7 @@ namespace BrainrotPlanet
             if(team==1)
             {
                 game.ReduceSkillCooldown(c.rare?9f:4f);
-                game.Announce(c.rare?"⭐ ЛЕГЕНДАРНЫЙ КРИСТАЛЛ!":"💎 КРИСТАЛЛ: КРАСКА + ЭНЕРГИЯ");
+                game.Announce(c.rare?" ЛЕГЕНДАРНЫЙ КРИСТАЛЛ!":" КРИСТАЛЛ: КРАСКА + ЭНЕРГИЯ");
             }
             Destroy(c.obj);
         }

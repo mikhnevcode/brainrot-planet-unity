@@ -44,11 +44,12 @@ namespace BrainrotPlanet.Editor
         [MenuItem("Brainrot Planet/2. Build Android APK")]
         public static void BuildAndroid()
         {
+            RuntimeShaderAssets.Ensure();
             CreateScene(false);
             PlayerSettings.companyName="mikhnevcode";
             PlayerSettings.productName="Brainrot Planet IO";
-            PlayerSettings.bundleVersion="0.1.0";
-            PlayerSettings.Android.bundleVersionCode=1;
+            PlayerSettings.bundleVersion="0.1.2";
+            PlayerSettings.Android.bundleVersionCode=3;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android,"com.mikhnevcode.brainrotplanet");
             PlayerSettings.defaultInterfaceOrientation=UIOrientation.Portrait;
             PlayerSettings.allowedAutorotateToLandscapeLeft=false;
@@ -56,13 +57,15 @@ namespace BrainrotPlanet.Editor
             PlayerSettings.allowedAutorotateToPortrait=true;
             PlayerSettings.allowedAutorotateToPortraitUpsideDown=false;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android,ScriptingImplementation.IL2CPP);
+            // Primitive colliders are instantiated dynamically at runtime.
+            PlayerSettings.stripEngineCode=false;
             PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
             PlayerSettings.Android.minSdkVersion=AndroidSdkVersions.AndroidApiLevel26;
             PlayerSettings.Android.targetSdkVersion=AndroidSdkVersions.AndroidApiLevelAuto;
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android,BuildTarget.Android);
             var dir=Path.Combine(Directory.GetCurrentDirectory(),"Builds","Android");
             Directory.CreateDirectory(dir);
-            var output=Path.Combine(dir,"BrainrotPlanet-v0.1.apk");
+            var output=Path.Combine(dir,"BrainrotPlanet-v0.1.2.apk");
             var opts=new BuildPlayerOptions{
                 scenes=new[]{Arena},locationPathName=output,
                 target=BuildTarget.Android,options=BuildOptions.Development

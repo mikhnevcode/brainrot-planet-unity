@@ -17,7 +17,11 @@ namespace BrainrotPlanet
             baseAxis=Vector3.Slerp(baseAxis,(up*.94f + sideways*.33f).normalized,Time.deltaTime*2.7f);
             // Entire curved world remains visible, while the player is near its foreground.
             Vector3 focus=Target.position*.25f;
-            Vector3 desired=baseAxis*42f;
+            // On tall phones, horizontal field of view is much narrower than vertical.
+            float aspect=Mathf.Max(.42f,view.aspect);
+            float horizontalHalf=Mathf.Atan(Mathf.Tan(view.fieldOfView*Mathf.Deg2Rad*.5f)*aspect);
+            float distance=Mathf.Max(55f,(PlanetMath.Radius+6f)/Mathf.Max(.16f,Mathf.Tan(horizontalHalf)));
+            Vector3 desired=baseAxis*distance;
             transform.position=Vector3.Lerp(transform.position,desired,Time.deltaTime*3f);
             Vector3 upHint=Vector3.ProjectOnPlane(up,transform.forward).normalized;
             if(upHint.sqrMagnitude<.01f)upHint=Vector3.up;
