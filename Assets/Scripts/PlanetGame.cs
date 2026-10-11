@@ -9,6 +9,7 @@ namespace BrainrotPlanet
     public sealed class PlanetGame : MonoBehaviour
     {
         public MatchState State { get; private set; } = MatchState.Menu;
+        public bool IsLanding => orbitCamera != null && orbitCamera.IsDescending;
         public TerritorySystem Territory { get; private set; }
         public PlanetEffects Effects { get; private set; }
         public PlanetActor Player { get; private set; }

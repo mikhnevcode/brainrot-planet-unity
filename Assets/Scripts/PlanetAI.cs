@@ -43,6 +43,7 @@ namespace BrainrotPlanet
         private void Update()
         {
             if(game==null || game.State!=MatchState.Playing)return;
+            if(game.IsLanding){actor.Wish=Vector3.zero;return;}
             Vector3 normal=transform.position.normalized;
             rethink-=Time.deltaTime;
             if(Vector3.Angle(normal,goal)<7.5f || rethink<=0)NextLeg();

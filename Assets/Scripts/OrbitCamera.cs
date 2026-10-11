@@ -9,12 +9,12 @@ namespace BrainrotPlanet
         public Transform Target { get; private set; }
         public bool IsDescending => Target != null && descentTime < DescentDuration;
 
-        private const float DescentDuration = 3.8f;
-        private const float CameraHeight = 12.5f;
-        private const float CameraBack = 4.5f;
-        private const float LookAhead = 0.5f;
-        private const float FollowSharpness = 4.5f;
-        private const float NormalSharpness = 5.0f;
+        private const float DescentDuration = 2.9f;
+        private const float CameraHeight = 10.8f;
+        private const float CameraBack = 1.1f;
+        private const float LookAhead = .7f;
+        private const float FollowSharpness = 10.0f;
+        private const float NormalSharpness = 12.0f;
 
         private Camera view;
         private float descentTime = DescentDuration;
@@ -84,7 +84,7 @@ namespace BrainrotPlanet
             // Camera anchor is the planet surface, not the avatar's actual height.
             // Jumping and the radial physics correction cannot bounce the camera.
             Vector3 desiredGround = PlanetSurface.Point(smoothedNormal, .65f);
-            smoothedGround = Vector3.Lerp(smoothedGround, desiredGround, 1f - Mathf.Exp(-3.1f * dt));
+            smoothedGround = Vector3.Lerp(smoothedGround, desiredGround, 1f - Mathf.Exp(-5.0f * dt));
             Vector3 ground = smoothedGround;
             Vector3 targetPosition = ground + smoothedNormal * CameraHeight - travelForward * CameraBack;
             Vector3 targetFocus = ground + smoothedNormal * .55f + travelForward * LookAhead;
@@ -97,7 +97,7 @@ namespace BrainrotPlanet
                 transform.position = Vector3.Lerp(landingStart, targetPosition, ease);
                 Vector3 focus = Vector3.Lerp(landingFocus, targetFocus, ease);
                 transform.rotation = Quaternion.LookRotation(focus - transform.position, travelForward);
-                view.fieldOfView = Mathf.Lerp(50f, 57f, ease);
+                view.fieldOfView = Mathf.Lerp(50f, 48f, ease);
                 LogDiagnostics();
                 if (descentTime >= DescentDuration)
                     positionVelocity = Vector3.zero;
@@ -107,11 +107,11 @@ namespace BrainrotPlanet
             // Smoothing is applied after ground stabilisation; player turning
             // on the spot never makes the planet revolve on the screen.
             transform.position = Vector3.SmoothDamp(
-                transform.position, targetPosition, ref positionVelocity, .25f, 100f, dt);
+                transform.position, targetPosition, ref positionVelocity, .11f, 100f, dt);
             Quaternion ideal = Quaternion.LookRotation(targetFocus - transform.position, travelForward);
             float rotate = 1f - Mathf.Exp(-FollowSharpness * dt);
             transform.rotation = Quaternion.Slerp(transform.rotation, ideal, rotate);
-            view.fieldOfView = Mathf.Lerp(view.fieldOfView, 57f, rotate);
+            view.fieldOfView = Mathf.Lerp(view.fieldOfView, 48f, rotate);
             LogDiagnostics();
         }
 
