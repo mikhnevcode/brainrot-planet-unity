@@ -135,6 +135,46 @@ namespace BrainrotPlanet
             }
             Debug.Log("BOMBOMBINI_COLORED_RENDERERS="+count);
         }
+        private static readonly Dictionary<string,Material> BallerinaMaterials=new Dictionary<string,Material>();
+        private static Material BallerinaPalette(Material original)
+        {
+            string n=(original!=null?original.name:"unknown").ToLowerInvariant();
+            if(BallerinaMaterials.TryGetValue(n,out Material cached))return cached;
+            Color c;
+            if(n.Contains("porcelain"))c=new Color(.91f,.83f,.72f);
+            else if(n.Contains("gold"))c=new Color(.64f,.39f,.18f);
+            else if(n.Contains("espresso")||n.Contains("mocha"))c=new Color(.29f,.115f,.055f);
+            else if(n.Contains("foam"))c=new Color(.96f,.83f,.60f);
+            else if(n.Contains("latte art"))c=new Color(.98f,.97f,.87f);
+            else if(n.Contains("warm rose")||n.Contains("skin"))c=new Color(.92f,.58f,.48f);
+            else if(n.Contains("soft pink"))c=new Color(.91f,.39f,.60f);
+            else if(n.Contains("pale blush"))c=new Color(.97f,.65f,.74f);
+            else if(n.Contains("ribbons")||n.Contains("dusty rose"))c=new Color(.70f,.21f,.38f);
+            else if(n.Contains("eye white"))c=new Color(.97f,.95f,.93f);
+            else if(n.Contains("iris"))c=new Color(.37f,.18f,.10f);
+            else if(n.Contains("eyelashes"))c=new Color(.07f,.035f,.04f);
+            else if(n.Contains("catchlight"))c=new Color(.98f,.98f,.94f);
+            else c=new Color(.93f,.66f,.73f);
+            Material m=Colors.New(c);
+            if(m.HasProperty("_Glossiness"))m.SetFloat("_Glossiness",.02f);
+            if(m.HasProperty("_Metallic"))m.SetFloat("_Metallic",0f);
+            if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
+            if(m.HasProperty("_GlossyReflections"))m.SetFloat("_GlossyReflections",0f);
+            m.name="Ballerina / "+n;
+            BallerinaMaterials[n]=m;
+            return m;
+        }
+        private static void RecolorBallerina(Transform root)
+        {
+            int count=0;
+            foreach(Renderer r in root.GetComponentsInChildren<Renderer>(true))
+            {
+                var mats=r.sharedMaterials;
+                for(int i=0;i<mats.Length;i++)mats[i]=BallerinaPalette(mats[i]);
+                r.sharedMaterials=mats;count++;
+            }
+            Debug.Log("BALLERINA_COLORED_RENDERERS="+count);
+        }
         private static void Recolor(Transform imported)
         {
             int count=0;
@@ -238,6 +278,33 @@ namespace BrainrotPlanet
                     return;
                 }
                 Debug.LogWarning("BOMBARDIRO_FBX_MISSING: primitives remain in use");
+            }
+            if(character==4)
+            {
+                GameObject prefab=Resources.Load<GameObject>("Characters/Ballerina_v01");
+                if(prefab!=null)
+                {
+                    GameObject visual=Object.Instantiate(prefab,art,false);
+                    visual.name="Ballerina Cappuccina / rigged cappuccino ballerina";
+                    visual.transform.localPosition=new Vector3(0,-.32f,0);
+                    visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
+                    visual.transform.localScale=Vector3.one*.52f;
+                    RecolorBallerina(visual.transform);
+                    foreach(Collider c in visual.GetComponentsInChildren<Collider>(true))
+                        Object.Destroy(c);
+                    Animator anim=visual.GetComponent<Animator>();
+                    if(anim==null)anim=visual.AddComponent<Animator>();
+                    anim.runtimeAnimatorController=
+                        Resources.Load<RuntimeAnimatorController>("Characters/Ballerina");
+                    anim.applyRootMotion=false;
+                    anim.cullingMode=AnimatorCullingMode.AlwaysAnimate;
+                    Debug.Log("BALLERINA_RIG_LOADED animator="+
+                        (anim.runtimeAnimatorController!=null));
+                    Oval(root,"Paint aura",new Vector3(0,-.42f,0),
+                         new Vector3(1.25f,.09f,1.25f),neon);
+                    return;
+                }
+                Debug.LogWarning("BALLERINA_FBX_MISSING: using placeholder");
             }
             if(character==3)
             {

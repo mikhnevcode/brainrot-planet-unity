@@ -15,8 +15,8 @@ namespace BrainrotPlanet
         public PlanetActor Player { get; private set; }
         private readonly List<PlanetActor> players = new List<PlanetActor>();
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
-        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ "};
-        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА","РЕАКТИВНЫЙ РЫВОК"};
+        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО "};
+        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА","РЕАКТИВНЫЙ РЫВОК","КОФЕЙНЫЙ ВИХРЬ"};
         private int selectedHero=0;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
@@ -32,6 +32,7 @@ namespace BrainrotPlanet
         private float nextInputDiagnostic;
         private int steerFinger=-1;
         private Vector2 steerOrigin;
+        private Vector2 menuScroll;
         private Rect skillArea,jumpArea;
         private Texture2D whitePixel;
         private GUIStyle headerStyle,menuStyle,buttonStyle,smallStyle;
@@ -169,6 +170,7 @@ namespace BrainrotPlanet
             Effects.CaptureFlash(direction,Colors.Team(team),changed);
             if(team==1)
             {
+                if(selectedHero==4 && Player!=null)Player.Celebrate();
                 float before=scores[1];
                 scores[1]=Territory.Percentage(1);
                 float gain=Mathf.Max(0f,scores[1]-before);
@@ -230,6 +232,15 @@ namespace BrainrotPlanet
                 Player.SpeedSeconds=4.0f;
                 Effects.Burst(Player.transform.position,Colors.Team(1),35,5f);
                 Announce(" ГУСИНИ: РЕАКТИВНЫЙ РЫВОК!");
+            }
+            else if(selectedHero==4)
+            {
+                int painted=Territory.ClaimDisk(1,Player.transform.position.normalized,.125f);
+                Effects.CaptureFlash(Player.transform.position.normalized,Colors.Team(1),painted);
+                Effects.Burst(Player.transform.position,Colors.Team(1),35,2.2f);
+                Player.Celebrate();
+                Announce(" БАЛЕРИНА: КОФЕЙНЫЙ ВИХРЬ! +"+painted+" КЛЕТОК");
+                Debug.Log("BALLERINA_WHIRL_CAPTURE cells="+painted);
             }
         }
         private void Update()
@@ -372,15 +383,19 @@ namespace BrainrotPlanet
                 GUI.Label(new Rect(16,45,logicalW-32,55)," BRAINROT PLANET.IO",headerStyle);
                 GUI.Label(new Rect(22,102,logicalW-44,74),"Десантируйся на планету. Оставляй след и замыкай его, чтобы захватить поверхность!",menuStyle);
                 GUI.Label(new Rect(18,184,logicalW-36,32),"ВЫБЕРИ ГЕРОЯ",headerStyle);
+                var menuRect=new Rect(18,220,logicalW-36,Mathf.Max(150,logicalH-414));
+                menuScroll=GUI.BeginScrollView(menuRect,menuScroll,
+                    new Rect(0,0,logicalW-54,characters.Length*84+8));
                 for(int i=0;i<characters.Length;i++)
                 {
-                    float y=222+i*84;
-                    Plate(new Rect(19,y,logicalW-38,78),i==selectedHero?new Color(.90f,.25f,.52f,.85f):new Color(.25f,.34f,.52f,.72f));
-                    if(GUI.Button(new Rect(28,y+7,logicalW-56,65),characters[i]+"\n"+
-                       (i==0?" Ускорение":i==1?" Бомба по дуге":i==2?" Ледяная волна":" Реактивный рывок"),buttonStyle)) selectedHero=i;
+                    float y=i*84;
+                    Plate(new Rect(1,y,logicalW-58,78),i==selectedHero?new Color(.90f,.25f,.52f,.85f):new Color(.25f,.34f,.52f,.72f));
+                    if(GUI.Button(new Rect(9,y+7,logicalW-74,65),characters[i]+"\n"+
+                       (i==0?" Ускорение":i==1?" Бомба по дуге":i==2?" Ледяная волна":i==3?" Реактивный рывок":" Кофейный вихрь"),buttonStyle)) selectedHero=i;
                 }
+                GUI.EndScrollView();
                 if(GUI.Button(new Rect(26,logicalH-166,logicalW-52,60)," ДЕСАНТИРОВАТЬСЯ",buttonStyle))StartGame();
-                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),"145 секунд · 4 героя · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
+                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),"145 секунд · 5 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
             }
             else if(State==MatchState.Playing)
             {

@@ -1,0 +1,44 @@
+10-12 00:43:36.431 20582 20628 I Unity   : BALLERINA_COLORED_RENDERERS=11
+10-12 00:43:36.478 20582 20628 I Unity   : BALLERINA_RIG_LOADED animator=True
+10-12 00:43:37.150 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Idle movement=0.00 grounded=False
+10-12 00:43:37.569 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Jump movement=0.00 grounded=True
+10-12 00:43:38.977 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Idle movement=0.00 grounded=True
+10-12 00:43:40.382 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Idle movement=0.00 grounded=True
+10-12 00:43:41.777 20582 20628 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=30 selection=none
+10-12 00:43:41.784 20582 20628 I Unity   : AUTOMOVE actor=(13.74,3.02,4.98) input=(1.00,0.00) finger=0
+10-12 00:43:41.784 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Idle movement=1.00 grounded=True
+10-12 00:43:42.441 20582 20628 I Unity   : TERRITORY_CAPTURE team=4 areaCells=52 totalNewCells=140 selection=polygon
+10-12 00:43:42.664 20582 20628 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=55 selection=none
+10-12 00:43:42.988 20582 20628 I Unity   : AUTOMOVE actor=(9.36,2.62,11.30) input=(1.00,0.00) finger=-1
+10-12 00:43:43.199 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 00:43:43.959 20582 20628 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=14 selection=none
+10-12 00:43:44.201 20582 20628 I Unity   : AUTOMOVE actor=(2.56,1.55,14.91) input=(1.00,0.00) finger=-1
+10-12 00:43:44.405 20582 20628 I Unity   : TERRITORY_CAPTURE team=2 areaCells=26 totalNewCells=122 selection=polygon
+10-12 00:43:44.603 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 00:43:45.400 20582 20628 I Unity   : AUTOMOVE actor=(-5.08,0.01,14.11) input=(1.00,0.00) finger=-1
+10-12 00:43:45.831 20582 20628 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=24 selection=none
+10-12 00:43:46.007 20582 20628 I Unity   : TERRITORY_CAPTURE team=3 areaCells=15 totalNewCells=93 selection=polygon
+10-12 00:43:46.011 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 00:43:46.020 20582 20628 I Unity   : TERRITORY_CAPTURE team=4 areaCells=1 totalNewCells=78 selection=polygon
+10-12 00:43:46.613 20582 20628 I Unity   : AUTOMOVE actor=(-11.29,-1.51,9.73) input=(1.00,0.00) finger=-1
+10-12 00:43:47.239 20582 20628 I Unity   : TERRITORY_CAPTURE team=3 areaCells=1 totalNewCells=33 selection=polygon
+10-12 00:43:47.420 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Land movement=1.00 grounded=True
+10-12 00:43:47.784 20582 20628 I Unity   : TERRITORY_CAPTURE team=3 areaCells=1 totalNewCells=20 selection=flood
+10-12 00:43:47.820 20582 20628 I Unity   : AUTOMOVE actor=(-14.52,-2.62,2.90) input=(1.00,0.00) finger=-1
+10-12 00:43:48.542 20582 20628 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=41 selection=none
+10-12 00:43:48.818 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 00:43:48.837 20582 20628 I Unity   : TERRITORY_CAPTURE team=4 areaCells=1 totalNewCells=25 selection=flood
+10-12 00:43:49.026 20582 20628 I Unity   : AUTOMOVE actor=(-13.95,-3.05,-4.85) input=(1.00,0.00) finger=-1
+10-12 00:43:49.418 20582 20628 I Unity   : BALLERINA_VICTORY_TRIGGER team=1
+10-12 00:43:49.421 20582 20628 I Unity   : BALLERINA_VICTORY_TRIGGER team=1
+10-12 00:43:49.422 20582 20628 I Unity   : BALLERINA_WHIRL_CAPTURE cells=83
+10-12 00:43:49.436 20582 20628 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=372 selection=none
+10-12 00:43:49.438 20582 20628 I Unity   : BALLERINA_VICTORY_TRIGGER team=1
+10-12 00:43:49.937 20582 20628 I Unity   : TERRITORY_CAPTURE team=2 areaCells=3 totalNewCells=43 selection=polygon
+10-12 00:43:50.230 20582 20628 I Unity   : AUTOMOVE actor=(-9.58,-2.65,-11.25) input=(1.00,0.00) finger=-1
+10-12 00:43:50.230 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Victory movement=1.00 grounded=True
+10-12 00:43:50.573 20582 20628 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=24 selection=none
+10-12 00:43:51.439 20582 20628 I Unity   : AUTOMOVE actor=(-2.75,-1.59,-14.98) input=(1.00,0.00) finger=-1
+10-12 00:43:51.644 20582 20628 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Victory movement=1.00 grounded=True
+10-12 00:43:51.700 20582 20628 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=88 selection=none
+10-12 00:43:52.645 20582 20628 I Unity   : AUTOMOVE actor=(4.92,-0.04,-14.17) input=(1.00,0.00) finger=-1

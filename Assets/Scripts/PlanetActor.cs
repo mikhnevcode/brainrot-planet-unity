@@ -36,6 +36,15 @@ namespace BrainrotPlanet
             AvatarArt.Make(transform,character,Colors.Team(team));
             visualAnimator=GetComponentInChildren<Animator>();
         }
+        public void Celebrate()
+        {
+            if(Character==4 && visualAnimator!=null &&
+               visualAnimator.runtimeAnimatorController!=null)
+            {
+                visualAnimator.SetTrigger("Victory");
+                Debug.Log("BALLERINA_VICTORY_TRIGGER team="+Team);
+            }
+        }
         public void Jump()
         {
             if(!Active||!Grounded||jumpCooldown>0)return;
