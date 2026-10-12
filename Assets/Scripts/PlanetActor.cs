@@ -63,6 +63,7 @@ namespace BrainrotPlanet
             nextDropDiagnostic=0f;
             isDropping=true;
             if(heroMotion!=null)heroMotion.StartDrop();
+            if(visualAnimator!=null)visualAnimator.SetBool("Dropping",true);
             Grounded=false;
             Wish=Vector3.zero;
             body.linearVelocity=Vector3.zero;
@@ -95,6 +96,7 @@ namespace BrainrotPlanet
             if(dropElapsed<OrbitCamera.DescentDuration)return;
             body.position=dropLanding;
             isDropping=false;
+            if(visualAnimator!=null)visualAnimator.SetBool("Dropping",false);
             body.isKinematic=false;
             if(bodyCollider!=null)bodyCollider.enabled=true;
             body.linearVelocity=Vector3.zero;
@@ -111,13 +113,14 @@ namespace BrainrotPlanet
         public void Celebrate()
         {
             if(heroMotion!=null)heroMotion.Celebrate();
-            if(Character>=4 && visualAnimator!=null &&
+            if(visualAnimator!=null &&
                visualAnimator.runtimeAnimatorController!=null)
                 visualAnimator.SetTrigger("Victory");
         }
         public void PlaySpecial()
         {
             if(heroMotion!=null)heroMotion.PerformSkill();
+            if(visualAnimator!=null)visualAnimator.SetTrigger("Special");
         }
         public bool SpringJump()
         {

@@ -11,3 +11,6 @@
 *.sln
 *.apk
 *.aab
+
+# Old imported FBX copies live in Git history; local rollback copies are not repackaged.
+Characters/LegacyUnityFBX/

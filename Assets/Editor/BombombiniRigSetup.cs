@@ -9,7 +9,7 @@ namespace BrainrotPlanet.Editor
 {
     public static class BombombiniRigSetup
     {
-        private const string Fbx = "Assets/Resources/Characters/Bombombini_v01.fbx";
+        private const string Fbx = "Assets/Resources/Characters/Bombombini_v02.fbx";
         private const string Controller = "Assets/Resources/Characters/Bombombini.controller";
 
         [MenuItem("Brainrot Planet/3. Import animated Bombombini")]

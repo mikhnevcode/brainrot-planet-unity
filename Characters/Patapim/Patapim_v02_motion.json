@@ -1,0 +1,45 @@
+{
+  "hero": "Patapim",
+  "new": "Patapim_v02",
+  "source": "Patapim_v01",
+  "meshes": 6,
+  "bones": 7,
+  "old_actions": [
+    "Idle",
+    "Idle.001",
+    "Jump",
+    "Jump.001",
+    "Land",
+    "Land.001",
+    "Run",
+    "Run.001",
+    "Victory",
+    "Victory.001"
+  ],
+  "all_actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "new_actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "blend_bytes": 425294,
+  "fbx_bytes": 868300
+}

@@ -277,7 +277,7 @@ namespace BrainrotPlanet
         {
             string hero=NewHeroName(character);
             if(hero==null)return false;
-            GameObject prefab=Resources.Load<GameObject>("Characters/"+hero+"_v01");
+            GameObject prefab=Resources.Load<GameObject>("Characters/"+hero+"_v02");
             if(prefab==null)
             {
                 Debug.LogWarning("NEW_HERO_FBX_MISSING "+hero);
@@ -325,7 +325,7 @@ namespace BrainrotPlanet
             {
                 // Authored in Blender with an actual three-legged skeleton and
                 // imported Animator clips. Retain old geometry as a fallback.
-                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v02");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v03");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);
@@ -352,7 +352,7 @@ namespace BrainrotPlanet
             }
             if(character==1)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v01");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v02");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);
@@ -379,7 +379,7 @@ namespace BrainrotPlanet
             }
             if(character==4)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Ballerina_v01");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Ballerina_v02");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);
@@ -406,7 +406,7 @@ namespace BrainrotPlanet
             }
             if(character==3)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Bombombini_v01");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombombini_v02");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);

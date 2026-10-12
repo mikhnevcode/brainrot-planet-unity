@@ -1,0 +1,65 @@
+{
+  "hero": "Frulli",
+  "new": "Frulli_v02",
+  "source": "Frulli_v01",
+  "meshes": 6,
+  "bones": 7,
+  "old_actions": [
+    "Idle",
+    "Idle.001",
+    "Idle.002",
+    "Idle.003",
+    "Idle.004",
+    "Idle.005",
+    "Jump",
+    "Jump.001",
+    "Jump.002",
+    "Jump.003",
+    "Jump.004",
+    "Jump.005",
+    "Land",
+    "Land.001",
+    "Land.002",
+    "Land.003",
+    "Land.004",
+    "Land.005",
+    "Run",
+    "Run.001",
+    "Run.002",
+    "Run.003",
+    "Run.004",
+    "Run.005",
+    "Victory",
+    "Victory.001",
+    "Victory.002",
+    "Victory.003",
+    "Victory.004",
+    "Victory.005"
+  ],
+  "all_actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "new_actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "blend_bytes": 260797,
+  "fbx_bytes": 629884
+}

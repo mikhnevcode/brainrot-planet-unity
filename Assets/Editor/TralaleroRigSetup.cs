@@ -9,7 +9,7 @@ namespace BrainrotPlanet.Editor
 {
     public static class TralaleroRigSetup
     {
-        private const string Fbx = "Assets/Resources/Characters/Tralalero_v02.fbx";
+        private const string Fbx = "Assets/Resources/Characters/Tralalero_v03.fbx";
         private const string Controller = "Assets/Resources/Characters/Tralalero.controller";
 
         [MenuItem("Brainrot Planet/3. Import animated Tralalero")]

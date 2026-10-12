@@ -1,0 +1,40 @@
+{
+  "hero": "Ballerina",
+  "new": "Ballerina_v02",
+  "source": "Ballerina_v01",
+  "meshes": 11,
+  "bones": 12,
+  "old_actions": [
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Victory"
+  ],
+  "all_actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "new_actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "blend_bytes": 1378075,
+  "fbx_bytes": 2393788
+}

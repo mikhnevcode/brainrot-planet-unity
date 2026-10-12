@@ -1,0 +1,138 @@
+{
+  "samples": [
+    {
+      "stage": "menu",
+      "fps": 23.93,
+      "p95ms": 17.0,
+      "maxms": 2096.7
+    },
+    {
+      "stage": "landing",
+      "fps": 44.32,
+      "p95ms": 17.0,
+      "maxms": 1306.4
+    },
+    {
+      "stage": "game",
+      "fps": 57.9,
+      "p95ms": 17.0,
+      "maxms": 83.8
+    },
+    {
+      "stage": "game",
+      "fps": 58.5,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.7,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.5,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.3,
+      "p95ms": 17.0,
+      "maxms": 83.8
+    },
+    {
+      "stage": "game",
+      "fps": 59.1,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.9,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 59.1,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 59.3,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "end",
+      "fps": 59.1,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "end",
+      "fps": 59.7,
+      "p95ms": 17.0,
+      "maxms": 16.8
+    }
+  ],
+  "steady_state_samples": [
+    {
+      "stage": "game",
+      "fps": 58.5,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.7,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.5,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.3,
+      "p95ms": 17.0,
+      "maxms": 83.8
+    },
+    {
+      "stage": "game",
+      "fps": 59.1,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 58.9,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 59.1,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    },
+    {
+      "stage": "game",
+      "fps": 59.3,
+      "p95ms": 17.0,
+      "maxms": 33.5
+    }
+  ],
+  "mean_fps": 58.8,
+  "median_fps": 58.8,
+  "min_fps": 58.3,
+  "max_p95ms": 17.0,
+  "captures": 1,
+  "android_fatal": false
+}

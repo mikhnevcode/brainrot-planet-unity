@@ -1,0 +1,98 @@
+[
+  {
+    "hero": 0,
+    "name": "Tralalero",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 1,
+    "name": "Bombardiro",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 2,
+    "name": "Frigo",
+    "captures": 3,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 3,
+    "name": "Bombombini",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 4,
+    "name": "Ballerina",
+    "captures": 3,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 5,
+    "name": "Assassino",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 6,
+    "name": "Patapim",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 7,
+    "name": "TungSahur",
+    "captures": 3,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 8,
+    "name": "Lirili",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 9,
+    "name": "Frulli",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 10,
+    "name": "Boneca",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  },
+  {
+    "hero": 11,
+    "name": "Trippi",
+    "captures": 4,
+    "victory_trigger": true,
+    "blender_victory_clip": true,
+    "fatal": false
+  }
+]

@@ -46,6 +46,7 @@ namespace BrainrotPlanet
             Application.targetFrameRate=60;
             Screen.sleepTimeout=SleepTimeout.NeverSleep;
             Input.multiTouchEnabled=true;
+            if(Debug.isDebugBuild)gameObject.AddComponent<GamePerformanceProbe>();
             var requiredTypes=new GameObject("Runtime collider types");
             requiredTypes.AddComponent<BoxCollider>();
             requiredTypes.AddComponent<CapsuleCollider>();

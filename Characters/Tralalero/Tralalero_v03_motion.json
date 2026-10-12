@@ -1,0 +1,40 @@
+{
+  "hero": "Tralalero",
+  "new": "Tralalero_v03",
+  "source": "Tralalero_v02",
+  "meshes": 83,
+  "bones": 14,
+  "old_actions": [
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Victory"
+  ],
+  "all_actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "new_actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "blend_bytes": 434217,
+  "fbx_bytes": 3087356
+}

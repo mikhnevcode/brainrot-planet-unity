@@ -1,0 +1,50 @@
+{
+  "hero": "TungSahur",
+  "new": "TungSahur_v02",
+  "source": "TungSahur_v01",
+  "meshes": 6,
+  "bones": 7,
+  "old_actions": [
+    "Idle",
+    "Idle.001",
+    "Idle.002",
+    "Jump",
+    "Jump.001",
+    "Jump.002",
+    "Land",
+    "Land.001",
+    "Land.002",
+    "Run",
+    "Run.001",
+    "Run.002",
+    "Victory",
+    "Victory.001",
+    "Victory.002"
+  ],
+  "all_actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "new_actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "blend_bytes": 296782,
+  "fbx_bytes": 679756
+}

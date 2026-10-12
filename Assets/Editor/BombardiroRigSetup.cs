@@ -9,7 +9,7 @@ namespace BrainrotPlanet.Editor
 {
     public static class BombardiroRigSetup
     {
-        private const string Fbx = "Assets/Resources/Characters/Bombardiro_v01.fbx";
+        private const string Fbx = "Assets/Resources/Characters/Bombardiro_v02.fbx";
         private const string Controller = "Assets/Resources/Characters/Bombardiro.controller";
 
         [MenuItem("Brainrot Planet/3. Import animated Bombardiro")]

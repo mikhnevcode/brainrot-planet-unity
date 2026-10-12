@@ -1,0 +1,40 @@
+{
+  "hero": "Bombombini",
+  "new": "Bombombini_v02",
+  "source": "Bombombini_v01",
+  "meshes": 10,
+  "bones": 11,
+  "old_actions": [
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Victory"
+  ],
+  "all_actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "new_actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "blend_bytes": 511824,
+  "fbx_bytes": 1313100
+}
