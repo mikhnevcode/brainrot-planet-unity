@@ -15,8 +15,8 @@ namespace BrainrotPlanet
         public PlanetActor Player { get; private set; }
         private readonly List<PlanetActor> players = new List<PlanetActor>();
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
-        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО "};
-        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА"};
+        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ "};
+        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА","РЕАКТИВНЫЙ РЫВОК"};
         private int selectedHero=0;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
@@ -101,7 +101,7 @@ namespace BrainrotPlanet
             };
             for(int team=1;team<=4;team++)
             {
-                int hero=team==1?selectedHero:(selectedHero+team-1)%3;
+                int hero=team==1?selectedHero:(selectedHero+team-1)%characters.Length;
                 var actorObject=new GameObject("Landing hero " + team);
                 actorObject.transform.SetParent(worldRoot);
                 actorObject.AddComponent<Rigidbody>();
@@ -216,7 +216,7 @@ namespace BrainrotPlanet
                 ball.AddComponent<PaintBomb>().Launch(this,Player);
                 Announce(" КРАСКОБОМБА!");
             }
-            else
+            else if(selectedHero==2)
             {
                 Vector3 at=Player.transform.position.normalized;
                 foreach(var pawn in players)
@@ -224,6 +224,12 @@ namespace BrainrotPlanet
                         pawn.SlowSeconds=4f;
                 Effects.CaptureFlash(at,Color.cyan,110);
                 Announce(" ФРИГО: ЛЕДЯНАЯ ВОЛНА!");
+            }
+            else if(selectedHero==3)
+            {
+                Player.SpeedSeconds=4.0f;
+                Effects.Burst(Player.transform.position,Colors.Team(1),35,5f);
+                Announce(" ГУСИНИ: РЕАКТИВНЫЙ РЫВОК!");
             }
         }
         private void Update()
@@ -366,12 +372,12 @@ namespace BrainrotPlanet
                 GUI.Label(new Rect(16,45,logicalW-32,55)," BRAINROT PLANET.IO",headerStyle);
                 GUI.Label(new Rect(22,102,logicalW-44,74),"Десантируйся на планету. Оставляй след и замыкай его, чтобы захватить поверхность!",menuStyle);
                 GUI.Label(new Rect(18,184,logicalW-36,32),"ВЫБЕРИ ГЕРОЯ",headerStyle);
-                for(int i=0;i<3;i++)
+                for(int i=0;i<characters.Length;i++)
                 {
-                    float y=227+i*99;
-                    Plate(new Rect(19,y,logicalW-38,90),i==selectedHero?new Color(.90f,.25f,.52f,.85f):new Color(.25f,.34f,.52f,.72f));
-                    if(GUI.Button(new Rect(28,y+8,logicalW-56,74),characters[i]+"\n"+
-                       (i==0?" Ускорение":i==1?" Бомба по дуге":" Ледяная волна"),buttonStyle)) selectedHero=i;
+                    float y=222+i*84;
+                    Plate(new Rect(19,y,logicalW-38,78),i==selectedHero?new Color(.90f,.25f,.52f,.85f):new Color(.25f,.34f,.52f,.72f));
+                    if(GUI.Button(new Rect(28,y+7,logicalW-56,65),characters[i]+"\n"+
+                       (i==0?" Ускорение":i==1?" Бомба по дуге":i==2?" Ледяная волна":" Реактивный рывок"),buttonStyle)) selectedHero=i;
                 }
                 if(GUI.Button(new Rect(26,logicalH-166,logicalW-52,60)," ДЕСАНТИРОВАТЬСЯ",buttonStyle))StartGame();
                 GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),"145 секунд · 4 героя · планетная физика\nБез рекламы и интернет-подключения",smallStyle);

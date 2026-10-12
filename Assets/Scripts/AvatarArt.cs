@@ -96,6 +96,45 @@ namespace BrainrotPlanet
             }
             Debug.Log("BOMBARDIRO_COLORED_RENDERERS="+count);
         }
+        private static readonly Dictionary<string,Material> GooseMaterials=new Dictionary<string,Material>();
+        private static Material GoosePalette(Material source)
+        {
+            string n=(source!=null?source.name:"unknown").ToLowerInvariant();
+            if(GooseMaterials.TryGetValue(n,out Material old))return old;
+            Color c;
+            if(n.Contains("pearl white")||n.Contains("feathers"))c=new Color(.88f,.89f,.84f);
+            else if(n.Contains("grey wing"))c=new Color(.57f,.66f,.69f);
+            else if(n.Contains("neck ivory"))c=new Color(.96f,.91f,.78f);
+            else if(n.Contains("coral orange")||n.Contains("webbed foot"))c=new Color(.95f,.39f,.14f);
+            else if(n.Contains("dark beak"))c=new Color(.20f,.11f,.08f);
+            else if(n.Contains("amber"))c=new Color(.68f,.41f,.14f);
+            else if(n.Contains("black pupil"))c=new Color(.02f,.03f,.04f);
+            else if(n.Contains("eye highlights"))c=new Color(.92f,.96f,.93f);
+            else if(n.Contains("satin dark silver"))c=new Color(.36f,.43f,.50f);
+            else if(n.Contains("pale aluminium"))c=new Color(.67f,.74f,.76f);
+            else if(n.Contains("rivet seams"))c=new Color(.26f,.29f,.32f);
+            else if(n.Contains("engine gunmetal"))c=new Color(.19f,.25f,.30f);
+            else if(n.Contains("turbine cyan"))c=new Color(.08f,.68f,.88f);
+            else if(n.Contains("magenta"))c=new Color(.83f,.20f,.49f);
+            else c=new Color(.70f,.76f,.76f);
+            Material m=Colors.New(c);
+            if(m.HasProperty("_Glossiness"))m.SetFloat("_Glossiness",.08f);
+            if(m.HasProperty("_Metallic"))m.SetFloat("_Metallic",0f);
+            if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
+            m.name="Bombombini / "+n;GooseMaterials[n]=m;
+            return m;
+        }
+        private static void RecolorGoose(Transform root)
+        {
+            int count=0;
+            foreach(Renderer r in root.GetComponentsInChildren<Renderer>(true))
+            {
+                Material[] mats=r.sharedMaterials;
+                for(int i=0;i<mats.Length;i++)mats[i]=GoosePalette(mats[i]);
+                r.sharedMaterials=mats;count++;
+            }
+            Debug.Log("BOMBOMBINI_COLORED_RENDERERS="+count);
+        }
         private static void Recolor(Transform imported)
         {
             int count=0;
@@ -200,6 +239,33 @@ namespace BrainrotPlanet
                 }
                 Debug.LogWarning("BOMBARDIRO_FBX_MISSING: primitives remain in use");
             }
+            if(character==3)
+            {
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombombini_v01");
+                if(prefab!=null)
+                {
+                    GameObject visual=Object.Instantiate(prefab,art,false);
+                    visual.name="Bombombini Gusini / rigged goose aircraft";
+                    visual.transform.localPosition=new Vector3(0,-.30f,0);
+                    visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
+                    visual.transform.localScale=Vector3.one*.48f;
+                    RecolorGoose(visual.transform);
+                    foreach(Collider c in visual.GetComponentsInChildren<Collider>(true))
+                        Object.Destroy(c);
+                    Animator anim=visual.GetComponent<Animator>();
+                    if(anim==null)anim=visual.AddComponent<Animator>();
+                    anim.runtimeAnimatorController=
+                        Resources.Load<RuntimeAnimatorController>("Characters/Bombombini");
+                    anim.applyRootMotion=false;
+                    anim.cullingMode=AnimatorCullingMode.AlwaysAnimate;
+                    Debug.Log("BOMBOMBINI_RIG_LOADED animator="+
+                        (anim.runtimeAnimatorController!=null));
+                    Oval(root,"Paint aura",new Vector3(0,-.42f,0),
+                         new Vector3(1.25f,.09f,1.25f),neon);
+                    return;
+                }
+                Debug.LogWarning("BOMBOMBINI_FBX_MISSING: using simple fallback");
+            }
             if(character==0) // Tralalero fallback if FBX is unavailable.
             {
                 Oval(art,"Shark body",new Vector3(0,.65f,0),new Vector3(.95f,1.15f,.9f),blue);
@@ -229,7 +295,7 @@ namespace BrainrotPlanet
                 Oval(art,"Pupil R",new Vector3(.29f,.92f,.79f),new Vector3(.06f,.09f,.07f),black);
                 Cube(art,"Paint tank",new Vector3(0,1f,-.14f),new Vector3(.37f,.31f,.52f),neon);
             }
-            else // Frigo Camelo: desert camel / refrigerator hybrid.
+            else if(character==2) // Frigo Camelo: desert camel / refrigerator hybrid.
             {
                 Cube(art,"Fridge torso",new Vector3(0,.65f,-.06f),new Vector3(.93f,1.10f,.82f),white);
                 Cube(art,"Fridge rim",new Vector3(0,.65f,.38f),new Vector3(.92f,1.04f,.075f),silver);
@@ -245,6 +311,13 @@ namespace BrainrotPlanet
                 Cube(art,"Front right hoof",new Vector3(.35f,-.14f,.24f),new Vector3(.23f,.44f,.27f),sand);
                 Cube(art,"Back left hoof",new Vector3(-.35f,-.14f,-.35f),new Vector3(.23f,.44f,.27f),sand);
                 Cube(art,"Back right hoof",new Vector3(.35f,-.14f,-.35f),new Vector3(.23f,.44f,.27f),sand);
+            }
+            if(character==3)
+            {
+                Oval(art,"Goose fallback white body",new Vector3(0,.77f,0),new Vector3(.8f,.75f,1.4f),white);
+                Cube(art,"Goose fallback aircraft wing",new Vector3(0,.75f,-.3f),new Vector3(2.9f,.10f,.65f),silver);
+                Oval(art,"Goose fallback neck",new Vector3(0,1.28f,.65f),new Vector3(.32f,.78f,.31f),white);
+                Oval(art,"Goose fallback beak",new Vector3(0,1.68f,.97f),new Vector3(.46f,.13f,.40f),sand);
             }
             Oval(root,"Paint aura",new Vector3(0,-.42f,0),new Vector3(1.25f,.09f,1.25f),neon);
         }
