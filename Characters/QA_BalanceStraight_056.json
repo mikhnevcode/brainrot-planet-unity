@@ -1,0 +1,28 @@
+[
+  {
+    "level": "Easy",
+    "balance_report": "10-12 07:05:35.421 11817 11842 I Unity   : AI_BALANCE_RESULT level=Easy winner=3 playerPct=1.11 aiPct=2.11,2.69,1.66 encounterStarts=3 visibleSeconds=14.1 nearSeconds=6.5 dangerSeconds=4.5 nearestEverDeg=4.8 playerMovingSeconds=23.6 captures=0/14 trailsLost=5 duration=26.0",
+    "player_win": false,
+    "winner": "3",
+    "encounter_events": 3,
+    "capture_events_by_team": [
+      0,
+      4,
+      5,
+      5
+    ],
+    "ability_by_team": {
+      "1": 2,
+      "2": 0,
+      "3": 0,
+      "4": 1
+    },
+    "fps_mean": 59.15,
+    "fps_min_interval": 58.7,
+    "fatal": false
+  },
+  {
+    "level": "Medium",
+    "error": "('shell', 'screencap', '-p', '/sdcard/balance056_Medium_end.png') adb server is out of date.  killing...\r\n* daemon started successfully *\r\n** daemon still not running\r\nerror: cannot connect to daemon: No error\r\n"
+  }
+]

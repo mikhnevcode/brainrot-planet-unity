@@ -16,7 +16,7 @@ namespace BrainrotPlanet
             switch(level)
             {
                 case AiDifficulty.Easy:return 53f;
-                case AiDifficulty.Hard:return 33f;
+                case AiDifficulty.Hard:return 36.5f;
                 default:return 42f;
             }
         }
@@ -26,7 +26,7 @@ namespace BrainrotPlanet
             switch(level)
             {
                 case AiDifficulty.Easy:return 19f;
-                case AiDifficulty.Hard:return 8f;
+                case AiDifficulty.Hard:return 11f;
                 default:return 12f;
             }
         }
@@ -36,7 +36,7 @@ namespace BrainrotPlanet
             switch(level)
             {
                 case AiDifficulty.Easy:return 7f;
-                case AiDifficulty.Hard:return 3f;
+                case AiDifficulty.Hard:return 4f;
                 default:return 5f;
             }
         }

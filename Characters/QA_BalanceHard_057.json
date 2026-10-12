@@ -1,0 +1,15 @@
+[
+  {
+    "level": "Hard",
+    "control_swipes": 80,
+    "early_end": true,
+    "winner": "2",
+    "player_won": false,
+    "balance_result": "10-12 07:25:03.671 18123 18151 I Unity   : AI_BALANCE_RESULT level=Hard winner=2 playerPct=5.56 aiPct=5.84,5.33,5.60 encounterStarts=14 visibleSeconds=54.3 nearSeconds=30.2 dangerSeconds=15.1 nearestEverDeg=4.9 playerMovingSeconds=61.8 captures=24/68 trailsLost=5 duration=62.9",
+    "player_captures": 24,
+    "player_trail_hits": 2,
+    "encounter_starts": 14,
+    "avg_fps": 58.32,
+    "fatal": false
+  }
+]
