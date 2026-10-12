@@ -13,6 +13,7 @@ namespace BrainrotPlanet
         public TerritorySystem Territory { get; private set; }
         public PlanetEffects Effects { get; private set; }
         public PlanetActor Player { get; private set; }
+        public IReadOnlyList<PlanetActor> Actors => players;
         private readonly List<PlanetActor> players = new List<PlanetActor>();
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
         private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ "};
@@ -99,11 +100,16 @@ namespace BrainrotPlanet
             Effects=new GameObject("Paint particles and explosions").AddComponent<PlanetEffects>();
             Effects.transform.SetParent(worldRoot);
 
+            // Keep opponents visible in the same planetary sector while
+            // maintaining initial separation between the painted home cores.
+            Vector3 centre=new Vector3(.91f,.20f,.33f).normalized;
+            Vector3 east=Vector3.Cross(Vector3.up,centre).normalized;
+            Vector3 north=Vector3.Cross(centre,east).normalized;
             Vector3[] spawnDirections={
-                new Vector3(.91f,.20f,.33f).normalized,
-                new Vector3(-.77f,.41f,.47f).normalized,
-                new Vector3(-.18f,-.46f,-.87f).normalized,
-                new Vector3(.40f,-.78f,.48f).normalized
+                centre,
+                (centre*.75f+east*.66f).normalized,
+                (centre*.75f-east*.66f).normalized,
+                (centre*.74f+north*.67f).normalized
             };
             for(int team=1;team<=4;team++)
             {
@@ -217,20 +223,30 @@ namespace BrainrotPlanet
         public void Announce(string text){announcement=text;annTime=2.4f;}
         public void UseSkill()
         {
-            if(State!=MatchState.Playing||skillCooldown>0||Player==null||IsLanding)return;
-            if(selectedHero==10 && !Player.Grounded)return;
-            skillCooldown=12f;
+            TryUseActorSkill(Player);
+        }
+
+        // Shared human/AI ability logic; UI messages and cooldown only for human.
+        public bool TryUseActorSkill(PlanetActor caster)
+        {
+            if(State!=MatchState.Playing||caster==null||!caster.Active||IsLanding)
+                return false;
+            int hero=caster.Character,team=caster.Team;
+            bool human=team==1;
+            if(human && skillCooldown>0)return false;
+            if(hero==10 && !caster.Grounded)return false;
+            if(human)skillCooldown=12f;
             resolvingHeroSkill=true;
-            Player.PlaySpecial();
-            Vector3 center=Player.transform.position.normalized;
+            caster.PlaySpecial();
+            Vector3 center=caster.transform.position.normalized;
             int cells=0;
             try
             {
-                switch(selectedHero)
+                switch(hero)
                 {
                     case 0: // Tralalero: shark sprint
-                        Player.SpeedSeconds=3.5f;
-                        Announce(" ТРАЛАЛЕРО: АКУЛИЙ РЫВОК!");
+                        caster.SpeedSeconds=3.5f;
+                        if(human)Announce(" ТРАЛАЛЕРО: АКУЛИЙ РЫВОК!");
                         break;
                     case 1: // Bombardiro: three evenly spread paint bombs
                         for(int i=-1;i<=1;i++)
@@ -240,80 +256,80 @@ namespace BrainrotPlanet
                             bomb.layer=9;
                             bomb.transform.localScale=Vector3.one*.55f;
                             bomb.GetComponent<Renderer>().sharedMaterial=
-                                Colors.New(Colors.Team(1),true);
+                                Colors.New(Colors.Team(team),true);
                             Rigidbody rigid=bomb.AddComponent<Rigidbody>();
                             rigid.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
-                            bomb.AddComponent<PaintBomb>().Launch(this,Player,i*16f,.070f);
+                            bomb.AddComponent<PaintBomb>().Launch(this,caster,i*16f,.070f);
                         }
-                        Announce(" БОМБАРДИРО: ТРОЙНАЯ БОМБАРДИРОВКА!");
+                        if(human)Announce(" БОМБАРДИРО: ТРОЙНАЯ БОМБАРДИРОВКА!");
                         break;
                     case 2: // Frigo: chilled opponents
                         for(int i=0;i<players.Count;i++)
                         {
                             PlanetActor pawn=players[i];
-                            if(pawn.Team!=1 &&
+                            if(pawn.Team!=team &&
                                Vector3.Angle(pawn.transform.position.normalized,center)<21f)
                                 pawn.SlowSeconds=4f;
                         }
-                        Announce(" ФРИГО: ЛЕДЯНАЯ ВОЛНА!");
+                        if(human)Announce(" ФРИГО: ЛЕДЯНАЯ ВОЛНА!");
                         break;
                     case 3: // Bombombini: jet-powered dash
-                        Player.SpeedSeconds=4.0f;
-                        Announce(" ГУСИНИ: ТУРБОРЕЖИМ!");
+                        caster.SpeedSeconds=4.0f;
+                        if(human)Announce(" ГУСИНИ: ТУРБОРЕЖИМ!");
                         break;
                     case 4: // Ballerina: cappuccino pirouette paint
-                        cells=Territory.ClaimDisk(1,center,.125f);
-                        Announce(" БАЛЕРИНА: КОФЕЙНЫЙ ВИХРЬ! +"+cells);
+                        cells=Territory.ClaimDisk(team,center,.125f);
+                        if(human)Announce(" БАЛЕРИНА: КОФЕЙНЫЙ ВИХРЬ! +"+cells);
                         break;
                     case 5: // Ninja: shadow dash + narrow paint pocket
-                        Player.SpeedSeconds=2.8f;
-                        cells=Territory.ClaimDisk(1,center,.08f);
-                        Announce(" АССАСИНО: ТЕНЕВОЙ РЫВОК!");
+                        caster.SpeedSeconds=2.8f;
+                        cells=Territory.ClaimDisk(team,center,.08f);
+                        if(human)Announce(" АССАСИНО: ТЕНЕВОЙ РЫВОК!");
                         break;
                     case 6: // Patapim: thicket roots slow nearby opponents
-                        cells=Territory.ClaimDisk(1,center,.10f);
+                        cells=Territory.ClaimDisk(team,center,.10f);
                         for(int i=0;i<players.Count;i++)
                         {
                             PlanetActor pawn=players[i];
-                            if(pawn.Team!=1 &&
+                            if(pawn.Team!=team &&
                                Vector3.Angle(pawn.transform.position.normalized,center)<15f)
                                 pawn.SlowSeconds=3f;
                         }
-                        Announce(" ПАТАПИМ: ЛЕСНАЯ ХВАТКА!");
+                        if(human)Announce(" ПАТАПИМ: ЛЕСНАЯ ХВАТКА!");
                         break;
                     case 7: // Tung: large percussive shock wave
-                        cells=Territory.ClaimDisk(1,center,.09f);
+                        cells=Territory.ClaimDisk(team,center,.09f);
                         for(int i=0;i<players.Count;i++)
                         {
                             PlanetActor pawn=players[i];
-                            if(pawn.Team!=1 &&
+                            if(pawn.Team!=team &&
                                Vector3.Angle(pawn.transform.position.normalized,center)<18f)
                                 pawn.SlowSeconds=3.5f;
                         }
-                        Announce(" САХУР: БАРАБАННЫЙ УДАР!");
+                        if(human)Announce(" САХУР: БАРАБАННЫЙ УДАР!");
                         break;
                     case 8: // Lirili: thorny cactus spray
-                        cells=Territory.ClaimDisk(1,center,.11f);
+                        cells=Territory.ClaimDisk(team,center,.11f);
                         for(int i=0;i<players.Count;i++)
                         {
                             PlanetActor pawn=players[i];
-                            if(pawn.Team!=1 &&
+                            if(pawn.Team!=team &&
                                Vector3.Angle(pawn.transform.position.normalized,center)<13f)
                                 pawn.SlowSeconds=4f;
                         }
-                        Announce(" ЛИРИЛИ: КАКТУСНАЯ БУРЯ!");
+                        if(human)Announce(" ЛИРИЛИ: КАКТУСНАЯ БУРЯ!");
                         break;
                     case 9: // Frulli: flutter movement with small paint splash
-                        Player.SpeedSeconds=3.5f;
-                        cells=Territory.ClaimDisk(1,center,.075f);
-                        Announce(" ФРУЛЛИ: ВОЗДУШНЫЙ ТАНЕЦ!");
+                        caster.SpeedSeconds=3.5f;
+                        cells=Territory.ClaimDisk(team,center,.075f);
+                        if(human)Announce(" ФРУЛЛИ: ВОЗДУШНЫЙ ТАНЕЦ!");
                         break;
                     case 10: // Wheel frog bounces; real paint arrives on touchdown.
-                        if(!Player.SpringJump())skillCooldown=0f;
-                        Announce(" БОНЕКА: ПРУЖИНА!");
+                        if(!caster.SpringJump()){if(human)skillCooldown=0f;return false;}
+                        if(human)Announce(" БОНЕКА: ПРУЖИНА!");
                         break;
                     case 11: // Trippi: three separate shrimp-paint splashes
-                        Vector3 tangent=Vector3.ProjectOnPlane(Player.transform.forward,
+                        Vector3 tangent=Vector3.ProjectOnPlane(caster.transform.forward,
                             center).normalized;
                         if(tangent.sqrMagnitude<.01f)
                             tangent=Vector3.Cross(center,Vector3.up).normalized;
@@ -321,16 +337,17 @@ namespace BrainrotPlanet
                         for(int i=-1;i<=1;i++)
                         {
                             Vector3 splash=Quaternion.AngleAxis(i*7.5f,across)*center;
-                            cells+=Territory.ClaimDisk(1,splash,.068f);
+                            cells+=Territory.ClaimDisk(team,splash,.068f);
                         }
-                        Announce(" ТРИППИ: КРЕВЕТОЧНЫЙ ВСПЛЕСК! +"+cells);
+                        if(human)Announce(" ТРИППИ: КРЕВЕТОЧНЫЙ ВСПЛЕСК! +"+cells);
                         break;
                 }
-                Effects.HeroAbility(selectedHero,center,Colors.Team(1));
-                Debug.Log("HERO_SPECIAL_ACTIVATED hero="+selectedHero+
+                Effects.HeroAbility(hero,center,Colors.Team(team));
+                Debug.Log("HERO_SPECIAL_ACTIVATED hero="+hero+" team="+team+
                           " cells="+cells+" cooldown="+skillCooldown.ToString("F1"));
             }
             finally{resolvingHeroSkill=false;}
+            return true;
         }
         private void Update()
         {
@@ -490,6 +507,30 @@ namespace BrainrotPlanet
             smallStyle.normal.textColor=Color.white;
             buttonStyle=new GUIStyle(GUI.skin.button){fontSize=17,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter,wordWrap=true};
         }
+        private void DrawEnemySignals(float logicalW,float logicalH)
+        {
+            if(Player==null||worldCamera==null)return;
+            Vector3 playerNormal=Player.transform.position.normalized;
+            foreach(PlanetActor other in players)
+            {
+                if(other==null||other.Team==1||!other.Active)continue;
+                Vector3 direction=other.transform.position.normalized;
+                if(Vector3.Dot(playerNormal,direction)<.34f)continue;
+                Vector3 world=other.transform.position + direction*1.28f;
+                Vector3 screen=worldCamera.WorldToViewportPoint(world);
+                if(screen.z<=0f)continue;
+                bool offscreen=screen.x<.04f||screen.x>.96f||
+                               screen.y<.16f||screen.y>.88f;
+                float x=Mathf.Clamp(screen.x*logicalW-44f,5f,logicalW-93f);
+                float y=Mathf.Clamp((1f-screen.y)*logicalH-30f,199f,logicalH-235f);
+                Color paint=Colors.Team(other.Team);
+                paint.a=.84f;
+                Plate(new Rect(x,y,89f,27f),paint);
+                GUI.Label(new Rect(x+2f,y,85f,26f),
+                    (offscreen?"! ":"")+"ВРАГ "+other.Team,smallStyle);
+            }
+        }
+
         private void Plate(Rect rect,Color color)
         {
             Color original=GUI.color;GUI.color=color;
@@ -567,6 +608,7 @@ namespace BrainrotPlanet
                 GUI.Label(skillArea,skillCooldown>0?skillNames[selectedHero]+"\n"+Mathf.CeilToInt(skillCooldown)+" сек":skillNames[selectedHero],smallStyle);
                 Plate(jumpArea,new Color(.21f,.62f,.89f,.91f));
                 GUI.Label(jumpArea,"\nПРЫЖОК",smallStyle);
+                DrawEnemySignals(logicalW,logicalH);
             }
             else
             {

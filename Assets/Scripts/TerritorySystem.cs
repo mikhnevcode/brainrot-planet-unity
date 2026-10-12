@@ -67,6 +67,45 @@ namespace BrainrotPlanet
         public IReadOnlyList<int> Path(int team)=>trailOrder[team];
         public IReadOnlyList<Vector3> VisualPath(int team)=>trailVisualDirections[team];
 
+        /// <summary>
+        /// Locate a reachable opponent's exposed trail from the current position.
+        /// The search is bounded to 64 evenly spaced samples per opposing team
+        /// and is only invoked by AI at its decision interval, never per frame.
+        /// </summary>
+        public bool TryFindEnemyTrail(int team,Vector3 origin,float maxDegrees,
+            out Vector3 target,out int trailTeam,out float degrees)
+        {
+            target=Vector3.zero;trailTeam=0;degrees=maxDegrees;
+            Vector3 n=origin.normalized;
+            float bestDot=Mathf.Cos(maxDegrees*Mathf.Deg2Rad);
+            for(int other=1;other<=4;other++)
+            {
+                if(other==team)continue;
+                var trace=trailVisualDirections[other];
+                if(trace.Count<3)continue;
+                int step=Mathf.Max(1,trace.Count/64);
+                for(int j=0;j<trace.Count;j+=step)
+                {
+                    float d=Vector3.Dot(n,trace[j]);
+                    if(d<=bestDot)continue;
+                    bestDot=d;
+                    target=trace[j];trailTeam=other;
+                }
+                int last=trace.Count-1;
+                if(last>=0)
+                {
+                    float d=Vector3.Dot(n,trace[last]);
+                    if(d>bestDot)
+                    {
+                        bestDot=d;target=trace[last];trailTeam=other;
+                    }
+                }
+            }
+            if(trailTeam==0)return false;
+            degrees=Mathf.Acos(Mathf.Clamp(bestDot,-1f,1f))*Mathf.Rad2Deg;
+            return true;
+        }
+
         public void TraceStep(int team,Vector3 direction)
         {
             direction.Normalize();

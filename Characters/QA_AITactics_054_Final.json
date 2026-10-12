@@ -1,0 +1,38 @@
+{
+  "version": "0.5.4",
+  "phone": "Realme RMX3151",
+  "no_player_input_expected": true,
+  "validation": "Final AI tactical transition adjustment",
+  "team_decision_counts": {
+    "2": 8,
+    "3": 8,
+    "4": 8
+  },
+  "ai_mode_counts": {
+    "Expand": 32,
+    "Retreat": 12,
+    "Defend": 0,
+    "HuntTrail": 8
+  },
+  "tactic_change_events": 28,
+  "intercepts": 7,
+  "ai_ability_events": 10,
+  "ability_team_distribution": {
+    "1": 0,
+    "2": 4,
+    "3": 2,
+    "4": 4
+  },
+  "ai_captures": {
+    "2": 16,
+    "3": 16,
+    "4": 22
+  },
+  "player_move_events": 0,
+  "player_skill_events": 0,
+  "match_victory_events": [],
+  "fps_samples": 13,
+  "steady_fps_average": 58.9,
+  "steady_fps_min": 58.5,
+  "fatal_android_error": false
+}

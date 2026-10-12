@@ -159,6 +159,8 @@ namespace BrainrotPlanet
             transform.rotation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
             lastDirection=SpawnDirection;
             Active=true;
+            var ai=GetComponent<PlanetAI>();
+            if(ai!=null)ai.OnRespawn();
         }
         private void FixedUpdate()
         {

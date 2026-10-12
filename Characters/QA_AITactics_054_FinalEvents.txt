@@ -1,0 +1,45 @@
+10-12 05:41:05.714  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Expand -> HuntTrail opponentDeg=30.3 trailDeg=26.4 ownTrail=0
+10-12 05:41:11.077  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> Retreat opponentDeg=32.9 trailDeg=24.4 ownTrail=8
+10-12 05:41:11.361  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Expand -> Retreat opponentDeg=8.4 trailDeg=180.0 ownTrail=19
+10-12 05:41:12.510  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Retreat -> Expand opponentDeg=37.7 trailDeg=180.0 ownTrail=0
+10-12 05:41:13.086  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Retreat -> Expand opponentDeg=41.6 trailDeg=180.0 ownTrail=0
+10-12 05:41:16.037  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> HuntTrail opponentDeg=19.5 trailDeg=12.6 ownTrail=0
+10-12 05:41:24.326  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> Retreat opponentDeg=8.5 trailDeg=8.9 ownTrail=7
+10-12 05:41:25.634  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Retreat -> Expand opponentDeg=42.3 trailDeg=180.0 ownTrail=0
+10-12 05:41:35.031  3872  3910 I Unity   : AI_TACTIC_CHANGE team=3 Expand -> HuntTrail opponentDeg=15.1 trailDeg=15.5 ownTrail=1
+10-12 05:41:35.147  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> Retreat opponentDeg=11.6 trailDeg=11.6 ownTrail=12
+10-12 05:41:35.768  3872  3910 I Unity   : AI_TACTIC_CHANGE team=3 HuntTrail -> Retreat opponentDeg=5.0 trailDeg=180.0 ownTrail=16
+10-12 05:41:35.836  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> Retreat opponentDeg=6.7 trailDeg=5.8 ownTrail=2
+10-12 05:41:37.092  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Retreat -> Expand opponentDeg=40.5 trailDeg=180.0 ownTrail=0
+10-12 05:41:37.209  3872  3910 I Unity   : AI_TACTIC_CHANGE team=3 Retreat -> Expand opponentDeg=39.5 trailDeg=180.0 ownTrail=0
+10-12 05:41:46.140  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> Retreat opponentDeg=77.8 trailDeg=180.0 ownTrail=56
+10-12 05:41:47.879  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Retreat -> Expand opponentDeg=42.3 trailDeg=180.0 ownTrail=0
+10-12 05:41:51.647  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> HuntTrail opponentDeg=25.4 trailDeg=25.4 ownTrail=0
+10-12 05:41:52.787  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Expand -> HuntTrail opponentDeg=26.4 trailDeg=22.7 ownTrail=0
+10-12 05:41:53.557  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 HuntTrail -> Retreat opponentDeg=22.5 trailDeg=6.9 ownTrail=2
+10-12 05:41:55.250  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Retreat -> Expand opponentDeg=41.3 trailDeg=180.0 ownTrail=0
+10-12 05:41:56.025  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Expand -> HuntTrail opponentDeg=22.1 trailDeg=22.3 ownTrail=4
+10-12 05:41:56.087  3872  3910 I Unity   : AI_TACTIC_CHANGE team=3 Expand -> HuntTrail opponentDeg=13.9 trailDeg=21.4 ownTrail=9
+10-12 05:41:56.741  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 HuntTrail -> Retreat opponentDeg=5.1 trailDeg=5.9 ownTrail=9
+10-12 05:41:56.758  3872  3910 I Unity   : AI_TACTIC_CHANGE team=3 HuntTrail -> Retreat opponentDeg=5.1 trailDeg=4.3 ownTrail=18
+10-12 05:41:57.721  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Expand -> Retreat opponentDeg=81.2 trailDeg=180.0 ownTrail=7
+10-12 05:41:58.147  3872  3910 I Unity   : AI_TACTIC_CHANGE team=3 Retreat -> Expand opponentDeg=36.4 trailDeg=180.0 ownTrail=0
+10-12 05:41:58.300  3872  3910 I Unity   : AI_TACTIC_CHANGE team=4 Retreat -> Expand opponentDeg=35.3 trailDeg=180.0 ownTrail=0
+10-12 05:41:59.471  3872  3910 I Unity   : AI_TACTIC_CHANGE team=2 Retreat -> Expand opponentDeg=45.4 trailDeg=180.0 ownTrail=0
+10-12 05:41:05.714  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=2 targetTeam=4 distanceDeg=26.4
+10-12 05:41:16.038  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=4 targetTeam=2 distanceDeg=12.6
+10-12 05:41:35.032  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=3 targetTeam=4 distanceDeg=15.5
+10-12 05:41:51.648  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=4 targetTeam=2 distanceDeg=25.4
+10-12 05:41:52.787  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=2 targetTeam=4 distanceDeg=22.7
+10-12 05:41:56.026  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=4 targetTeam=3 distanceDeg=22.3
+10-12 05:41:56.087  3872  3910 I Unity   : AI_TRAIL_INTERCEPT team=3 targetTeam=4 distanceDeg=21.4
+10-12 05:41:02.654  3872  3910 I Unity   : AI_SKILL_USED team=4 character=3 mode=Expand
+10-12 05:41:05.717  3872  3910 I Unity   : AI_SKILL_USED team=2 character=1 mode=HuntTrail
+10-12 05:41:20.863  3872  3910 I Unity   : AI_SKILL_USED team=4 character=3 mode=Expand
+10-12 05:41:23.880  3872  3910 I Unity   : AI_SKILL_USED team=2 character=1 mode=Expand
+10-12 05:41:35.035  3872  3910 I Unity   : AI_SKILL_USED team=3 character=2 mode=HuntTrail
+10-12 05:41:42.773  3872  3910 I Unity   : AI_SKILL_USED team=4 character=3 mode=Expand
+10-12 05:41:43.378  3872  3910 I Unity   : AI_SKILL_USED team=2 character=1 mode=Expand
+10-12 05:41:56.091  3872  3910 I Unity   : AI_SKILL_USED team=3 character=2 mode=HuntTrail
+10-12 05:42:00.665  3872  3910 I Unity   : AI_SKILL_USED team=2 character=1 mode=Expand
+10-12 05:42:00.865  3872  3910 I Unity   : AI_SKILL_USED team=4 character=3 mode=Expand
