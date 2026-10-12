@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace BrainrotPlanet
@@ -18,10 +19,14 @@ namespace BrainrotPlanet
         private int windows;
         private float totalFrames;
         private float totalSeconds;
+        private int lastGc0,lastGc1,lastGc2;
 
         private void Awake()
         {
             game=GetComponent<PlanetGame>();
+            lastGc0=GC.CollectionCount(0);
+            lastGc1=GC.CollectionCount(1);
+            lastGc2=GC.CollectionCount(2);
             Debug.Log("PERF_PROBE_READY device="+SystemInfo.deviceModel+
                 " processor="+SystemInfo.processorType+
                 " graphics="+SystemInfo.graphicsDeviceName+
@@ -53,6 +58,8 @@ namespace BrainrotPlanet
                 game.IsLanding?"landing":"game";
             float p95=percentile<EdgesMs.Length?EdgesMs[percentile]:300f;
             float fps=frames/Mathf.Max(.01f,elapsed);
+            int gc0=GC.CollectionCount(0),gc1=GC.CollectionCount(1),gc2=GC.CollectionCount(2);
+            long managedBytes=GC.GetTotalMemory(false);
             totalFrames+=frames;totalSeconds+=elapsed;
             Debug.Log("PERF_SAMPLE stage="+stage+
                 " fps="+fps.ToString("F2")+
@@ -60,7 +67,10 @@ namespace BrainrotPlanet
                 " maxms="+maxFrameMs.ToString("F1")+
                 " samples="+frames+
                 " avgTotalFps="+(totalFrames/Mathf.Max(.01f,totalSeconds)).ToString("F2")+
+                " managedMB="+(managedBytes/(1024f*1024f)).ToString("F2")+
+                " gcDelta="+(gc0-lastGc0)+"/"+(gc1-lastGc1)+"/"+(gc2-lastGc2)+
                 " window="+(++windows));
+            lastGc0=gc0;lastGc1=gc1;lastGc2=gc2;
             frames=0;elapsed=0;maxFrameMs=0;
             System.Array.Clear(distribution,0,distribution.Length);
         }

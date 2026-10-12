@@ -38,6 +38,10 @@ namespace BrainrotPlanet
         private Vector2 savedSteering;
         private bool autoMoving;
         private float nextInputDiagnostic;
+        private float threatTick;
+        private float nearestEnemyDegrees=180f;
+        private bool playerBoostWasActive;
+        private bool playerSlowWasActive;
         private int steerFinger=-1;
         private Vector2 steerOrigin;
         private int heroPage;
@@ -99,6 +103,8 @@ namespace BrainrotPlanet
             playerLandingGrace=AiBalanceTuning.StartGrace(chosenDifficulty);
             movement=Vector2.zero;savedSteering=Vector2.zero;autoMoving=false;steerFinger=-1;
             nextInputDiagnostic=0f;
+            threatTick=0f;nearestEnemyDegrees=180f;
+            playerBoostWasActive=false;playerSlowWasActive=false;
             var gameObjectRoot=new GameObject("ONE PLANET / ONE MATCH");
             worldRoot=gameObjectRoot.transform;
             var globe=new GameObject("Spherical walkable planet");globe.transform.SetParent(worldRoot);
@@ -425,9 +431,48 @@ namespace BrainrotPlanet
                 if(Player!=null)Player.Wish=Vector3.zero;
                 return;
             }
-            matchTime-=dt;skillCooldown=Mathf.Max(0,skillCooldown-dt);
+            matchTime-=dt;
+            float cooldownBefore=skillCooldown;
+            skillCooldown=Mathf.Max(0,skillCooldown-dt);
             annTime=Mathf.Max(0,annTime-dt);
             HandleInput();
+            if(cooldownBefore>0f && skillCooldown<=0f)
+            {
+                Announce(" СПОСОБНОСТЬ ГОТОВА!");
+                if(Player!=null)Effects.Burst(Player.transform.position,
+                    Colors.Team(1),14,1.2f);
+                Debug.Log("PLAYER_SKILL_READY hero="+selectedHero);
+            }
+            bool boostActive=Player!=null && Player.SpeedSeconds>0f;
+            bool slowActive=Player!=null && Player.SlowSeconds>0f;
+            if(playerBoostWasActive && !boostActive)
+            {
+                Announce(" УСКОРЕНИЕ ЗАКОНЧИЛОСЬ");
+                Debug.Log("PLAYER_SPEED_EFFECT_ENDED");
+            }
+            if(playerSlowWasActive && !slowActive)
+            {
+                Announce(" ЗАМЕДЛЕНИЕ ЗАКОНЧИЛОСЬ");
+                Debug.Log("PLAYER_SLOW_EFFECT_ENDED");
+            }
+            playerBoostWasActive=boostActive;playerSlowWasActive=slowActive;
+            threatTick-=dt;
+            if(threatTick<=0f)
+            {
+                threatTick=.20f;
+                nearestEnemyDegrees=180f;
+                if(Player!=null)
+                {
+                    Vector3 playerDirection=Player.transform.position.normalized;
+                    for(int i=0;i<players.Count;i++)
+                    {
+                        PlanetActor candidate=players[i];
+                        if(candidate==null||candidate.Team==1||!candidate.Active)continue;
+                        nearestEnemyDegrees=Mathf.Min(nearestEnemyDegrees,
+                            Vector3.Angle(playerDirection,candidate.transform.position.normalized));
+                    }
+                }
+            }
             Territory.Update(dt);
             scoreTick-=dt;
             if(scoreTick<=0)
@@ -651,33 +696,59 @@ namespace BrainrotPlanet
             }
             else if(State==MatchState.Playing)
             {
-                Plate(new Rect(9,9,logicalW-18,76),new Color(.10f,.12f,.22f,.86f));
+                Plate(new Rect(9,9,logicalW-18,91),new Color(.10f,.12f,.22f,.86f));
                 GUI.Label(new Rect(14,12,logicalW-28,29)," BRAINROT PLANET.IO",headerStyle);
-                GUI.Label(new Rect(15,42,logicalW-30,37),
-                    " "+scores[1].ToString("F1")+"%    "+scores[2].ToString("F1")+"%    "+scores[3].ToString("F1")+"%"+
-                    "\n "+lives+"     ⏱ "+Mathf.CeilToInt(matchTime)+" сек",smallStyle);
+                GUI.Label(new Rect(15,39,logicalW-30,55),
+                    "ТЫ "+scores[1].ToString("F1")+"%   СИНИЙ "+scores[2].ToString("F1")+
+                    "%   ЖЁЛТЫЙ "+scores[3].ToString("F1")+"%   ЗЕЛЁНЫЙ "+scores[4].ToString("F1")+"%"+
+                    "\nЖИЗНИ "+lives+"     ⏱ "+Mathf.CeilToInt(matchTime)+" сек",smallStyle);
                 if(orbitCamera != null && orbitCamera.IsDescending)
                 {
-                    Plate(new Rect(25,96,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
-                    GUI.Label(new Rect(25,99,logicalW-50,34),"ПРИБЛИЖЕНИЕ К ПЛАНЕТЕ...",smallStyle);
+                    Plate(new Rect(25,106,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
+                    GUI.Label(new Rect(25,109,logicalW-50,34),"ПРИБЛИЖЕНИЕ К ПЛАНЕТЕ...",smallStyle);
                 }
                 else if(annTime>0)
                 {
-                    Plate(new Rect(25,96,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
-                    GUI.Label(new Rect(25,99,logicalW-50,34),announcement,smallStyle);
+                    Plate(new Rect(25,106,logicalW-50,42),new Color(.09f,.10f,.21f,.74f));
+                    GUI.Label(new Rect(25,109,logicalW-50,34),announcement,smallStyle);
                 }
                 // Floating steering input replaces the fixed bottom-left joystick.
-                GUI.Label(new Rect(12,logicalH-65,logicalW-135,36),"СВАЙП: МЕНЯЙ НАПРАВЛЕНИЕ",smallStyle);
+                string motionLabel=autoMoving
+                    ? "ДВИЖЕНИЕ ПРОДОЛЖАЕТСЯ: "+GameplayFeedback.DirectionLabel(savedSteering)
+                    : GameplayFeedback.DirectionLabel(Vector2.zero);
+                GUI.Label(new Rect(12,logicalH-72,logicalW-135,43),motionLabel,smallStyle);
                 if(Territory!=null && Territory.HasTrail(1))
                 {
-                    Plate(new Rect(25,145,logicalW-50,41),new Color(.80f,.17f,.42f,.75f));
-                    GUI.Label(new Rect(30,149,logicalW-60,34),
-                        "ЗАМКНИ ПЕТЛЮ: ВЕРНИСЬ НА РОЗОВУЮ ЗОНУ",smallStyle);
+                    int trailCells=Territory.Path(1).Count;
+                    TrailRisk risk=GameplayFeedback.TrailRiskFor(trailCells,nearestEnemyDegrees);
+                    Color riskColor=risk==TrailRisk.Critical?new Color(.95f,.08f,.20f,.88f):
+                        risk==TrailRisk.Exposed?new Color(.92f,.28f,.10f,.82f):
+                        new Color(.80f,.17f,.42f,.75f);
+                    string riskText=risk==TrailRisk.Critical?"КРИТИЧЕСКИЙ РИСК! ЗАМКНИ ПЕТЛЮ":
+                        risk==TrailRisk.Exposed?"ОТКРЫТЫЙ СЛЕД: ПОРА ВОЗВРАЩАТЬСЯ":
+                        "КОРОТКАЯ ПЕТЛЯ: ВЕРНИСЬ НА РОЗОВУЮ ЗОНУ";
+                    Plate(new Rect(25,154,logicalW-50,41),riskColor);
+                    GUI.Label(new Rect(30,158,logicalW-60,34),riskText,smallStyle);
+                }
+                if(playerLandingGrace>0f && (orbitCamera==null || !orbitCamera.IsDescending))
+                {
+                    Plate(new Rect(logicalW-151,201,126,31),new Color(.16f,.62f,.84f,.82f));
+                    GUI.Label(new Rect(logicalW-149,202,122,28),
+                        "ЗАЩИТА "+Mathf.CeilToInt(playerLandingGrace)+" сек",smallStyle);
+                }
+                else if(nearestEnemyDegrees<15f)
+                {
+                    Plate(new Rect(25,201,logicalW-50,34),new Color(.92f,.12f,.20f,.82f));
+                    GUI.Label(new Rect(30,203,logicalW-60,29),
+                        Territory!=null&&Territory.HasTrail(1)?"ВРАГ РЯДОМ — ЗАЩИТИ СЛЕД!":"ВРАГ ОЧЕНЬ БЛИЗКО!",smallStyle);
                 }
                 if(steerFinger>=0)
                     GUI.Label(new Rect(steerOrigin.x-25,steerOrigin.y-25,50,50),"+",headerStyle);
                 Plate(skillArea,skillCooldown<=0?new Color(.91f,.31f,.56f,.90f):new Color(.37f,.39f,.53f,.83f));
-                GUI.Label(skillArea,skillCooldown>0?skillNames[selectedHero]+"\n"+Mathf.CeilToInt(skillCooldown)+" сек":skillNames[selectedHero],smallStyle);
+                string skillLabel=skillCooldown>0?skillNames[selectedHero]+"\n"+Mathf.CeilToInt(skillCooldown)+" сек":skillNames[selectedHero]+"\nГОТОВО";
+                if(Player!=null&&Player.SpeedSeconds>0f)skillLabel="УСКОРЕНИЕ\n"+Mathf.CeilToInt(Player.SpeedSeconds)+" сек";
+                else if(Player!=null&&Player.SlowSeconds>0f)skillLabel="ЗАМЕДЛЕНИЕ\n"+Mathf.CeilToInt(Player.SlowSeconds)+" сек";
+                GUI.Label(skillArea,skillLabel,smallStyle);
                 Plate(jumpArea,new Color(.21f,.62f,.89f,.91f));
                 GUI.Label(jumpArea,"\nПРЫЖОК",smallStyle);
                 DrawEnemySignals(logicalW,logicalH);

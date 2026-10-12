@@ -102,6 +102,10 @@ namespace BrainrotPlanet
             bool moving=actor.Wish.sqrMagnitude>.02f && actor.Grounded && !dropping;
             bool celebrating=now-victoryStart>=0f && now-victoryStart<VictoryLength;
             bool special=now-skillStart>=0f && now-skillStart<SkillLength;
+            AnimatorStateInfo authoredState=animator.GetCurrentAnimatorStateInfo(0);
+            bool authoredDrop=authoredState.IsName("Drop");
+            bool authoredSpecial=authoredState.IsName("Special");
+            bool authoredVictory=authoredState.IsName("Victory");
             float gait=moving ? (1f+.09f*(hero%5)) : 0f;
             float pace=t*(moving?13f+hero*.27f:2.0f);
             float step=Mathf.Sin(pace),other=Mathf.Sin(pace+Mathf.PI);
@@ -247,6 +251,31 @@ namespace BrainrotPlanet
                 if(hero==10){bodyPitch=28f*strike;bounce+=.10f*strike;}
             }
 
+            // Drop/Special/Victory are now fully authored Blender actions.
+            // Retain only a restrained secondary accent while those clips play;
+            // applying the old full-body overlay caused double spins and a hard
+            // pose reset when an authored action ended.
+            float authoredOverlay=1f;
+            if(dropping && authoredDrop)
+            {
+                float u=Mathf.Clamp01(dropTime/OrbitCamera.DescentDuration);
+                authoredOverlay=Mathf.Lerp(.12f,.34f,Mathf.Sin(u*Mathf.PI));
+            }
+            else if(special && authoredSpecial)
+            {
+                float u=Mathf.Clamp01((now-skillStart)/SkillLength);
+                authoredOverlay=.30f*Mathf.Sin(u*Mathf.PI);
+            }
+            else if(celebrating && authoredVictory)
+            {
+                float u=Mathf.Clamp01((now-victoryStart)/VictoryLength);
+                authoredOverlay=.22f*Mathf.Sin(u*Mathf.PI);
+            }
+            bodyPitch*=authoredOverlay;bodyRoll*=authoredOverlay;bodyYaw*=authoredOverlay;
+            tiltHead*=authoredOverlay;lArm*=authoredOverlay;rArm*=authoredOverlay;
+            lLeg*=authoredOverlay;rLeg*=authoredOverlay;shoulderFlap*=authoredOverlay;
+            tailSway*=authoredOverlay;bounce*=authoredOverlay;leanYaw*=authoredOverlay;
+
             float totalTilt=bodyRoll;
             transform.localPosition=restPosition+Vector3.up*bounce;
             transform.localRotation=restRotation*Quaternion.Euler(bodyPitch*.21f,
@@ -266,6 +295,8 @@ namespace BrainrotPlanet
                 nextDebugLog=now+1.8f;
                 string state=dropping?"drop":celebrating?"victory":special?"skill":moving?"run":"idle";
                 Debug.Log("HERO_MOTION_ACTIVE hero="+hero+" state="+state+
+                          " authored="+authoredState.shortNameHash+
+                          " overlay="+authoredOverlay.ToString("F2")+
                           " armL="+(armL!=null)+" armR="+(armR!=null));
             }
         }
