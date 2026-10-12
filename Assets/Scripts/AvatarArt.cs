@@ -209,6 +209,100 @@ namespace BrainrotPlanet
             }
             Debug.Log("TRALALERO_COLORED_RENDERERS="+count);
         }
+        private static readonly Dictionary<string,Material> NewHeroMaterials =
+            new Dictionary<string,Material>();
+        private static Material NewHeroPalette(Material source)
+        {
+            string n=(source!=null?source.name:"unknown").ToLowerInvariant();
+            if(NewHeroMaterials.TryGetValue(n,out Material old))return old;
+            Color c;
+            if(n.Contains("cream ceramic"))c=new Color(.88f,.75f,.59f);
+            else if(n.Contains("espresso dark"))c=new Color(.24f,.10f,.052f);
+            else if(n.Contains("graphite fabric"))c=new Color(.08f,.09f,.12f);
+            else if(n.Contains("soot black"))c=new Color(.023f,.03f,.04f);
+            else if(n.Contains("warm white"))c=new Color(.93f,.91f,.86f);
+            else if(n.Contains("silver metal"))c=new Color(.59f,.67f,.72f);
+            else if(n.Contains("brass gold"))c=new Color(.72f,.44f,.16f);
+            else if(n.Contains("pink rose"))c=new Color(.88f,.34f,.49f);
+            else if(n.Contains("forest green"))c=new Color(.16f,.37f,.15f);
+            else if(n.Contains("lime leaf"))c=new Color(.35f,.60f,.19f);
+            else if(n.Contains("rich wood"))c=new Color(.48f,.28f,.13f);
+            else if(n.Contains("woodgrain caramel"))c=new Color(.67f,.42f,.19f);
+            else if(n.Contains("sky ice blue"))c=new Color(.42f,.76f,.85f);
+            else if(n.Contains("sunset orange"))c=new Color(.93f,.39f,.12f);
+            else if(n.Contains("deep crimson"))c=new Color(.62f,.12f,.14f);
+            else if(n.Contains("sandy khaki"))c=new Color(.68f,.55f,.34f);
+            else if(n.Contains("tyre rubber"))c=new Color(.07f,.09f,.11f);
+            else if(n.Contains("frog green"))c=new Color(.27f,.58f,.18f);
+            else if(n.Contains("soft human skin"))c=new Color(.87f,.62f,.43f);
+            else if(n.Contains("shrimp salmon"))c=new Color(.86f,.37f,.28f);
+            else if(n.Contains("orange cat fur"))c=new Color(.81f,.42f,.17f);
+            else if(n.Contains("shell pale pink"))c=new Color(.95f,.67f,.54f);
+            else c=new Color(.62f,.60f,.56f);
+            Material m=Colors.New(c);
+            if(m.HasProperty("_Glossiness"))m.SetFloat("_Glossiness",.035f);
+            if(m.HasProperty("_Metallic"))m.SetFloat("_Metallic",0f);
+            if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
+            if(m.HasProperty("_GlossyReflections"))m.SetFloat("_GlossyReflections",0f);
+            m.name="Brainrot character / "+n;
+            NewHeroMaterials[n]=m;
+            return m;
+        }
+        private static void RecolorNewHero(Transform root)
+        {
+            foreach(Renderer r in root.GetComponentsInChildren<Renderer>(true))
+            {
+                Material[] mats=r.sharedMaterials;
+                for(int i=0;i<mats.Length;i++)mats[i]=NewHeroPalette(mats[i]);
+                r.sharedMaterials=mats;
+            }
+        }
+        private static string NewHeroName(int character)
+        {
+            switch(character)
+            {
+                case 2:return "Frigo";
+                case 5:return "Assassino";
+                case 6:return "Patapim";
+                case 7:return "TungSahur";
+                case 8:return "Lirili";
+                case 9:return "Frulli";
+                case 10:return "Boneca";
+                case 11:return "Trippi";
+                default:return null;
+            }
+        }
+        private static bool TryAddNewHero(Transform art,Transform root,
+                                          int character,Material paint)
+        {
+            string hero=NewHeroName(character);
+            if(hero==null)return false;
+            GameObject prefab=Resources.Load<GameObject>("Characters/"+hero+"_v01");
+            if(prefab==null)
+            {
+                Debug.LogWarning("NEW_HERO_FBX_MISSING "+hero);
+                return false;
+            }
+            GameObject visual=Object.Instantiate(prefab,art,false);
+            visual.name="Blender "+hero+" / animated";
+            visual.transform.localPosition=new Vector3(0,-.32f,0);
+            visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
+            visual.transform.localScale=Vector3.one*(hero=="Patapim" ? .52f : .60f);
+            RecolorNewHero(visual.transform);
+            foreach(Collider collider in visual.GetComponentsInChildren<Collider>(true))
+                Object.Destroy(collider);
+            Animator animator=visual.GetComponent<Animator>();
+            if(animator==null)animator=visual.AddComponent<Animator>();
+            animator.runtimeAnimatorController=
+                Resources.Load<RuntimeAnimatorController>("Characters/"+hero);
+            animator.applyRootMotion=false;
+            animator.cullingMode=AnimatorCullingMode.AlwaysAnimate;
+            Debug.Log("NEW_HERO_RIG_LOADED name="+hero+
+                " controller="+(animator.runtimeAnimatorController!=null));
+            Oval(root,"Paint aura",new Vector3(0,-.42f,0),
+                 new Vector3(1.25f,.09f,1.25f),paint);
+            return true;
+        }
         public static void Make(Transform root,int character,Color territoryColor)
         {
             Transform art=new GameObject("Brainrot avatar / animated").transform;
@@ -223,6 +317,8 @@ namespace BrainrotPlanet
             Material belly=Colors.New(new Color(.83f,.94f,.82f));
             Material silver=Colors.New(new Color(.72f,.82f,.92f));
             Material neon=Colors.New(territoryColor,true);
+            // Preserve existing hero slots; replace only Frigo's provisional art.
+            if(TryAddNewHero(art,root,character,neon))return;
             if(character==0)
             {
                 // Authored in Blender with an actual three-legged skeleton and

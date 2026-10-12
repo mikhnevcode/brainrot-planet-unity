@@ -38,7 +38,7 @@ namespace BrainrotPlanet
         }
         public void Celebrate()
         {
-            if(Character==4 && visualAnimator!=null &&
+            if(Character>=4 && visualAnimator!=null &&
                visualAnimator.runtimeAnimatorController!=null)
             {
                 visualAnimator.SetTrigger("Victory");

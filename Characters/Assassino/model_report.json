@@ -1,0 +1,16 @@
+{
+  "character": "Assassino",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Assassino\\Assassino_v01.blend",
+  "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Assassino\\Assassino_v01.fbx",
+  "mesh_parts": 36,
+  "render_meshes": 6,
+  "bones": 7,
+  "animations": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory"
+  ],
+  "blender": "5.2.2 LTS"
+}

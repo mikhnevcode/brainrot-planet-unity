@@ -1,0 +1,130 @@
+[
+  {
+    "character": "Assassino",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Assassino\\Assassino_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Assassino\\Assassino_v01.fbx",
+    "mesh_parts": 36,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "Patapim",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Patapim\\Patapim_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Patapim\\Patapim_v01.fbx",
+    "mesh_parts": 63,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "TungSahur",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\TungSahur\\TungSahur_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\TungSahur\\TungSahur_v01.fbx",
+    "mesh_parts": 42,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "Lirili",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Lirili\\Lirili_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Lirili\\Lirili_v01.fbx",
+    "mesh_parts": 73,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "Frigo",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Frigo\\Frigo_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Frigo\\Frigo_v01.fbx",
+    "mesh_parts": 27,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "Frulli",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Frulli\\Frulli_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Frulli\\Frulli_v01.fbx",
+    "mesh_parts": 26,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "Boneca",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Boneca\\Boneca_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Boneca\\Boneca_v01.fbx",
+    "mesh_parts": 38,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  },
+  {
+    "character": "Trippi",
+    "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Trippi\\Trippi_v01.blend",
+    "fbx": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Trippi\\Trippi_v01.fbx",
+    "mesh_parts": 43,
+    "render_meshes": 6,
+    "bones": 7,
+    "animations": [
+      "Idle",
+      "Run",
+      "Jump",
+      "Land",
+      "Victory"
+    ],
+    "blender": "5.2.2 LTS"
+  }
+]

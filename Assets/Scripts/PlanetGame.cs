@@ -15,8 +15,8 @@ namespace BrainrotPlanet
         public PlanetActor Player { get; private set; }
         private readonly List<PlanetActor> players = new List<PlanetActor>();
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
-        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО "};
-        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА","РЕАКТИВНЫЙ РЫВОК","КОФЕЙНЫЙ ВИХРЬ"};
+        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ "};
+        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА","РЕАКТИВНЫЙ РЫВОК","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНОЙ КРУГ","ГРОМКИЙ УДАР","КАКТУСНАЯ ВОЛНА","БЫСТРЫЙ ТАНЕЦ","ПРУЖИНА","КРАСОЧНЫЙ ВСПЛЕСК"};
         private int selectedHero=0;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
@@ -32,7 +32,7 @@ namespace BrainrotPlanet
         private float nextInputDiagnostic;
         private int steerFinger=-1;
         private Vector2 steerOrigin;
-        private Vector2 menuScroll;
+        private int heroPage;
         private Rect skillArea,jumpArea;
         private Texture2D whitePixel;
         private GUIStyle headerStyle,menuStyle,buttonStyle,smallStyle;
@@ -242,6 +242,49 @@ namespace BrainrotPlanet
                 Announce(" БАЛЕРИНА: КОФЕЙНЫЙ ВИХРЬ! +"+painted+" КЛЕТОК");
                 Debug.Log("BALLERINA_WHIRL_CAPTURE cells="+painted);
             }
+            else if(selectedHero>=5 && selectedHero<characters.Length)
+            {
+                Vector3 direction=Player.transform.position.normalized;
+                int cells=0;
+                switch(selectedHero)
+                {
+                    case 5:
+                        Player.SpeedSeconds=2.8f;
+                        cells=Territory.ClaimDisk(1,direction,.080f);
+                        break;
+                    case 6:
+                        cells=Territory.ClaimDisk(1,direction,.16f);
+                        break;
+                    case 7:
+                        cells=Territory.ClaimDisk(1,direction,.090f);
+                        foreach(var pawn in players)
+                            if(pawn.Team!=1 && Vector3.Angle(pawn.transform.position.normalized,direction)<15f)
+                                pawn.SlowSeconds=2.5f;
+                        break;
+                    case 8:
+                        cells=Territory.ClaimDisk(1,direction,.110f);
+                        foreach(var pawn in players)
+                            if(pawn.Team!=1 && Vector3.Angle(pawn.transform.position.normalized,direction)<11f)
+                                pawn.SlowSeconds=4f;
+                        break;
+                    case 9:
+                        Player.SpeedSeconds=3.5f;
+                        cells=Territory.ClaimDisk(1,direction,.075f);
+                        break;
+                    case 10:
+                        Player.SpeedSeconds=2.0f;
+                        cells=Territory.ClaimDisk(1,direction,.11f);
+                        break;
+                    case 11:
+                        cells=Territory.ClaimDisk(1,direction,.16f);
+                        break;
+                }
+                Effects.CaptureFlash(direction,Colors.Team(1),Mathf.Max(cells,25));
+                Effects.Burst(Player.transform.position,Colors.Team(1),28,2.4f);
+                Player.Celebrate();
+                Announce(characters[selectedHero]+": "+skillNames[selectedHero]);
+                Debug.Log("ADDITIONAL_HERO_SKILL index="+selectedHero+" cells="+cells);
+            }
         }
         private void Update()
         {
@@ -382,20 +425,34 @@ namespace BrainrotPlanet
                 Plate(new Rect(0,0,logicalW,logicalH),new Color(.055f,.065f,.13f,.97f));
                 GUI.Label(new Rect(16,45,logicalW-32,55)," BRAINROT PLANET.IO",headerStyle);
                 GUI.Label(new Rect(22,102,logicalW-44,74),"Десантируйся на планету. Оставляй след и замыкай его, чтобы захватить поверхность!",menuStyle);
-                GUI.Label(new Rect(18,184,logicalW-36,32),"ВЫБЕРИ ГЕРОЯ",headerStyle);
-                var menuRect=new Rect(18,220,logicalW-36,Mathf.Max(150,logicalH-414));
-                menuScroll=GUI.BeginScrollView(menuRect,menuScroll,
-                    new Rect(0,0,logicalW-54,characters.Length*84+8));
-                for(int i=0;i<characters.Length;i++)
+                // Paged hero picker: unlike IMGUI scroll views, taps work reliably on Android.
+                int pageSize=Mathf.Max(3,Mathf.Min(5,Mathf.FloorToInt((logicalH-440)/84f)));
+                int pageCount=(characters.Length+pageSize-1)/pageSize;
+                heroPage=Mathf.Clamp(heroPage,0,pageCount-1);
+                GUI.Label(new Rect(84,184,logicalW-168,34),
+                    "ВЫБЕРИ ГЕРОЯ  "+(heroPage+1)+"/"+pageCount,headerStyle);
+                if(heroPage>0 && GUI.Button(new Rect(20,183,56,37),"<<",buttonStyle))
+                    heroPage--;
+                if(heroPage<pageCount-1 &&
+                   GUI.Button(new Rect(logicalW-76,183,56,37),">>",buttonStyle))
+                    heroPage++;
+                for(int slot=0;slot<pageSize;slot++)
                 {
-                    float y=i*84;
-                    Plate(new Rect(1,y,logicalW-58,78),i==selectedHero?new Color(.90f,.25f,.52f,.85f):new Color(.25f,.34f,.52f,.72f));
-                    if(GUI.Button(new Rect(9,y+7,logicalW-74,65),characters[i]+"\n"+
-                       (i==0?" Ускорение":i==1?" Бомба по дуге":i==2?" Ледяная волна":i==3?" Реактивный рывок":" Кофейный вихрь"),buttonStyle)) selectedHero=i;
+                    int i=heroPage*pageSize+slot;
+                    if(i>=characters.Length)break;
+                    float y=222+slot*84;
+                    Plate(new Rect(19,y,logicalW-38,78),
+                        i==selectedHero?new Color(.90f,.25f,.52f,.85f):
+                                        new Color(.25f,.34f,.52f,.72f));
+                    if(GUI.Button(new Rect(28,y+7,logicalW-56,65),
+                        characters[i]+"\n"+skillNames[i],buttonStyle))
+                    {
+                        selectedHero=i;
+                        Debug.Log("HERO_MENU_SELECTED index="+i);
+                    }
                 }
-                GUI.EndScrollView();
                 if(GUI.Button(new Rect(26,logicalH-166,logicalW-52,60)," ДЕСАНТИРОВАТЬСЯ",buttonStyle))StartGame();
-                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),"145 секунд · 5 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
+                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),"145 секунд · 12 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
             }
             else if(State==MatchState.Playing)
             {
