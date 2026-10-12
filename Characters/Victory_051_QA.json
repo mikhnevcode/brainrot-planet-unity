@@ -1,0 +1,18 @@
+[
+  {
+    "hero": 0,
+    "name": "Tralalero",
+    "capture_events": 3,
+    "victory_triggered": true,
+    "victory_state": true,
+    "fatal": false
+  },
+  {
+    "hero": 4,
+    "name": "Ballerina",
+    "capture_events": 3,
+    "victory_triggered": true,
+    "victory_state": true,
+    "fatal": false
+  }
+]

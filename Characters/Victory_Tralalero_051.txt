@@ -1,0 +1,38 @@
+10-12 02:55:37.141 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=False
+10-12 02:55:37.142 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=drop armL=True armR=True
+10-12 02:55:37.626 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Jump movement=0.00 grounded=False
+10-12 02:55:38.882 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=drop armL=True armR=True
+10-12 02:55:39.033 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Jump movement=0.00 grounded=False
+10-12 02:55:40.440 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Land movement=0.00 grounded=True
+10-12 02:55:40.690 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=skill armL=True armR=True
+10-12 02:55:41.846 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=True
+10-12 02:55:42.501 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=run armL=True armR=True
+10-12 02:55:43.254 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:44.310 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=run armL=True armR=True
+10-12 02:55:44.661 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:46.067 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:46.119 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=run armL=True armR=True
+10-12 02:55:46.947 14102 14135 I Unity   : TERRITORY_CAPTURE team=1 areaCells=384 totalNewCells=648 seamCells=28 selection=old-land+trail
+10-12 02:55:46.949 14102 14135 I Unity   : HERO_MOTION_VICTORY hero=0
+10-12 02:55:47.471 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:47.924 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=victory armL=True armR=True
+10-12 02:55:48.882 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:49.735 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=run armL=True armR=True
+10-12 02:55:50.289 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:50.866 14102 14135 I Unity   : TERRITORY_CAPTURE team=1 areaCells=247 totalNewCells=434 seamCells=23 selection=old-land+trail
+10-12 02:55:50.868 14102 14135 I Unity   : HERO_MOTION_VICTORY hero=0
+10-12 02:55:51.546 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=victory armL=True armR=True
+10-12 02:55:51.695 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:53.101 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:53.355 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=victory armL=True armR=True
+10-12 02:55:54.510 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:55.156 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=run armL=True armR=True
+10-12 02:55:55.917 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:56.713 14102 14135 I Unity   : TERRITORY_CAPTURE team=1 areaCells=254 totalNewCells=435 seamCells=30 selection=old-land+trail
+10-12 02:55:56.714 14102 14135 I Unity   : HERO_MOTION_VICTORY hero=0
+10-12 02:55:56.974 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=victory armL=True armR=True
+10-12 02:55:57.324 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:58.733 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:55:58.782 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=victory armL=True armR=True
+10-12 02:56:00.139 14102 14135 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:56:00.592 14102 14135 I Unity   : HERO_MOTION_ACTIVE hero=0 state=run armL=True armR=True

@@ -15,6 +15,9 @@ namespace BrainrotPlanet
         public bool Grounded { get; private set; }
         private Rigidbody body;
         private Animator visualAnimator;
+        private HeroMotion heroMotion;
+        private bool springLandingArmed;
+        private float springEarliestLand;
         private float nextAnimationCheck;
         private float jumpCooldown, bumpCooldown, damageCooldown;
         private PlanetGame game;
@@ -42,6 +45,11 @@ namespace BrainrotPlanet
             bodyCollider.radius=.66f;
             AvatarArt.Make(transform,character,Colors.Team(team));
             visualAnimator=GetComponentInChildren<Animator>();
+            if(visualAnimator!=null)
+            {
+                heroMotion=visualAnimator.gameObject.AddComponent<HeroMotion>();
+                heroMotion.Configure(this,visualAnimator);
+            }
         }
         // Scripted insertion occurs only at the start of a match. Keep the
         // actor above the planet while the existing 2.9-second camera approach
@@ -54,6 +62,7 @@ namespace BrainrotPlanet
             dropElapsed=0f;
             nextDropDiagnostic=0f;
             isDropping=true;
+            if(heroMotion!=null)heroMotion.StartDrop();
             Grounded=false;
             Wish=Vector3.zero;
             body.linearVelocity=Vector3.zero;
@@ -70,6 +79,7 @@ namespace BrainrotPlanet
         private void UpdateDrop(float dt)
         {
             dropElapsed+=dt;
+            if(heroMotion!=null)heroMotion.SetDropTime(dropElapsed);
             // Delay visible fall until the approach has established the planet.
             // Then accelerate downward, leaving time to see the descent clearly.
             float progress=Mathf.Clamp01((dropElapsed-.65f)/
@@ -90,6 +100,7 @@ namespace BrainrotPlanet
             body.linearVelocity=Vector3.zero;
             body.angularVelocity=Vector3.zero;
             Grounded=true;
+            if(heroMotion!=null)heroMotion.Landed();
             jumpCooldown=.25f;
             lastDirection=dropLanding.normalized;
             game.Effects.Burst(dropLanding,Colors.Team(Team),36,2.1f);
@@ -99,12 +110,26 @@ namespace BrainrotPlanet
 
         public void Celebrate()
         {
+            if(heroMotion!=null)heroMotion.Celebrate();
             if(Character>=4 && visualAnimator!=null &&
                visualAnimator.runtimeAnimatorController!=null)
-            {
                 visualAnimator.SetTrigger("Victory");
-                Debug.Log("BALLERINA_VICTORY_TRIGGER team="+Team);
-            }
+        }
+        public void PlaySpecial()
+        {
+            if(heroMotion!=null)heroMotion.PerformSkill();
+        }
+        public bool SpringJump()
+        {
+            if(!Active||!Grounded||springLandingArmed||body==null)return false;
+            springLandingArmed=true;
+            springEarliestLand=Time.time+.38f;
+            Vector3 normal=transform.position.normalized;
+            body.AddForce(normal*8.5f,ForceMode.VelocityChange);
+            Grounded=false;
+            if(heroMotion!=null)heroMotion.PerformSkill();
+            Debug.Log("BONECA_SPRING_LAUNCH team="+Team);
+            return true;
         }
         public void Jump()
         {
@@ -125,6 +150,7 @@ namespace BrainrotPlanet
         public void Respawn()
         {
             game.Territory.ResetTrail(Team);
+            springLandingArmed=false;
             body.linearVelocity=Vector3.zero;body.angularVelocity=Vector3.zero;
             transform.position=PlanetSurface.Point(SpawnDirection,1.8f);
             transform.rotation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
@@ -167,6 +193,15 @@ namespace BrainrotPlanet
             RaycastHit ground;
             bool colliderContact=Physics.Raycast(body.position+n*.15f,-n,out ground,1.15f,1<<8,QueryTriggerInteraction.Ignore);
             Grounded=radialContact||colliderContact;
+            if(springLandingArmed && Grounded && Time.time>=springEarliestLand)
+            {
+                springLandingArmed=false;
+                int painted=game.Territory.ClaimDisk(Team,n,.115f);
+                game.Effects.CaptureFlash(n,Colors.Team(Team),Mathf.Max(25,painted));
+                game.Effects.Burst(transform.position,Colors.Team(Team),26,2.9f);
+                if(heroMotion!=null)heroMotion.Celebrate();
+                Debug.Log("BONECA_SPRING_LANDED team="+Team+" cells="+painted);
+            }
             Vector3 walk=Vector3.ProjectOnPlane(Wish,n).normalized;
             float speed=(Team==1?6.5f:5.4f)*(SlowSeconds>0?.46f:1f)*(SpeedSeconds>0?1.85f:1f);
             if(Grounded)

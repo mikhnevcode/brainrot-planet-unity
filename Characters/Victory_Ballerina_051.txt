@@ -1,0 +1,37 @@
+10-12 02:56:10.153 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Idle movement=0.00 grounded=False
+10-12 02:56:10.155 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=drop armL=True armR=True
+10-12 02:56:11.093 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Jump movement=0.00 grounded=False
+10-12 02:56:11.880 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=drop armL=True armR=True
+10-12 02:56:12.499 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Jump movement=0.00 grounded=False
+10-12 02:56:13.684 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=skill armL=True armR=True
+10-12 02:56:13.901 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Land movement=0.00 grounded=True
+10-12 02:56:15.313 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Idle movement=0.00 grounded=True
+10-12 02:56:15.499 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=idle armL=True armR=True
+10-12 02:56:16.721 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:17.302 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:18.128 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:19.119 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:19.537 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:20.199 14408 14459 I Unity   : TERRITORY_CAPTURE team=1 areaCells=384 totalNewCells=645 seamCells=28 selection=old-land+trail
+10-12 02:56:20.200 14408 14459 I Unity   : HERO_MOTION_VICTORY hero=4
+10-12 02:56:20.941 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Victory movement=1.00 grounded=True
+10-12 02:56:20.942 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=victory armL=True armR=True
+10-12 02:56:22.351 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Victory movement=1.00 grounded=True
+10-12 02:56:22.754 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:23.758 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:24.035 14408 14459 I Unity   : TERRITORY_CAPTURE team=1 areaCells=256 totalNewCells=437 seamCells=26 selection=old-land+trail
+10-12 02:56:24.036 14408 14459 I Unity   : HERO_MOTION_VICTORY hero=4
+10-12 02:56:24.562 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=victory armL=True armR=True
+10-12 02:56:25.165 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Victory movement=1.00 grounded=True
+10-12 02:56:26.365 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=victory armL=True armR=True
+10-12 02:56:26.565 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Victory movement=1.00 grounded=True
+10-12 02:56:27.980 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:28.182 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:29.387 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:29.989 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:30.050 14408 14459 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=50 seamCells=34 selection=none
+10-12 02:56:30.812 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:31.797 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:32.218 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True
+10-12 02:56:33.607 14408 14459 I Unity   : HERO_MOTION_ACTIVE hero=4 state=run armL=True armR=True
+10-12 02:56:33.624 14408 14459 I Unity   : TRALALERO_ANIMATION clip=BallerinaCappuccina_Armature|Run movement=1.00 grounded=True

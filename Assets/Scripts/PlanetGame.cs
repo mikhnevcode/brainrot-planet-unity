@@ -16,8 +16,9 @@ namespace BrainrotPlanet
         private readonly List<PlanetActor> players = new List<PlanetActor>();
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
         private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ "};
-        private readonly string[] skillNames={"РЫВОК","КРАСКОБОМБА","ЛЕДЯНАЯ ВОЛНА","РЕАКТИВНЫЙ РЫВОК","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНОЙ КРУГ","ГРОМКИЙ УДАР","КАКТУСНАЯ ВОЛНА","БЫСТРЫЙ ТАНЕЦ","ПРУЖИНА","КРАСОЧНЫЙ ВСПЛЕСК"};
+        private readonly string[] skillNames={"АКУЛИЙ РЫВОК","3 БОМБЫ","ЛЕДЯНАЯ ВОЛНА","ТУРБО","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНАЯ ХВАТКА","БАРАБАННЫЙ УДАР","КАКТУСНАЯ БУРЯ","ВОЗДУШНЫЙ ТАНЕЦ","ПРУЖИНА","ВСПЛЕСК КРАСКИ"};
         private int selectedHero=0;
+        private bool resolvingHeroSkill;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
         private float[] scores = new float[5];
@@ -171,13 +172,24 @@ namespace BrainrotPlanet
         private void HandleCapture(int team,int changed,Vector3 direction)
         {
             Effects.CaptureFlash(direction,Colors.Team(team),changed);
+            if(changed>=150 && !resolvingHeroSkill && !IsLanding)
+            {
+                // Only meaningful captures trigger a celebration; little paint
+                // splashes and crystal pickups do not interrupt movement.
+                for(int i=0;i<players.Count;i++)
+                    if(players[i].Team==team)
+                    {
+                        players[i].Celebrate();
+                        break;
+                    }
+            }
             if(team==1)
             {
-                if(selectedHero==4 && Player!=null)Player.Celebrate();
                 float before=scores[1];
                 scores[1]=Territory.Percentage(1);
                 float gain=Mathf.Max(0f,scores[1]-before);
-                Announce((changed>180?" БОЛЬШОЙ ЗАХВАТ! +":" ОБЛАСТЬ ЗАКРАШЕНА! +")+gain.ToString("F1")+"%");
+                Announce((changed>180?" БОЛЬШОЙ ЗАХВАТ! +":" ОБЛАСТЬ ЗАКРАШЕНА! +")+
+                    gain.ToString("F1")+"%");
                 skillCooldown=Mathf.Max(0f,skillCooldown-Mathf.Min(1.5f,changed/450f));
             }
         }
@@ -201,93 +213,120 @@ namespace BrainrotPlanet
         public void Announce(string text){announcement=text;annTime=2.4f;}
         public void UseSkill()
         {
-            if(State!=MatchState.Playing||skillCooldown>0||Player==null)return;
+            if(State!=MatchState.Playing||skillCooldown>0||Player==null||IsLanding)return;
+            if(selectedHero==10 && !Player.Grounded)return;
             skillCooldown=12f;
-            if(selectedHero==0)
+            resolvingHeroSkill=true;
+            Player.PlaySpecial();
+            Vector3 center=Player.transform.position.normalized;
+            int cells=0;
+            try
             {
-                Player.SpeedSeconds=3.5f;
-                Effects.Burst(Player.transform.position,Colors.Team(1),25,3f);
-                Announce(" ТРАЛАЛЕРО: УСКОРЕНИЕ!");
-            }
-            else if(selectedHero==1)
-            {
-                GameObject ball=GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                ball.name="Paint bomb / gravity projectile";
-                ball.layer=9;
-                ball.transform.localScale=Vector3.one*.70f;
-                ball.GetComponent<Renderer>().sharedMaterial=Colors.New(Colors.Team(1),true);
-                var rigid=ball.AddComponent<Rigidbody>();
-                rigid.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
-                ball.AddComponent<PaintBomb>().Launch(this,Player);
-                Announce(" КРАСКОБОМБА!");
-            }
-            else if(selectedHero==2)
-            {
-                Vector3 at=Player.transform.position.normalized;
-                foreach(var pawn in players)
-                    if(pawn.Team!=1&&Vector3.Angle(pawn.transform.position.normalized,at)<21f)
-                        pawn.SlowSeconds=4f;
-                Effects.CaptureFlash(at,Color.cyan,110);
-                Announce(" ФРИГО: ЛЕДЯНАЯ ВОЛНА!");
-            }
-            else if(selectedHero==3)
-            {
-                Player.SpeedSeconds=4.0f;
-                Effects.Burst(Player.transform.position,Colors.Team(1),35,5f);
-                Announce(" ГУСИНИ: РЕАКТИВНЫЙ РЫВОК!");
-            }
-            else if(selectedHero==4)
-            {
-                int painted=Territory.ClaimDisk(1,Player.transform.position.normalized,.125f);
-                Effects.CaptureFlash(Player.transform.position.normalized,Colors.Team(1),painted);
-                Effects.Burst(Player.transform.position,Colors.Team(1),35,2.2f);
-                Player.Celebrate();
-                Announce(" БАЛЕРИНА: КОФЕЙНЫЙ ВИХРЬ! +"+painted+" КЛЕТОК");
-                Debug.Log("BALLERINA_WHIRL_CAPTURE cells="+painted);
-            }
-            else if(selectedHero>=5 && selectedHero<characters.Length)
-            {
-                Vector3 direction=Player.transform.position.normalized;
-                int cells=0;
                 switch(selectedHero)
                 {
-                    case 5:
-                        Player.SpeedSeconds=2.8f;
-                        cells=Territory.ClaimDisk(1,direction,.080f);
-                        break;
-                    case 6:
-                        cells=Territory.ClaimDisk(1,direction,.16f);
-                        break;
-                    case 7:
-                        cells=Territory.ClaimDisk(1,direction,.090f);
-                        foreach(var pawn in players)
-                            if(pawn.Team!=1 && Vector3.Angle(pawn.transform.position.normalized,direction)<15f)
-                                pawn.SlowSeconds=2.5f;
-                        break;
-                    case 8:
-                        cells=Territory.ClaimDisk(1,direction,.110f);
-                        foreach(var pawn in players)
-                            if(pawn.Team!=1 && Vector3.Angle(pawn.transform.position.normalized,direction)<11f)
-                                pawn.SlowSeconds=4f;
-                        break;
-                    case 9:
+                    case 0: // Tralalero: shark sprint
                         Player.SpeedSeconds=3.5f;
-                        cells=Territory.ClaimDisk(1,direction,.075f);
+                        Announce(" ТРАЛАЛЕРО: АКУЛИЙ РЫВОК!");
                         break;
-                    case 10:
-                        Player.SpeedSeconds=2.0f;
-                        cells=Territory.ClaimDisk(1,direction,.11f);
+                    case 1: // Bombardiro: three evenly spread paint bombs
+                        for(int i=-1;i<=1;i++)
+                        {
+                            GameObject bomb=GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                            bomb.name="Bombardiro paint bomb "+(i+1);
+                            bomb.layer=9;
+                            bomb.transform.localScale=Vector3.one*.55f;
+                            bomb.GetComponent<Renderer>().sharedMaterial=
+                                Colors.New(Colors.Team(1),true);
+                            Rigidbody rigid=bomb.AddComponent<Rigidbody>();
+                            rigid.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
+                            bomb.AddComponent<PaintBomb>().Launch(this,Player,i*16f,.070f);
+                        }
+                        Announce(" БОМБАРДИРО: ТРОЙНАЯ БОМБАРДИРОВКА!");
                         break;
-                    case 11:
-                        cells=Territory.ClaimDisk(1,direction,.16f);
+                    case 2: // Frigo: chilled opponents
+                        for(int i=0;i<players.Count;i++)
+                        {
+                            PlanetActor pawn=players[i];
+                            if(pawn.Team!=1 &&
+                               Vector3.Angle(pawn.transform.position.normalized,center)<21f)
+                                pawn.SlowSeconds=4f;
+                        }
+                        Announce(" ФРИГО: ЛЕДЯНАЯ ВОЛНА!");
+                        break;
+                    case 3: // Bombombini: jet-powered dash
+                        Player.SpeedSeconds=4.0f;
+                        Announce(" ГУСИНИ: ТУРБОРЕЖИМ!");
+                        break;
+                    case 4: // Ballerina: cappuccino pirouette paint
+                        cells=Territory.ClaimDisk(1,center,.125f);
+                        Announce(" БАЛЕРИНА: КОФЕЙНЫЙ ВИХРЬ! +"+cells);
+                        break;
+                    case 5: // Ninja: shadow dash + narrow paint pocket
+                        Player.SpeedSeconds=2.8f;
+                        cells=Territory.ClaimDisk(1,center,.08f);
+                        Announce(" АССАСИНО: ТЕНЕВОЙ РЫВОК!");
+                        break;
+                    case 6: // Patapim: thicket roots slow nearby opponents
+                        cells=Territory.ClaimDisk(1,center,.10f);
+                        for(int i=0;i<players.Count;i++)
+                        {
+                            PlanetActor pawn=players[i];
+                            if(pawn.Team!=1 &&
+                               Vector3.Angle(pawn.transform.position.normalized,center)<15f)
+                                pawn.SlowSeconds=3f;
+                        }
+                        Announce(" ПАТАПИМ: ЛЕСНАЯ ХВАТКА!");
+                        break;
+                    case 7: // Tung: large percussive shock wave
+                        cells=Territory.ClaimDisk(1,center,.09f);
+                        for(int i=0;i<players.Count;i++)
+                        {
+                            PlanetActor pawn=players[i];
+                            if(pawn.Team!=1 &&
+                               Vector3.Angle(pawn.transform.position.normalized,center)<18f)
+                                pawn.SlowSeconds=3.5f;
+                        }
+                        Announce(" САХУР: БАРАБАННЫЙ УДАР!");
+                        break;
+                    case 8: // Lirili: thorny cactus spray
+                        cells=Territory.ClaimDisk(1,center,.11f);
+                        for(int i=0;i<players.Count;i++)
+                        {
+                            PlanetActor pawn=players[i];
+                            if(pawn.Team!=1 &&
+                               Vector3.Angle(pawn.transform.position.normalized,center)<13f)
+                                pawn.SlowSeconds=4f;
+                        }
+                        Announce(" ЛИРИЛИ: КАКТУСНАЯ БУРЯ!");
+                        break;
+                    case 9: // Frulli: flutter movement with small paint splash
+                        Player.SpeedSeconds=3.5f;
+                        cells=Territory.ClaimDisk(1,center,.075f);
+                        Announce(" ФРУЛЛИ: ВОЗДУШНЫЙ ТАНЕЦ!");
+                        break;
+                    case 10: // Wheel frog bounces; real paint arrives on touchdown.
+                        if(!Player.SpringJump())skillCooldown=0f;
+                        Announce(" БОНЕКА: ПРУЖИНА!");
+                        break;
+                    case 11: // Trippi: three separate shrimp-paint splashes
+                        Vector3 tangent=Vector3.ProjectOnPlane(Player.transform.forward,
+                            center).normalized;
+                        if(tangent.sqrMagnitude<.01f)
+                            tangent=Vector3.Cross(center,Vector3.up).normalized;
+                        Vector3 across=Vector3.Cross(center,tangent).normalized;
+                        for(int i=-1;i<=1;i++)
+                        {
+                            Vector3 splash=Quaternion.AngleAxis(i*7.5f,across)*center;
+                            cells+=Territory.ClaimDisk(1,splash,.068f);
+                        }
+                        Announce(" ТРИППИ: КРЕВЕТОЧНЫЙ ВСПЛЕСК! +"+cells);
                         break;
                 }
-                Effects.CaptureFlash(direction,Colors.Team(1),Mathf.Max(cells,25));
-                Effects.Burst(Player.transform.position,Colors.Team(1),28,2.4f);
-                Player.Celebrate();
-                Announce(characters[selectedHero]+": "+skillNames[selectedHero]);
-                Debug.Log("ADDITIONAL_HERO_SKILL index="+selectedHero+" cells="+cells);
+                Effects.HeroAbility(selectedHero,center,Colors.Team(1));
+                Debug.Log("HERO_SPECIAL_ACTIVATED hero="+selectedHero+
+                          " cells="+cells+" cooldown="+skillCooldown.ToString("F1"));
             }
+            finally{resolvingHeroSkill=false;}
         }
         private void Update()
         {
@@ -396,8 +435,21 @@ namespace BrainrotPlanet
         private void Finish()
         {
             if(State==MatchState.End)return;
+            int winningTeam=1;
+            float best=float.MinValue;
+            for(int team=1;team<=4;team++)
+                if(scores[team]>best)
+                {
+                    best=scores[team];winningTeam=team;
+                }
+            foreach(var pawn in players)
+            {
+                pawn.Wish=Vector3.zero;
+                pawn.Active=false;
+                if(pawn.Team==winningTeam)pawn.Celebrate();
+            }
             State=MatchState.End;
-            foreach(var pawn in players){pawn.Wish=Vector3.zero;pawn.Active=false;}
+            Debug.Log("HERO_MATCH_VICTORY team="+winningTeam);
         }
         private float GameScale(){return Mathf.Max(.60f,Mathf.Min(Screen.width/420f,Screen.height/790f));}
         private void InitStyles()
@@ -491,15 +543,31 @@ namespace BrainrotPlanet
             }
             else
             {
-                Plate(new Rect(0,0,logicalW,logicalH),new Color(.06f,.08f,.15f,.88f));
-                float place=0;int winner=0;
-                for(int i=1;i<=4;i++)if(scores[i]>place){place=scores[i];winner=i;}
-                GUI.Label(new Rect(20,logicalH/2-182,logicalW-40,62),winner==1?" ПОБЕДА!":" ПЛАНЕТА ЗАХВАЧЕНА!",headerStyle);
-                GUI.Label(new Rect(24,logicalH/2-103,logicalW-48,80),
-                    "Твоя территория: "+scores[1].ToString("F1")+"%\nПобедитель: "+(winner==1?"ТЫ":("КОМАНДА "+winner)),menuStyle);
-                if(GUI.Button(new Rect(26,logicalH/2+14,logicalW-52,64),"ИГРАТЬ ЕЩЁ",buttonStyle))StartGame();
-                if(GUI.Button(new Rect(26,logicalH/2+89,logicalW-52,57),"ВЫБРАТЬ ГЕРОЯ",buttonStyle))
-                {if(worldRoot!=null)Destroy(worldRoot.gameObject);State=MatchState.Menu;orbitCamera.ClearTarget();}
+                // The centre of the planet stays visible during the victory
+                // dance. The end-of-match information is placed above/below.
+                int winner=1;
+                float best=float.MinValue;
+                for(int team=1;team<=4;team++)
+                    if(scores[team]>best){best=scores[team];winner=team;}
+                Plate(new Rect(0,0,logicalW,145),
+                    new Color(.06f,.08f,.15f,.85f));
+                GUI.Label(new Rect(20,17,logicalW-40,57),
+                    winner==1?" ПОБЕДА!":" ПЛАНЕТА ЗАХВАЧЕНА!",headerStyle);
+                GUI.Label(new Rect(24,72,logicalW-48,68),
+                    "Твоя территория: "+scores[1].ToString("F1")+
+                    "%\nПобедитель: "+(winner==1?"ТЫ":("КОМАНДА "+winner)),
+                    menuStyle);
+                Plate(new Rect(0,logicalH-205,logicalW,205),
+                    new Color(.06f,.08f,.15f,.80f));
+                if(GUI.Button(new Rect(26,logicalH-190,logicalW-52,65),
+                              "ИГРАТЬ ЕЩЁ",buttonStyle))StartGame();
+                if(GUI.Button(new Rect(26,logicalH-115,logicalW-52,60),
+                              "ВЫБРАТЬ ГЕРОЯ",buttonStyle))
+                {
+                    if(worldRoot!=null)Destroy(worldRoot.gameObject);
+                    State=MatchState.Menu;
+                    orbitCamera.ClearTarget();
+                }
             }
             GUI.matrix=old;
         }

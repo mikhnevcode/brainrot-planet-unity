@@ -24,6 +24,38 @@ namespace BrainrotPlanet
             particle.Play();particle.Emit(amount);
             Destroy(go,2.4f);
         }
+        /// <summary>
+        /// One small themed wave and burst per skill activation (not per frame).
+        /// Reuses existing particle materials; unique color and radius per hero.
+        /// </summary>
+        public void HeroAbility(int hero,Vector3 direction,Color teamColor)
+        {
+            Color accent;
+            switch(hero)
+            {
+                case 0:accent=new Color(.19f,.76f,1f);break;    // Shark water
+                case 1:accent=new Color(1f,.58f,.11f);break;   // Bombardiro blast
+                case 2:accent=new Color(.37f,.91f,1f);break;   // Ice
+                case 3:accent=new Color(.94f,.65f,.21f);break; // Turbine exhaust
+                case 4:accent=new Color(.94f,.55f,.66f);break; // Coffee
+                case 5:accent=new Color(.60f,.36f,.84f);break; // Ninja smoke
+                case 6:accent=new Color(.34f,.85f,.33f);break; // Forest
+                case 7:accent=new Color(1f,.67f,.26f);break;   // Drum pulse
+                case 8:accent=new Color(.55f,.94f,.26f);break; // Cactus
+                case 9:accent=new Color(.40f,.88f,1f);break;   // Bird swirl
+                case 10:accent=new Color(.44f,.99f,.33f);break;// Spring
+                default:accent=new Color(1f,.50f,.44f);break; // Shrimp
+            }
+            Vector3 n=direction.normalized;
+            Burst(PlanetSurface.Point(n,1.1f),Color.Lerp(accent,teamColor,.35f),
+                  (hero==1||hero==7?36:20),2.5f+(hero%3));
+            var ring=new GameObject("Signature hero power "+hero);
+            var effect=ring.AddComponent<PaintWave>();
+            effect.Configure(n,hero==7 ? 5.5f : hero==10 ? 3.9f : 3.0f,
+                             hero==4 ? .95f : .67f,accent);
+            Debug.Log("HERO_FX_ACTIVATED hero="+hero);
+        }
+
         public void CaptureFlash(Vector3 direction,Color color,int count)
         {
             Vector3 at=PlanetSurface.Point(direction,.7f);
@@ -75,13 +107,17 @@ namespace BrainrotPlanet
         private int team;
         private Rigidbody body;
         private float seconds=2.8f;
-        public void Launch(PlanetGame world,PlanetActor actor)
+        private float paintRadius=.095f;
+        public void Launch(PlanetGame world,PlanetActor actor,float spreadDegrees=0f,float radius=.095f)
         {
-            game=world;team=actor.Team;body=GetComponent<Rigidbody>();
+            game=world;team=actor.Team;paintRadius=radius;body=GetComponent<Rigidbody>();
             body.useGravity=false;body.mass=.7f;
             Vector3 n=actor.transform.position.normalized;
             body.position=actor.transform.position+n*1.5f;
             Vector3 direction=Vector3.ProjectOnPlane(actor.transform.forward,n).normalized;
+            if(direction.sqrMagnitude<.01f)
+                direction=Vector3.Cross(n,Vector3.up).normalized;
+            direction=Quaternion.AngleAxis(spreadDegrees,n)*direction;
             body.linearVelocity=direction*10f+n*6f;
         }
         private void FixedUpdate()
@@ -100,7 +136,7 @@ namespace BrainrotPlanet
         {
             if(game==null)return;
             Vector3 at=transform.position.normalized;
-            game.Territory.ClaimDisk(team,at,.095f);
+            game.Territory.ClaimDisk(team,at,paintRadius);
             game.Effects.Burst(PlanetSurface.Point(at,1f),Colors.Team(team),62,6f);
             game=null;Destroy(gameObject);
         }
