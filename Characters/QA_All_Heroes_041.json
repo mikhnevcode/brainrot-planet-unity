@@ -1,0 +1,82 @@
+[
+  {
+    "index": 2,
+    "name": "Frigo",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": false,
+    "fatal": false,
+    "tap_y": 1095
+  },
+  {
+    "index": 5,
+    "name": "Assassino",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 663
+  },
+  {
+    "index": 6,
+    "name": "Patapim",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 879
+  },
+  {
+    "index": 7,
+    "name": "TungSahur",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 1095
+  },
+  {
+    "index": 8,
+    "name": "Lirili",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 1311
+  },
+  {
+    "index": 9,
+    "name": "Frulli",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 1527
+  },
+  {
+    "index": 10,
+    "name": "Boneca",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 663
+  },
+  {
+    "index": 11,
+    "name": "Trippi",
+    "menu_selected": true,
+    "rig_loaded": true,
+    "run_clip": true,
+    "skill_event": true,
+    "fatal": false,
+    "tap_y": 879
+  }
+]
