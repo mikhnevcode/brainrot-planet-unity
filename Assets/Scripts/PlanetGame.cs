@@ -30,6 +30,7 @@ namespace BrainrotPlanet
         private string announcement="";
         private OrbitCamera orbitCamera;
         private PlanetActor victoryActor;
+        private AiBalanceTelemetry balanceTelemetry;
         private float victoryReplayTimer;
         private Camera worldCamera;
         private float guiScale=1f;
@@ -93,8 +94,9 @@ namespace BrainrotPlanet
             Array.Clear(pathRenderers,0,pathRenderers.Length);
             players.Clear();lives=3;
             victoryActor=null;victoryReplayTimer=0f;
+            balanceTelemetry=null;
             matchTime=145f;skillCooldown=0f;scoreTick=0f;
-            playerLandingGrace=12f;
+            playerLandingGrace=AiBalanceTuning.StartGrace(chosenDifficulty);
             movement=Vector2.zero;savedSteering=Vector2.zero;autoMoving=false;steerFinger=-1;
             nextInputDiagnostic=0f;
             var gameObjectRoot=new GameObject("ONE PLANET / ONE MATCH");
@@ -109,14 +111,18 @@ namespace BrainrotPlanet
 
             // Keep opponents visible in the same planetary sector while
             // maintaining initial separation between the painted home cores.
+            // Wider opening on Easy, compact combat sector on Hard.
+            // All spawn cores remain separated; no bot receives a speed bonus.
+            float botSpawnOffset=AiBalanceTuning.SpawnAngle(chosenDifficulty);
+            float radial=Mathf.Tan(botSpawnOffset*Mathf.Deg2Rad);
             Vector3 centre=new Vector3(.91f,.20f,.33f).normalized;
             Vector3 east=Vector3.Cross(Vector3.up,centre).normalized;
             Vector3 north=Vector3.Cross(centre,east).normalized;
             Vector3[] spawnDirections={
                 centre,
-                (centre*.75f+east*.66f).normalized,
-                (centre*.75f-east*.66f).normalized,
-                (centre*.74f+north*.67f).normalized
+                (centre+east*radial).normalized,
+                (centre-east*radial).normalized,
+                (centre+north*radial).normalized
             };
             for(int team=1;team<=4;team++)
             {
@@ -153,6 +159,11 @@ namespace BrainrotPlanet
             CreateStars();
             State=MatchState.Playing;
             sceneLoaded=true;
+            if(Debug.isDebugBuild)
+            {
+                balanceTelemetry=gameObjectRoot.AddComponent<AiBalanceTelemetry>();
+                balanceTelemetry.Configure(this,players,chosenDifficulty);
+            }
             Announce(" ДЕСАНТ НА ПЛАНЕТУ!");
         }
         private void CreateStars()
@@ -188,6 +199,7 @@ namespace BrainrotPlanet
         }
         private void HandleCapture(int team,int changed,Vector3 direction)
         {
+            if(balanceTelemetry!=null)balanceTelemetry.RecordCapture(team);
             Effects.CaptureFlash(direction,Colors.Team(team),changed);
             if(changed>=150 && !resolvingHeroSkill && !IsLanding)
             {
@@ -212,6 +224,7 @@ namespace BrainrotPlanet
         }
         private void HandleTrailLost(int team,Vector3 direction)
         {
+            if(balanceTelemetry!=null)balanceTelemetry.RecordTrailLost(team);
             if(team==1 && playerLandingGrace>0f)
             {
                 // Player is invulnerable to trail hits while landing and learning to move.
@@ -220,6 +233,20 @@ namespace BrainrotPlanet
             PlanetActor actor=players.Find(p=>p.Team==team);
             if(actor!=null)actor.HitTrail();
         }
+        public void OnPlayerRespawn()
+        {
+            savedSteering=Vector2.zero;
+            movement=Vector2.zero;
+            autoMoving=false;
+            steerFinger=-1;
+            if(Player!=null)Player.Wish=Vector3.zero;
+            playerLandingGrace=Mathf.Max(playerLandingGrace,
+                AiBalanceTuning.RespawnGrace(chosenDifficulty));
+            Announce(" ПОТЕРЯН СЛЕД! СДЕЛАЙ НОВЫЙ СВАЙП");
+            Debug.Log("PLAYER_RESPAWN_RECOVERY level="+chosenDifficulty+
+                " seconds="+playerLandingGrace.ToString("F1"));
+        }
+
         public void HurtPlayer()
         {
             lives--;
@@ -477,6 +504,7 @@ namespace BrainrotPlanet
         private void Finish()
         {
             if(State==MatchState.End)return;
+            for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
             int winningTeam=1;
             float best=float.MinValue;
             for(int team=1;team<=4;team++)
@@ -484,6 +512,7 @@ namespace BrainrotPlanet
                 {
                     best=scores[team];winningTeam=team;
                 }
+            if(balanceTelemetry!=null)balanceTelemetry.Report(winningTeam,scores);
             foreach(var pawn in players)
             {
                 pawn.Wish=Vector3.zero;

@@ -147,7 +147,11 @@ namespace BrainrotPlanet
             if(damageCooldown>0)return;
             damageCooldown=1.6f;
             game.Effects.Burst(transform.position,Colors.Team(Team),36,3f);
-            if(Team==1)game.HurtPlayer();
+            if(Team==1)
+            {
+                game.HurtPlayer();
+                if(game.State!=MatchState.Playing)return;
+            }
             Respawn();
         }
         public void Respawn()
@@ -159,6 +163,7 @@ namespace BrainrotPlanet
             transform.rotation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
             lastDirection=SpawnDirection;
             Active=true;
+            if(Team==1)game.OnPlayerRespawn();
             var ai=GetComponent<PlanetAI>();
             if(ai!=null)ai.OnRespawn();
         }
@@ -208,7 +213,7 @@ namespace BrainrotPlanet
                 Debug.Log("BONECA_SPRING_LANDED team="+Team+" cells="+painted);
             }
             Vector3 walk=Vector3.ProjectOnPlane(Wish,n).normalized;
-            float speed=(Team==1?6.5f:5.4f)*(SlowSeconds>0?.46f:1f)*(SpeedSeconds>0?1.85f:1f);
+            float speed=6.5f*(SlowSeconds>0?.46f:1f)*(SpeedSeconds>0?1.85f:1f);
             if(Grounded)
             {
                 float incline=colliderContact?Vector3.Angle(ground.normal,n):0f;
