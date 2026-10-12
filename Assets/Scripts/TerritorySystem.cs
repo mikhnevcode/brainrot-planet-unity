@@ -18,6 +18,9 @@ namespace BrainrotPlanet
         // Visible centreline is not the same thing as the thick flood-fill wall.
         private readonly HashSet<int>[] trailCenters = new HashSet<int>[5];
         private readonly List<int>[] trailOrder = new List<int>[5];
+        // Continuous world directions used only by LineRenderer. The logical
+        // ownership/closure arrays stay on their original grid.
+        private readonly List<Vector3>[] trailVisualDirections = new List<Vector3>[5];
         private readonly Vector3[] lastPosition = new Vector3[5];
         private readonly bool[] hasLast = new bool[5];
         private readonly Vector3[] core = new Vector3[5];
@@ -29,7 +32,13 @@ namespace BrainrotPlanet
         public TerritorySystem(PlanetSurface surface)
         {
             this.surface=surface;
-            for(int i=0;i<5;i++){Trails[i]=new HashSet<int>();trailCenters[i]=new HashSet<int>();trailOrder[i]=new List<int>();}
+            for(int i=0;i<5;i++)
+            {
+                Trails[i]=new HashSet<int>();
+                trailCenters[i]=new HashSet<int>();
+                trailOrder[i]=new List<int>();
+                trailVisualDirections[i]=new List<Vector3>();
+            }
         }
         public void Seed(int team,Vector3 direction)
         {
@@ -56,6 +65,7 @@ namespace BrainrotPlanet
         public bool InOwn(int team,Vector3 direction)=>OwnerAt(direction)==team;
         public bool HasTrail(int team)=>trailOrder[team].Count>0;
         public IReadOnlyList<int> Path(int team)=>trailOrder[team];
+        public IReadOnlyList<Vector3> VisualPath(int team)=>trailVisualDirections[team];
 
         public void TraceStep(int team,Vector3 direction)
         {
@@ -93,19 +103,22 @@ namespace BrainrotPlanet
                 // Render the true path. Keep a thicker and connected digital wall
                 // so diagonal steps do not leak during the 4-neighbor flood fill.
                 trailOrder[team].Add(id);
+                trailVisualDirections[team].Add(direction);
                 int x=id%PlanetMath.Width,y=id/PlanetMath.Width;
                 Trails[team].Add(id);
                 Trails[team].Add(y*PlanetMath.Width+(x+1)%PlanetMath.Width);
                 Trails[team].Add(y*PlanetMath.Width+(x+PlanetMath.Width-1)%PlanetMath.Width);
                 if(y>0)Trails[team].Add(id-PlanetMath.Width);
                 if(y<PlanetMath.Height-1)Trails[team].Add(id+PlanetMath.Width);
-                dirty=true;
+                // Trail is displayed with a continuous LineRenderer, so it
+                // no longer needs a per-cell texture upload for every step.
                 if(trailOrder[team].Count>2000)ClearTrail(team);
             }
         }
         private void ClearTrail(int team)
         {
-            Trails[team].Clear();trailCenters[team].Clear();trailOrder[team].Clear();dirty=true;
+            Trails[team].Clear();trailCenters[team].Clear();
+            trailOrder[team].Clear();trailVisualDirections[team].Clear();
         }
         public void ResetTrail(int team){ClearTrail(team);hasLast[team]=false;}
 

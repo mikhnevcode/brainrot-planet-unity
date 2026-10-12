@@ -6,8 +6,13 @@ namespace BrainrotPlanet
     {
         public MeshCollider GroundCollider { get; private set; }
         public Texture2D MapTexture { get; private set; }
+        private const int VisualScale = 2;
+        private const int VisualWidth = PlanetMath.Width * VisualScale;
+        private const int VisualHeight = PlanetMath.Height * VisualScale;
         private Color32[] pixels;
         private Color32[] unpainted;
+        private Color32[] sourcePixels;
+        private Color32[] softenedPixels;
         private readonly Color32[] teamColors = {
             new Color32(0,0,0,0),new Color32(255,78,169,255),
             new Color32(48,174,255,255),new Color32(255,174,57,255),
@@ -68,11 +73,13 @@ namespace BrainrotPlanet
             mesh.RecalculateNormals();mesh.RecalculateBounds();
             gameObject.AddComponent<MeshFilter>().sharedMesh=mesh;
             GroundCollider=gameObject.AddComponent<MeshCollider>();GroundCollider.sharedMesh=mesh;
-            MapTexture=new Texture2D(PlanetMath.Width,PlanetMath.Height,TextureFormat.RGBA32,false);
+            MapTexture=new Texture2D(VisualWidth,VisualHeight,TextureFormat.RGBA32,false);
             MapTexture.wrapModeU=TextureWrapMode.Repeat;MapTexture.wrapModeV=TextureWrapMode.Clamp;
             MapTexture.filterMode=FilterMode.Bilinear;
-            pixels=new Color32[PlanetMath.CellCount];
+            pixels=new Color32[VisualWidth*VisualHeight];
             unpainted=new Color32[PlanetMath.CellCount];
+            sourcePixels=new Color32[PlanetMath.CellCount];
+            softenedPixels=new Color32[PlanetMath.CellCount];
             PrepareBaseColors();
             var mat = Colors.New(Color.white);mat.name="Planet paint / relief";
             mat.SetFloat("_Glossiness",.18f);mat.SetTexture("_MainTex",MapTexture);
@@ -93,23 +100,79 @@ namespace BrainrotPlanet
                 unpainted[cell]=baseColor;
             }
         }
+        /// <summary>
+        /// Gameplay remains on a 256x128 ownership grid. The map draws a smooth,
+        /// 2x-resolution visual representation; actual capture logic is unchanged.
+        /// Trail display is owned by the smooth 3D LineRenderer, not cell squares.
+        /// </summary>
         public void PaintTexture(byte[] owners, System.Collections.Generic.HashSet<int>[] trails)
         {
-            for(int cell=0;cell<pixels.Length;cell++)
+            float started=Time.realtimeSinceStartup;
+            int w=PlanetMath.Width,h=PlanetMath.Height;
+            for(int cell=0;cell<sourcePixels.Length;cell++)
             {
-                Color baseColor=unpainted[cell];
                 byte owner=owners==null ? (byte)0 : owners[cell];
-                if(owner>0 && owner<teamColors.Length)
-                    baseColor=(Color)teamColors[owner]; // Opaque paint: no underlying terrain patches.
-                if(trails!=null)
-                {
-                    for(int team=1;team<trails.Length;team++)
-                        if(trails[team]!=null && trails[team].Contains(cell))
-                        {baseColor=Color.Lerp((Color)teamColors[team],Color.white,.30f);break;}
-                }
-                pixels[cell]=baseColor;
+                sourcePixels[cell]=owner>0 && owner<teamColors.Length
+                    ? teamColors[owner] : unpainted[cell];
             }
-            MapTexture.SetPixels32(pixels);MapTexture.Apply(false);
+
+            // A lightweight 3x3 smoothing pass affects visual colors only.
+            // Extra border softness rounds diagonal/corner steps in paint.
+            for(int y=0;y<h;y++)
+            {
+                int up=Mathf.Max(0,y-1)*w;
+                int current=y*w;
+                int down=Mathf.Min(h-1,y+1)*w;
+                for(int x=0;x<w;x++)
+                {
+                    int left=(x+w-1)%w,right=(x+1)%w;
+                    int k=current+x;
+                    Color32 c=sourcePixels[k];
+                    Color32 a=sourcePixels[up+left],b=sourcePixels[up+x],
+                        d=sourcePixels[up+right],e=sourcePixels[current+left],
+                        f=sourcePixels[current+right],g=sourcePixels[down+left],
+                        i=sourcePixels[down+x],j=sourcePixels[down+right];
+                    // Kernel [1 2 1; 2 4 2; 1 2 1].
+                    int rr=(a.r+2*b.r+d.r+2*e.r+4*c.r+2*f.r+g.r+2*i.r+j.r+8)/16;
+                    int gg=(a.g+2*b.g+d.g+2*e.g+4*c.g+2*f.g+g.g+2*i.g+j.g+8)/16;
+                    int bb=(a.b+2*b.b+d.b+2*e.b+4*c.b+2*f.b+g.b+2*i.b+j.b+8)/16;
+                    // Retain full saturated interiors and only round edges.
+                    softenedPixels[k]=new Color32(
+                        (byte)((2*c.r+rr+1)/3),
+                        (byte)((2*c.g+gg+1)/3),
+                        (byte)((2*c.b+bb+1)/3),255);
+                }
+            }
+
+            // 2x bilinear supersampling. Fixed 1:3 weights avoid float math
+            // inside the pixel loop and wrap properly at the UV longitude seam.
+            for(int y=0;y<VisualHeight;y++)
+            {
+                int iy=y/2;
+                int y0=(y&1)==0 ? Mathf.Max(iy-1,0) : iy;
+                int y1=(y&1)==0 ? iy : Mathf.Min(iy+1,h-1);
+                int wy0=(y&1)==0 ? 1 : 3,wy1=4-wy0;
+                int row0=y0*w,row1=y1*w,outrow=y*VisualWidth;
+                for(int x=0;x<VisualWidth;x++)
+                {
+                    int ix=x/2;
+                    int x0=(x&1)==0 ? (ix+w-1)%w : ix;
+                    int x1=(x&1)==0 ? ix : (ix+1)%w;
+                    int wx0=(x&1)==0 ? 1 : 3,wx1=4-wx0;
+                    int aa=wx0*wy0,bb=wx1*wy0,cc=wx0*wy1,dd=wx1*wy1;
+                    Color32 a=softenedPixels[row0+x0],b=softenedPixels[row0+x1],
+                            c=softenedPixels[row1+x0],d=softenedPixels[row1+x1];
+                    pixels[outrow+x]=new Color32(
+                        (byte)((aa*a.r+bb*b.r+cc*c.r+dd*d.r+8)/16),
+                        (byte)((aa*a.g+bb*b.g+cc*c.g+dd*d.g+8)/16),
+                        (byte)((aa*a.b+bb*b.b+cc*c.b+dd*d.b+8)/16),255);
+                }
+            }
+            MapTexture.SetPixels32(pixels);
+            MapTexture.Apply(false);
+            if(Debug.isDebugBuild)
+                Debug.Log("PAINT_VISUAL_UPDATE resolution="+VisualWidth+"x"+VisualHeight+
+                    " ms="+((Time.realtimeSinceStartup-started)*1000f).ToString("F2"));
         }
         private void CreateRockProps()
         {

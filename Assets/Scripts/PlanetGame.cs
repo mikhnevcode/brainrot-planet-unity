@@ -117,8 +117,9 @@ namespace BrainrotPlanet
                 renderer.transform.SetParent(worldRoot);
                 renderer.useWorldSpace=true;
                 renderer.positionCount=0;
-                renderer.startWidth=.27f;renderer.endWidth=.27f;
-                renderer.numCapVertices=5;
+                renderer.startWidth=.34f;renderer.endWidth=.34f;
+                renderer.numCapVertices=10;
+                renderer.numCornerVertices=10;
                 renderer.material=Colors.FromResource("PlanetSprite");
                 renderer.startColor=Colors.Team(team);
                 renderer.endColor=Color.Lerp(Colors.Team(team),Color.white,.35f);
@@ -314,7 +315,7 @@ namespace BrainrotPlanet
                 pathUpdate=.08f;
                 for(int team=1;team<=4;team++)
                 {
-                    IReadOnlyList<int> path=Territory.Path(team);
+                    IReadOnlyList<Vector3> path=Territory.VisualPath(team);
                     LineRenderer r=pathRenderers[team];
                     if(r==null)continue;
                     int skip=Mathf.Max(1,path.Count/280);
@@ -322,8 +323,8 @@ namespace BrainrotPlanet
                     r.positionCount=count;
                     for(int j=0;j<count;j++)
                     {
-                        int idx=path[Mathf.Min(j*skip,path.Count-1)];
-                        r.SetPosition(j,PlanetSurface.Point(PlanetMath.CellDirection(idx),.56f));
+                        Vector3 exactDirection=path[Mathf.Min(j*skip,path.Count-1)];
+                        r.SetPosition(j,PlanetSurface.Point(exactDirection,.56f));
                     }
                 }
             }

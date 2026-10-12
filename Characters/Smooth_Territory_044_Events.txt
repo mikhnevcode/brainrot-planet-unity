@@ -1,0 +1,73 @@
+10-12 02:05:50.205  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.34
+10-12 02:05:51.088  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=False
+10-12 02:05:51.541  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Jump movement=0.00 grounded=False
+10-12 02:05:52.947  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Jump movement=0.00 grounded=False
+10-12 02:05:54.293  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=4.02
+10-12 02:05:54.352  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Land movement=0.00 grounded=True
+10-12 02:05:55.296  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.45
+10-12 02:05:55.540  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.24
+10-12 02:05:55.758  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=True
+10-12 02:05:56.482  7584  7627 I Unity   : AUTOMOVE actor=(13.74,3.02,4.98) input=(1.00,0.00) finger=0
+10-12 02:05:57.160  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:05:57.650  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=4.11
+10-12 02:05:57.686  7584  7627 I Unity   : AUTOMOVE actor=(9.45,2.63,11.25) input=(1.00,0.00) finger=0
+10-12 02:05:57.846  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.11
+10-12 02:05:57.872  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=4.15
+10-12 02:05:58.567  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:05:58.726  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.24
+10-12 02:05:58.892  7584  7627 I Unity   : AUTOMOVE actor=(6.64,9.15,9.80) input=(0.00,1.00) finger=-1
+10-12 02:05:59.980  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:00.012  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.32
+10-12 02:06:00.037  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.42
+10-12 02:06:00.097  7584  7627 I Unity   : AUTOMOVE actor=(10.29,9.85,4.41) input=(-1.00,0.00) finger=-1
+10-12 02:06:00.260  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.26
+10-12 02:06:01.070  7584  7627 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=28
+10-12 02:06:01.076  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=5.44
+10-12 02:06:01.077  7584  7627 I Unity   : TERRITORY_CAPTURE team=1 areaCells=394 totalNewCells=666 seamCells=28 selection=old-land+trail
+10-12 02:06:01.305  7584  7627 I Unity   : AUTOMOVE actor=(13.22,4.57,5.31) input=(0.00,-1.00) finger=0
+10-12 02:06:01.389  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:02.512  7584  7627 I Unity   : AUTOMOVE actor=(12.67,-2.89,7.37) input=(0.00,-1.00) finger=-1
+10-12 02:06:02.723  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=5.97
+10-12 02:06:02.796  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:03.041  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=5.75
+10-12 02:06:03.324  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.12
+10-12 02:06:03.717  7584  7627 I Unity   : AUTOMOVE actor=(8.35,-2.21,12.14) input=(1.00,0.00) finger=-1
+10-12 02:06:04.204  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:04.840  7584  7627 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=24
+10-12 02:06:04.847  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.14
+10-12 02:06:04.848  7584  7627 I Unity   : TERRITORY_CAPTURE team=1 areaCells=240 totalNewCells=416 seamCells=24 selection=old-land+trail
+10-12 02:06:04.925  7584  7627 I Unity   : AUTOMOVE actor=(8.49,3.91,11.56) input=(0.00,1.00) finger=0
+10-12 02:06:05.402  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.04
+10-12 02:06:05.609  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:05.922  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.10
+10-12 02:06:05.953  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.74
+10-12 02:06:06.130  7584  7627 I Unity   : AUTOMOVE actor=(12.48,4.03,7.43) input=(-1.00,0.00) finger=0
+10-12 02:06:06.706  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.15
+10-12 02:06:07.018  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:07.334  7584  7627 I Unity   : AUTOMOVE actor=(12.85,-1.58,7.39) input=(0.00,-1.00) finger=0
+10-12 02:06:07.816  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.34
+10-12 02:06:07.983  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.31
+10-12 02:06:08.421  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:08.540  7584  7627 I Unity   : AUTOMOVE actor=(8.63,-7.71,9.68) input=(0.00,-1.00) finger=-1
+10-12 02:06:08.904  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=5.92
+10-12 02:06:09.748  7584  7627 I Unity   : AUTOMOVE actor=(4.48,-5.16,13.44) input=(1.00,0.00) finger=0
+10-12 02:06:09.832  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:10.612  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=5.94
+10-12 02:06:10.907  7584  7627 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=29
+10-12 02:06:10.914  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.17
+10-12 02:06:10.914  7584  7627 I Unity   : TERRITORY_CAPTURE team=1 areaCells=248 totalNewCells=432 seamCells=29 selection=old-land+trail
+10-12 02:06:10.952  7584  7627 I Unity   : AUTOMOVE actor=(7.07,0.05,13.29) input=(0.00,1.00) finger=0
+10-12 02:06:11.127  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=6.17
+10-12 02:06:11.239  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:12.161  7584  7627 I Unity   : AUTOMOVE actor=(11.14,-1.59,9.82) input=(-1.00,0.00) finger=0
+10-12 02:06:12.373  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=7.21
+10-12 02:06:12.646  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:13.296  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=7.18
+10-12 02:06:13.368  7584  7627 I Unity   : AUTOMOVE actor=(9.46,-6.83,9.49) input=(0.00,-1.00) finger=0
+10-12 02:06:14.053  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:14.570  7584  7627 I Unity   : AUTOMOVE actor=(2.47,-9.77,10.99) input=(0.00,-1.00) finger=-1
+10-12 02:06:14.719  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=3.36
+10-12 02:06:15.022  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=7.12
+10-12 02:06:15.137  7584  7627 I Unity   : PAINT_VISUAL_UPDATE resolution=512x256 ms=7.23
+10-12 02:06:15.461  7584  7627 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 02:06:15.778  7584  7627 I Unity   : AUTOMOVE actor=(-5.10,-10.16,9.59) input=(0.00,-1.00) finger=-1
