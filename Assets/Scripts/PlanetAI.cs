@@ -63,9 +63,11 @@ namespace BrainrotPlanet
             if(game!=null && !game.Territory.InOwn(actor.Team,start))
                 start=home;
             firstTurn=Accessible(PlanetMath.RandomAround(start,
-                Random.Range(difficulty.LoopFirstMin,difficulty.LoopFirstMax)),start);
+                Random.Range(difficulty.LoopFirstMin,difficulty.LoopFirstMax)*
+                PlanetMath.TraversalScale),start);
             secondTurn=Accessible(PlanetMath.RandomAround(firstTurn,
-                Random.Range(difficulty.LoopSecondMin,difficulty.LoopSecondMax)),firstTurn);
+                Random.Range(difficulty.LoopSecondMin,difficulty.LoopSecondMax)*
+                PlanetMath.TraversalScale),firstTurn);
             goal=firstTurn;
             legDeadline=Time.time+9f;
         }

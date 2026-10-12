@@ -4,7 +4,10 @@ namespace BrainrotPlanet
 {
     public static class PlanetMath
     {
-        public const float Radius = 14f;
+        // A larger planet makes boosts cover less of the total circumference.
+        public const float PreviousRadius = 14f;
+        public const float Radius = 24f;
+        public const float TraversalScale = PreviousRadius / Radius;
         public const int Width = 256;
         public const int Height = 128;
         public const int CellCount = Width * Height;

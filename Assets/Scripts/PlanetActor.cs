@@ -28,6 +28,7 @@ namespace BrainrotPlanet
         private Vector3 dropStart;
         private Vector3 dropLanding;
         private SphereCollider bodyCollider;
+        public Collider BodyCollider => bodyCollider;
 
         public void Configure(PlanetGame director,int team,int character,Vector3 spawn)
         {
@@ -42,7 +43,8 @@ namespace BrainrotPlanet
             body.constraints=RigidbodyConstraints.FreezeRotation;
             bodyCollider=gameObject.AddComponent<SphereCollider>();
             bodyCollider.center=new Vector3(0,.05f,0);
-            bodyCollider.radius=.66f;
+            // Half-size art should not retain the original oversized contact ball.
+            bodyCollider.radius=ActorCollisionRules.Radius;
             AvatarArt.Make(transform,character,Colors.Team(team));
             visualAnimator=GetComponentInChildren<Animator>();
             if(visualAnimator!=null)
@@ -99,6 +101,8 @@ namespace BrainrotPlanet
             if(visualAnimator!=null)visualAnimator.SetBool("Dropping",false);
             body.isKinematic=false;
             if(bodyCollider!=null)bodyCollider.enabled=true;
+            // Unity resets ignored-pair state if one collider was disabled in flight.
+            game.ApplyActorPassThrough("after_descent");
             body.linearVelocity=Vector3.zero;
             body.angularVelocity=Vector3.zero;
             Grounded=true;

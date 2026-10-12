@@ -150,6 +150,10 @@ namespace BrainrotPlanet
                 pathRenderers[team]=renderer;
                 Effects.Burst(motor.transform.position,Colors.Team(team),45,4f);
             }
+            // Stop rigidbody-to-rigidbody pushing, but keep terrain collisions
+            // and the independent logical trail-crossing game rules.
+            ApplyActorPassThrough("spawn");
+
             // The player now falls from above the planet during the camera approach.
             Player.BeginDropFromOrbit();
             orbitCamera.BeginDescent(Player.transform);
@@ -166,6 +170,20 @@ namespace BrainrotPlanet
             }
             Announce(" ДЕСАНТ НА ПЛАНЕТУ!");
         }
+        public void ApplyActorPassThrough(string reason)
+        {
+            int applied=ActorCollisionRules.Apply(players);
+            int ignored=ActorCollisionRules.CountIgnoredPairs(players);
+            int expected=ActorCollisionRules.PairCount(players.Count);
+            Debug.Log("HERO_BODY_PASS_THROUGH reason="+reason+
+                      " ignoredPairs="+ignored+"/"+expected+
+                      " applied="+applied+
+                      " radius="+ActorCollisionRules.Radius.ToString("F2"));
+            if(ignored!=expected)
+                Debug.LogError("HERO_BODY_PASS_THROUGH_INCOMPLETE "+
+                    ignored+"/"+expected+" reason="+reason);
+        }
+
         private void CreateStars()
         {
             // Decorative low-cost point cloud, not a second physics scene.
