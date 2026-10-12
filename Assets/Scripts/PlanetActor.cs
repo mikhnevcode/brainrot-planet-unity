@@ -14,6 +14,8 @@ namespace BrainrotPlanet
         public bool Active { get; set; }
         public bool Grounded { get; private set; }
         private Rigidbody body;
+        private Animator visualAnimator;
+        private float nextAnimationCheck;
         private float jumpCooldown, bumpCooldown, damageCooldown;
         private PlanetGame game;
         private Vector3 lastDirection;
@@ -32,6 +34,7 @@ namespace BrainrotPlanet
             SphereCollider col=gameObject.AddComponent<SphereCollider>();
             col.center=new Vector3(0,.05f,0);col.radius=.66f;
             AvatarArt.Make(transform,character,Colors.Team(team));
+            visualAnimator=GetComponentInChildren<Animator>();
         }
         public void Jump()
         {
@@ -116,6 +119,20 @@ namespace BrainrotPlanet
         private void Update()
         {
             if(body==null||!Active||game==null||game.State!=MatchState.Playing)return;
+            if(visualAnimator!=null && visualAnimator.runtimeAnimatorController!=null)
+            {
+                visualAnimator.SetFloat("Speed",Wish.sqrMagnitude>.02f?1f:0f);
+                visualAnimator.SetBool("Grounded",Grounded);
+                if(Team==1 && Debug.isDebugBuild && Time.unscaledTime>=nextAnimationCheck)
+                {
+                    nextAnimationCheck=Time.unscaledTime+1.4f;
+                    var clips=visualAnimator.GetCurrentAnimatorClipInfo(0);
+                    string clipName=clips.Length>0 && clips[0].clip!=null ? clips[0].clip.name : "none";
+                    Debug.Log("TRALALERO_ANIMATION clip="+clipName+
+                        " movement="+Wish.magnitude.ToString("F2")+
+                        " grounded="+Grounded);
+                }
+            }
             Vector3 dir=transform.position.normalized;
             if(Vector3.Angle(lastDirection,dir)>.06f)
             {

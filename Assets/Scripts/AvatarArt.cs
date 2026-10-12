@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace BrainrotPlanet
 {
@@ -19,6 +20,43 @@ namespace BrainrotPlanet
             => Part(parent,name,PrimitiveType.Cube,p,s,m);
         private static Transform Oval(Transform parent,string name,Vector3 p,Vector3 s,Material m)
             => Part(parent,name,PrimitiveType.Sphere,p,s,m);
+        private static readonly Dictionary<string,Material> SharkMaterials=new Dictionary<string,Material>();
+        private static Material Palette(Material source,string fallback)
+        {
+            string n=(source!=null?source.name:fallback).ToLowerInvariant();
+            if(SharkMaterials.TryGetValue(n,out Material cached))return cached;
+            Color c;
+            if(n.Contains("deep dorsal"))c=new Color(.065f,.27f,.42f);
+            else if(n.Contains("blue grey")||n.Contains("shark skin"))c=new Color(.16f,.49f,.70f);
+            else if(n.Contains("pale belly")||n.Contains("underbelly"))c=new Color(.85f,.90f,.85f);
+            else if(n.Contains("gill shadow"))c=new Color(.025f,.12f,.18f);
+            else if(n.Contains("pupil")||n.Contains("mouth"))c=new Color(.028f,.035f,.045f);
+            else if(n.Contains("iris"))c=new Color(.56f,.35f,.15f);
+            else if(n.Contains("eye wet"))c=new Color(.94f,.96f,.93f);
+            else if(n.Contains("blue sneaker"))c=new Color(.05f,.55f,.98f);
+            else if(n.Contains("blue mesh"))c=new Color(.035f,.30f,.65f);
+            else if(n.Contains("white sneaker"))c=new Color(.96f,.96f,.93f);
+            else if(n.Contains("dark outsole"))c=new Color(.05f,.10f,.15f);
+            else if(n.Contains("light cyan")||n.Contains("white detail"))c=new Color(.83f,.94f,1f);
+            else if(n.Contains("teeth"))c=new Color(.96f,.95f,.84f);
+            else c=new Color(.22f,.52f,.69f);
+            Material m=Colors.New(c);
+            m.name="Tralalero / "+n;
+            SharkMaterials.Add(n,m);
+            return m;
+        }
+        private static void Recolor(Transform imported)
+        {
+            int count=0;
+            foreach(Renderer renderer in imported.GetComponentsInChildren<Renderer>(true))
+            {
+                Material[] mats=renderer.sharedMaterials;
+                for(int i=0;i<mats.Length;i++)mats[i]=Palette(mats[i],renderer.name);
+                renderer.sharedMaterials=mats;
+                count++;
+            }
+            Debug.Log("TRALALERO_COLORED_RENDERERS="+count);
+        }
         public static void Make(Transform root,int character,Color territoryColor)
         {
             Transform art=new GameObject("Brainrot avatar / animated").transform;
@@ -33,7 +71,36 @@ namespace BrainrotPlanet
             Material belly=Colors.New(new Color(.83f,.94f,.82f));
             Material silver=Colors.New(new Color(.72f,.82f,.92f));
             Material neon=Colors.New(territoryColor,true);
-            if(character==0) // Tralalero Tralala: shark on chunky trainers.
+            if(character==0)
+            {
+                // Authored in Blender with an actual three-legged skeleton and
+                // imported Animator clips. Retain old geometry as a fallback.
+                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v02");
+                if(prefab!=null)
+                {
+                    GameObject visual=Object.Instantiate(prefab,art,false);
+                    visual.name="Tralalero fully rigged Blender character";
+                    visual.transform.localPosition=new Vector3(0,-.34f,0);
+                    visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
+                    visual.transform.localScale=Vector3.one*.60f;
+                    Recolor(visual.transform);
+                    foreach(Collider collider in visual.GetComponentsInChildren<Collider>(true))
+                        Object.Destroy(collider);
+                    Animator anim=visual.GetComponent<Animator>();
+                    if(anim==null)anim=visual.AddComponent<Animator>();
+                    anim.runtimeAnimatorController=
+                        Resources.Load<RuntimeAnimatorController>("Characters/Tralalero");
+                    anim.applyRootMotion=false;
+                    anim.cullingMode=AnimatorCullingMode.AlwaysAnimate;
+                    Debug.Log("TRALALERO_RIG_LOADED animator="+
+                        (anim.runtimeAnimatorController!=null));
+                    Oval(root,"Paint aura",new Vector3(0,-.42f,0),
+                         new Vector3(1.25f,.09f,1.25f),neon);
+                    return;
+                }
+                Debug.LogWarning("TRALALERO_FBX_MISSING: falling back to primitives");
+            }
+            if(character==0) // Tralalero fallback if FBX is unavailable.
             {
                 Oval(art,"Shark body",new Vector3(0,.65f,0),new Vector3(.95f,1.15f,.9f),blue);
                 Oval(art,"White belly",new Vector3(0,.57f,.42f),new Vector3(.67f,.88f,.22f),white);

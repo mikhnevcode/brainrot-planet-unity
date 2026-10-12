@@ -1,0 +1,46 @@
+{
+  "model": "Tralalero Tralala",
+  "blender": "5.2.2 LTS",
+  "mesh_objects": 84,
+  "triangles": 18483,
+  "bones": [
+    "Root",
+    "Body",
+    "Tail",
+    "Fin_L",
+    "Fin_R",
+    "Thigh_L",
+    "Shin_L",
+    "Foot_L",
+    "Thigh_R",
+    "Shin_R",
+    "Foot_R",
+    "Thigh_Rear",
+    "Shin_Rear",
+    "Foot_Rear"
+  ],
+  "actions": {
+    "Idle": [
+      1,
+      49
+    ],
+    "Run": [
+      1,
+      33
+    ],
+    "Jump": [
+      1,
+      32
+    ],
+    "Land": [
+      1,
+      24
+    ],
+    "Victory": [
+      1,
+      57
+    ]
+  },
+  "fbx": "Tralalero_v02.fbx",
+  "source": "Tralalero_v02.blend"
+}
