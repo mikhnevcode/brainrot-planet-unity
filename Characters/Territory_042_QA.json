@@ -1,0 +1,19 @@
+{
+  "version": "0.4.2",
+  "player_capture_events": 4,
+  "player_seam_repair_events": 4,
+  "capture_log": [
+    "10-12 01:37:45.787 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=407 totalNewCells=682 seamCells=28 selection=old-land+trail",
+    "10-12 01:37:49.558 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=223 totalNewCells=402 seamCells=25 selection=old-land+trail",
+    "10-12 01:37:55.689 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=292 totalNewCells=481 seamCells=29 selection=old-land+trail",
+    "10-12 01:37:57.995 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=53 seamCells=39 selection=none"
+  ],
+  "seam_log": [
+    "10-12 01:37:45.778 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=28",
+    "10-12 01:37:49.547 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=25",
+    "10-12 01:37:55.679 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=29",
+    "10-12 01:37:57.989 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=39"
+  ],
+  "automatic_movement": true,
+  "fatal": false
+}

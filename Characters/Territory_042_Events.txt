@@ -1,0 +1,45 @@
+10-12 01:37:35.794 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=False
+10-12 01:37:36.213 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Land movement=0.00 grounded=True
+10-12 01:37:37.623 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=True
+10-12 01:37:39.028 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=True
+10-12 01:37:40.435 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Idle movement=0.00 grounded=True
+10-12 01:37:41.157 31306 31330 I Unity   : AUTOMOVE actor=(13.74,3.02,4.98) input=(1.00,0.00) finger=0
+10-12 01:37:41.836 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:42.366 31306 31330 I Unity   : AUTOMOVE actor=(9.44,2.63,11.26) input=(1.00,0.00) finger=0
+10-12 01:37:43.261 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:43.566 31306 31330 I Unity   : AUTOMOVE actor=(6.64,9.16,9.80) input=(0.00,1.00) finger=-1
+10-12 01:37:44.654 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:44.773 31306 31330 I Unity   : AUTOMOVE actor=(10.17,9.96,4.46) input=(-1.00,0.00) finger=-1
+10-12 01:37:45.778 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=28
+10-12 01:37:45.787 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=407 totalNewCells=682 seamCells=28 selection=old-land+trail
+10-12 01:37:45.973 31306 31330 I Unity   : AUTOMOVE actor=(13.16,4.79,5.25) input=(0.00,-1.00) finger=0
+10-12 01:37:46.057 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:47.184 31306 31330 I Unity   : AUTOMOVE actor=(12.72,-2.66,7.38) input=(0.00,-1.00) finger=-1
+10-12 01:37:47.471 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:48.392 31306 31330 I Unity   : AUTOMOVE actor=(8.32,-1.81,12.20) input=(1.00,0.00) finger=-1
+10-12 01:37:48.877 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:49.547 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=25
+10-12 01:37:49.558 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=223 totalNewCells=402 seamCells=25 selection=old-land+trail
+10-12 01:37:49.620 31306 31330 I Unity   : AUTOMOVE actor=(8.38,4.39,11.49) input=(0.00,1.00) finger=0
+10-12 01:37:50.284 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:50.822 31306 31330 I Unity   : AUTOMOVE actor=(12.49,4.19,7.31) input=(-1.00,0.00) finger=0
+10-12 01:37:51.692 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:52.027 31306 31330 I Unity   : AUTOMOVE actor=(12.83,-1.46,7.47) input=(0.00,-1.00) finger=0
+10-12 01:37:53.105 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:53.230 31306 31330 I Unity   : AUTOMOVE actor=(8.63,-7.59,9.77) input=(0.00,-1.00) finger=-1
+10-12 01:37:54.439 31306 31330 I Unity   : AUTOMOVE actor=(4.25,-5.81,13.10) input=(1.00,0.00) finger=0
+10-12 01:37:54.505 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:55.646 31306 31330 I Unity   : AUTOMOVE actor=(6.40,-0.67,13.71) input=(0.00,1.00) finger=0
+10-12 01:37:55.679 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=29
+10-12 01:37:55.689 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=292 totalNewCells=481 seamCells=29 selection=old-land+trail
+10-12 01:37:55.913 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:56.853 31306 31330 I Unity   : AUTOMOVE actor=(10.72,-1.63,10.39) input=(-1.00,0.00) finger=0
+10-12 01:37:57.321 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:57.989 31306 31330 I Unity   : TERRITORY_SEAM_REPAIR team=1 cells=39
+10-12 01:37:57.995 31306 31330 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=53 seamCells=39 selection=none
+10-12 01:37:58.058 31306 31330 I Unity   : AUTOMOVE actor=(9.56,-6.96,9.27) input=(0.00,-1.00) finger=0
+10-12 01:37:58.726 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:37:59.263 31306 31330 I Unity   : AUTOMOVE actor=(2.60,-9.93,10.83) input=(0.00,-1.00) finger=-1
+10-12 01:38:00.132 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True
+10-12 01:38:00.468 31306 31330 I Unity   : AUTOMOVE actor=(-5.00,-10.28,9.55) input=(0.00,-1.00) finger=-1
+10-12 01:38:01.541 31306 31330 I Unity   : TRALALERO_ANIMATION clip=Tralalero_Armature|Run movement=1.00 grounded=True

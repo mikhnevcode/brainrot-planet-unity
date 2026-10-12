@@ -300,14 +300,16 @@ namespace BrainrotPlanet
             Debug.Log("NEW_HERO_RIG_LOADED name="+hero+
                 " controller="+(animator.runtimeAnimatorController!=null));
             Oval(root,"Paint aura",new Vector3(0,-.42f,0),
-                 new Vector3(1.25f,.09f,1.25f),paint);
+                 new Vector3(.625f,.05f,.625f),paint);
             return true;
         }
         public static void Make(Transform root,int character,Color territoryColor)
         {
             Transform art=new GameObject("Brainrot avatar / animated").transform;
             art.SetParent(root,false);
-            art.localPosition=new Vector3(0,.37f,0);
+            // All twelve visual avatars become half-size; gameplay physics stays unchanged.
+            art.localPosition=new Vector3(0,.185f,0);
+            art.localScale=Vector3.one*.50f;
             Material white=Colors.New(new Color(.97f,.99f,1f));
             Material black=Colors.New(new Color(.06f,.08f,.17f));
             Material red=Colors.New(new Color(1f,.14f,.26f));
@@ -343,7 +345,7 @@ namespace BrainrotPlanet
                     Debug.Log("TRALALERO_RIG_LOADED animator="+
                         (anim.runtimeAnimatorController!=null));
                     Oval(root,"Paint aura",new Vector3(0,-.42f,0),
-                         new Vector3(1.25f,.09f,1.25f),neon);
+                         new Vector3(.625f,.05f,.625f),neon);
                     return;
                 }
                 Debug.LogWarning("TRALALERO_FBX_MISSING: falling back to primitives");
@@ -370,7 +372,7 @@ namespace BrainrotPlanet
                     Debug.Log("BOMBARDIRO_RIG_LOADED animator="+
                         (anim.runtimeAnimatorController!=null));
                     Oval(root,"Paint aura",new Vector3(0,-.42f,0),
-                         new Vector3(1.25f,.09f,1.25f),neon);
+                         new Vector3(.625f,.05f,.625f),neon);
                     return;
                 }
                 Debug.LogWarning("BOMBARDIRO_FBX_MISSING: primitives remain in use");
@@ -397,7 +399,7 @@ namespace BrainrotPlanet
                     Debug.Log("BALLERINA_RIG_LOADED animator="+
                         (anim.runtimeAnimatorController!=null));
                     Oval(root,"Paint aura",new Vector3(0,-.42f,0),
-                         new Vector3(1.25f,.09f,1.25f),neon);
+                         new Vector3(.625f,.05f,.625f),neon);
                     return;
                 }
                 Debug.LogWarning("BALLERINA_FBX_MISSING: using placeholder");
@@ -424,7 +426,7 @@ namespace BrainrotPlanet
                     Debug.Log("BOMBOMBINI_RIG_LOADED animator="+
                         (anim.runtimeAnimatorController!=null));
                     Oval(root,"Paint aura",new Vector3(0,-.42f,0),
-                         new Vector3(1.25f,.09f,1.25f),neon);
+                         new Vector3(.625f,.05f,.625f),neon);
                     return;
                 }
                 Debug.LogWarning("BOMBOMBINI_FBX_MISSING: using simple fallback");
@@ -482,7 +484,7 @@ namespace BrainrotPlanet
                 Oval(art,"Goose fallback neck",new Vector3(0,1.28f,.65f),new Vector3(.32f,.78f,.31f),white);
                 Oval(art,"Goose fallback beak",new Vector3(0,1.68f,.97f),new Vector3(.46f,.13f,.40f),sand);
             }
-            Oval(root,"Paint aura",new Vector3(0,-.42f,0),new Vector3(1.25f,.09f,1.25f),neon);
+            Oval(root,"Paint aura",new Vector3(0,-.42f,0),new Vector3(.625f,.05f,.625f),neon);
         }
     }
 }

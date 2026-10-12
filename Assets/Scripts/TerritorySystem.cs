@@ -11,7 +11,9 @@ namespace BrainrotPlanet
         private readonly byte[] owner = new byte[PlanetMath.CellCount];
         private readonly int[] queue = new int[PlanetMath.CellCount];
         private readonly byte[] seen = new byte[PlanetMath.CellCount];
-        private readonly float[] territoryArea = new float[5];
+        // Reused snapshot makes old land part of each new capture.
+        private readonly byte[] territoryBeforeCapture = new byte[PlanetMath.CellCount];
+        private readonly byte[] seamCandidates = new byte[PlanetMath.CellCount];
         public readonly HashSet<int>[] Trails = new HashSet<int>[5];
         // Visible centreline is not the same thing as the thick flood-fill wall.
         private readonly HashSet<int>[] trailCenters = new HashSet<int>[5];
@@ -110,6 +112,8 @@ namespace BrainrotPlanet
         private void Capture(int team,Vector3 hit)
         {
             if(trailOrder[team].Count<3)return;
+            for(int i=0;i<owner.Length;i++)
+                territoryBeforeCapture[i]=(byte)(owner[i]==team ? 1 : 0);
             // A closed sphere has no external border. The painted land and this
             // unfinished path divide it; take the smaller enclosed component.
             Array.Clear(seen,0,seen.Length);
@@ -141,9 +145,10 @@ namespace BrainrotPlanet
             // Even with high-speed or diagonal cell transitions, a visible closed
             // loop should create a filled area. Fall back to a local tangent-plane
             // polygon if the discrete 4-neighbor wall failed to separate the sphere.
-            List<int> polygonCells=PolygonFallback(team);
-            List<int> enclosedCells = polygonCells!=null ? polygonCells :
-                (selected>=0 ? components[selected] : null);
+            List<int> polygonCells=selected>=0 ? null : PolygonFallback(team);
+            // Existing painted land participates in the closure boundary.
+            // Prefer flood-fill against old land + new trail to avoid wedges.
+            List<int> enclosedCells = selected>=0 ? components[selected] : polygonCells;
             int changed=0, enclosed=0;
             Vector3 effectCenter=Vector3.zero;
             foreach(int i in Trails[team])
@@ -161,6 +166,8 @@ namespace BrainrotPlanet
                     }
                 }
             }
+            int seamCells=RepairCaptureSeams(team,territoryBeforeCapture);
+            changed+=seamCells;
             ClearTrail(team);
             dirty=true;
             // Apply the full closed area in the same frame as the end of the trail.
@@ -170,11 +177,55 @@ namespace BrainrotPlanet
                 dirty=false;renderTimer=.18f;
             }
             Debug.Log("TERRITORY_CAPTURE team="+team+" areaCells="+enclosed+
-                " totalNewCells="+changed+" selection="+
-                (polygonCells!=null?"polygon":selected>=0?"flood":"none"));
+                " totalNewCells="+changed+" seamCells="+seamCells+" selection="+
+                (selected>=0?"old-land+trail":polygonCells!=null?"polygon":"none"));
             if(changed>3)
                 OnCapture?.Invoke(team,changed,
                     effectCenter.sqrMagnitude>.001f ? effectCenter.normalized : hit);
+        }
+
+        /// <summary>
+        /// Fill short unpainted seams between the territory as it was before
+        /// capture and newly painted cells. Never fill distant gaps or other
+        /// teams' land; include the longitude wrap at x=0 / x=Width-1.
+        /// </summary>
+        private int RepairCaptureSeams(int team,byte[] oldLand)
+        {
+            const int reach=3; // Deliberate small inward overlap in texture pixels.
+            Array.Clear(seamCandidates,0,seamCandidates.Length);
+            int width=PlanetMath.Width,height=PlanetMath.Height;
+            for(int cell=0;cell<owner.Length;cell++)
+            {
+                if(owner[cell]!=0)continue;
+                int x=cell%width,y=cell/width;
+                bool nearOld=false,nearNew=false;
+                for(int dy=-reach;dy<=reach && !(nearOld&&nearNew);dy++)
+                {
+                    int yy=y+dy;
+                    if(yy<0 || yy>=height)continue;
+                    int row=yy*width;
+                    for(int dx=-reach;dx<=reach;dx++)
+                    {
+                        int xx=(x+dx+width)%width;
+                        int nearby=row+xx;
+                        if(oldLand[nearby]!=0)nearOld=true;
+                        if(owner[nearby]==team && oldLand[nearby]==0)nearNew=true;
+                        if(nearOld&&nearNew)break;
+                    }
+                }
+                if(nearOld&&nearNew && !ProtectedByOtherCore(team,cell))
+                    seamCandidates[cell]=1;
+            }
+            int repaired=0;
+            for(int cell=0;cell<owner.Length;cell++)
+            {
+                if(seamCandidates[cell]==0)continue;
+                owner[cell]=(byte)team;
+                repaired++;
+            }
+            if(repaired>0)
+                Debug.Log("TERRITORY_SEAM_REPAIR team="+team+" cells="+repaired);
+            return repaired;
         }
 
         // Robust local approximation for relatively short planetary loops. Unlike
