@@ -112,7 +112,19 @@ namespace BrainrotPlanet
                     continue;
                 }
                 Material[] mats=renderer.sharedMaterials;
-                for(int i=0;i<mats.Length;i++)mats[i]=Palette(mats[i],renderer.name);
+                for(int i=0;i<mats.Length;i++)
+                {
+                    string materialName=mats[i]!=null ? mats[i].name.ToLowerInvariant() : "";
+                    // A flipped FBX belly material slot painted an obvious white
+                    // oval across the upper shark head. The torso is now one
+                    // continuous blue skin; separate small facial details remain.
+                    bool bodyBelly=renderer.name.IndexOf("Shark organic smoothed torso",
+                        System.StringComparison.OrdinalIgnoreCase)>=0 &&
+                        materialName.Contains("pale belly");
+                    mats[i]=bodyBelly ? Palette(null,"Shark skin") :
+                        Palette(mats[i],renderer.name);
+                    if(bodyBelly)Debug.Log("TRALALERO_CORRECTED_TORSO_BELLY_SLOT");
+                }
                 renderer.sharedMaterials=mats;
                 count++;
             }
