@@ -19,6 +19,12 @@ namespace BrainrotPlanet
         private float jumpCooldown, bumpCooldown, damageCooldown;
         private PlanetGame game;
         private Vector3 lastDirection;
+        private bool isDropping;
+        private float dropElapsed;
+        private float nextDropDiagnostic;
+        private Vector3 dropStart;
+        private Vector3 dropLanding;
+        private SphereCollider bodyCollider;
 
         public void Configure(PlanetGame director,int team,int character,Vector3 spawn)
         {
@@ -31,11 +37,66 @@ namespace BrainrotPlanet
             body.interpolation=RigidbodyInterpolation.Interpolate;
             body.collisionDetectionMode=CollisionDetectionMode.ContinuousDynamic;
             body.constraints=RigidbodyConstraints.FreezeRotation;
-            SphereCollider col=gameObject.AddComponent<SphereCollider>();
-            col.center=new Vector3(0,.05f,0);col.radius=.66f;
+            bodyCollider=gameObject.AddComponent<SphereCollider>();
+            bodyCollider.center=new Vector3(0,.05f,0);
+            bodyCollider.radius=.66f;
             AvatarArt.Make(transform,character,Colors.Team(team));
             visualAnimator=GetComponentInChildren<Animator>();
         }
+        // Scripted insertion occurs only at the start of a match. Keep the
+        // actor above the planet while the existing 2.9-second camera approach
+        // occurs, then land with no leftover Rigidbody velocity.
+        public void BeginDropFromOrbit()
+        {
+            if(body==null || isDropping)return;
+            dropLanding=PlanetSurface.Point(SpawnDirection,.75f);
+            dropStart=dropLanding + SpawnDirection*9.0f;
+            dropElapsed=0f;
+            nextDropDiagnostic=0f;
+            isDropping=true;
+            Grounded=false;
+            Wish=Vector3.zero;
+            body.linearVelocity=Vector3.zero;
+            body.angularVelocity=Vector3.zero;
+            body.isKinematic=true;
+            if(bodyCollider!=null)bodyCollider.enabled=false;
+            body.position=dropStart;
+            transform.position=dropStart;
+            Debug.Log("PLAYER_DROP_BEGIN altitude=9.00 duration="+
+                      OrbitCamera.DescentDuration.ToString("F2")+
+                      " character="+Character);
+        }
+
+        private void UpdateDrop(float dt)
+        {
+            dropElapsed+=dt;
+            // Delay visible fall until the approach has established the planet.
+            // Then accelerate downward, leaving time to see the descent clearly.
+            float progress=Mathf.Clamp01((dropElapsed-.65f)/
+                (OrbitCamera.DescentDuration-.65f));
+            float fall=progress*progress*(3f-2f*progress);
+            body.MovePosition(Vector3.Lerp(dropStart,dropLanding,fall));
+            if(dropElapsed>=nextDropDiagnostic)
+            {
+                nextDropDiagnostic+=.45f;
+                Debug.Log("PLAYER_DROP_PROGRESS t="+dropElapsed.ToString("F2")+
+                          " height="+(9f*(1f-fall)).ToString("F2"));
+            }
+            if(dropElapsed<OrbitCamera.DescentDuration)return;
+            body.position=dropLanding;
+            isDropping=false;
+            body.isKinematic=false;
+            if(bodyCollider!=null)bodyCollider.enabled=true;
+            body.linearVelocity=Vector3.zero;
+            body.angularVelocity=Vector3.zero;
+            Grounded=true;
+            jumpCooldown=.25f;
+            lastDirection=dropLanding.normalized;
+            game.Effects.Burst(dropLanding,Colors.Team(Team),36,2.1f);
+            Debug.Log("PLAYER_DROP_LANDED altitude=0.00 character="+Character);
+            if(Team==1)game.Announce(" ДЕСАНТ ЗАВЕРШЁН! НАЧИНАЙ ЗАХВАТ!");
+        }
+
         public void Celebrate()
         {
             if(Character>=4 && visualAnimator!=null &&
@@ -74,6 +135,11 @@ namespace BrainrotPlanet
         {
             if(body==null||!Active)return;
             float dt=Time.fixedDeltaTime;
+            if(isDropping)
+            {
+                UpdateDrop(dt);
+                return;
+            }
             jumpCooldown=Mathf.Max(0,jumpCooldown-dt);
             bumpCooldown=Mathf.Max(0,bumpCooldown-dt);
             damageCooldown=Mathf.Max(0,damageCooldown-dt);
@@ -142,6 +208,7 @@ namespace BrainrotPlanet
                         " grounded="+Grounded);
                 }
             }
+            if(isDropping)return; // Falling is not a player paint trail.
             Vector3 dir=transform.position.normalized;
             if(Vector3.Angle(lastDirection,dir)>.06f)
             {

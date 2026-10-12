@@ -1,0 +1,19 @@
+10-12 01:50:13.714  2589  2627 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=0
+10-12 01:50:13.718  2589  2627 I Unity   : CAMQA stage=descent actorR=23.96 camR=96.41 actorScreen=(0.500,0.529,72.12) camToActor=72.59 heading=0.0
+10-12 01:50:13.987  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-12 01:50:13.997  2589  2627 I Unity   : CAMQA stage=descent actorR=23.96 camR=96.32 actorScreen=(0.500,0.529,72.02) camToActor=72.49 heading=0.0
+10-12 01:50:14.115  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-12 01:50:14.570  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-12 01:50:14.989  2589  2627 I Unity   : CAMQA stage=descent actorR=22.02 camR=75.55 actorScreen=(0.500,0.533,53.22) camToActor=53.69 heading=0.0
+10-12 01:50:15.005  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-12 01:50:15.472  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-12 01:50:15.907  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-12 01:50:15.992  2589  2627 I Unity   : CAMQA stage=descent actorR=16.40 camR=42.10 actorScreen=(0.500,0.526,25.44) camToActor=25.89 heading=0.0
+10-12 01:50:16.377  2589  2627 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-12 01:50:16.577  2589  2627 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=0
+10-12 01:50:16.991  2589  2627 I Unity   : CAMQA stage=ground actorR=14.92 camR=28.87 actorScreen=(0.500,0.500,13.82) camToActor=14.25 heading=0.0
+10-12 01:50:18.003  2589  2627 I Unity   : CAMQA stage=ground actorR=14.93 camR=28.87 actorScreen=(0.500,0.500,13.82) camToActor=14.25 heading=0.0
+10-12 01:50:18.723  2589  2627 I Unity   : AUTOMOVE actor=(13.75,3.02,4.98) input=(1.00,0.00) finger=0
+10-12 01:50:19.011  2589  2627 I Unity   : CAMQA stage=ground actorR=14.93 camR=28.87 actorScreen=(0.500,0.500,13.82) camToActor=14.25 heading=2.6
+10-12 01:50:19.931  2589  2627 I Unity   : AUTOMOVE actor=(9.47,2.63,11.24) input=(1.00,0.00) finger=-1
+10-12 01:50:20.007  2589  2627 I Unity   : CAMQA stage=ground actorR=14.90 camR=28.83 actorScreen=(0.500,0.500,13.82) camToActor=14.25 heading=2.9

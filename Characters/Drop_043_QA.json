@@ -1,0 +1,39 @@
+{
+  "device": "Realme RMX3151",
+  "version": "0.4.3",
+  "drop_started": true,
+  "drop_landed": true,
+  "progress": [
+    [
+      0.02,
+      9.0
+    ],
+    [
+      0.46,
+      9.0
+    ],
+    [
+      0.92,
+      8.64
+    ],
+    [
+      1.36,
+      6.88
+    ],
+    [
+      1.82,
+      4.23
+    ],
+    [
+      2.26,
+      1.77
+    ],
+    [
+      2.72,
+      0.16
+    ]
+  ],
+  "auto_move_after_landing": true,
+  "fatal": false,
+  "frame_count": 8
+}

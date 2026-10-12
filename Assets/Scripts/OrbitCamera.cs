@@ -9,7 +9,7 @@ namespace BrainrotPlanet
         public Transform Target { get; private set; }
         public bool IsDescending => Target != null && descentTime < DescentDuration;
 
-        private const float DescentDuration = 2.9f;
+        public const float DescentDuration = 2.9f;
         private const float CameraHeight = 13.2f;
         private const float CameraBack = 4.1f;
         private const float FollowNormalSharpness = 8.0f;
@@ -74,7 +74,11 @@ namespace BrainrotPlanet
             // Position is locked to the actual character, including jumps.
             // Both look-at and position reference the SAME target point,
             // so the hero stays at viewport centre (0.5, 0.5) without lag.
-            Vector3 anchor = Target.position + normal * .45f;
+            // During deployment keep the landing spot in view, so the hero
+            // visibly moves toward the surface instead of staying centred.
+            Vector3 anchor = IsDescending
+                ? PlanetSurface.Point(normal,.72f) + normal * .45f
+                : Target.position + normal * .45f;
             Vector3 gameplayPosition =
                 anchor + stableNormal * CameraHeight - tangentUp * CameraBack;
             Quaternion gameplayRotation =

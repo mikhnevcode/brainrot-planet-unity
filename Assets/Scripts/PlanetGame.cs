@@ -125,6 +125,8 @@ namespace BrainrotPlanet
                 pathRenderers[team]=renderer;
                 Effects.Burst(motor.transform.position,Colors.Team(team),45,4f);
             }
+            // The player now falls from above the planet during the camera approach.
+            Player.BeginDropFromOrbit();
             orbitCamera.BeginDescent(Player.transform);
             var gems=new GameObject("Crystal pickups").AddComponent<CrystalSystem>();
             gems.transform.SetParent(worldRoot);
