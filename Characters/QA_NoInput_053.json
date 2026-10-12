@@ -1,0 +1,8 @@
+{
+  "AUTO_MOVE_STARTED": 0,
+  "AUTOMOVE actor=": 0,
+  "HERO_SPECIAL_ACTIVATED hero=0": 0,
+  "TERRITORY_CAPTURE team=1": 0,
+  "PLAYER_DROP_LANDED": 1,
+  "fatal": false
+}

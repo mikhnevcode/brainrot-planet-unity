@@ -25,6 +25,8 @@ namespace BrainrotPlanet
         private int lives=3;
         private string announcement="";
         private OrbitCamera orbitCamera;
+        private PlanetActor victoryActor;
+        private float victoryReplayTimer;
         private Camera worldCamera;
         private float guiScale=1f;
         private Vector2 movement;
@@ -82,6 +84,7 @@ namespace BrainrotPlanet
             foreach(LineRenderer l in pathRenderers)if(l!=null)Destroy(l.gameObject);
             Array.Clear(pathRenderers,0,pathRenderers.Length);
             players.Clear();lives=3;
+            victoryActor=null;victoryReplayTimer=0f;
             matchTime=145f;skillCooldown=0f;scoreTick=0f;
             playerLandingGrace=12f;
             movement=Vector2.zero;savedSteering=Vector2.zero;autoMoving=false;steerFinger=-1;
@@ -331,6 +334,20 @@ namespace BrainrotPlanet
         }
         private void Update()
         {
+            if(State==MatchState.End)
+            {
+                if(victoryActor!=null)
+                {
+                    victoryReplayTimer-=Time.deltaTime;
+                    if(victoryReplayTimer<=0f)
+                    {
+                        victoryReplayTimer=2.90f;
+                        victoryActor.Celebrate();
+                        Debug.Log("HERO_MATCH_VICTORY_REPLAY team="+victoryActor.Team);
+                    }
+                }
+                return;
+            }
             if(State!=MatchState.Playing)return;
             float dt=Time.deltaTime;
             playerLandingGrace=Mathf.Max(0f,playerLandingGrace-dt);
@@ -447,10 +464,19 @@ namespace BrainrotPlanet
             {
                 pawn.Wish=Vector3.zero;
                 pawn.Active=false;
-                if(pawn.Team==winningTeam)pawn.Celebrate();
+                if(pawn.Team==winningTeam)victoryActor=pawn;
             }
             State=MatchState.End;
-            Debug.Log("HERO_MATCH_VICTORY team="+winningTeam);
+            victoryReplayTimer=2.90f;
+            if(victoryActor!=null)
+            {
+                orbitCamera.BeginVictoryFocus(victoryActor.transform);
+                victoryActor.Celebrate();
+                Effects.Burst(victoryActor.transform.position,
+                              Colors.Team(winningTeam),55,3.8f);
+            }
+            Debug.Log("HERO_MATCH_VICTORY team="+winningTeam+
+                " cameraFocus="+(victoryActor!=null));
         }
         private float GameScale(){return Mathf.Max(.60f,Mathf.Min(Screen.width/420f,Screen.height/790f));}
         private void InitStyles()
