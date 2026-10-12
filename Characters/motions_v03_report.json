@@ -1,0 +1,518 @@
+[
+  {
+    "hero": "Tralalero",
+    "new": "Tralalero_v04",
+    "source": "Tralalero_v03",
+    "meshes": 83,
+    "bones": 14,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 435210,
+    "fbx_bytes": 3087260
+  },
+  {
+    "hero": "Bombardiro",
+    "new": "Bombardiro_v03",
+    "source": "Bombardiro_v02",
+    "meshes": 7,
+    "bones": 8,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 797546,
+    "fbx_bytes": 1542204
+  },
+  {
+    "hero": "Frigo",
+    "new": "Frigo_v03",
+    "source": "Frigo_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 239899,
+    "fbx_bytes": 638972
+  },
+  {
+    "hero": "Bombombini",
+    "new": "Bombombini_v03",
+    "source": "Bombombini_v02",
+    "meshes": 10,
+    "bones": 11,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 513332,
+    "fbx_bytes": 1313948
+  },
+  {
+    "hero": "Ballerina",
+    "new": "Ballerina_v03",
+    "source": "Ballerina_v02",
+    "meshes": 11,
+    "bones": 12,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 1379209,
+    "fbx_bytes": 2394620
+  },
+  {
+    "hero": "Assassino",
+    "new": "Assassino_v03",
+    "source": "Assassino_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 276386,
+    "fbx_bytes": 694428
+  },
+  {
+    "hero": "Patapim",
+    "new": "Patapim_v03",
+    "source": "Patapim_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 423751,
+    "fbx_bytes": 867964
+  },
+  {
+    "hero": "TungSahur",
+    "new": "TungSahur_v03",
+    "source": "TungSahur_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 297061,
+    "fbx_bytes": 679452
+  },
+  {
+    "hero": "Lirili",
+    "new": "Lirili_v03",
+    "source": "Lirili_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 405185,
+    "fbx_bytes": 831596
+  },
+  {
+    "hero": "Frulli",
+    "new": "Frulli_v03",
+    "source": "Frulli_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 261880,
+    "fbx_bytes": 629484
+  },
+  {
+    "hero": "Boneca",
+    "new": "Boneca_v03",
+    "source": "Boneca_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 258542,
+    "fbx_bytes": 632236
+  },
+  {
+    "hero": "Trippi",
+    "new": "Trippi_v03",
+    "source": "Trippi_v02",
+    "meshes": 6,
+    "bones": 7,
+    "old_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "all_actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ],
+    "new_actions": {
+      "Drop": [
+        1.0,
+        73.0
+      ],
+      "Special": [
+        1.0,
+        34.0
+      ],
+      "VictoryShow": [
+        1.0,
+        73.0
+      ]
+    },
+    "blend_bytes": 305525,
+    "fbx_bytes": 691724
+  }
+]

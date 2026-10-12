@@ -24,7 +24,7 @@ namespace BrainrotPlanet.Editor
 
         private static void PrepareOne(string name)
         {
-            string path = "Assets/Resources/Characters/"+name+"_v02.fbx";
+            string path = "Assets/Resources/Characters/"+name+"_v03.fbx";
             string controllerPath = "Assets/Resources/Characters/"+name+".controller";
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if(prefab == null) throw new Exception("Missing hero FBX: "+path);

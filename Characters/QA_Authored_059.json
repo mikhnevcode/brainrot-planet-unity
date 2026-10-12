@@ -1,0 +1,230 @@
+[
+  {
+    "hero": 0,
+    "name": "Tralalero",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:51:50.575  4242  4278 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.8 samples=288 avgTotalFps=42.46 managedMB=7.94 gcDelta=2/2/2 window=3"
+    ]
+  },
+  {
+    "hero": 1,
+    "name": "Bombardiro",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:52:10.393  4832  4858 I Unity   : PERF_SAMPLE stage=game fps=57.90 p95ms=17.0 maxms=83.8 samples=290 avgTotalFps=44.37 managedMB=8.49 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 2,
+    "name": "Frigo",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:52:30.476  5272  5320 I Unity   : PERF_SAMPLE stage=game fps=58.30 p95ms=17.0 maxms=83.8 samples=292 avgTotalFps=44.90 managedMB=8.61 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 3,
+    "name": "Bombombini",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:52:50.452  5574  5634 I Unity   : PERF_SAMPLE stage=game fps=58.10 p95ms=17.0 maxms=83.8 samples=291 avgTotalFps=44.39 managedMB=8.11 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 4,
+    "name": "Ballerina",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:53:10.712  5854  5876 I Unity   : PERF_SAMPLE stage=game fps=57.90 p95ms=17.0 maxms=83.7 samples=290 avgTotalFps=44.55 managedMB=8.44 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 5,
+    "name": "Assassino",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:53:30.765  6112  6171 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=67.0 samples=295 avgTotalFps=45.72 managedMB=8.62 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 6,
+    "name": "Patapim",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:53:51.201  6394  6447 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=83.8 samples=293 avgTotalFps=45.45 managedMB=8.92 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 7,
+    "name": "TungSahur",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:54:11.647  6667  6691 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=67.0 samples=295 avgTotalFps=45.76 managedMB=8.61 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 8,
+    "name": "Lirili",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:54:32.032  6906  6963 I Unity   : PERF_SAMPLE stage=game fps=58.10 p95ms=17.0 maxms=67.0 samples=291 avgTotalFps=45.57 managedMB=8.92 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 9,
+    "name": "Frulli",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:54:52.248  7387  7442 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=83.7 samples=295 avgTotalFps=43.52 managedMB=8.85 gcDelta=1/1/1 window=3"
+    ]
+  },
+  {
+    "hero": 10,
+    "name": "Boneca",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:55:12.507  7654  7676 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=67.0 samples=294 avgTotalFps=42.89 managedMB=7.86 gcDelta=2/2/2 window=3"
+    ]
+  },
+  {
+    "hero": 11,
+    "name": "Trippi",
+    "rig": true,
+    "dropping": true,
+    "landed": true,
+    "running": true,
+    "ability": true,
+    "animated_ability": true,
+    "blender_drop_clip": true,
+    "blender_special_clip": true,
+    "blender_victory_clip": false,
+    "vfx": true,
+    "spring_land": null,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 10:55:33.264  7895  7972 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=83.7 samples=295 avgTotalFps=43.24 managedMB=8.81 gcDelta=1/1/1 window=3"
+    ]
+  }
+]

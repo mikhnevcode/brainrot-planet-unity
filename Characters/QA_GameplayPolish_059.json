@@ -1,0 +1,32 @@
+{
+  "build": "0.5.9",
+  "version_code": 36,
+  "landing": true,
+  "movement_started": true,
+  "special": true,
+  "captures": 0,
+  "ignored_pairs": true,
+  "performance_windows": [
+    {
+      "fps": 45.72,
+      "managed_mb": 8.37,
+      "gc_delta": "8/8/8"
+    },
+    {
+      "fps": 58.7,
+      "managed_mb": 8.94,
+      "gc_delta": "1/1/1"
+    },
+    {
+      "fps": 59.5,
+      "managed_mb": 8.15,
+      "gc_delta": "2/2/2"
+    },
+    {
+      "fps": 59.7,
+      "managed_mb": 8.11,
+      "gc_delta": "2/2/2"
+    }
+  ],
+  "fatal_android_error": false
+}
