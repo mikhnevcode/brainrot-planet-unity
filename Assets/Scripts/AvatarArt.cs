@@ -32,7 +32,7 @@ namespace BrainrotPlanet
             else if(n.Contains("gill shadow"))c=new Color(.025f,.12f,.18f);
             else if(n.Contains("pupil")||n.Contains("mouth"))c=new Color(.028f,.035f,.045f);
             else if(n.Contains("iris"))c=new Color(.56f,.35f,.15f);
-            else if(n.Contains("eye wet"))c=new Color(.94f,.96f,.93f);
+            else if(n.Contains("eye wet"))c=new Color(.62f,.76f,.78f);
             else if(n.Contains("blue sneaker"))c=new Color(.05f,.55f,.98f);
             else if(n.Contains("blue mesh"))c=new Color(.035f,.30f,.65f);
             else if(n.Contains("white sneaker"))c=new Color(.96f,.96f,.93f);
@@ -41,15 +41,76 @@ namespace BrainrotPlanet
             else if(n.Contains("teeth"))c=new Color(.96f,.95f,.84f);
             else c=new Color(.22f,.52f,.69f);
             Material m=Colors.New(c);
+            // Shark skin and eyes must be matte; the Standard shader previously
+            // produced a distracting white hotspot on the top of the snout.
+            if(m.HasProperty("_Glossiness"))m.SetFloat("_Glossiness",.035f);
+            if(m.HasProperty("_Metallic"))m.SetFloat("_Metallic",0f);
+            if(m.HasProperty("_SpecColor"))m.SetColor("_SpecColor",new Color(.025f,.025f,.025f));
+            if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
+            if(m.HasProperty("_GlossyReflections"))m.SetFloat("_GlossyReflections",0f);
             m.name="Tralalero / "+n;
             SharkMaterials.Add(n,m);
             return m;
+        }
+        private static readonly Dictionary<string,Material> AircraftMaterials=new Dictionary<string,Material>();
+        private static Material AircraftPalette(Material source)
+        {
+            string n=(source!=null?source.name:"unknown").ToLowerInvariant();
+            if(AircraftMaterials.TryGetValue(n,out Material cached))return cached;
+            Color c;
+            if(n.Contains("crocodile dark"))c=new Color(.12f,.34f,.19f);
+            else if(n.Contains("crocodile nose"))c=new Color(.22f,.46f,.24f);
+            else if(n.Contains("underjaw"))c=new Color(.51f,.57f,.39f);
+            else if(n.Contains("inner mouth"))c=new Color(.22f,.05f,.07f);
+            else if(n.Contains("ivory teeth"))c=new Color(.93f,.89f,.74f);
+            else if(n.Contains("yellow reptile"))c=new Color(.9f,.69f,.14f);
+            else if(n.Contains("black slit"))c=new Color(.012f,.018f,.012f);
+            else if(n.Contains("brushed silver"))c=new Color(.46f,.50f,.54f);
+            else if(n.Contains("metal dark"))c=new Color(.24f,.31f,.34f);
+            else if(n.Contains("silver edge"))c=new Color(.70f,.74f,.75f);
+            else if(n.Contains("propeller nearly"))c=new Color(.045f,.065f,.085f);
+            else if(n.Contains("propeller yellow"))c=new Color(.93f,.71f,.15f);
+            else if(n.Contains("cockpit"))c=new Color(.17f,.40f,.55f);
+            else if(n.Contains("scale crevice"))c=new Color(.04f,.13f,.07f);
+            else if(n.Contains("paint tank"))c=new Color(.03f,.74f,.82f);
+            else c=new Color(.35f,.40f,.43f);
+            Material m=Colors.New(c);
+            if(m.HasProperty("_Glossiness"))m.SetFloat("_Glossiness",.12f);
+            if(m.HasProperty("_Metallic"))m.SetFloat("_Metallic",0f);
+            if(m.HasProperty("_SpecColor"))m.SetColor("_SpecColor",new Color(.04f,.04f,.04f));
+            if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
+            if(m.HasProperty("_GlossyReflections"))m.SetFloat("_GlossyReflections",0f);
+            m.name="Bombardiro / "+n;
+            AircraftMaterials.Add(n,m);
+            return m;
+        }
+        private static void RecolorAircraft(Transform root)
+        {
+            int count=0;
+            foreach(Renderer renderer in root.GetComponentsInChildren<Renderer>(true))
+            {
+                Material[] mats=renderer.sharedMaterials;
+                for(int i=0;i<mats.Length;i++)mats[i]=AircraftPalette(mats[i]);
+                renderer.sharedMaterials=mats;
+                count++;
+            }
+            Debug.Log("BOMBARDIRO_COLORED_RENDERERS="+count);
         }
         private static void Recolor(Transform imported)
         {
             int count=0;
             foreach(Renderer renderer in imported.GetComponentsInChildren<Renderer>(true))
             {
+                // The former separate pale jaw ellipsoid intersected the head,
+                // creating a bright white sphere on the dorsal side in Unity.
+                // Keep the original belly material on the main torso.
+                if(renderer.name.IndexOf("Underjaw pale underside",
+                    System.StringComparison.OrdinalIgnoreCase)>=0)
+                {
+                    renderer.enabled=false;
+                    Debug.Log("TRALALERO_HIDDEN_JAW_ELLIPSOID="+renderer.name);
+                    continue;
+                }
                 Material[] mats=renderer.sharedMaterials;
                 for(int i=0;i<mats.Length;i++)mats[i]=Palette(mats[i],renderer.name);
                 renderer.sharedMaterials=mats;
@@ -99,6 +160,33 @@ namespace BrainrotPlanet
                     return;
                 }
                 Debug.LogWarning("TRALALERO_FBX_MISSING: falling back to primitives");
+            }
+            if(character==1)
+            {
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v01");
+                if(prefab!=null)
+                {
+                    GameObject visual=Object.Instantiate(prefab,art,false);
+                    visual.name="Bombardiro crocodile airplane / Blender skeletal rig";
+                    visual.transform.localPosition=new Vector3(0,-.32f,0);
+                    visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
+                    visual.transform.localScale=Vector3.one*.45f;
+                    RecolorAircraft(visual.transform);
+                    foreach(Collider collider in visual.GetComponentsInChildren<Collider>(true))
+                        Object.Destroy(collider);
+                    Animator anim=visual.GetComponent<Animator>();
+                    if(anim==null)anim=visual.AddComponent<Animator>();
+                    anim.runtimeAnimatorController=
+                        Resources.Load<RuntimeAnimatorController>("Characters/Bombardiro");
+                    anim.applyRootMotion=false;
+                    anim.cullingMode=AnimatorCullingMode.AlwaysAnimate;
+                    Debug.Log("BOMBARDIRO_RIG_LOADED animator="+
+                        (anim.runtimeAnimatorController!=null));
+                    Oval(root,"Paint aura",new Vector3(0,-.42f,0),
+                         new Vector3(1.25f,.09f,1.25f),neon);
+                    return;
+                }
+                Debug.LogWarning("BOMBARDIRO_FBX_MISSING: primitives remain in use");
             }
             if(character==0) // Tralalero fallback if FBX is unavailable.
             {
