@@ -18,7 +18,10 @@ namespace BrainrotPlanet
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
         private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ "};
         private readonly string[] skillNames={"АКУЛИЙ РЫВОК","3 БОМБЫ","ЛЕДЯНАЯ ВОЛНА","ТУРБО","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНАЯ ХВАТКА","БАРАБАННЫЙ УДАР","КАКТУСНАЯ БУРЯ","ВОЗДУШНЫЙ ТАНЕЦ","ПРУЖИНА","ВСПЛЕСК КРАСКИ"};
+        private static readonly string[] DifficultyLabels={"ЛЕГКО","СРЕДНЕ","СЛОЖНО"};
         private int selectedHero=0;
+        private AiDifficulty chosenDifficulty=AiDifficulty.Medium;
+        public AiDifficulty Difficulty => chosenDifficulty;
         private bool resolvingHeroSkill;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
@@ -49,6 +52,9 @@ namespace BrainrotPlanet
             Application.targetFrameRate=60;
             Screen.sleepTimeout=SleepTimeout.NeverSleep;
             Input.multiTouchEnabled=true;
+            chosenDifficulty=(AiDifficulty)Mathf.Clamp(
+                PlayerPrefs.GetInt("BrainrotAiDifficulty",1),0,2);
+            Debug.Log("AI_DIFFICULTY_LOADED level="+chosenDifficulty);
             if(Debug.isDebugBuild)gameObject.AddComponent<GamePerformanceProbe>();
             var requiredTypes=new GameObject("Runtime collider types");
             requiredTypes.AddComponent<BoxCollider>();
@@ -81,6 +87,7 @@ namespace BrainrotPlanet
         }
         public void StartGame()
         {
+            Debug.Log("AI_DIFFICULTY_MATCH level="+chosenDifficulty);
             if(worldRoot!=null)Destroy(worldRoot.gameObject);
             foreach(LineRenderer l in pathRenderers)if(l!=null)Destroy(l.gameObject);
             Array.Clear(pathRenderers,0,pathRenderers.Length);
@@ -572,6 +579,24 @@ namespace BrainrotPlanet
                     {
                         selectedHero=i;
                         Debug.Log("HERO_MENU_SELECTED index="+i);
+                    }
+                }
+                // Always-visible difficulty selector under the current hero page.
+                float diffY=logicalH-226f;
+                float diffWidth=(logicalW-68f)/3f;
+                for(int i=0;i<3;i++)
+                {
+                    float x=26f+i*(diffWidth+8f);
+                    bool picked=(int)chosenDifficulty==i;
+                    Plate(new Rect(x-3f,diffY-3f,diffWidth+6f,48f),
+                        picked?new Color(.92f,.31f,.58f,.95f):
+                               new Color(.18f,.25f,.39f,.92f));
+                    if(GUI.Button(new Rect(x,diffY,diffWidth,42f),DifficultyLabels[i],buttonStyle))
+                    {
+                        chosenDifficulty=(AiDifficulty)i;
+                        PlayerPrefs.SetInt("BrainrotAiDifficulty",i);
+                        PlayerPrefs.Save();
+                        Debug.Log("AI_DIFFICULTY_SELECTED level="+chosenDifficulty);
                     }
                 }
                 if(GUI.Button(new Rect(26,logicalH-166,logicalW-52,60)," ДЕСАНТИРОВАТЬСЯ",buttonStyle))StartGame();

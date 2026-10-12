@@ -1,0 +1,5 @@
+{
+  "hard_persisted_after_restart": true,
+  "medium_persisted_after_restart": true,
+  "device_restored_to_medium": true
+}

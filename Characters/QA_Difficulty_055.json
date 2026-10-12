@@ -1,0 +1,47 @@
+[
+  {
+    "level": "Easy",
+    "level_selected": true,
+    "match_level": true,
+    "bot_config_count": 3,
+    "bot_decisions": 15,
+    "tactical_changes": 4,
+    "intercept_targets": 0,
+    "ability_uses": 1,
+    "bot_captures": 17,
+    "player_move_events": 0,
+    "game_fps_average": 59.17,
+    "game_fps_samples": 9,
+    "fatal_android_error": false
+  },
+  {
+    "level": "Medium",
+    "level_selected": true,
+    "match_level": true,
+    "bot_config_count": 3,
+    "bot_decisions": 15,
+    "tactical_changes": 10,
+    "intercept_targets": 0,
+    "ability_uses": 6,
+    "bot_captures": 33,
+    "player_move_events": 0,
+    "game_fps_average": 58.79,
+    "game_fps_samples": 8,
+    "fatal_android_error": false
+  },
+  {
+    "level": "Hard",
+    "level_selected": true,
+    "match_level": true,
+    "bot_config_count": 3,
+    "bot_decisions": 15,
+    "tactical_changes": 47,
+    "intercept_targets": 17,
+    "ability_uses": 8,
+    "bot_captures": 30,
+    "player_move_events": 0,
+    "game_fps_average": 58.77,
+    "game_fps_samples": 9,
+    "fatal_android_error": false
+  }
+]

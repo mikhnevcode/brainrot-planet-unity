@@ -7,18 +7,30 @@ namespace BrainrotPlanet
     /// <summary>Deterministic tactical priority; separate from navigation and Unity time.</summary>
     public static class AiTactics
     {
-        public static AiObjective Choose(bool hasOwnTrail, float homeDegrees,
-            int ownTrailCells, float intruderDegrees, bool intruderAtHome,
+        // Backward-compatible baseline used by existing regression checks.
+        public static AiObjective Choose(bool hasOwnTrail,float homeDegrees,
+            int ownTrailCells,float intruderDegrees,bool intruderAtHome,
             float enemyTrailDegrees)
         {
-            // Finish a vulnerable expansion before chasing anything else.
-            if(hasOwnTrail && (ownTrailCells>=145 || homeDegrees>=36f ||
-                intruderDegrees<13f || enemyTrailDegrees<10f))
+            return Choose(hasOwnTrail,homeDegrees,ownTrailCells,
+                intruderDegrees,intruderAtHome,enemyTrailDegrees,
+                AiDifficultyProfile.For(AiDifficulty.Medium));
+        }
+
+        public static AiObjective Choose(bool hasOwnTrail,float homeDegrees,
+            int ownTrailCells,float intruderDegrees,bool intruderAtHome,
+            float enemyTrailDegrees,AiDifficultyProfile tuning)
+        {
+            if(hasOwnTrail && (ownTrailCells>=tuning.ReturnTrailCells ||
+                homeDegrees>=tuning.ReturnDegrees ||
+                intruderDegrees<tuning.DangerDegrees ||
+                enemyTrailDegrees<tuning.ThreatDegrees))
                 return AiObjective.Retreat;
-            if(!hasOwnTrail && intruderAtHome && intruderDegrees<27f)
+            if(!hasOwnTrail && intruderAtHome &&
+               intruderDegrees<tuning.DefendDegrees)
                 return AiObjective.Defend;
-            // Only intercept reachable tracks. Do not abandon a long open loop.
-            if((!hasOwnTrail || ownTrailCells<42) && enemyTrailDegrees<27f)
+            if((!hasOwnTrail || ownTrailCells<tuning.RiskTrailCells) &&
+               enemyTrailDegrees<tuning.HuntDegrees)
                 return AiObjective.HuntTrail;
             return AiObjective.Expand;
         }

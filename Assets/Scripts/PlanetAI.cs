@@ -19,16 +19,28 @@ namespace BrainrotPlanet
         private float evaluateAt, nextAbility, legDeadline, nextLog, objectiveStartedAt;
         private int leg;
         private int lastTargetTeam;
+        private AiDifficultyProfile difficulty;
+        private float nextAggressionRoll;
+        private bool pursuePermission;
 
         public AiObjective Objective => objective;
 
         public void Configure(PlanetGame director,PlanetActor pawn)
         {
             game=director;actor=pawn;home=pawn.SpawnDirection;
+            difficulty=AiDifficultyProfile.For(director.Difficulty);
+            Debug.Log("AI_DIFFICULTY_CONFIG team="+pawn.Team+
+                " level="+difficulty.Level+" decision="+
+                difficulty.DecisionMin.ToString("F2")+"-"+
+                difficulty.DecisionMax.ToString("F2")+
+                " skill="+difficulty.SkillMin.ToString("F1")+"-"+
+                difficulty.SkillMax.ToString("F1"));
             lastPosition=home;
-            nextAbility=Time.time+Random.Range(4.5f,8.0f);
+            nextAbility=Time.time+Random.Range(difficulty.FirstSkillMin,
+                difficulty.FirstSkillMax);
             ChooseTrip();
             evaluateAt=Time.time+.25f;
+            nextAggressionRoll=Time.time;
         }
 
         private void Awake(){actor=GetComponent<PlanetActor>();}
@@ -51,9 +63,9 @@ namespace BrainrotPlanet
             if(game!=null && !game.Territory.InOwn(actor.Team,start))
                 start=home;
             firstTurn=Accessible(PlanetMath.RandomAround(start,
-                Random.Range(.23f,.37f)),start);
+                Random.Range(difficulty.LoopFirstMin,difficulty.LoopFirstMax)),start);
             secondTurn=Accessible(PlanetMath.RandomAround(firstTurn,
-                Random.Range(.24f,.39f)),firstTurn);
+                Random.Range(difficulty.LoopSecondMin,difficulty.LoopSecondMax)),firstTurn);
             goal=firstTurn;
             legDeadline=Time.time+9f;
         }
@@ -104,11 +116,20 @@ namespace BrainrotPlanet
             int trailTeam;
             float trailDegrees;
             bool found=game.Territory.TryFindEnemyTrail(
-                actor.Team,position,30f,out trailGoal,out trailTeam,out trailDegrees);
+                actor.Team,position,difficulty.HuntDegrees+3f,
+                out trailGoal,out trailTeam,out trailDegrees);
             if(!found)trailDegrees=180f;
-            bool defenderNeeded=nearestHomeThreat<23f;
+            bool defenderNeeded=nearestHomeThreat<difficulty.DefendDegrees;
+            if(found && objective!=AiObjective.HuntTrail &&
+               Time.time>=nextAggressionRoll)
+            {
+                nextAggressionRoll=Time.time+2.5f;
+                pursuePermission=Random.value<=difficulty.TrailAggression;
+            }
+            if(objective!=AiObjective.HuntTrail && !pursuePermission)
+                trailDegrees=180f;
             AiObjective desired=AiTactics.Choose(ownTrail>0,homeDegrees,ownTrail,
-                nearestOpponent,defenderNeeded,trailDegrees);
+                nearestOpponent,defenderNeeded,trailDegrees,difficulty);
 
             // A retreat is a commitment until the exposed line is closed.
             // Also avoid repeatedly changing between hunting and expanding
@@ -116,7 +137,7 @@ namespace BrainrotPlanet
             if(objective==AiObjective.Retreat && ownTrail>0)
                 desired=AiObjective.Retreat;
             if(desired!=objective && desired!=AiObjective.Retreat &&
-               Time.time-objectiveStartedAt<1.25f)
+               Time.time-objectiveStartedAt<difficulty.CommitSeconds)
                 desired=objective;
 
             if(desired!=objective)
@@ -164,22 +185,25 @@ namespace BrainrotPlanet
             {
                 bool outside=!game.Territory.InOwn(actor.Team,position);
                 if(AiTactics.WantsSkill(actor.Character,objective,outside,
-                    nearestOpponent,trailDegrees,actor.Grounded))
+                    nearestOpponent,trailDegrees,actor.Grounded) &&
+                   Random.value<=difficulty.SkillConfidence)
                 {
                     if(game.TryUseActorSkill(actor))
                     {
-                        nextAbility=Time.time+Random.Range(12.5f,17.2f);
+                        nextAbility=Time.time+Random.Range(difficulty.SkillMin,
+                            difficulty.SkillMax);
                         Debug.Log("AI_SKILL_USED team="+actor.Team+
                             " character="+actor.Character+" mode="+objective);
                     }
-                    else nextAbility=Time.time+1.2f;
+                    else nextAbility=Time.time+2.0f;
                 }
             }
 
             if(Time.time>=nextLog)
             {
                 nextLog=Time.time+9f;
-                Debug.Log("AI_DECISION team="+actor.Team+" mode="+objective+
+                Debug.Log("AI_DECISION team="+actor.Team+
+                    " difficulty="+difficulty.Level+" mode="+objective+
                     " ownTrail="+ownTrail+" nearestEnemyDeg="+
                     nearestOpponent.ToString("F1")+" trailDeg="+
                     trailDegrees.ToString("F1"));
@@ -196,7 +220,8 @@ namespace BrainrotPlanet
             if(Time.time>=evaluateAt)
             {
                 Think();
-                evaluateAt=Time.time+Random.Range(.45f,.78f);
+                evaluateAt=Time.time+Random.Range(difficulty.DecisionMin,
+                    difficulty.DecisionMax);
             }
 
             Vector3 normal=transform.position.normalized;
@@ -217,7 +242,7 @@ namespace BrainrotPlanet
             // Steer with a small continuous turn. Do not teleport or alter
             // rigidbody speed, preserving fair player/bot movement.
             actor.Wish=Vector3.ProjectOnPlane(desired,normal).normalized;
-            if(actor.Grounded && Random.value<.0011f)
+            if(actor.Grounded && Random.value<difficulty.JumpPerFrame)
                 actor.Jump();
             lastPosition=normal;
         }
