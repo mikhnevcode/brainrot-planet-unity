@@ -1,0 +1,57 @@
+Brainrot Planet — remote wardrobe alpha
+Date: 2026-10-13
+Version: 0.7.1-wardrobe1 / Android code 45 / match protocol 2
+APK SHA256: 70a2cd6d6935e29196ab8d3c3197de04bf497219ccaf3cc947651256d433212f
+
+PASS — Blender 5.2.2 generated editable .blend sources and cosmetic mesh packs.
+  Orbital: 3576 vertices, 4 material parts, 164312 bytes.
+  Lava: 3616 vertices, 3 material parts, 172199 bytes.
+  Existing detailed Bombardiro model/rig/textures remain the base.
+PASS — Unity 6000.2.7f2 preview render: attachments aligned, opaque body preserved.
+PASS — Android IL2CPP build and Linux dedicated server build.
+  Both ran protocol (24), cosmetic catalog (21), territory, outcome (8) and
+  actor-collision smoke checks. No C# compilation errors.
+  Editor startup licensing/discovery warnings are not counted as game exceptions.
+
+PASS — Both real phones installed the same APK without clearing user data:
+  RMX3151 / E6ZTMFVCEA895HAA, RMX2020 / NBTK5TZTVC8T9TRG.
+  Installed base.apk hashes match the above SHA256 on BOTH devices.
+PASS — HTTPS catalog revision 1 loaded one skin on both phones.
+  Published revision 2 (two skins), tapped Refresh: both logged
+  SKIN_CATALOG_READY revision=2 count=2 without reinstall or APK rebuild.
+  Content packages live outside Assets/Resources and are not embedded in APK.
+PASS — Wardrobe buttons, original/Orbital/Lava preview and equip were operated
+  on devices. No overlapping wardrobe/menu controls at tested portrait sizes.
+PASS — Invalid catalog schema 999 was rejected; old catalog and selectable skins
+  remained. Restart with that invalid remote catalog restored cached skins.
+  Valid revision 2 was then restored on the server.
+PASS — Lava choice persisted across a normal delayed restart. An immediate
+  force-stop directly after equip initially retained the previous choice;
+  abrupt-kill persistence is not claimed as crash-proof.
+
+PASS — One full WSS match with two phones, Orbital team 1 and Lava team 2.
+  BOTH clients logged exact id@SHA references applied for BOTH actors.
+  BOTH reported MATCH_QA_RESULT epoch=1 winner=4 actions=12.
+  Replay re-applied both skins; both logged MATCH_QA_PASS result_replay_offline.
+  Runtime Unity logs contained no Exception/Error/MATCH_QA_FAIL matches.
+  Gameplay screenshots show attached cosmetic geometry; no physics changes.
+  Recorded game-stage 5-second FPS windows (not a long soak benchmark):
+    RMX3151: 29 windows, 51.91–59.70 FPS, arithmetic mean 59.18.
+    RMX2020: 29 windows, 52.54–59.30 FPS, arithmetic mean 57.88.
+PASS — .network-qa-key and .skin-qa-selection removed from both phones afterward.
+  Manual private invite retained. Apps restarted normally, no auto-join.
+  Existing isolated server updated to server4/protocol2; shared services untouched.
+
+Local evidence (ignored build/log directories, not committed binaries):
+  Logs/skin-preview.log, wardrobe-android-build-final.log, wardrobe-server-build.log
+  Logs/wardrobe-network-rmx3151.log, wardrobe-network-rmx2020.log
+  Logs/wardrobe-v1.png, wardrobe-v2.png, wardrobe-rejected-update.png,
+  wardrobe-cache-restart.png, wardrobe-lava-v2.png, wardrobe-network-*.png
+  Builds/CosmeticsPreview/*.png
+
+NOT IMPLEMENTED / NOT VERIFIED
+  Real or sandbox payments, inventory ownership, refunds, ads, iOS device build,
+  broad cellular fault testing, disk-full/power-loss recovery and cache eviction.
+  Missing remote reference falls back to base by code; asymmetric catalogs in
+  a live two-device match have not been separately tested.
+  This free cosmetic alpha is not a secure paid store or release-ready economy.

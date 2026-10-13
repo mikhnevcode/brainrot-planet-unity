@@ -13,13 +13,14 @@ namespace BrainrotPlanet.Editor
         public static void Windows() => Build(BuildTarget.StandaloneWindows64, "Builds/NetworkWindows/BrainrotMatch.exe", false);
         public static void Android()
         {
-            PlayerSettings.bundleVersion="0.7.0-network1";
-            PlayerSettings.Android.bundleVersionCode=44;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.0-network1.apk",false);
+            PlayerSettings.bundleVersion="0.7.1-wardrobe1";
+            PlayerSettings.Android.bundleVersionCode=45;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.1-wardrobe1.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {
             MatchProtocolSmoke.Run();
+            SkinCatalogSmoke.Run();
             TerritoryJoinSmoke.Run(); MatchOutcomeSmoke.Run(); ActorCollisionSmoke.Run();
             RuntimeShaderAssets.Ensure();
             Directory.CreateDirectory(Path.GetDirectoryName(output));

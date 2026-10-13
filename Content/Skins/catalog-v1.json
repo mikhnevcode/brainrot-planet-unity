@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "skins": [
+    {
+      "id": "bombardiro_orbital",
+      "hero": 1,
+      "title": "ОРБИТАЛЬНЫЙ СПАСАТЕЛЬ",
+      "description": "Солнечные панели · голубые реакторы",
+      "file": "bombardiro_orbital-f949c2741e3d1719f39b72cfd7f71811839fa03a1e9c24d99d913f91d00539a3.json",
+      "sha256": "f949c2741e3d1719f39b72cfd7f71811839fa03a1e9c24d99d913f91d00539a3",
+      "bytes": 164312
+    }
+  ]
+}

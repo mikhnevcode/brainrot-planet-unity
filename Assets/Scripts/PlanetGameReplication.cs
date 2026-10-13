@@ -47,6 +47,7 @@ namespace BrainrotPlanet
                 if(difficulty>2)throw new InvalidDataException("Invalid difficulty");
                 for(int i=1;i<=4;i++)
                 { networkHeroes[i]=r.ReadByte(); if(networkHeroes[i]>=characters.Length)throw new InvalidDataException("Invalid hero"); }
+                for(int i=1;i<=4;i++){networkSkins[i]=r.ReadString();if(!SkinCatalog.ValidReference(networkSkins[i]))throw new InvalidDataException("Invalid cosmetic reference");}
                 MatchProtocol.End(r); networkEpoch=epoch; LocalTeam=team;
                 chosenDifficulty=(AiDifficulty)difficulty; selectedHero=networkHeroes[team];
                 networkWinner=0; networkMessage=""; inputButtons=0;

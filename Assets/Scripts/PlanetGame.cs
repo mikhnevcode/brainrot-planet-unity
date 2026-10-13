@@ -79,6 +79,7 @@ namespace BrainrotPlanet
         private void Awake()
         {
             SetupNetwork();
+            SetupWardrobe();
             Application.SetStackTraceLogType(LogType.Log,StackTraceLogType.None);
             Application.targetFrameRate=60;
             Screen.sleepTimeout=SleepTimeout.NeverSleep;
@@ -192,6 +193,7 @@ namespace BrainrotPlanet
                 actorObject.AddComponent<Rigidbody>();
                 var motor=actorObject.AddComponent<PlanetActor>();
                 motor.Configure(this,team,hero,spawnDirections[team-1]);
+                ApplyActorSkin(motor,hero,team);
                 motor.Active=true;
                 players.Add(motor);
                 Territory.Seed(team,spawnDirections[team-1]);
@@ -497,6 +499,7 @@ namespace BrainrotPlanet
             {
                 if(DedicatedMatchServer)return;
                 EnsureHeroPreview();
+                RefreshWardrobePreview();
                 if(heroPreviewRig!=null)
                 {
                     Quaternion portrait=selectedHero==1?Quaternion.Euler(0f,148f,0f):
@@ -810,6 +813,7 @@ namespace BrainrotPlanet
             heroPreviewRig=new GameObject("Portrait turntable");
             heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
             AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
+            if(selectedHero==1&&skinCatalog!=null)SkinVisual.Apply(heroPreviewRig.transform,skinCatalog.Pack(wardrobeOpen?previewSkin:equippedSkin));
             previewFacing=AvatarArt.LocalFacing(heroPreviewRig.transform);
             heroPreviewRig.transform.localRotation=selectedHero==1?Quaternion.Euler(0f,148f,0f):
                 Quaternion.AngleAxis(18f,Vector3.up)*AvatarArt.AlignFacing(previewFacing,Vector3.back);
@@ -930,6 +934,7 @@ namespace BrainrotPlanet
             float logicalW=Screen.width/guiScale,logicalH=Screen.height/guiScale;
             var old=GUI.matrix;
             GUI.matrix=Matrix4x4.Scale(new Vector3(guiScale,guiScale,1f));
+            if(wardrobeOpen && State==MatchState.Menu){DrawWardrobe(logicalW,logicalH);GUI.matrix=old;return;}
             if(networkPanel && State==MatchState.Menu){DrawNetworkPanel(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.Playing){DrawPlayPolish(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.End){DrawResultPolish(logicalW,logicalH);GUI.matrix=old;return;}
@@ -1004,6 +1009,8 @@ namespace BrainrotPlanet
                 }
 
                 DrawMenuPolish(logicalW,logicalH);
+                if(FlatButton(new Rect(26,492,logicalW-52,34),"ГАРДЕРОБ БОМБАРДИРО",new Color(.36f,.22f,.60f)))
+                {selectedHero=1;previewSkin=equippedSkin;previewHero=-1;wardrobeOpen=true;}
                 float diffY=logicalH-226f;
                 float diffWidth=(logicalW-68f)/3f;
                 GUI.Label(new Rect(22,diffY-30f,logicalW-44f,25f),"СЛОЖНОСТЬ СОПЕРНИКОВ",smallStyle);

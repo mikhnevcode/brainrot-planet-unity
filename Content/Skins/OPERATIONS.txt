@@ -1,0 +1,59 @@
+REMOTE COSMETICS ALPHA — 0.7.1-wardrobe1
+
+Scope
+Two free Bombardiro appearances. Blender-authored extra geometry and opaque
+material palettes, existing rig/animations/physics unchanged. No purchases,
+ads, currency, account ownership or entitlement verification are implemented.
+This is a small data-only pipeline, not Unity Addressables.
+
+Authoring
+Run Blender in background with Characters/Bombardiro/build_cosmetics_v071.py.
+The generator writes the two .blend sources and content-addressed JSON packs
+here. These files are outside Assets/Resources: not embedded in the APK.
+Unity SkinPreviewRender.Run renders the real avatar plus each package.
+SkinCatalogSmoke.Run validates the catalog, integrity and geometry constraints.
+
+Publishing
+Base URL: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/skins/
+Server directory: /srv/loadfiles-oauth/downloads/brainrot-planet/cast/skins
+Upload immutable id-sha256.json packages BEFORE replacing catalog.json.
+Publish catalog-v2.json as catalog.json.tmp, then rename to catalog.json.
+Keep previous catalog and immutable packages available for rollback.
+Never overwrite a content-addressed filename with different content.
+Changing the catalog requires no APK rebuild. Refresh is available in wardrobe;
+the app also checks on startup. Each pack is downloaded only if absent/invalid.
+Only project static files are changed; shared Caddy and other games are untouched.
+
+Schema 1
+Catalog: schema, revision, skins[{id,hero,title,description,file,sha256,bytes}].
+hero is currently restricted to Bombardiro=1. At most 24 entries, 64 KiB manifest.
+Package: schema, hero, id, hull, trim, accent, skin, meshes[].
+Meshes contain name, #RRGGBB color, glow, vertices and triangle indices.
+Limits: 2 MiB/pack, 16 mesh parts, 12000 vertices, 72000 indices, |coordinate|<=5.
+No URLs inside entries, code, colliders, shaders, arbitrary prefabs or game rules.
+The fixed HTTPS origin authenticates delivery; SHA-256 checks integrity, NOT a
+separate publisher signature or entitlement. Protect publishing credentials.
+All packs must validate before a catalog becomes active. Last-good files live
+in app-persistent cosmetics-v1. Failed refresh keeps last-good active content.
+Missing first-run content leaves the original avatar available.
+Do not remove sold content using this alpha: it has no permanent ownership/archive.
+Old unreferenced cache files are retained; cache lifecycle needs production work.
+
+Multiplayer
+Protocol 2 adds id@sha256 cosmetic references to Hello and Start. Update server
+and all clients together; protocol-1 clients are not compatible. Clients render
+only an exact reference present in their validated local catalog; otherwise base
+avatar. Server accepts format-valid FREE references; this is not purchase auth.
+The dedicated server does not download or render cosmetic packages.
+The current private room and invite key mechanism is otherwise unchanged.
+
+Development QA
+.network-qa-key opts into scripted network testing (existing mechanism).
+.skin-qa-selection optionally contains bombardiro_orbital or bombardiro_lava.
+Both are temporary app-private files; remove after testing. Never publish keys.
+
+Next gates
+Store sandbox purchases + server-side receipt verification, durable inventory,
+restore/refund handling, trusted ownership in match handshake, iOS device tests,
+download cancellation/budget/eviction and wider network-failure/performance QA.
+New mechanics, shaders or unsupported schema require an application update.

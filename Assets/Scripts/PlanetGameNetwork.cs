@@ -143,7 +143,7 @@ namespace BrainrotPlanet
             if (matchConnection.Connected && !helloSent)
             {
                 helloSent = true;
-                matchConnection.Send(MatchProtocol.Packet(MatchProtocol.Hello, w => { w.Write(MatchProtocol.Version); w.Write((byte)selectedHero); }));
+                matchConnection.Send(MatchProtocol.Packet(MatchProtocol.Hello, w => { w.Write(MatchProtocol.Version); w.Write((byte)selectedHero); w.Write(ChosenSkinReference()); }));
             }
             try
             {
@@ -168,7 +168,8 @@ namespace BrainrotPlanet
             {
                 if (r.ReadInt32() != MatchProtocol.Version) throw new InvalidDataException("Protocol mismatch");
                 int hero = r.ReadByte(); if (hero >= characters.Length) throw new InvalidDataException("Invalid hero");
-                MatchProtocol.End(r); networkHeroes[team] = hero; p.joined = true;
+                string skin=r.ReadString();if(!SkinCatalog.ValidReference(skin))throw new InvalidDataException("Invalid cosmetic reference");
+                MatchProtocol.End(r); networkHeroes[team] = hero; networkSkins[team]=hero==1?skin:""; p.joined = true;
                 Debug.Log("MATCH_PEER_JOINED team=" + team + " hero=" + hero); return;
             }
             if (kind != MatchProtocol.Input || !p.joined) throw new InvalidDataException("Unexpected command");
@@ -196,7 +197,7 @@ namespace BrainrotPlanet
             StartGame();
             for (int team = 1; team <= 4; team++) if (participants[team]?.joined == true)
                 participants[team].peer.Send(MatchProtocol.Packet(MatchProtocol.Start, w =>
-                { w.Write(networkEpoch); w.Write((byte)team); w.Write((byte)chosenDifficulty); for (int i=1;i<=4;i++) w.Write((byte)networkHeroes[i]); }));
+                { w.Write(networkEpoch); w.Write((byte)team); w.Write((byte)chosenDifficulty); for (int i=1;i<=4;i++) w.Write((byte)networkHeroes[i]); for(int i=1;i<=4;i++)w.Write(networkSkins[i]); }));
             nextSnapshot = Time.unscaledTime;
             Debug.Log("MATCH_SERVER_STARTED epoch=" + networkEpoch);
         }

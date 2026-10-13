@@ -18,6 +18,10 @@ namespace BrainrotPlanet
             if(string.IsNullOrEmpty(key))yield break;
             Application.runInBackground=true;
             yield return null;
+            float catalogDeadline=Time.unscaledTime+40f;
+            while(skinCatalog!=null&&skinCatalog.Busy&&Time.unscaledTime<catalogDeadline)yield return null;
+            string skinPath=Path.Combine(Application.persistentDataPath,".skin-qa-selection");
+            if(File.Exists(skinPath))equippedSkin=File.ReadAllText(skinPath).Trim();
             selectedHero=1; networkKey=key; networkPanel=true; ConnectMatch();
             float deadline=Time.unscaledTime+35f;
             while(State!=MatchState.Playing && Time.unscaledTime<deadline)yield return null;

@@ -99,7 +99,7 @@ namespace BrainrotPlanet
         private void DrawMenuPolish(float w,float h)
         {
             InitPolishStyles();
-            float top=502f;
+            float top=541f;
             float available=Mathf.Min(142,h-265-top);
             if(available<52)return;
             Rounded(new Rect(21,top,w-42,available),new Color(.07f,.095f,.18f,.95f));
