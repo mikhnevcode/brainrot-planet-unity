@@ -1,0 +1,38 @@
+{
+  "hero": "Bombombini",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Bombombini\\Bombombini_v03.blend",
+  "rig": "BombombiniGusini_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Neck",
+    "Beak",
+    "Wing_L",
+    "Engine_L",
+    "Rotor_L0",
+    "Rotor_L1",
+    "Wing_R",
+    "Engine_R",
+    "Rotor_R0",
+    "Rotor_R1",
+    "Tail",
+    "Foot_L",
+    "Foot_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 12,
+  "vertices": 32708,
+  "triangles": 64988,
+  "sculpt_vertices": 13948,
+  "blender": "5.2.2 LTS"
+}

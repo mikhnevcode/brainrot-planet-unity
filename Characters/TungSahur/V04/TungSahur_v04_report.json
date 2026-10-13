@@ -1,0 +1,30 @@
+{
+  "hero": "TungSahur",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\TungSahur\\TungSahur_v03.blend",
+  "rig": "TungSahur_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 6,
+  "vertices": 17734,
+  "triangles": 35228,
+  "sculpt_vertices": 36088,
+  "blender": "5.2.2 LTS"
+}

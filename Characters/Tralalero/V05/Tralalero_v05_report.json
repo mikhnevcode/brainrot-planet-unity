@@ -1,0 +1,37 @@
+{
+  "hero": "Tralalero",
+  "version": "v05",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Tralalero\\Tralalero_v04.blend",
+  "rig": "Tralalero_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Tail",
+    "Fin_L",
+    "Fin_R",
+    "Thigh_L",
+    "Shin_L",
+    "Foot_L",
+    "Thigh_R",
+    "Shin_R",
+    "Foot_R",
+    "Thigh_Rear",
+    "Shin_Rear",
+    "Foot_Rear"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 13,
+  "vertices": 32631,
+  "triangles": 64990,
+  "sculpt_vertices": 33580,
+  "blender": "5.2.2 LTS"
+}

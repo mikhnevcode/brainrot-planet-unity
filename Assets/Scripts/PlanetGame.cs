@@ -16,22 +16,22 @@ namespace BrainrotPlanet
         public IReadOnlyList<PlanetActor> Actors => players;
         private readonly List<PlanetActor> players = new List<PlanetActor>();
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
-        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ "};
-        private readonly string[] skillNames={"АКУЛИЙ РЫВОК","3 БОМБЫ","ЛЕДЯНАЯ ВОЛНА","ТУРБО","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНАЯ ХВАТКА","БАРАБАННЫЙ УДАР","КАКТУСНАЯ БУРЯ","ВОЗДУШНЫЙ ТАНЕЦ","ПРУЖИНА","ВСПЛЕСК КРАСКИ"};
+        private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ ","ТРОППА ТРИППА "};
+        private readonly string[] skillNames={"АКУЛИЙ РЫВОК","3 БОМБЫ","ЛЕДЯНАЯ ВОЛНА","ТУРБО","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНАЯ ХВАТКА","БАРАБАННЫЙ УДАР","КАКТУСНАЯ БУРЯ","ВОЗДУШНЫЙ ТАНЕЦ","ПРУЖИНА","ВСПЛЕСК КРАСКИ","БРЮШНОЙ ПЛЕСК"};
         private static readonly Color[] HeroColors={
             new Color(.08f,.72f,1f),new Color(.32f,.77f,.20f),
             new Color(.24f,.82f,.96f),new Color(1f,.48f,.12f),
             new Color(1f,.30f,.67f),new Color(.61f,.31f,.94f),
             new Color(.20f,.77f,.37f),new Color(.82f,.50f,.16f),
             new Color(.49f,.82f,.20f),new Color(.22f,.70f,1f),
-            new Color(1f,.40f,.22f),new Color(.91f,.24f,.98f)};
+            new Color(1f,.40f,.22f),new Color(.91f,.24f,.98f),new Color(.16f,.70f,.48f)};
         private static readonly Color[] HeroAccents={
             new Color(.77f,.96f,1f),new Color(.92f,1f,.33f),
             new Color(.82f,.98f,1f),new Color(1f,.88f,.27f),
             new Color(1f,.77f,.91f),new Color(.90f,.72f,1f),
             new Color(.76f,1f,.43f),new Color(1f,.79f,.34f),
             new Color(.91f,1f,.48f),new Color(.70f,.94f,1f),
-            new Color(1f,.82f,.35f),new Color(.52f,.94f,1f)};
+            new Color(1f,.82f,.35f),new Color(.52f,.94f,1f),new Color(1f,.84f,.37f)};
         private static readonly Color[] DifficultyColors={
             new Color(.15f,.72f,.92f),new Color(1f,.57f,.14f),new Color(.94f,.20f,.38f)};
         private static readonly string[] DifficultyLabels={"ЛЕГКО","СРЕДНЕ","СЛОЖНО"};
@@ -67,6 +67,7 @@ namespace BrainrotPlanet
         private Camera heroPreviewCamera;
         private GameObject heroPreviewRoot,heroPreviewRig;
         private int previewHero=-1;
+        private Vector3 previewFacing=Vector3.right;
         private bool heroMenuLogged;
         private GUIStyle headerStyle,menuStyle,buttonStyle,smallStyle,enemyArrowStyle;
         private GUIStyle heroNameStyle,heroSkillStyle,heroBadgeStyle,clearButtonStyle;
@@ -439,6 +440,10 @@ namespace BrainrotPlanet
                         }
                         if(human)Announce(" ТРИППИ: КРЕВЕТОЧНЫЙ ВСПЛЕСК! +"+cells);
                         break;
+                    case 12: // Troppa Trippa: a short circular belly splash.
+                        cells=Territory.ClaimDisk(team,center,.105f);
+                        if(human)Announce(" ТРОППА: БРЮШНОЙ ПЛЕСК! +"+cells);
+                        break;
                 }
                 Effects.HeroAbility(hero,center,Colors.Team(team));
                 Debug.Log("HERO_SPECIAL_ACTIVATED hero="+hero+" team="+team+
@@ -454,9 +459,10 @@ namespace BrainrotPlanet
                 EnsureHeroPreview();
                 if(heroPreviewRig!=null)
                 {
-                    float portraitYaw=selectedHero==1?148f:0f;
-                    heroPreviewRig.transform.localRotation=Quaternion.Euler(
-                        0f,portraitYaw+Mathf.Sin(Time.unscaledTime*.72f)*7f,0f);
+                    Quaternion portrait=selectedHero==1?Quaternion.Euler(0f,148f,0f):
+                        Quaternion.AngleAxis(18f,Vector3.up)*AvatarArt.AlignFacing(previewFacing,Vector3.back);
+                    heroPreviewRig.transform.localRotation=Quaternion.AngleAxis(
+                        Mathf.Sin(Time.unscaledTime*.72f)*7f,Vector3.up)*portrait;
                 }
                 return;
             }
@@ -640,7 +646,7 @@ namespace BrainrotPlanet
                 Vector3 stageCenter=CreateVictoryStage(winningTeam);
                 Vector3 winnerPosition=stageCenter+Vector3.up*.37f;
                 Vector3 cameraSide=Vector3.back;
-                victoryActor.EnterVictoryStage(winnerPosition,cameraSide);
+                victoryActor.EnterVictoryStage(winnerPosition,cameraSide,stageCenter.y+.205f);
                 orbitCamera.BeginVictoryFocus(victoryActor.transform,stageCenter);
                 victoryActor.Celebrate();
                 Effects.Burst(victoryActor.transform.position,
@@ -744,14 +750,23 @@ namespace BrainrotPlanet
             heroPreviewRig=new GameObject("Portrait turntable");
             heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
             AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
-            heroPreviewRig.transform.localRotation=Quaternion.Euler(0f,selectedHero==1?148f:0f,0f);
+            previewFacing=AvatarArt.LocalFacing(heroPreviewRig.transform);
+            heroPreviewRig.transform.localRotation=selectedHero==1?Quaternion.Euler(0f,148f,0f):
+                Quaternion.AngleAxis(18f,Vector3.up)*AvatarArt.AlignFacing(previewFacing,Vector3.back);
             SetLayerRecursively(heroPreviewRoot,previewLayer);
 
             Renderer[] renderers=heroPreviewRig.GetComponentsInChildren<Renderer>(true);
             if(renderers.Length>0)
             {
-                Bounds bounds=renderers[0].bounds;
-                for(int i=1;i<renderers.Length;i++)bounds.Encapsulate(renderers[i].bounds);
+                Bounds bounds=new Bounds(heroPreviewRig.transform.position,Vector3.zero);
+                bool boundsReady=false;
+                foreach(Renderer renderer in renderers)
+                {
+                    if(renderer.name=="Paint aura"){renderer.enabled=false;continue;}
+                    if(!renderer.enabled)continue;
+                    if(!boundsReady){bounds=renderer.bounds;boundsReady=true;}
+                    else bounds.Encapsulate(renderer.bounds);
+                }
                 float footprint=Mathf.Max(bounds.size.x,bounds.size.z)*.72f;
                 var platform=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 platform.name="Hero portrait colour podium";
@@ -919,7 +934,7 @@ namespace BrainrotPlanet
                 if(!heroMenuLogged)
                 {
                     heroMenuLogged=true;
-                    Debug.Log("HERO_MENU_PRESENTED colorfulCards=12 pages="+pageCount+" preview=3D");
+                    Debug.Log("HERO_MENU_PRESENTED colorfulCards="+characters.Length+" pages="+pageCount+" preview=3D");
                 }
 
                 float diffY=logicalH-226f;
@@ -942,7 +957,7 @@ namespace BrainrotPlanet
                 if(FlatButton(new Rect(26,logicalH-166,logicalW-52,60),
                     "ДЕСАНТИРОВАТЬСЯ  >",Color.Lerp(heroColor,heroAccent,.30f)))StartGame();
                 GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),
-                    "145 секунд · 12 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
+                    "145 секунд · 13 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
             }
             else if(State==MatchState.Playing)
             {

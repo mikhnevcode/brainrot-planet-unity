@@ -1,0 +1,30 @@
+{
+  "hero": "Troppa",
+  "version": "v01",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Trippi\\Trippi_v03.blend",
+  "rig": "Troppa_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 6,
+  "vertices": 28490,
+  "triangles": 56688,
+  "sculpt_vertices": 64950,
+  "blender": "5.2.2 LTS"
+}

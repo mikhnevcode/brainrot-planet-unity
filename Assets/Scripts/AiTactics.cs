@@ -48,7 +48,7 @@ namespace BrainrotPlanet
                     return nearestOpponentDegrees<31f || nearestTrailDegrees<22f;
                 case 2: case 6: case 7: case 8:
                     return nearestOpponentDegrees<22f;
-                case 4: case 11:
+                case 4: case 11: case 12:
                     return outsideOwnLand && mode!=AiObjective.Retreat;
                 case 10:
                     return grounded && outsideOwnLand &&

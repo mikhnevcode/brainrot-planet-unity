@@ -1,0 +1,30 @@
+{
+  "hero": "Boneca",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Boneca\\Boneca_v03.blend",
+  "rig": "Boneca_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 4,
+  "vertices": 32731,
+  "triangles": 64994,
+  "sculpt_vertices": 33778,
+  "blender": "5.2.2 LTS"
+}

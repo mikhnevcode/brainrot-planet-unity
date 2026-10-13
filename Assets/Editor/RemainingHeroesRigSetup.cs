@@ -12,7 +12,7 @@ namespace BrainrotPlanet.Editor
     {
         public static readonly string[] Names = {
             "Assassino","Patapim","TungSahur","Lirili",
-            "Frigo","Frulli","Boneca","Trippi"
+            "Frigo","Frulli","Boneca","Trippi","Troppa"
         };
 
         [MenuItem("Brainrot Planet/5. Import remaining character models")]
@@ -24,7 +24,7 @@ namespace BrainrotPlanet.Editor
 
         private static void PrepareOne(string name)
         {
-            string path = "Assets/Resources/Characters/"+name+"_v03.fbx";
+            string path = "Assets/Resources/Characters/"+name+(name=="Troppa"?"_v01.fbx":"_v04.fbx");
             string controllerPath = "Assets/Resources/Characters/"+name+".controller";
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if(prefab == null) throw new Exception("Missing hero FBX: "+path);

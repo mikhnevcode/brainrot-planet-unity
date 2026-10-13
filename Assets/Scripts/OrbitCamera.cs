@@ -109,7 +109,7 @@ namespace BrainrotPlanet
                     Debug.Log(string.Format(
                         "CAM_VICTORY_STABLE upDot={0:F3} faceDot={1:F3} screen=({2:F3},{3:F3},{4:F2})",
                         Vector3.Dot(transform.up,Vector3.up),
-                        Vector3.Dot(Target.right,facing),
+                        Vector3.Dot(Target.TransformDirection(AvatarArt.LocalFacing(Target)),facing),
                         viewport.x,viewport.y,viewport.z));
                 }
                 return;

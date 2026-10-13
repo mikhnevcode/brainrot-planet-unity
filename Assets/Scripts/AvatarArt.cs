@@ -3,9 +3,32 @@ using System.Collections.Generic;
 
 namespace BrainrotPlanet
 {
-    /// <summary>Original primitive-built, meme-inspired silhouettes. No third-party model assets.</summary>
+    /// <summary>Reference-driven Blender cast, with primitive fallbacks if assets are missing.</summary>
     public static class AvatarArt
     {
+        public static Quaternion AlignFacing(Vector3 localFront,Vector3 targetFront)
+        {
+            // FromToRotation chooses an arbitrary axis at exactly 180 degrees.
+            // An explicit yaw can never flip the character's vertical axis.
+            float localYaw=Mathf.Atan2(localFront.x,localFront.z)*Mathf.Rad2Deg;
+            float targetYaw=Mathf.Atan2(targetFront.x,targetFront.z)*Mathf.Rad2Deg;
+            return Quaternion.Euler(0f,targetYaw-localYaw,0f);
+        }
+        public static Vector3 LocalFacing(Transform root)
+        {
+            Transform origin=null,front=null;
+            foreach(Transform child in root.GetComponentsInChildren<Transform>(true))
+            {
+                if(child.name=="ReferenceFacingOrigin")origin=child;
+                else if(child.name=="ReferenceFacingFront")front=child;
+            }
+            if(origin!=null && front!=null)
+            {
+                Vector3 direction=root.InverseTransformDirection(front.position-origin.position);
+                return Vector3.ProjectOnPlane(direction,Vector3.up).normalized;
+            }
+            return Vector3.right; // Legacy Bombardiro FBX.
+        }
         private static Transform Part(Transform parent,string name,PrimitiveType type,Vector3 p,
                                       Vector3 size,Material mat)
         {
@@ -21,8 +44,37 @@ namespace BrainrotPlanet
         private static Transform Oval(Transform parent,string name,Vector3 p,Vector3 s,Material m)
             => Part(parent,name,PrimitiveType.Sphere,p,s,m);
         private static readonly Dictionary<string,Material> SharkMaterials=new Dictionary<string,Material>();
+        private static readonly Dictionary<string,Material> ReferenceMaterials=new Dictionary<string,Material>();
+        private static Material ReferencePalette(Material source)
+        {
+            if(source==null || !source.name.StartsWith("Ref63 ",System.StringComparison.Ordinal))return null;
+            string name=source.name;
+            if(ReferenceMaterials.TryGetValue(name,out Material cached))return cached;
+            string[] tokens=name.Split(' ');
+            if(tokens.Length<3 || !ColorUtility.TryParseHtmlString(tokens[2],out Color color))
+                throw new System.InvalidOperationException("Invalid reference material: "+name);
+            Material material=Colors.New(color);
+            material.name=name;
+            ForceAircraftOpaque(material);
+            if(material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",.10f);
+            if(material.HasProperty("_SpecularHighlights"))material.SetFloat("_SpecularHighlights",0f);
+            if(material.HasProperty("_GlossyReflections"))material.SetFloat("_GlossyReflections",0f);
+            string kind=tokens[1];
+            if(kind!="solid")
+            {
+                material.mainTexture=Resources.Load<Texture2D>("Characters/ReferenceDetail/Ref63_"+kind+"_Albedo");
+                var normal=Resources.Load<Texture2D>("Characters/ReferenceDetail/Ref63_"+kind+"_Normal");
+                if(material.mainTexture==null || normal==null)
+                    throw new System.InvalidOperationException("Missing reference skin maps: "+kind);
+                material.SetTexture("_BumpMap",normal);material.SetFloat("_BumpScale",.6f);
+                material.EnableKeyword("_NORMALMAP");
+                Debug.Log("REFERENCE_SKIN_READY kind="+kind+" albedo=true normal=true opaque=true");
+            }
+            ReferenceMaterials[name]=material;return material;
+        }
         private static Material Palette(Material source,string fallback)
         {
+            Material reference=ReferencePalette(source);if(reference!=null)return reference;
             string n=(source!=null?source.name:fallback).ToLowerInvariant();
             if(SharkMaterials.TryGetValue(n,out Material cached))return cached;
             Color c;
@@ -130,6 +182,7 @@ namespace BrainrotPlanet
         private static readonly Dictionary<string,Material> GooseMaterials=new Dictionary<string,Material>();
         private static Material GoosePalette(Material source)
         {
+            Material reference=ReferencePalette(source);if(reference!=null)return reference;
             string n=(source!=null?source.name:"unknown").ToLowerInvariant();
             if(GooseMaterials.TryGetValue(n,out Material old))return old;
             Color c;
@@ -169,6 +222,7 @@ namespace BrainrotPlanet
         private static readonly Dictionary<string,Material> BallerinaMaterials=new Dictionary<string,Material>();
         private static Material BallerinaPalette(Material original)
         {
+            Material reference=ReferencePalette(original);if(reference!=null)return reference;
             string n=(original!=null?original.name:"unknown").ToLowerInvariant();
             if(BallerinaMaterials.TryGetValue(n,out Material cached))return cached;
             Color c;
@@ -244,6 +298,7 @@ namespace BrainrotPlanet
             new Dictionary<string,Material>();
         private static Material NewHeroPalette(Material source)
         {
+            Material reference=ReferencePalette(source);if(reference!=null)return reference;
             string n=(source!=null?source.name:"unknown").ToLowerInvariant();
             if(NewHeroMaterials.TryGetValue(n,out Material old))return old;
             Color c;
@@ -300,6 +355,7 @@ namespace BrainrotPlanet
                 case 9:return "Frulli";
                 case 10:return "Boneca";
                 case 11:return "Trippi";
+                case 12:return "Troppa";
                 default:return null;
             }
         }
@@ -308,7 +364,7 @@ namespace BrainrotPlanet
         {
             string hero=NewHeroName(character);
             if(hero==null)return false;
-            GameObject prefab=Resources.Load<GameObject>("Characters/"+hero+"_v03");
+            GameObject prefab=Resources.Load<GameObject>("Characters/"+hero+(hero=="Troppa"?"_v01":"_v04"));
             if(prefab==null)
             {
                 Debug.LogWarning("NEW_HERO_FBX_MISSING "+hero);
@@ -338,7 +394,7 @@ namespace BrainrotPlanet
         {
             Transform art=new GameObject("Brainrot avatar / animated").transform;
             art.SetParent(root,false);
-            // All twelve visual avatars become half-size; gameplay physics stays unchanged.
+            // Visual avatars remain half-size; gameplay physics stays unchanged.
             art.localPosition=new Vector3(0,.185f,0);
             art.localScale=Vector3.one*.50f;
             Material white=Colors.New(new Color(.97f,.99f,1f));
@@ -356,7 +412,7 @@ namespace BrainrotPlanet
             {
                 // Authored in Blender with an actual three-legged skeleton and
                 // imported Animator clips. Retain old geometry as a fallback.
-                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v04");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v05");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);
@@ -410,7 +466,7 @@ namespace BrainrotPlanet
             }
             if(character==4)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Ballerina_v03");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Ballerina_v04");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);
@@ -437,7 +493,7 @@ namespace BrainrotPlanet
             }
             if(character==3)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Bombombini_v03");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombombini_v04");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);

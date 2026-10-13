@@ -1,0 +1,30 @@
+{
+  "hero": "Patapim",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Patapim\\Patapim_v03.blend",
+  "rig": "Patapim_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 6,
+  "vertices": 32669,
+  "triangles": 64998,
+  "sculpt_vertices": 56782,
+  "blender": "5.2.2 LTS"
+}

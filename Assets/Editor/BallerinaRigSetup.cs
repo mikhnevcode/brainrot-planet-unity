@@ -9,7 +9,7 @@ namespace BrainrotPlanet.Editor
 {
     public static class BallerinaRigSetup
     {
-        private const string Fbx = "Assets/Resources/Characters/Ballerina_v03.fbx";
+        private const string Fbx = "Assets/Resources/Characters/Ballerina_v04.fbx";
         private const string Controller = "Assets/Resources/Characters/Ballerina.controller";
 
         [MenuItem("Brainrot Planet/4. Import animated Ballerina")]

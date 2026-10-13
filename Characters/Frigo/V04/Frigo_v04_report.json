@@ -1,0 +1,30 @@
+{
+  "hero": "Frigo",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Frigo\\Frigo_v03.blend",
+  "rig": "Frigo_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 4,
+  "vertices": 26128,
+  "triangles": 52028,
+  "sculpt_vertices": 38934,
+  "blender": "5.2.2 LTS"
+}

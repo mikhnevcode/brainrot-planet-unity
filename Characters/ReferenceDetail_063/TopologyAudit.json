@@ -1,0 +1,674 @@
+[
+  {
+    "hero": "Frigo",
+    "sections": [
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 1.5731352090510287
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.2820172142987811
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.13248099788697074
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.13248151357744178
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Tralalero",
+    "sections": [
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 1.715972161082271
+      },
+      {
+        "name": "Combined_Fin_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.015000786129863804
+      },
+      {
+        "name": "Combined_Fin_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.015000783869595956
+      },
+      {
+        "name": "Combined_Foot_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.08382079934380282
+      },
+      {
+        "name": "Combined_Foot_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.08382079927372554
+      },
+      {
+        "name": "Combined_Foot_Rear",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.08382080466528714
+      },
+      {
+        "name": "Combined_Shin_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.0038218041637813616
+      },
+      {
+        "name": "Combined_Shin_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.0038218042479005888
+      },
+      {
+        "name": "Combined_Shin_Rear",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.0038218019496386434
+      },
+      {
+        "name": "Combined_Tail",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.006599536765616819
+      },
+      {
+        "name": "Combined_Thigh_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.02409115939155182
+      },
+      {
+        "name": "Combined_Thigh_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.024091159378925996
+      },
+      {
+        "name": "Combined_Thigh_Rear",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.024091160393838112
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "TungSahur",
+    "sections": [
+      {
+        "name": "Combined_Arm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.015438431952137212
+      },
+      {
+        "name": "Combined_Arm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.04140863327124648
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.5569689586842663
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.4877295327106649
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.04136070288165532
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.041360305470095865
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Ballerina",
+    "sections": [
+      {
+        "name": "Combined_Arm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.009313286527359077
+      },
+      {
+        "name": "Combined_Arm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.009313285453768916
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.07325869318650928
+      },
+      {
+        "name": "Combined_Forearm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.005853359444687766
+      },
+      {
+        "name": "Combined_Forearm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.005853359277719293
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.5772983229019827
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.019321289422898832
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.01932128942289884
+      },
+      {
+        "name": "Combined_Shin_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.01897801697356777
+      },
+      {
+        "name": "Combined_Shin_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.01897801697455953
+      },
+      {
+        "name": "Combined_Skirt",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.027244868194712838
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Patapim",
+    "sections": [
+      {
+        "name": "Combined_Arm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.04036788636816813
+      },
+      {
+        "name": "Combined_Arm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.040335128982923046
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.5623914639812516
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.7196236915579447
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.1851492951956705
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.18514882681095823
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Lirili",
+    "sections": [
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.38724801099433603
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.43777669834916155
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.32398618444447114
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.3239861835277162
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Trippi",
+    "sections": [
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.6392908617428419
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.4354475170383123
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.006030256667926277
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.006031890503586062
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Troppa",
+    "sections": [
+      {
+        "name": "Combined_Arm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.10759677233981219
+      },
+      {
+        "name": "Combined_Arm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.10760375154635686
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 1.5717991984286388
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.46937576305978407
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.10295468815085809
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.10295688782957041
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Assassino",
+    "sections": [
+      {
+        "name": "Combined_Arm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.022374546735622603
+      },
+      {
+        "name": "Combined_Arm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.02237454732233919
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 1.1969055458414242
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.8573666398019429
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.10475909844281105
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.10475909838312239
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Frulli",
+    "sections": [
+      {
+        "name": "Combined_Arm_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.020698772379144834
+      },
+      {
+        "name": "Combined_Arm_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.020698772379144855
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.46713683817687246
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.2874677647351084
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.006106308184262578
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.006106125954062716
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Boneca",
+    "sections": [
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.5509261010634435
+      },
+      {
+        "name": "Combined_Head",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.5073464740299659
+      },
+      {
+        "name": "Combined_Leg_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.0466242457128378
+      },
+      {
+        "name": "Combined_Leg_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.046624400445404564
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  },
+  {
+    "hero": "Bombombini",
+    "sections": [
+      {
+        "name": "Combined_Beak",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.008344502363609075
+      },
+      {
+        "name": "Combined_Body",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 1.9026485786064398
+      },
+      {
+        "name": "Combined_Foot_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.008267257317093255
+      },
+      {
+        "name": "Combined_Foot_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.008267119883132468
+      },
+      {
+        "name": "Combined_Neck",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.19615626146642637
+      },
+      {
+        "name": "Combined_Rotor_L0",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.000474749262766847
+      },
+      {
+        "name": "Combined_Rotor_L1",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.0004747493790523947
+      },
+      {
+        "name": "Combined_Rotor_R0",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.0004747493744979366
+      },
+      {
+        "name": "Combined_Rotor_R1",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.00047474937026678463
+      },
+      {
+        "name": "Combined_Tail",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.009196778519535365
+      },
+      {
+        "name": "Combined_Wing_L",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.41104116525640066
+      },
+      {
+        "name": "Combined_Wing_R",
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "signed_volume": 0.4110411284835854
+      }
+    ],
+    "actions": [
+      "Drop",
+      "Idle",
+      "Jump",
+      "Land",
+      "Run",
+      "Special",
+      "Victory",
+      "VictoryShow"
+    ]
+  }
+]

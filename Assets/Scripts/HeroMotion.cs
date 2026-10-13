@@ -5,7 +5,7 @@ namespace BrainrotPlanet
     /// <summary>
     /// Cheap per-character procedural secondary motion, layered AFTER imported
     /// Animator clips. It never changes Rigidbody, collider, planet camera or
-    /// territory logic. Shared by all 12 heroes, including non-humanoid rigs.
+    /// territory logic. Shared by all 13 heroes, including non-humanoid rigs.
     /// </summary>
     public sealed class HeroMotion : MonoBehaviour
     {
@@ -28,7 +28,7 @@ namespace BrainrotPlanet
         {
             actor = owner;
             animator = source;
-            hero = Mathf.Clamp(owner.Character,0,11);
+            hero = Mathf.Clamp(owner.Character,0,12);
             restRotation = transform.localRotation;
             restPosition = transform.localPosition;
             motionOffset = hero*.53f;
@@ -137,6 +137,7 @@ namespace BrainrotPlanet
                     case 9: gaitAmp=9f;bodyRoll+=5f*step;bodyPitch+=3f*step;break; // Bird
                     case 10:gaitAmp=18f;bodyRoll+=11f*step;bodyPitch+=3f*step;break; // Wheel frog
                     case 11:gaitAmp=20f;bodyRoll+=7f*step;bodyPitch+=3f*step;break; // Shrimp cat
+                    case 12:gaitAmp=13f;bodyRoll+=8f*step;bodyPitch+=4f*step;break; // Fish bear
                 }
                 lArm+=gaitAmp*step;
                 rArm+=gaitAmp*other;

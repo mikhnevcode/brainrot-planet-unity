@@ -1,0 +1,30 @@
+{
+  "hero": "Trippi",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Trippi\\Trippi_v03.blend",
+  "rig": "Trippi_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 4,
+  "vertices": 18198,
+  "triangles": 36196,
+  "sculpt_vertices": 58956,
+  "blender": "5.2.2 LTS"
+}

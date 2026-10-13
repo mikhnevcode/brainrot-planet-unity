@@ -21,18 +21,19 @@ namespace BrainrotPlanet.Editor
 
         private static readonly Item[] Heroes =
         {
-            new Item("Tralalero","v04"),
+            new Item("Tralalero","v05"),
             new Item("Bombardiro","v06"),
-            new Item("Frigo","v03"),
-            new Item("Bombombini","v03"),
-            new Item("Ballerina","v03"),
-            new Item("Assassino","v03"),
-            new Item("Patapim","v03"),
-            new Item("TungSahur","v03"),
-            new Item("Lirili","v03"),
-            new Item("Frulli","v03"),
-            new Item("Boneca","v03"),
-            new Item("Trippi","v03")
+            new Item("Frigo","v04"),
+            new Item("Bombombini","v04"),
+            new Item("Ballerina","v04"),
+            new Item("Assassino","v04"),
+            new Item("Patapim","v04"),
+            new Item("TungSahur","v04"),
+            new Item("Lirili","v04"),
+            new Item("Frulli","v04"),
+            new Item("Boneca","v04"),
+            new Item("Trippi","v04"),
+            new Item("Troppa","v01")
         };
 
         [MenuItem("Brainrot Planet/7. Import authored character animations")]

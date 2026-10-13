@@ -1,0 +1,30 @@
+{
+  "hero": "Frulli",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Frulli\\Frulli_v03.blend",
+  "rig": "Frulli_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 6,
+  "vertices": 12176,
+  "triangles": 24144,
+  "sculpt_vertices": 36696,
+  "blender": "5.2.2 LTS"
+}

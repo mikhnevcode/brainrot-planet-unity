@@ -44,6 +44,7 @@ namespace BrainrotPlanet
                 case 8:accent=new Color(.55f,.94f,.26f);break; // Cactus
                 case 9:accent=new Color(.40f,.88f,1f);break;   // Bird swirl
                 case 10:accent=new Color(.44f,.99f,.33f);break;// Spring
+                case 12:accent=new Color(.16f,.85f,.61f);break;// Fish-bear splash
                 default:accent=new Color(1f,.50f,.44f);break; // Shrimp
             }
             Vector3 n=direction.normalized;

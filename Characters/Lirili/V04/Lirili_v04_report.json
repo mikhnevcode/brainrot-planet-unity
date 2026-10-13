@@ -1,0 +1,30 @@
+{
+  "hero": "Lirili",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Lirili\\Lirili_v03.blend",
+  "rig": "Lirili_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 4,
+  "vertices": 28108,
+  "triangles": 55900,
+  "sculpt_vertices": 46010,
+  "blender": "5.2.2 LTS"
+}

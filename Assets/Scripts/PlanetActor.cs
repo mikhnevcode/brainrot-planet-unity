@@ -19,6 +19,7 @@ namespace BrainrotPlanet
         private bool springLandingArmed;
         private float springEarliestLand;
         private float nextAnimationCheck;
+        private float jumpAnimationDiagnosticUntil;
         private float jumpCooldown, bumpCooldown, damageCooldown;
         private PlanetGame game;
         private Vector3 lastDirection;
@@ -126,14 +127,20 @@ namespace BrainrotPlanet
                visualAnimator.runtimeAnimatorController!=null)
                 visualAnimator.SetTrigger("Victory");
         }
-        public void EnterVictoryStage(Vector3 position,Vector3 faceDirection)
+        public void EnterVictoryStage(Vector3 position,Vector3 faceDirection,float floorY)
         {
-            // All authored Blender heroes use local +X as their visual front.
-            // Build a world-up rotation whose right axis points at the camera.
+            // Use exported facing metadata, independent of FBX axis conversion.
             Vector3 flatFace=Vector3.ProjectOnPlane(faceDirection,Vector3.up).normalized;
             if(flatFace.sqrMagnitude<.01f)flatFace=Vector3.back;
-            Quaternion stageRotation=Quaternion.LookRotation(
-                Vector3.Cross(flatFace,Vector3.up),Vector3.up);
+            Quaternion stageRotation=AvatarArt.AlignFacing(AvatarArt.LocalFacing(transform),flatFace);
+            foreach(Transform node in GetComponentsInChildren<Transform>(true))
+                if(node.name=="ReferenceFacingOrigin")
+                {
+                    Vector3 localOrigin=transform.InverseTransformPoint(node.position);
+                    position.y=floorY-(stageRotation*localOrigin).y;
+                    Debug.Log("VICTORY_FOOTING character="+Character+" floorY="+floorY.ToString("F3"));
+                    break;
+                }
             Wish=Vector3.zero;
             Active=false;
             isDropping=false;
@@ -176,6 +183,12 @@ namespace BrainrotPlanet
             Vector3 normal=transform.position.normalized;
             body.AddForce(normal*6.2f,ForceMode.VelocityChange);
             jumpCooldown=.55f;
+            if(Team==1 && Debug.isDebugBuild)Debug.Log("PLAYER_JUMP_BEGIN character="+Character);
+            if(Team==1 && Debug.isDebugBuild)
+            {
+                jumpAnimationDiagnosticUntil=Time.unscaledTime+1.8f;
+                nextAnimationCheck=Time.unscaledTime+.15f;
+            }
             game.Effects.Burst(transform.position,Colors.Team(Team),12,1.3f);
         }
         public void HitTrail()
@@ -287,7 +300,7 @@ namespace BrainrotPlanet
                 visualAnimator.SetBool("Grounded",Grounded);
                 if(Team==1 && Debug.isDebugBuild && Time.unscaledTime>=nextAnimationCheck)
                 {
-                    nextAnimationCheck=Time.unscaledTime+1.4f;
+                    nextAnimationCheck=Time.unscaledTime+(Time.unscaledTime<jumpAnimationDiagnosticUntil ? .12f : 1.4f);
                     var clips=visualAnimator.GetCurrentAnimatorClipInfo(0);
                     string clipName=clips.Length>0 && clips[0].clip!=null ? clips[0].clip.name : "none";
                     Debug.Log("TRALALERO_ANIMATION clip="+clipName+

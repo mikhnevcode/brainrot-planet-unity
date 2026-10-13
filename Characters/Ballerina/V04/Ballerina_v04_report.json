@@ -1,0 +1,35 @@
+{
+  "hero": "Ballerina",
+  "version": "v04",
+  "source": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\Characters\\Ballerina\\Ballerina_v03.blend",
+  "rig": "BallerinaCappuccina_Armature",
+  "bones": [
+    "Root",
+    "Body",
+    "Head",
+    "Skirt",
+    "Arm_L",
+    "Forearm_L",
+    "Leg_L",
+    "Shin_L",
+    "Arm_R",
+    "Forearm_R",
+    "Leg_R",
+    "Shin_R"
+  ],
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "render_sections": 11,
+  "vertices": 32623,
+  "triangles": 64990,
+  "sculpt_vertices": 56848,
+  "blender": "5.2.2 LTS"
+}
