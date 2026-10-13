@@ -1,0 +1,62 @@
+{
+  "model": "Bombardiro Crocodilo v04 detailed",
+  "source": "Bombardiro_v03.blend",
+  "blend": "Bombardiro_v04.blend",
+  "fbx": "Bombardiro_v04.fbx",
+  "blender": "5.2.2 LTS",
+  "bones": [
+    "Root",
+    "Body",
+    "Jaw",
+    "Prop_L",
+    "Prop_R",
+    "Tail",
+    "Flap_L",
+    "Flap_R"
+  ],
+  "actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Idle": [
+      1.0,
+      49.0
+    ],
+    "Jump": [
+      1.0,
+      31.0
+    ],
+    "Land": [
+      1.0,
+      23.0
+    ],
+    "Run": [
+      1.0,
+      31.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "Victory": [
+      1.0,
+      57.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  },
+  "mesh_sections": {
+    "Combined_Body": 32684,
+    "Combined_Flap_L": 56,
+    "Combined_Flap_R": 56,
+    "Combined_Jaw": 1310,
+    "Combined_Prop_L": 820,
+    "Combined_Prop_R": 820,
+    "Combined_Tail": 136
+  },
+  "details_added": 164,
+  "renderer_sections": 7
+}

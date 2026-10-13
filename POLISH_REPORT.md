@@ -1,4 +1,4 @@
-# Brainrot Planet.io — отчёт о доводке 0.6.0
+# Brainrot Planet.io — отчёт о доводке 0.6.1
 
 Дата завершения: 13 октября 2026 года
 Проект: `mikhnevcode/brainrot-planet-unity`
@@ -33,6 +33,7 @@
 3. `1a0e4cb` — стабильная victory-сцена, фронтальная ориентация победителя, цветные шевроны врагов и воспроизводимый Android QA.
 4. `7865a39` — детализированный mesh-native рельеф: отдельные кратеры и холмы, нормали шва/полюсов, прыжки на холмах и PlanetRelief smoke.
 5. `3bd8ba4` — цветное меню 12 героев с реальными 3D-превью, цветными карточками и новой навигацией 2×2.
+6. Bombardiro v04 — новая детализированная Blender-модель с сохранением всех 8 анимаций, отдельный трёхчетвертной портрет и Android QA.
 
 ## Герои и анимации
 
@@ -65,6 +66,7 @@
 | 12 героев, финальный APK | 12/12 selection/preview/Drop/Land/Run/Special/VFX; 56,70–58,90 FPS; fatal=false |
 | Victory игрока, 0.6.0 | team 1; 168 свайпов; upDot=0,968; faceDot=1,000; 58,46 FPS; Play Again=true |
 | Victory AI, 0.6.0 | Hard без ввода; team 2; upDot=0,968; faceDot=1,000; 59,06 FPS; Play Again=true |
+| Bombardiro v04, 0.6.1 | 7/7 renderer-секций; Drop/Land/Run/Special/VFX — PASS; 57,5–59,5 FPS; fatal=false |
 
 Цель не ниже 55 FPS в среднем выполнена во всех перечисленных игровых измерениях. Medium и Hard не шли ровно 145 секунд, поскольку штатное условие победы завершило матч раньше; это зафиксировано как результат, а не представлено как полный 145-секундный геймплей.
 
@@ -76,9 +78,9 @@
 
 ## APK
 
-- URL: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.6.0.apk
-- Размер: 57 610 278 байт.
-- SHA-256: `1E6D15D4B7873D34682CBFE3B94800CB30854B734E3F3B737BDA0D5BBAEB3198`.
+- URL: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.6.1.apk
+- Размер: 53 852 238 байт.
+- SHA-256: `9CE08C2E7B7CDF16C1B24448B26C62308208CA471A12C6DCC7729DCAD9398794`.
 - Сервер и повторно скачанная HTTPS-копия дали одинаковую контрольную сумму; HTTP status — 200.
 
 ## QA-материалы
@@ -97,6 +99,10 @@
 - `QA/v060/PlanetRelief_Realme_060.jpg`
 - `QA/v060/PlayerVictory_Stable_060.png`
 - `QA/v060/AI_Victory_Stable_060.png`
+- `QA/v061/Bombardiro_Blender_Front3Q_061.png`
+- `QA/v061/Bombardiro_Menu_Realme_061.png`
+- `QA/v061/Bombardiro_Landed_Realme_061.png`
+- `QA/v061/Bombardiro_Special_Realme_061.png`
 
 ## Ограничения и рекомендации
 

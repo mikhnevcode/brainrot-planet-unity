@@ -352,7 +352,7 @@ namespace BrainrotPlanet
             }
             if(character==1)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v03");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v04");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);

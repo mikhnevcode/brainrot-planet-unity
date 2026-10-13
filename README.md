@@ -1,6 +1,6 @@
 # Brainrot Planet.io — Unity 6 playable game scene
 
-**Version**: 0.6.0 / polished Android gameplay build
+**Version**: 0.6.1 / polished Android gameplay build
 **Unity Editor**: 6000.2.7f2 (a different Unity 6000.2 patch should normally open the project)
 **Platform**: Android (ARM64 / IL2CPP), Editor testing on Windows.
 
@@ -12,10 +12,10 @@
 
 ## Android APK
 
-Run **RUN_ANDROID_BUILD_V060.cmd** on Windows, or use **Brainrot Planet → 2. Build Android APK** inside Unity. Unity Android Build Support, SDK, NDK and OpenJDK must be installed in Unity Hub. The result is `Builds/Android/BrainrotPlanet-v0.6.0.apk`.
+Run **RUN_ANDROID_BUILD_V061.cmd** on Windows, or use **Brainrot Planet → 2. Build Android APK** inside Unity. Unity Android Build Support, SDK, NDK and OpenJDK must be installed in Unity Hub. The result is `Builds/Android/BrainrotPlanet-v0.6.1.apk`.
 
-Verified APK: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.6.0.apk
-SHA-256: `1E6D15D4B7873D34682CBFE3B94800CB30854B734E3F3B737BDA0D5BBAEB3198`
+Verified APK: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.6.1.apk
+SHA-256: `9CE08C2E7B7CDF16C1B24448B26C62308208CA471A12C6DCC7729DCAD9398794`
 
 Alternatively, close the Editor and run:
 
@@ -23,7 +23,7 @@ Alternatively, close the Editor and run:
 "C:\Program Files\Unity\Hub\Editor\6000.2.7f2\Editor\Unity.exe" -batchmode -nographics -quit -projectPath "C:\Rabota\projects\BrainrotPlanetUnity" -executeMethod BrainrotPlanet.Editor.PlanetEditorSetup.BuildAndroid -logFile "C:\Rabota\projects\BrainrotPlanetUnity\unity-build.log"
 ```
 
-The 0.6.0 ARM64/IL2CPP build and its smoke tests were completed with Unity 6000.2.7f2 and verified on a Realme RMX3151.
+The 0.6.1 ARM64/IL2CPP build and its smoke tests were completed with Unity 6000.2.7f2 and verified on a Realme RMX3151.
 
 ## Game rules
 
@@ -48,7 +48,7 @@ The 12 runtime characters use project-owned Blender/FBX sources and Unity Animat
 
 ## Scope and next improvements
 
-This is a **Unity game implementation**, not an HTML game. It is a local single-player match against three AI opponents on one spherical arena, with no networking or monetization. The primary Android target holds 56.7–59.1 FPS in the documented 0.6.0 QA runs.
+This is a **Unity game implementation**, not an HTML game. It is a local single-player match against three AI opponents on one spherical arena, with no networking or monetization. Bombardiro v04 held 57.5–59.5 FPS in stabilized Android gameplay windows; the full 0.6.0 all-hero QA range was 56.7–59.1 FPS.
 
 ## Code structure
 

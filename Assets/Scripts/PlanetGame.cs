@@ -453,8 +453,11 @@ namespace BrainrotPlanet
             {
                 EnsureHeroPreview();
                 if(heroPreviewRig!=null)
+                {
+                    float portraitYaw=selectedHero==1?148f:0f;
                     heroPreviewRig.transform.localRotation=Quaternion.Euler(
-                        0f,Mathf.Sin(Time.unscaledTime*.72f)*7f,0f);
+                        0f,portraitYaw+Mathf.Sin(Time.unscaledTime*.72f)*7f,0f);
+                }
                 return;
             }
             if(State==MatchState.End)
@@ -759,7 +762,8 @@ namespace BrainrotPlanet
                 SetLayerRecursively(platform,previewLayer);
 
                 float largest=Mathf.Max(bounds.size.y,Mathf.Max(bounds.size.x,bounds.size.z));
-                float distance=Mathf.Max(1.75f,largest*1.85f);
+                float portraitDistanceScale=selectedHero==1?1.52f:1.85f;
+                float distance=Mathf.Max(1.75f,largest*portraitDistanceScale);
                 Vector3 target=bounds.center+Vector3.up*(bounds.size.y*.035f);
                 heroPreviewCamera.transform.position=target+new Vector3(0f,bounds.size.y*.04f,-distance);
                 heroPreviewCamera.transform.LookAt(target);
