@@ -8,6 +8,7 @@ namespace BrainrotPlanet
     {
         private static GameSound instance;
         private AudioSource voice,music;
+        private ExplosionSound explosions;
         private readonly AudioClip[] clips=new AudioClip[8];
         public static bool Enabled { get; private set; }=true;
         public static bool Haptics { get; private set; }
@@ -16,7 +17,11 @@ namespace BrainrotPlanet
         {
             Enabled=on;PlayerPrefs.SetInt("BrainrotSound",on?1:0);
             PlayerPrefs.Save();
-            if(instance!=null)instance.music.mute=!on;
+            if(instance!=null)
+            {
+                instance.music.mute=!on;instance.voice.mute=!on;
+                if(instance.explosions!=null)instance.explosions.SetMuted(!on);
+            }
         }
         public static void SetHaptics(bool on){Haptics=on;PlayerPrefs.SetInt("BrainrotHaptics",on?1:0);PlayerPrefs.Save();}
         private void Awake()
@@ -24,11 +29,19 @@ namespace BrainrotPlanet
             instance=this;Enabled=PlayerPrefs.GetInt("BrainrotSound",1)!=0;
             Haptics=PlayerPrefs.GetInt("BrainrotHaptics",0)!=0;
             voice=gameObject.AddComponent<AudioSource>();voice.playOnAwake=false;
+            voice.mute=!Enabled;
             music=gameObject.AddComponent<AudioSource>();music.playOnAwake=false;
             music.loop=true;music.volume=.055f;music.mute=!Enabled;
             for(int i=0;i<clips.Length;i++)clips[i]=Tone(i);
             music.clip=Music();music.Play();
+            explosions=gameObject.AddComponent<ExplosionSound>();
         }
+        public static void Explosion(Vector3 at,Vector3 listener,Vector3 cameraRight)
+        {if(instance!=null&&instance.explosions!=null)instance.explosions.Play(at,listener,cameraRight);}
+        public static void PauseGameplay(bool paused)
+        {if(instance!=null&&instance.explosions!=null)instance.explosions.SetPaused(paused);}
+        public static void StopGameplay()
+        {if(instance!=null&&instance.explosions!=null)instance.explosions.StopAll();}
         public static void Play(GameCue cue,int streak=0)
         {
             if(instance==null)return;

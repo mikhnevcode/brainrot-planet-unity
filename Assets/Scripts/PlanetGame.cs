@@ -39,6 +39,7 @@ namespace BrainrotPlanet
         private AiDifficulty chosenDifficulty=AiDifficulty.Medium;
         public AiDifficulty Difficulty => chosenDifficulty;
         private bool resolvingHeroSkill;
+        private bool resolvingBombImpact;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
         private float[] scores = new float[5];
@@ -293,7 +294,7 @@ namespace BrainrotPlanet
                 float gain=Mathf.Max(0f,scores[1]-before);
                 bestCapture=Mathf.Max(bestCapture,gain);
                 captureReward=gain;captureRewardTime=1.5f;
-                GameSound.Play(GameCue.Capture,Mathf.Min(captureStreak,5));
+                if(!resolvingBombImpact)GameSound.Play(GameCue.Capture,Mathf.Min(captureStreak,5));
                 Announce((changed>180?" БОЛЬШОЙ ЗАХВАТ! +":" ОБЛАСТЬ ЗАКРАШЕНА! +")+
                     gain.ToString("F1")+"%");
                 skillCooldown=Mathf.Max(0f,skillCooldown-Mathf.Min(1.5f,changed/450f));
@@ -461,7 +462,8 @@ namespace BrainrotPlanet
                         break;
                 }
                 Effects.HeroAbility(hero,center,Colors.Team(team));
-                if(human)GameSound.Play(GameCue.Power);
+                // Bombardiro sounds on actual impact, not a generic laser-like cue on launch.
+                if(human&&hero!=1)GameSound.Play(GameCue.Power);
                 Debug.Log("HERO_SPECIAL_ACTIVATED hero="+hero+" team="+team+
                           " cells="+cells+" cooldown="+skillCooldown.ToString("F1"));
             }
@@ -647,6 +649,7 @@ namespace BrainrotPlanet
         private void Finish()
         {
             if(State==MatchState.End)return;
+            GameSound.StopGameplay();
             for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
             int winningTeam=MatchOutcome.Winner(scores,lives);
             Debug.Log("MATCH_OUTCOME winner="+winningTeam+" playerLives="+lives+" reason="+finishReason);

@@ -156,8 +156,7 @@ namespace BrainrotPlanet
             if(game==null)return;
             if(game.State!=MatchState.Playing){Destroy(gameObject);return;}
             Vector3 at=transform.position.normalized;
-            game.Territory.ClaimDisk(team,at,paintRadius);
-            game.Effects.Burst(PlanetSurface.Point(at,1f),Colors.Team(team),62,6f);
+            game.ResolveBombImpact(team,at,paintRadius);
             game=null;Destroy(gameObject);
         }
         private void OnDestroy()

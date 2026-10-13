@@ -45,6 +45,7 @@ namespace BrainrotPlanet
         {
             bool changed=paused!=value;
             paused=value;Time.timeScale=value?0f:1f;
+            GameSound.PauseGameplay(value);
             steerFinger=-1;
             if(changed)Debug.Log((value?"MATCH_PAUSED":"MATCH_RESUMED")+" remaining="+matchTime.ToString("F2")+" lives="+lives);
         }
@@ -173,7 +174,20 @@ namespace BrainrotPlanet
         private void ReturnToMenu()
         {
             SetPaused(false);if(worldRoot!=null)Destroy(worldRoot.gameObject);
+            GameSound.StopGameplay();
             State=MatchState.Menu;orbitCamera.ClearTarget();
+        }
+        public void ResolveBombImpact(int team,Vector3 direction,float radius)
+        {
+            // Territory scoring/reward still happens, but its ascending chirp must
+            // not mask the explosion. Keep the flag local to this synchronous event.
+            bool previous=resolvingBombImpact;resolvingBombImpact=true;
+            try{Territory.ClaimDisk(team,direction,radius);}
+            finally{resolvingBombImpact=previous;}
+            Vector3 at=PlanetSurface.Point(direction,1f);
+            Effects.Burst(at,Colors.Team(team),62,6f);
+            if(Player!=null&&worldCamera!=null)
+                GameSound.Explosion(at,Player.transform.position,worldCamera.transform.right);
         }
         private void DrawResultPolish(float w,float h)
         {

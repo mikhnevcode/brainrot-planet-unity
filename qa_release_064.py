@@ -141,11 +141,16 @@ if __name__=='__main__':
             rows=[line for line in raw.splitlines() if 'AI_BALANCE_RESULT ' in line]
             if rows and rows[-1]!=last_result:
                 completed+=1;last_result=rows[-1];shot('stress_result_'+str(completed))
-                previous_landings=raw.count('PLAYER_DROP_LANDED')
+                # Logcat is a ring: older landings can expire during a long run.
+                # Compare the timestamped last event, never cumulative line count.
+                previous_landing=next((line for line in reversed(raw.splitlines()) if 'PLAYER_DROP_LANDED' in line),'')
                 tap(530,2030);deadline=time.monotonic()+20;replay=logs()
-                while replay.count('PLAYER_DROP_LANDED')<=previous_landings and time.monotonic()<deadline:
+                def fresh_landing(text):
+                    last=next((line for line in reversed(text.splitlines()) if 'PLAYER_DROP_LANDED' in line),'')
+                    return bool(last and last!=previous_landing)
+                while not fresh_landing(replay) and time.monotonic()<deadline:
                     time.sleep(.6);replay=logs()
-                landed=replay.count('PLAYER_DROP_LANDED')>previous_landings
+                landed=fresh_landing(replay)
                 replays.append(dict(match=completed,landed=landed))
                 if not landed:
                     save('stress_replay_failed',replay,dict(replays=replays,seconds=round(time.monotonic()-start,1)))

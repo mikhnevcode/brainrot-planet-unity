@@ -13,6 +13,8 @@ namespace BrainrotPlanet.Editor
         private static string Model(int i)=>"Assets/Resources/Characters/"+Names[i]+"_"+(i==0?"v06":i==1?"v06":i==12?"v01":"v04")+".fbx";
         public static void Prepare()
         {
+            if(SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)
+                throw new InvalidOperationException("Hero portraits require graphics rendering. Run the Unity build without -nographics.");
             const string dir="Assets/Resources/Characters/Victory064";
             Directory.CreateDirectory(dir);
             foreach(string name in Names)
@@ -189,6 +191,10 @@ namespace BrainrotPlanet.Editor
                         camera.transform.LookAt(bounds.center);camera.Render();
                         RenderTexture.active=rt;
                         atlas.ReadPixels(new Rect(0,0,tile,tile),(i%4)*tile,(3-i/4)*tile,false);
+                        int visible=0;
+                        foreach(var pixel in atlas.GetPixels((i%4)*tile,(3-i/4)*tile,tile,tile))
+                            if(pixel.a>.1f)visible++;
+                        if(visible<100)throw new InvalidOperationException("Empty hero portrait: "+Names[i]);
                     }
                     finally{UnityEngine.Object.DestroyImmediate(actor);}
                 }

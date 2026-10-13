@@ -54,6 +54,7 @@ namespace BrainrotPlanet.Editor
             TerrainMovementSmoke.Run();
             GameplayFeedbackSmoke.Run();
             MatchOutcomeSmoke.Run();
+            ExplosionAudioSmoke.Run();
             RuntimeShaderAssets.Ensure();
             ReferenceHeroArtSetup.Prepare();
             TralaleroRigSetup.Prepare();
@@ -67,8 +68,8 @@ namespace BrainrotPlanet.Editor
             CreateScene(false);
             PlayerSettings.companyName="mikhnevcode";
             PlayerSettings.productName="Brainrot Planet IO";
-            PlayerSettings.bundleVersion="0.6.5";
-            PlayerSettings.Android.bundleVersionCode=42;
+            PlayerSettings.bundleVersion="0.6.6";
+            PlayerSettings.Android.bundleVersionCode=43;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android,"com.mikhnevcode.brainrotplanet");
             PlayerSettings.defaultInterfaceOrientation=UIOrientation.Portrait;
             PlayerSettings.allowedAutorotateToLandscapeLeft=false;
@@ -87,7 +88,7 @@ namespace BrainrotPlanet.Editor
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android,BuildTarget.Android);
             var dir=Path.Combine(Directory.GetCurrentDirectory(),"Builds","Android");
             Directory.CreateDirectory(dir);
-            var output=Path.Combine(dir,"BrainrotPlanet-v0.6.5.apk");
+            var output=Path.Combine(dir,"BrainrotPlanet-v0.6.6.apk");
             var opts=new BuildPlayerOptions{
                 scenes=new[]{Arena},locationPathName=output,
                 target=BuildTarget.Android,options=BuildOptions.None
