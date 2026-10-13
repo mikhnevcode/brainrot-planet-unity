@@ -1,0 +1,29 @@
+{
+  "build": "0.5.9",
+  "phone": "Realme RMX3151",
+  "final_apk_sha256": "06EECE79958AC9972F34F7BCB773E5D0622EE0FD88F42DF9D9FFE15580102757",
+  "player_win_final_apk": {
+    "winner": 1,
+    "control_swipes": 168,
+    "stage_world_up": true,
+    "hero_world_up": true,
+    "camera_up_dot": 0.968,
+    "face_dot": 1.0,
+    "screen": [0.5, 0.57, 4.73],
+    "play_again": true,
+    "fatal": false
+  },
+  "ai_win_before_arrow_glyph_only_change": {
+    "winner": 2,
+    "difficulty": "Hard",
+    "input": "none",
+    "stage_world_up": true,
+    "hero_world_up": true,
+    "camera_up_dot": 0.968,
+    "face_dot": 1.0,
+    "screen": [0.5, 0.57, 4.73],
+    "steady_fps": 58.6,
+    "play_again": true,
+    "fatal": false
+  }
+}
