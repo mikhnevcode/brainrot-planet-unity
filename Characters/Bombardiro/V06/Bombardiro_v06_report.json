@@ -1,0 +1,70 @@
+{
+  "model": "Bombardiro v06 continuous organic sculpt",
+  "source": "Bombardiro_v04.blend",
+  "blender": "5.2.2 LTS",
+  "normal_repairs": [
+    {
+      "mesh": "Combined_Body",
+      "vertices": 4144,
+      "boundary_before": 224,
+      "boundary_after": 0,
+      "outward_signed_volume": 2.097481
+    }
+  ],
+  "runtime_sections": {
+    "Combined_Body": 28810,
+    "Combined_Flap_L": 56,
+    "Combined_Flap_R": 56,
+    "Combined_Jaw": 5100,
+    "Combined_Prop_L": 820,
+    "Combined_Prop_R": 820,
+    "Combined_Tail": 136
+  },
+  "runtime_triangles": 70264,
+  "sculpt_source_vertices": 147456,
+  "texture_size": 1024,
+  "bones": [
+    "Root",
+    "Body",
+    "Jaw",
+    "Prop_L",
+    "Prop_R",
+    "Tail",
+    "Flap_L",
+    "Flap_R"
+  ],
+  "actions": {
+    "Drop": [
+      1.0,
+      73.0
+    ],
+    "Idle": [
+      1.0,
+      49.0
+    ],
+    "Jump": [
+      1.0,
+      31.0
+    ],
+    "Land": [
+      1.0,
+      23.0
+    ],
+    "Run": [
+      1.0,
+      31.0
+    ],
+    "Special": [
+      1.0,
+      34.0
+    ],
+    "Victory": [
+      1.0,
+      57.0
+    ],
+    "VictoryShow": [
+      1.0,
+      73.0
+    ]
+  }
+}

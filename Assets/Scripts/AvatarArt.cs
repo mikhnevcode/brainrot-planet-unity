@@ -53,12 +53,29 @@ namespace BrainrotPlanet
             return m;
         }
         private static readonly Dictionary<string,Material> AircraftMaterials=new Dictionary<string,Material>();
+        private static void ForceAircraftOpaque(Material material)
+        {
+            Color opaque=material.color;opaque.a=1f;material.color=opaque;
+            if(material.HasProperty("_Mode"))material.SetFloat("_Mode",0f);
+            if(material.HasProperty("_Surface"))material.SetFloat("_Surface",0f);
+            if(material.HasProperty("_AlphaClip"))material.SetFloat("_AlphaClip",0f);
+            if(material.HasProperty("_SrcBlend"))material.SetFloat("_SrcBlend",(float)UnityEngine.Rendering.BlendMode.One);
+            if(material.HasProperty("_DstBlend"))material.SetFloat("_DstBlend",(float)UnityEngine.Rendering.BlendMode.Zero);
+            if(material.HasProperty("_ZWrite"))material.SetFloat("_ZWrite",1f);
+            if(material.HasProperty("_Cull"))material.SetFloat("_Cull",(float)UnityEngine.Rendering.CullMode.Back);
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.DisableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.SetOverrideTag("RenderType","Opaque");
+            material.renderQueue=-1;
+        }
         private static Material AircraftPalette(Material source)
         {
             string n=(source!=null?source.name:"unknown").ToLowerInvariant();
             if(AircraftMaterials.TryGetValue(n,out Material cached))return cached;
             Color c;
-            if(n.Contains("crocodile dark"))c=new Color(.12f,.34f,.19f);
+            if(n.Contains("sculpted textured skin"))c=Color.white;
+            else if(n.Contains("crocodile dark"))c=new Color(.12f,.34f,.19f);
             else if(n.Contains("crocodile nose"))c=new Color(.22f,.46f,.24f);
             else if(n.Contains("underjaw"))c=new Color(.51f,.57f,.39f);
             else if(n.Contains("inner mouth"))c=new Color(.22f,.05f,.07f);
@@ -80,6 +97,20 @@ namespace BrainrotPlanet
             if(m.HasProperty("_SpecColor"))m.SetColor("_SpecColor",new Color(.04f,.04f,.04f));
             if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
             if(m.HasProperty("_GlossyReflections"))m.SetFloat("_GlossyReflections",0f);
+            ForceAircraftOpaque(m);
+            if(n.Contains("sculpted textured skin"))
+            {
+                Texture2D skin=Resources.Load<Texture2D>("Characters/Bombardiro_v06_Skin_Albedo");
+                Texture2D normal=Resources.Load<Texture2D>("Characters/Bombardiro_v06_Skin_Normal");
+                m.mainTexture=skin;
+                if(normal!=null)
+                {
+                    m.SetTexture("_BumpMap",normal);m.SetFloat("_BumpScale",1f);
+                    m.EnableKeyword("_NORMALMAP");
+                }
+                Debug.Log("BOMBARDIRO_SCULPT_SKIN albedo="+(skin!=null)+
+                    " normal="+(normal!=null)+" opaque="+(m.GetFloat("_Mode")==0f));
+            }
             m.name="Bombardiro / "+n;
             AircraftMaterials.Add(n,m);
             return m;
@@ -352,7 +383,7 @@ namespace BrainrotPlanet
             }
             if(character==1)
             {
-                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v04");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Bombardiro_v06");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);

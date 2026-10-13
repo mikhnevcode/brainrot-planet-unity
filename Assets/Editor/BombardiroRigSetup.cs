@@ -9,12 +9,15 @@ namespace BrainrotPlanet.Editor
 {
     public static class BombardiroRigSetup
     {
-        private const string Fbx = "Assets/Resources/Characters/Bombardiro_v04.fbx";
+        private const string Fbx = "Assets/Resources/Characters/Bombardiro_v06.fbx";
         private const string Controller = "Assets/Resources/Characters/Bombardiro.controller";
 
         [MenuItem("Brainrot Planet/3. Import animated Bombardiro")]
         public static void Prepare()
         {
+            PrepareSkinTexture("Assets/Resources/Characters/Bombardiro_v06_Skin_Albedo.png",false);
+            PrepareSkinTexture("Assets/Resources/Characters/Bombardiro_v06_Skin_Normal.png",true);
+            PrepareSkinMaterial();
             var model=AssetDatabase.LoadAssetAtPath<GameObject>(Fbx);
             if(model==null)
             {
@@ -79,6 +82,45 @@ namespace BrainrotPlanet.Editor
             tr.AddCondition(AnimatorConditionMode.Less,.15f,"Speed");
             AssetDatabase.SaveAssets();
             Debug.Log("BOMBARDIRO_ANIMATOR_READY clips="+clips.Count+" controller="+Controller);
+        }
+
+        private static void PrepareSkinTexture(string path,bool normal)
+        {
+            var importer=AssetImporter.GetAtPath(path) as TextureImporter;
+            if(importer==null)throw new Exception("Bombardiro skin texture missing: "+path);
+            var type=normal?TextureImporterType.NormalMap:TextureImporterType.Default;
+            if(importer.textureType==type&&importer.sRGBTexture==!normal&&
+                importer.maxTextureSize==1024&&importer.mipmapEnabled)return;
+            importer.textureType=type;importer.sRGBTexture=!normal;
+            importer.maxTextureSize=1024;importer.mipmapEnabled=true;
+            importer.wrapMode=TextureWrapMode.Repeat;
+            importer.SaveAndReimport();
+        }
+
+        private static void PrepareSkinMaterial()
+        {
+            const string path="Assets/Resources/Characters/Bombardiro_v06_Skin.mat";
+            var material=AssetDatabase.LoadAssetAtPath<Material>(path);
+            if(material==null)
+            {
+                var template=AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/PlanetStandard.mat");
+                if(template==null)throw new Exception("PlanetStandard material is missing");
+                material=new Material(template){name="Bombardiro v06 Skin"};
+                AssetDatabase.CreateAsset(material,path);
+            }
+            // A Resources material preserves the Standard normal-map shader
+            // variant when Android strips unused variants at build time.
+            material.color=Color.white;
+            material.mainTexture=AssetDatabase.LoadAssetAtPath<Texture2D>(
+                "Assets/Resources/Characters/Bombardiro_v06_Skin_Albedo.png");
+            material.SetTexture("_BumpMap",AssetDatabase.LoadAssetAtPath<Texture2D>(
+                "Assets/Resources/Characters/Bombardiro_v06_Skin_Normal.png"));
+            material.SetFloat("_BumpScale",1f);material.SetFloat("_Mode",0f);
+            material.SetFloat("_Glossiness",.12f);
+            material.SetFloat("_SpecularHighlights",0f);
+            material.SetFloat("_GlossyReflections",0f);
+            material.EnableKeyword("_NORMALMAP");
+            EditorUtility.SetDirty(material);AssetDatabase.SaveAssets();
         }
 
         private static AnimationClip Find(List<AnimationClip> clips,string partial)

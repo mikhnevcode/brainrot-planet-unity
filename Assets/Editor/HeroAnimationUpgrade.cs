@@ -22,7 +22,7 @@ namespace BrainrotPlanet.Editor
         private static readonly Item[] Heroes =
         {
             new Item("Tralalero","v04"),
-            new Item("Bombardiro","v04"),
+            new Item("Bombardiro","v06"),
             new Item("Frigo","v03"),
             new Item("Bombombini","v03"),
             new Item("Ballerina","v03"),

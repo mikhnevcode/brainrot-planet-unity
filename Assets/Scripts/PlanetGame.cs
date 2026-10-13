@@ -744,6 +744,7 @@ namespace BrainrotPlanet
             heroPreviewRig=new GameObject("Portrait turntable");
             heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
             AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
+            heroPreviewRig.transform.localRotation=Quaternion.Euler(0f,selectedHero==1?148f:0f,0f);
             SetLayerRecursively(heroPreviewRoot,previewLayer);
 
             Renderer[] renderers=heroPreviewRig.GetComponentsInChildren<Renderer>(true);
@@ -762,7 +763,7 @@ namespace BrainrotPlanet
                 SetLayerRecursively(platform,previewLayer);
 
                 float largest=Mathf.Max(bounds.size.y,Mathf.Max(bounds.size.x,bounds.size.z));
-                float portraitDistanceScale=selectedHero==1?1.52f:1.85f;
+                float portraitDistanceScale=selectedHero==1?1.65f:1.85f;
                 float distance=Mathf.Max(1.75f,largest*portraitDistanceScale);
                 Vector3 target=bounds.center+Vector3.up*(bounds.size.y*.035f);
                 heroPreviewCamera.transform.position=target+new Vector3(0f,bounds.size.y*.04f,-distance);
