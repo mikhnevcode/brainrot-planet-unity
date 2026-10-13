@@ -23,6 +23,7 @@ namespace BrainrotPlanet
         private float jumpCooldown, bumpCooldown, damageCooldown;
         private PlanetGame game;
         private Vector3 lastDirection;
+        private Vector3 lastDriveVelocity;
         private bool isDropping;
         private float dropElapsed;
         private float nextDropDiagnostic;
@@ -129,6 +130,14 @@ namespace BrainrotPlanet
         }
         public void EnterVictoryStage(Vector3 position,Vector3 faceDirection,float floorY)
         {
+            // Sample the rest pose before positioning; a running pose is not a floor anchor.
+            if(heroMotion!=null)heroMotion.ResetStageVisual();
+            if(visualAnimator!=null)
+            {
+                visualAnimator.SetFloat("Speed",0);visualAnimator.SetBool("Grounded",true);
+                visualAnimator.SetBool("Dropping",false);visualAnimator.ResetTrigger("Special");
+                visualAnimator.Play("Idle",0,0);visualAnimator.Update(0);
+            }
             // Use exported facing metadata, independent of FBX axis conversion.
             Vector3 flatFace=Vector3.ProjectOnPlane(faceDirection,Vector3.up).normalized;
             if(flatFace.sqrMagnitude<.01f)flatFace=Vector3.back;
@@ -154,6 +163,11 @@ namespace BrainrotPlanet
                 body.rotation=stageRotation;
             }
             transform.SetPositionAndRotation(position,stageRotation);
+            // Foot markers in old FBX files are not always at the sole. A one-off
+            // baked pose also handles aircraft wheels and the fish/shrimp rigs.
+            float correction=floorY-AvatarArt.PoseBounds(transform).min.y;
+            position+=Vector3.up*correction;
+            transform.position=position;if(body!=null)body.position=position;
             if(bodyCollider!=null)bodyCollider.enabled=false;
             Debug.Log(string.Format(
                 "HERO_VICTORY_STAGE team={0} position=({1:F2},{2:F2},{3:F2}) upDot={4:F3}",
@@ -183,7 +197,8 @@ namespace BrainrotPlanet
             Vector3 normal=transform.position.normalized;
             body.AddForce(normal*6.2f,ForceMode.VelocityChange);
             jumpCooldown=.55f;
-            if(Team==1 && Debug.isDebugBuild)Debug.Log("PLAYER_JUMP_BEGIN character="+Character);
+            if(Team==1)GameSound.Play(GameCue.Jump);
+            if(Team==1)Debug.Log("PLAYER_JUMP_BEGIN character="+Character);
             if(Team==1 && Debug.isDebugBuild)
             {
                 jumpAnimationDiagnosticUntil=Time.unscaledTime+1.8f;
@@ -208,6 +223,7 @@ namespace BrainrotPlanet
             game.Territory.ResetTrail(Team);
             springLandingArmed=false;
             body.linearVelocity=Vector3.zero;body.angularVelocity=Vector3.zero;
+            lastDriveVelocity=Vector3.zero;
             transform.position=PlanetSurface.Point(SpawnDirection,1.8f);
             transform.rotation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
             lastDirection=SpawnDirection;
@@ -267,7 +283,6 @@ namespace BrainrotPlanet
             {
                 float incline=colliderContact?Vector3.Angle(ground.normal,n):0f;
                 Vector3 uphill=-Vector3.ProjectOnPlane(ground.normal,n).normalized;
-                if(incline>45f && Vector3.Dot(walk,uphill)>.02f)walk=Vector3.zero;
                 // Ramps / bumps cause little jumps instead of glued-to-ground movement.
                 float uphillApproach=Vector3.Dot(walk,uphill);
                 if(PlanetSurface.IsHillArea(n)&&
@@ -282,8 +297,17 @@ namespace BrainrotPlanet
                             " approach="+uphillApproach.ToString("F2"));
                 }
             }
-            Vector3 radial=Vector3.Project(body.linearVelocity,n);
-            body.linearVelocity=walk*speed+radial;
+            // Separate slope support from jump/gravity velocity. Do not add last
+            // frame's uphill lift again, or climbing turns into a rocket launch.
+            Vector3 radial=Vector3.Project(body.linearVelocity-lastDriveVelocity,n);
+            Vector3 drive=walk*speed;
+            if(Grounded&&colliderContact&&Vector3.Dot(ground.normal,n)>.12f)
+            {
+                Vector3 alongGround=Vector3.ProjectOnPlane(walk,ground.normal).normalized;
+                if(Vector3.Dot(alongGround,n)>0f)drive=alongGround*speed;
+            }
+            lastDriveVelocity=drive;
+            body.linearVelocity=drive+radial;
             Vector3 facing=walk.sqrMagnitude>.1f?walk:Vector3.ProjectOnPlane(transform.forward,n).normalized;
             if(facing.sqrMagnitude>.001f)
             {

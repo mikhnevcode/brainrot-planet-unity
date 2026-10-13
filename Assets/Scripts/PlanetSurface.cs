@@ -136,8 +136,11 @@ namespace BrainrotPlanet
             softenedPixels=new Color32[PlanetMath.CellCount];
             reliefTone=new float[PlanetMath.CellCount];
             PrepareBaseColors();
-            var mat = Colors.New(Color.white);mat.name="Planet paint / relief";
-            mat.SetFloat("_Glossiness",.18f);mat.SetTexture("_MainTex",MapTexture);
+            var shader=Resources.Load<Shader>("PlanetPaint");
+            var mat=shader!=null?new Material(shader):Colors.New(Color.white);
+            mat.name="Planet paint / fine continuous grain";
+            mat.SetTexture("_MainTex",MapTexture);
+            if(shader!=null)mat.SetTexture("_DetailTex",Resources.Load<Texture2D>("PlanetGrain064"));
             gameObject.AddComponent<MeshRenderer>().sharedMaterial=mat;
             PaintTexture(null,null);
             Debug.Log("PLANET_RELIEF_READY vertices="+v.Length+
@@ -167,6 +170,14 @@ namespace BrainrotPlanet
                 normals[lat*stride+i]=south;
             }
             mesh.normals=normals;
+        }
+        private void OnDestroy()
+        {
+            // Runtime-generated resources are not assets owned by the scene.
+            // Release them explicitly when replay destroys the old planet.
+            if(MapTexture!=null)Destroy(MapTexture);
+            var filter=GetComponent<MeshFilter>();if(filter!=null&&filter.sharedMesh!=null)Destroy(filter.sharedMesh);
+            var renderer=GetComponent<Renderer>();if(renderer!=null&&renderer.sharedMaterial!=null)Destroy(renderer.sharedMaterial);
         }
         private void PrepareBaseColors()
         {

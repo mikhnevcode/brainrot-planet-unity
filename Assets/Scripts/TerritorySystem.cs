@@ -28,6 +28,8 @@ namespace BrainrotPlanet
         private float renderTimer;
         public event Action<int,int,Vector3> OnCapture;
         public event Action<int,Vector3> OnTrailDestroyed;
+        // Evaluated BEFORE mutating a trail. Grace must protect the whole loop.
+        public Func<int,bool> IsTrailProtected;
 
         public TerritorySystem(PlanetSurface surface)
         {
@@ -127,6 +129,7 @@ namespace BrainrotPlanet
                 if(other==team)continue;
                 if(Trails[other].Contains(id))
                 {
+                    if(IsTrailProtected!=null && IsTrailProtected(other))continue;
                     ClearTrail(other);
                     OnTrailDestroyed?.Invoke(other,direction);
                 }

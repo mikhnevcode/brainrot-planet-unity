@@ -94,9 +94,16 @@ namespace BrainrotPlanet
             Debug.Log("HERO_MOTION_VICTORY hero="+hero);
         }
 
+        public void ResetStageVisual(){transform.localPosition=restPosition;transform.localRotation=restRotation;}
         private void LateUpdate()
         {
             if(actor==null || animator==null)return;
+            if(!actor.Active)
+            {
+                // The stage uses its own Blender clip; no second whole-body spin.
+                transform.localPosition=restPosition;transform.localRotation=restRotation;
+                return;
+            }
             float now=Time.time;
             float t=now+motionOffset;
             bool moving=actor.Wish.sqrMagnitude>.02f && actor.Grounded && !dropping;

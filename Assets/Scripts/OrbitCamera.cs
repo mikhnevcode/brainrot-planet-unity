@@ -69,13 +69,18 @@ namespace BrainrotPlanet
             victoryTime=0f;
             descentTime=DescentDuration;
             Target=winner;
-            victoryLookAt=stageCenter+Vector3.up*1.30f;
-            victoryCameraPosition=stageCenter+Vector3.up*2.50f+Vector3.back*4.65f;
+            Bounds bounds=AvatarArt.PoseBounds(winner);
+            // Frame the real half-size artwork, not an assumed human height.
+            // Keep room above/below for the fixed result panels on portrait screens.
+            victoryLookAt=bounds.center+Vector3.up*(bounds.size.y*.05f);
+            float aspect=view!=null?view.aspect:.5625f;
+            float distance=Mathf.Max(2.65f,Mathf.Max(bounds.size.x/(.68f*aspect),bounds.size.y/.40f)/(.788f));
+            victoryCameraPosition=victoryLookAt+new Vector3(0,distance*.24f,-distance);
             victoryCameraRotation=Quaternion.LookRotation(
                 victoryLookAt-victoryCameraPosition,Vector3.up);
             victoryDiagnosticsLogged=false;
             Debug.Log("CAM_VICTORY_FOCUS_STARTED teamActor="+winner.name+
-                " stableStage=true");
+                " stableStage=true bounds="+bounds.size+" distance="+distance.ToString("F2"));
         }
 
         private void LateUpdate()

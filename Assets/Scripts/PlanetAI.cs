@@ -22,6 +22,22 @@ namespace BrainrotPlanet
         private AiDifficultyProfile difficulty;
         private float nextAggressionRoll;
         private bool pursuePermission;
+        private float stuckSeconds,escapeUntil,nextEscapeAt;
+        private Vector3 escapeHeading;
+
+        public static bool GoalReached(Vector3 normal,Vector3 destination,float delta)
+        {
+            float arrival=Mathf.Max(.45f,12.1f*Mathf.Min(delta,.05f)*1.2f);
+            return Vector3.Angle(normal,destination)*Mathf.Deg2Rad*PlanetMath.Radius<=arrival;
+        }
+        public static Vector3 StableHeading(Vector3 previous,Vector3 desired,Vector3 normal,float delta)
+        {
+            desired=Vector3.ProjectOnPlane(desired,normal).normalized;
+            previous=Vector3.ProjectOnPlane(previous,normal).normalized;
+            if(desired.sqrMagnitude<.01f||previous.sqrMagnitude<.01f)return desired;
+            float angle=Vector3.SignedAngle(previous,desired,normal);
+            return Quaternion.AngleAxis(Mathf.Clamp(angle,-240f*delta,240f*delta),normal)*previous;
+        }
 
         public AiObjective Objective => objective;
 
@@ -50,6 +66,7 @@ namespace BrainrotPlanet
             objective=AiObjective.Expand;
             objectiveStartedAt=Time.time;
             lastPosition=actor.SpawnDirection;
+            stuckSeconds=0;escapeUntil=0;nextEscapeAt=Time.time+2f;
             nextAbility=Mathf.Max(nextAbility,Time.time+1.7f);
             ChooseTrip();
             Debug.Log("AI_RESPAWN_PLAN team="+actor.Team);
@@ -178,7 +195,7 @@ namespace BrainrotPlanet
                     else {objective=AiObjective.Expand;ChooseTrip();}
                     break;
                 default:
-                    if(Time.time>=legDeadline || Vector3.Angle(position,goal)<6.5f)
+                    if(Time.time>=legDeadline || GoalReached(position,goal,Time.deltaTime))
                         NextLeg();
                     break;
             }
@@ -217,6 +234,7 @@ namespace BrainrotPlanet
             if(game==null || actor==null || !actor.Active ||
                game.State!=MatchState.Playing)return;
             if(game.IsLanding){actor.Wish=Vector3.zero;return;}
+            if(Time.deltaTime<=0f)return;
 
             // Replanning is deliberately infrequent on mobile devices.
             if(Time.time>=evaluateAt)
@@ -227,23 +245,34 @@ namespace BrainrotPlanet
             }
 
             Vector3 normal=transform.position.normalized;
+            // Arrival is checked every frame, independently of tactical think
+            // intervals. Otherwise the bot overshoots a point and reverses each
+            // frame until the next decision, looking like a spinning fan.
+            if(GoalReached(normal,goal,Time.deltaTime))
+            {
+                if(objective==AiObjective.Expand)NextLeg();
+                else {actor.Wish=Vector3.zero;lastPosition=normal;stuckSeconds=0;return;}
+            }
             Vector3 desired=PlanetMath.Tangent(normal,goal);
             if(desired.sqrMagnitude<.01f)
                 desired=PlanetMath.Tangent(normal,home);
 
-            // Skirt sharp rocks rather than pursuing the same impossible line.
-            Vector3 probe=Vector3.Slerp(normal,goal,.10f);
-            if(PlanetSurface.Elevation(probe)>2.35f)
+            float moved=Vector3.Angle(lastPosition,normal)*Mathf.Deg2Rad*PlanetMath.Radius;
+            if(actor.Grounded&&actor.Wish.sqrMagnitude>.2f&&moved<.012f)
+                stuckSeconds+=Time.deltaTime;
+            else stuckSeconds=0;
+            if(stuckSeconds>1.2f&&Time.time>=nextEscapeAt)
             {
-                desired=Quaternion.AngleAxis(
-                    actor.Team%2==0 ? 65f : -65f,normal)*desired;
-                if(objective==AiObjective.Expand)
-                    legDeadline=Mathf.Min(legDeadline,Time.time+1.8f);
+                escapeHeading=Quaternion.AngleAxis(actor.Team%2==0?55f:-55f,normal)*desired;
+                escapeUntil=Time.time+.8f;nextEscapeAt=Time.time+2.5f;stuckSeconds=0;
+                actor.Jump();
+                Debug.Log("AI_UNSTUCK team="+actor.Team+" mode="+objective);
             }
+            if(Time.time<escapeUntil)desired=escapeHeading;
 
             // Steer with a small continuous turn. Do not teleport or alter
             // rigidbody speed, preserving fair player/bot movement.
-            actor.Wish=Vector3.ProjectOnPlane(desired,normal).normalized;
+            actor.Wish=StableHeading(actor.Wish,desired,normal,Time.deltaTime);
             if(actor.Grounded && Random.value<difficulty.JumpPerFrame)
                 actor.Jump();
             lastPosition=normal;

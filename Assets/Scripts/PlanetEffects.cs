@@ -4,26 +4,40 @@ namespace BrainrotPlanet
 {
     public sealed class PlanetEffects : MonoBehaviour
     {
+        private readonly ParticleSystem[] pool=new ParticleSystem[14];
+        private int next;
+        private Material softMaterial;
+        private void Awake()
+        {
+            softMaterial=new Material(Resources.Load<Shader>("SoftSpark"));
+            for(int i=0;i<pool.Length;i++)
+            {
+                var go=new GameObject("Pooled paint sparkle "+i);go.transform.SetParent(transform,false);
+                var particle=go.AddComponent<ParticleSystem>();particle.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+                var main=particle.main;main.loop=false;main.playOnAwake=false;main.duration=1.3f;
+                main.simulationSpace=ParticleSystemSimulationSpace.World;main.maxParticles=96;
+                main.startLifetime=new ParticleSystem.MinMaxCurve(.3f,.85f);main.gravityModifier=0;
+                var emission=particle.emission;emission.rateOverTime=0;
+                var shape=particle.shape;shape.shapeType=ParticleSystemShapeType.Cone;shape.angle=65;shape.radius=.25f;
+                var renderer=particle.GetComponent<ParticleSystemRenderer>();renderer.sharedMaterial=softMaterial;
+                var size=particle.sizeOverLifetime;size.enabled=true;size.size=new ParticleSystem.MinMaxCurve(1,AnimationCurve.EaseInOut(0,1,1,0));
+                var color=particle.colorOverLifetime;color.enabled=true;var gradient=new Gradient();
+                gradient.SetKeys(new[]{new GradientColorKey(Color.white,0),new GradientColorKey(Color.white,1)},new[]{new GradientAlphaKey(1,0),new GradientAlphaKey(0,1)});color.color=gradient;
+                pool[i]=particle;
+            }
+        }
         public void Burst(Vector3 position,Color color,int amount,float speed)
         {
-            var go=new GameObject("Color splash particles");
-            go.transform.position=position;
-            var particle=go.AddComponent<ParticleSystem>();
+            var particle=pool[next];next=(next+1)%pool.Length;
             particle.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+            particle.transform.position=position;
+            particle.transform.rotation=Quaternion.FromToRotation(Vector3.forward,position.normalized);
             var main=particle.main;
-            main.loop=false;main.duration=1f;main.startLifetime=new ParticleSystem.MinMaxCurve(.35f,1.2f);
-            main.startSpeed=new ParticleSystem.MinMaxCurve(speed*.6f,speed*1.4f);
-            main.startSize=new ParticleSystem.MinMaxCurve(.12f,.40f);
-            main.startColor=color;main.maxParticles=Mathf.Max(64,amount+8);
-            main.gravityModifier=.35f;
-            var emission=particle.emission;emission.rateOverTime=0f;
-            var shape=particle.shape;shape.shapeType=ParticleSystemShapeType.Sphere;shape.radius=.4f;
-            var renderer=particle.GetComponent<ParticleSystemRenderer>();
-            renderer.material=Colors.FromResource("PlanetParticles");
-            renderer.material.SetColor("_Color",color);
-            particle.Play();particle.Emit(amount);
-            Destroy(go,2.4f);
+            main.startSpeed=new ParticleSystem.MinMaxCurve(speed*.35f,speed*.85f);
+            main.startSize=new ParticleSystem.MinMaxCurve(.08f,.29f);main.startColor=color;
+            particle.Play();particle.Emit(Mathf.Min(amount,96));
         }
+        private void OnDestroy(){if(softMaterial!=null)Destroy(softMaterial);}
         /// <summary>
         /// One small themed wave and burst per skill activation (not per frame).
         /// Reuses existing particle materials; unique color and radius per hero.
@@ -80,8 +94,8 @@ namespace BrainrotPlanet
             tangentY=Vector3.Cross(center,tangentX).normalized;
             maxRadius=max;lifetime=duration;color=waveColor;
             line=gameObject.AddComponent<LineRenderer>();
-            line.loop=true;line.positionCount=65;
-            line.material=Colors.FromResource("PlanetSprite");
+            line.loop=true;line.positionCount=33;
+            line.sharedMaterial=Resources.Load<Material>("PlanetSprite");
             line.numCapVertices=3;line.startColor=color;line.endColor=color;
         }
         private void Update()
@@ -120,6 +134,10 @@ namespace BrainrotPlanet
                 direction=Vector3.Cross(n,Vector3.up).normalized;
             direction=Quaternion.AngleAxis(spreadDegrees,n)*direction;
             body.linearVelocity=direction*10f+n*6f;
+            var trail=gameObject.AddComponent<TrailRenderer>();
+            trail.sharedMaterial=Resources.Load<Material>("PlanetSprite");
+            trail.time=.34f;trail.minVertexDistance=.10f;trail.startWidth=.17f;trail.endWidth=0;
+            trail.startColor=new Color(1,.63f,.12f,.9f);trail.endColor=new Color(1,.22f,.1f,0);trail.numCapVertices=3;
         }
         private void FixedUpdate()
         {
@@ -136,10 +154,15 @@ namespace BrainrotPlanet
         private void Explode()
         {
             if(game==null)return;
+            if(game.State!=MatchState.Playing){Destroy(gameObject);return;}
             Vector3 at=transform.position.normalized;
             game.Territory.ClaimDisk(team,at,paintRadius);
             game.Effects.Burst(PlanetSurface.Point(at,1f),Colors.Team(team),62,6f);
             game=null;Destroy(gameObject);
+        }
+        private void OnDestroy()
+        {
+            var renderer=GetComponent<MeshRenderer>();if(renderer!=null&&renderer.sharedMaterial!=null)Destroy(renderer.sharedMaterial);
         }
     }
 }

@@ -6,6 +6,31 @@ namespace BrainrotPlanet
     /// <summary>Reference-driven Blender cast, with primitive fallbacks if assets are missing.</summary>
     public static class AvatarArt
     {
+        // Imported skinned bounds cover every animation, including old spins.
+        // Bake only once when framing a still/stage to measure the actual pose.
+        public static Bounds PoseBounds(Transform root)
+        {
+            var baked=new Mesh();Bounds total=new Bounds(root.position,Vector3.zero);bool found=false;
+            foreach(var renderer in root.GetComponentsInChildren<Renderer>())
+            {
+                if(!renderer.enabled||renderer.name=="Paint aura"||renderer is LineRenderer||renderer is ParticleSystemRenderer)continue;
+                Bounds local;
+                // Compensate the FBX transform scale before TransformPoint applies it once.
+                if(renderer is SkinnedMeshRenderer skin){skin.BakeMesh(baked,true);local=baked.bounds;}
+                else
+                {
+                    var filter=renderer.GetComponent<MeshFilter>();if(filter==null||filter.sharedMesh==null)continue;
+                    local=filter.sharedMesh.bounds;
+                }
+                for(int x=-1;x<=1;x+=2)for(int y=-1;y<=1;y+=2)for(int z=-1;z<=1;z+=2)
+                {
+                    Vector3 p=renderer.transform.TransformPoint(local.center+Vector3.Scale(local.extents,new Vector3(x,y,z)));
+                    if(!found){total=new Bounds(p,Vector3.zero);found=true;}else total.Encapsulate(p);
+                }
+            }
+            if(Application.isPlaying)Object.Destroy(baked);else Object.DestroyImmediate(baked);
+            return total;
+        }
         public static Quaternion AlignFacing(Vector3 localFront,Vector3 targetFront)
         {
             // FromToRotation chooses an arbitrary axis at exactly 180 degrees.
@@ -27,7 +52,18 @@ namespace BrainrotPlanet
                 Vector3 direction=root.InverseTransformDirection(front.position-origin.position);
                 return Vector3.ProjectOnPlane(direction,Vector3.up).normalized;
             }
-            return Vector3.right; // Legacy Bombardiro FBX.
+            // Legacy aircraft has no reference markers. Include the runtime
+            // visual's 180-degree yaw when finding the anatomical front.
+            Transform jaw=null,tail=null;
+            foreach(var child in root.GetComponentsInChildren<Transform>(true))
+            {if(child.name=="Jaw")jaw=child;else if(child.name=="Tail")tail=child;}
+            if(jaw!=null&&tail!=null)
+            {
+                Vector3 axis=root.InverseTransformDirection(jaw.position-tail.position);
+                axis=Vector3.ProjectOnPlane(axis,Vector3.up);
+                if(axis.sqrMagnitude>.0001f)return axis.normalized;
+            }
+            return Vector3.right;
         }
         private static Transform Part(Transform parent,string name,PrimitiveType type,Vector3 p,
                                       Vector3 size,Material mat)

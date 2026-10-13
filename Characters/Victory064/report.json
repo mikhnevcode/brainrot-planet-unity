@@ -1,0 +1,158 @@
+[
+  {
+    "hero": "Tralalero",
+    "source": "Tralalero_v05",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Bombardiro",
+    "source": "Bombardiro_v06",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Frigo",
+    "source": "Frigo_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Bombombini",
+    "source": "Bombombini_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Ballerina",
+    "source": "Ballerina_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Assassino",
+    "source": "Assassino_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Patapim",
+    "source": "Patapim_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "TungSahur",
+    "source": "TungSahur_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Lirili",
+    "source": "Lirili_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Frulli",
+    "source": "Frulli_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Boneca",
+    "source": "Boneca_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Trippi",
+    "source": "Trippi_v04",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  },
+  {
+    "hero": "Troppa",
+    "source": "Troppa_v01",
+    "action": "VictoryStage064",
+    "frames": 73,
+    "body_max_degrees": [
+      4,
+      7,
+      5
+    ],
+    "limb_animation": "preserved"
+  }
+]

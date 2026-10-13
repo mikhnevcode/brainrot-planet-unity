@@ -18,7 +18,7 @@ namespace BrainrotPlanet
             if(game==null||game.State!=MatchState.Playing)return;
             spawnTick-=Time.deltaTime;rareTick-=Time.deltaTime;
             if(spawnTick<=0){spawnTick=23f;if(items.Count<6)Spawn(false);}
-            if(rareTick<=0){rareTick=48f;Spawn(true);}
+            if(rareTick<=0){rareTick=48f;if(items.Count<6)Spawn(true);}
             for(int i=items.Count-1;i>=0;i--)
             {
                 Crystal c=items[i];
@@ -32,7 +32,7 @@ namespace BrainrotPlanet
                     Collect(c,team);
                     items.RemoveAt(i);
                 }
-                else if(c.age>29f && !c.rare)
+                else if(c.age>(c.rare?48f:29f))
                 {
                     Destroy(c.obj);items.RemoveAt(i);
                 }
@@ -45,11 +45,22 @@ namespace BrainrotPlanet
         private void Spawn(bool rare)
         {
             Vector3 n=Vector3.zero;
+            bool valid=false;
             for(int j=0;j<40;j++)
             {
-                n=Random.onUnitSphere;
-                if(game.Territory.OwnerAt(n)==0 && PlanetSurface.Elevation(n)<1.7f)break;
+                // Give the player a visible nearby objective. Keep a few remote
+                // crystals for AI; do not spawn rewards inside owned territory.
+                if(j<28&&game.Player!=null&&(items.Count%3!=2||rare))
+                {
+                    Vector3 center=game.Player.transform.position.normalized;
+                    Vector3 tangent=Vector3.ProjectOnPlane(Random.onUnitSphere,center).normalized;
+                    float angle=Random.Range(.23f,.38f);
+                    n=(center*Mathf.Cos(angle)+tangent*Mathf.Sin(angle)).normalized;
+                }
+                else n=Random.onUnitSphere;
+                if(game.Territory.OwnerAt(n)==0 && PlanetSurface.Elevation(n)<1.7f){valid=true;break;}
             }
+            if(!valid)return;
             var obj=new GameObject(rare?"RARE GOLD CRYSTAL":"Energy crystal");
             obj.transform.SetParent(transform);
             obj.transform.position=PlanetSurface.Point(n,1.1f);

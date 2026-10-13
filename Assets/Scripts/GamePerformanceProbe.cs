@@ -55,6 +55,7 @@ namespace BrainrotPlanet
             string stage=game==null?"unknown":
                 game.State==MatchState.Menu?"menu":
                 game.State==MatchState.End?"end":
+                game.IsPaused?"paused":
                 game.IsLanding?"landing":"game";
             float p95=percentile<EdgesMs.Length?EdgesMs[percentile]:300f;
             float fps=frames/Mathf.Max(.01f,elapsed);
