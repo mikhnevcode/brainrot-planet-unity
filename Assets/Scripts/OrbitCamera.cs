@@ -168,13 +168,15 @@ namespace BrainrotPlanet
             nextDiagnostics = Time.unscaledTime + 1.0f;
             Vector3 viewport = view.WorldToViewportPoint(
                 Target.position + Target.position.normalized * .45f);
+            Vector3 direction=Target.position.normalized;
             Debug.Log(string.Format(
-                "CAMQA stage={0} actorR={1:F2} camR={2:F2} actorScreen=({3:F3},{4:F3},{5:F2}) camToActor={6:F2} heading={7:F1}",
+                "CAMQA stage={0} actorR={1:F2} camR={2:F2} actorScreen=({3:F3},{4:F3},{5:F2}) camToActor={6:F2} heading={7:F1} actorDir=({8:F3},{9:F3},{10:F3})",
                 IsDescending ? "descent" : "ground",
                 Target.position.magnitude, transform.position.magnitude,
                 viewport.x, viewport.y, viewport.z,
                 Vector3.Distance(transform.position, Target.position),
-                Vector3.Angle(stableNormal, Target.position.normalized)));
+                Vector3.Angle(stableNormal, direction),
+                direction.x,direction.y,direction.z));
         }
 
         public void ClearTarget()

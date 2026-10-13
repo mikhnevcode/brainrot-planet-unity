@@ -30,6 +30,11 @@ namespace BrainrotPlanet
         private SphereCollider bodyCollider;
         public Collider BodyCollider => bodyCollider;
 
+        public static bool ShouldBounceOnHill(float incline,float uphillApproach)
+        {
+            return incline>8f&&incline<38f&&uphillApproach>.14f;
+        }
+
         public void Configure(PlanetGame director,int team,int character,Vector3 spawn)
         {
             game=director;Team=team;Character=character;SpawnDirection=spawn.normalized;
@@ -251,11 +256,17 @@ namespace BrainrotPlanet
                 Vector3 uphill=-Vector3.ProjectOnPlane(ground.normal,n).normalized;
                 if(incline>45f && Vector3.Dot(walk,uphill)>.02f)walk=Vector3.zero;
                 // Ramps / bumps cause little jumps instead of glued-to-ground movement.
-                if(incline>11f&&incline<34f&&bumpCooldown<=0&&walk.sqrMagnitude>.2f&&
-                   Vector3.Dot(walk,uphill)>.20f)
+                float uphillApproach=Vector3.Dot(walk,uphill);
+                if(PlanetSurface.IsHillArea(n)&&
+                   ShouldBounceOnHill(incline,uphillApproach)&&
+                   bumpCooldown<=0&&walk.sqrMagnitude>.2f)
                 {
-                    body.AddForce(n*2.35f,ForceMode.VelocityChange);
-                    bumpCooldown=.95f;
+                    body.AddForce(n*2.85f,ForceMode.VelocityChange);
+                    bumpCooldown=1.05f;
+                    if(Debug.isDebugBuild)
+                        Debug.Log("HILL_BOUNCE team="+Team+
+                            " incline="+incline.ToString("F1")+
+                            " approach="+uphillApproach.ToString("F2"));
                 }
             }
             Vector3 radial=Vector3.Project(body.linearVelocity,n);

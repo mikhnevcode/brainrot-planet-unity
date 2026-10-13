@@ -13,32 +13,84 @@ namespace BrainrotPlanet
         private Color32[] unpainted;
         private Color32[] sourcePixels;
         private Color32[] softenedPixels;
+        private float[] reliefTone;
         private readonly Color32[] teamColors = {
             new Color32(0,0,0,0),new Color32(255,78,169,255),
             new Color32(48,174,255,255),new Color32(255,174,57,255),
             new Color32(109,241,130,255)
         };
-        private static readonly Vector3[] mountains = {
+        private static readonly Vector3[] hills = {
             new Vector3(-.55f,.2f,.81f).normalized,
             new Vector3(.62f,-.30f,-.72f).normalized,
             new Vector3(-.04f,-.93f,.36f).normalized,
             new Vector3(-.88f,.36f,-.3f).normalized,
-            new Vector3(.27f,.82f,-.5f).normalized
+            new Vector3(.27f,.82f,-.5f).normalized,
+            new Vector3(.72f,.55f,.41f).normalized,
+            new Vector3(-.35f,-.58f,.74f).normalized
         };
+        private static readonly float[] hillRadii={.19f,.17f,.22f,.16f,.20f,.15f,.18f};
+        private static readonly float[] hillHeights={2.35f,1.85f,2.65f,1.70f,2.20f,1.45f,1.95f};
+        private static readonly Vector3[] craters = {
+            new Vector3(-.72f,.48f,.50f).normalized,
+            // One early readable crater sits outside the landing core, while
+            // the others remain distributed around the rest of the planet.
+            new Vector3(.935f,-.11f,.34f).normalized,
+            new Vector3(.73f,.54f,-.42f).normalized,
+            new Vector3(-.20f,-.72f,-.66f).normalized,
+            new Vector3(.47f,-.76f,.44f).normalized,
+            new Vector3(-.92f,-.12f,-.37f).normalized
+        };
+        private static readonly float[] craterRadii={.16f,.14f,.18f,.14f,.13f,.17f};
+        private static readonly float[] craterDepths={.72f,.65f,.82f,.58f,.52f,.76f};
+        private static readonly float[] craterRims={.46f,.42f,.51f,.39f,.36f,.48f};
+
+        public static int HillCount=>hills.Length;
+        public static int CraterCount=>craters.Length;
+        public static Vector3 HillDirection(int index)=>hills[index];
+        public static float HillRadius(int index)=>hillRadii[index];
+        public static Vector3 CraterDirection(int index)=>craters[index];
+        public static float CraterRadius(int index)=>craterRadii[index];
+        public static bool IsHillArea(Vector3 direction)
+        {
+            Vector3 n=direction.normalized;
+            for(int i=0;i<hills.Length;i++)
+                if(Vector3.Dot(n,hills[i])>=Mathf.Cos(hillRadii[i]*1.05f))
+                    return true;
+            return false;
+        }
+
+        private static float CapWeight(float dot,float radius)
+        {
+            float edge=Mathf.Cos(radius);
+            float t=Mathf.Clamp01((dot-edge)/(1f-edge));
+            return t*t*(3f-2f*t);
+        }
 
         public static float Elevation(Vector3 direction)
         {
             Vector3 n = direction.normalized;
-            float a = Mathf.PerlinNoise(n.x * 6.5f + 14.8f, n.z * 6.5f + n.y * 1.8f + 3.1f);
-            float b = Mathf.PerlinNoise(n.y * 13f + 9.2f,n.x * 13f + n.z * 4.8f + 7.3f);
-            float height = .08f + .62f * a * a + .15f * b;
-            foreach (Vector3 mountain in mountains)
+            float a=Mathf.PerlinNoise(n.x*5.2f+14.8f,n.z*5.2f+n.y*1.7f+3.1f);
+            float b=Mathf.PerlinNoise(n.y*11f+9.2f,n.x*11f+n.z*4.3f+7.3f);
+            float c=Mathf.PerlinNoise(n.z*23f+5.4f,n.y*19f+n.x*7f+11.7f);
+            float height=.09f+.43f*a*a+.15f*b+.055f*c;
+            for(int i=0;i<hills.Length;i++)
             {
-                float angle = Mathf.Acos(Mathf.Clamp(Vector3.Dot(n, mountain),-1f,1f));
-                float q = angle / .115f;
-                height += 4.6f * Mathf.Exp(-q*q*1.3f);
+                float hill=CapWeight(Vector3.Dot(n,hills[i]),hillRadii[i]);
+                // Rounded standalone hills: no chains or linear ridges.
+                height+=hillHeights[i]*hill*hill*(.88f+.12f*b);
             }
-            return height;
+            for(int i=0;i<craters.Length;i++)
+            {
+                float edge=1f-Mathf.Cos(craterRadii[i]);
+                float radial=(1f-Vector3.Dot(n,craters[i]))/edge;
+                float bowl=Mathf.Clamp01(1f-radial);
+                bowl=bowl*bowl*(3f-2f*bowl);
+                float rim=Mathf.Clamp01(1f-Mathf.Abs(radial-1f)/.30f);
+                rim=rim*rim*(3f-2f*rim);
+                height-=craterDepths[i]*bowl;
+                height+=craterRims[i]*rim;
+            }
+            return Mathf.Max(.035f,height);
         }
         public static Vector3 Point(Vector3 direction, float extra = 0)
         {
@@ -48,7 +100,7 @@ namespace BrainrotPlanet
         public void Build()
         {
             gameObject.layer = 8;
-            const int lon = 192, lat = 96;
+            const int lon = 224, lat = 112;
             var v = new Vector3[(lon + 1) * (lat + 1)];
             var uv = new Vector2[v.Length];
             var triangles = new int[lon * lat * 6];
@@ -70,7 +122,9 @@ namespace BrainrotPlanet
             Mesh mesh = new Mesh { name="Relief Planet" };
             mesh.indexFormat=UnityEngine.Rendering.IndexFormat.UInt32;
             mesh.vertices=v;mesh.uv=uv;mesh.triangles=triangles;
-            mesh.RecalculateNormals();mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
+            WeldVisualNormals(mesh,lon,lat);
+            mesh.RecalculateBounds();
             gameObject.AddComponent<MeshFilter>().sharedMesh=mesh;
             GroundCollider=gameObject.AddComponent<MeshCollider>();GroundCollider.sharedMesh=mesh;
             MapTexture=new Texture2D(VisualWidth,VisualHeight,TextureFormat.RGBA32,false);
@@ -80,12 +134,39 @@ namespace BrainrotPlanet
             unpainted=new Color32[PlanetMath.CellCount];
             sourcePixels=new Color32[PlanetMath.CellCount];
             softenedPixels=new Color32[PlanetMath.CellCount];
+            reliefTone=new float[PlanetMath.CellCount];
             PrepareBaseColors();
             var mat = Colors.New(Color.white);mat.name="Planet paint / relief";
             mat.SetFloat("_Glossiness",.18f);mat.SetTexture("_MainTex",MapTexture);
             gameObject.AddComponent<MeshRenderer>().sharedMaterial=mat;
             PaintTexture(null,null);
-            CreateRockProps();
+            Debug.Log("PLANET_RELIEF_READY vertices="+v.Length+
+                " hills="+hills.Length+" craters="+craters.Length+
+                " primitiveProps=0");
+        }
+        private static void WeldVisualNormals(Mesh mesh,int lon,int lat)
+        {
+            Vector3[] normals=mesh.normals;
+            int stride=lon+1;
+            for(int j=1;j<lat;j++)
+            {
+                int left=j*stride,right=left+lon;
+                Vector3 joined=(normals[left]+normals[right]).normalized;
+                normals[left]=joined;normals[right]=joined;
+            }
+            Vector3 north=Vector3.zero,south=Vector3.zero;
+            for(int i=0;i<=lon;i++)
+            {
+                north+=normals[i];
+                south+=normals[lat*stride+i];
+            }
+            north.Normalize();south.Normalize();
+            for(int i=0;i<=lon;i++)
+            {
+                normals[i]=north;
+                normals[lat*stride+i]=south;
+            }
+            mesh.normals=normals;
         }
         private void PrepareBaseColors()
         {
@@ -94,11 +175,52 @@ namespace BrainrotPlanet
                 Vector3 n=PlanetMath.CellDirection(cell);
                 float noise=Mathf.PerlinNoise(n.x*7f+3.4f,n.z*7f+n.y*5f+1.6f);
                 float alt=Elevation(n);
-                Color baseColor = alt>2.0f ? new Color(.61f,.60f,.69f) :
-                    noise>.56f ? new Color(.48f,.79f,.67f) : new Color(.67f,.82f,.72f);
-                if(alt>3.7f)baseColor=new Color(.87f,.88f,.95f);
-                unpainted[cell]=baseColor;
+                Color baseColor=alt<.11f ? new Color(.35f,.43f,.43f) :
+                    alt>1.95f ? new Color(.57f,.58f,.64f) :
+                    noise>.61f ? new Color(.44f,.75f,.63f) :
+                    noise<.34f ? new Color(.73f,.76f,.58f) :
+                    new Color(.64f,.80f,.69f);
+                if(alt>2.75f)baseColor=new Color(.78f,.80f,.85f);
+                float grain=(Mathf.PerlinNoise(n.x*31f+8.1f,n.z*29f+n.y*13f)-.5f)*.10f;
+                baseColor+=new Color(grain,grain,grain,0f);
+                reliefTone[cell]=ReliefTone(n,noise);
+                unpainted[cell]=Tone(baseColor,reliefTone[cell]);
             }
+        }
+        private static float ReliefTone(Vector3 n,float noise)
+        {
+            float tone=.96f+(noise-.5f)*.14f;
+            for(int i=0;i<hills.Length;i++)
+            {
+                float hill=CapWeight(Vector3.Dot(n,hills[i]),hillRadii[i]);
+                // Brighter crown and a slightly darker foot make the rounded
+                // silhouette readable even below brightly painted territory.
+                tone*=1f-.09f*Mathf.Sin(hill*Mathf.PI)+.18f*hill*hill;
+            }
+            for(int i=0;i<craters.Length;i++)
+            {
+                float edge=1f-Mathf.Cos(craterRadii[i]);
+                float radial=(1f-Vector3.Dot(n,craters[i]))/edge;
+                float bowl=Mathf.Clamp01(1f-radial);
+                bowl=bowl*bowl*(3f-2f*bowl);
+                float rim=Mathf.Clamp01(1f-Mathf.Abs(radial-1f)/.30f);
+                rim=rim*rim*(3f-2f*rim);
+                tone*=1f-.38f*bowl+.24f*rim;
+            }
+            return Mathf.Clamp(tone,.55f,1.28f);
+        }
+        private static Color32 Tone(Color color,float tone)
+        {
+            color*=tone;
+            color.a=1f;
+            return color;
+        }
+        private static Color32 Tone(Color32 color,float tone)
+        {
+            return new Color32(
+                (byte)Mathf.Clamp(Mathf.RoundToInt(color.r*tone),0,255),
+                (byte)Mathf.Clamp(Mathf.RoundToInt(color.g*tone),0,255),
+                (byte)Mathf.Clamp(Mathf.RoundToInt(color.b*tone),0,255),255);
         }
         /// <summary>
         /// Gameplay remains on a 256x128 ownership grid. The map draws a smooth,
@@ -113,7 +235,7 @@ namespace BrainrotPlanet
             {
                 byte owner=owners==null ? (byte)0 : owners[cell];
                 sourcePixels[cell]=owner>0 && owner<teamColors.Length
-                    ? teamColors[owner] : unpainted[cell];
+                    ? Tone(teamColors[owner],reliefTone[cell]) : unpainted[cell];
             }
 
             // A lightweight 3x3 smoothing pass affects visual colors only.
@@ -173,25 +295,6 @@ namespace BrainrotPlanet
             if(Debug.isDebugBuild)
                 Debug.Log("PAINT_VISUAL_UPDATE resolution="+VisualWidth+"x"+VisualHeight+
                     " ms="+((Time.realtimeSinceStartup-started)*1000f).ToString("F2"));
-        }
-        private void CreateRockProps()
-        {
-            Vector3[] spots={
-                new Vector3(-.51f,.2f,.86f),new Vector3(-.86f,.36f,-.28f),
-                new Vector3(.24f,.84f,-.50f),new Vector3(.65f,-.32f,-.69f),
-                new Vector3(.03f,-.91f,.43f)
-            };
-            foreach(Vector3 spot in spots)
-            {
-                Vector3 up=spot.normalized;
-                GameObject rock=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-                rock.name="IMPASSABLE MOUNTAIN";rock.transform.SetParent(transform,false);
-                rock.transform.position=Point(up,1.25f);
-                rock.transform.rotation=Quaternion.FromToRotation(Vector3.up,up);
-                rock.transform.localScale=new Vector3(1.15f,1.6f,1.15f);
-                rock.GetComponent<Renderer>().sharedMaterial=Colors.New(new Color(.48f,.50f,.61f));
-                rock.layer=8;
-            }
         }
     }
     public static class Colors
