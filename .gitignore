@@ -14,3 +14,7 @@
 
 # Old imported FBX copies live in Git history; local rollback copies are not repackaged.
 Characters/LegacyUnityFBX/
+/Server/runtime/
+/Server/.venv/
+__pycache__/
+*.key

@@ -40,11 +40,13 @@ namespace BrainrotPlanet
             light.cullingMask=~(1<<30);
             portraitAtlas=Resources.Load<Texture2D>("HeroPortraits064");
         }
-        private bool IsTrailProtected(int team)=>team==1&&playerLandingGrace>0f;
+        private bool IsTrailProtected(int team)=>DedicatedMatchServer?networkGrace[team]>0f:team==LocalTeam&&playerLandingGrace>0f;
         private void SetPaused(bool value)
         {
+            if(DedicatedMatchServer)return;
             bool changed=paused!=value;
-            paused=value;Time.timeScale=value?0f:1f;
+            paused=value;Time.timeScale=value&&!IsNetworkMatch?0f:1f;
+            if(IsNetworkReplica && value){inputButtons=0;if(Player!=null)Player.Wish=Vector3.zero;}
             GameSound.PauseGameplay(value);
             steerFinger=-1;
             if(changed)Debug.Log((value?"MATCH_PAUSED":"MATCH_RESUMED")+" remaining="+matchTime.ToString("F2")+" lives="+lives);
@@ -114,9 +116,9 @@ namespace BrainrotPlanet
         {
             InitPolishStyles();
             float safeTop=Mathf.Max(8,(Screen.height-Screen.safeArea.yMax)/guiScale);
-            int rank=1;for(int i=2;i<5;i++)if(scores[i]>scores[1])rank++;
+            int rank=1;for(int i=1;i<5;i++)if(i!=LocalTeam&&scores[i]>scores[LocalTeam])rank++;
             Rounded(new Rect(10,safeTop,w-20,60),new Color(.035f,.055f,.12f,.92f));
-            GUI.Label(new Rect(15,safeTop+3,100,27),scores[1].ToString("F1")+"%",numberStyle);
+            GUI.Label(new Rect(15,safeTop+3,100,27),scores[LocalTeam].ToString("F1")+"%",numberStyle);
             GUI.Label(new Rect(18,safeTop+31,94,22),"МЕСТО "+rank+" / 4",captionStyle);
             int seconds=Mathf.CeilToInt(matchTime);
             GUI.Label(new Rect(w*.5f-42,safeTop+3,84,29),(seconds/60)+":"+(seconds%60).ToString("00"),numberStyle);
@@ -125,15 +127,16 @@ namespace BrainrotPlanet
             Plate(new Rect(12,safeTop+62,(w-24)*Mathf.Clamp01(matchTime/145f),2),new Color(.2f,.85f,.95f));
 
             string hint="";Color hintColor=new Color(.07f,.13f,.21f,.88f);
-            if(IsLanding)hint="ДЕСАНТ НА ПЛАНЕТУ";
+            if(IsNetworkReplica && lives<=0)hint="ТЫ ВЫБЫЛ. ДОЖДИСЬ ИТОГОВ МАТЧА";
+            else if(IsLanding)hint="ДЕСАНТ НА ПЛАНЕТУ";
             else if(playerLandingGrace>0){hint="ЩИТ: ЖИЗНЬ И СЛЕД  "+Mathf.CeilToInt(playerLandingGrace)+" с";hintColor=new Color(.08f,.32f,.40f,.90f);}
-            else if(Territory!=null&&Territory.HasTrail(1))
+            else if(Territory!=null&&Territory.HasTrail(LocalTeam))
             {
                 hint=nearestEnemyDegrees<15?"ОПАСНО! ВЕРНИСЬ НА СВОЮ КРАСКУ":"ЗАМКНИ ПЕТЛЮ НА СВОЕЙ КРАСКЕ";
                 if(nearestEnemyDegrees<15)hintColor=new Color(.63f,.075f,.20f,.91f);
             }
             else if(tutorialStep==0)hint="СВАЙП — ДВИЖЕНИЕ ПРОДОЛЖАЕТСЯ";
-            else if(tutorialStep==1)hint="ВЫЙДИ ИЗ РОЗОВОЙ ЗОНЫ И ВЕРНИСЬ";
+            else if(tutorialStep==1)hint="ВЫЙДИ ИЗ СВОЕЙ ЗОНЫ И ВЕРНИСЬ";
             else if(annTime>0)hint=announcement.Trim();
             if(hint.Length>0){Rounded(new Rect(22,safeTop+76,w-44,32),hintColor);GUI.Label(new Rect(27,safeTop+77,w-54,29),hint,captionStyle);}
             if(captureRewardTime>0)
@@ -174,11 +177,13 @@ namespace BrainrotPlanet
         private void ReturnToMenu()
         {
             SetPaused(false);if(worldRoot!=null)Destroy(worldRoot.gameObject);
+            CloseNetwork();networkPanel=false;
             GameSound.StopGameplay();
             State=MatchState.Menu;orbitCamera.ClearTarget();
         }
         public void ResolveBombImpact(int team,Vector3 direction,float radius)
         {
+            EmitNetworkEffect(1,team,direction);
             // Territory scoring/reward still happens, but its ascending chirp must
             // not mask the explosion. Keep the flag local to this synchronous event.
             bool previous=resolvingBombImpact;resolvingBombImpact=true;
@@ -191,15 +196,15 @@ namespace BrainrotPlanet
         }
         private void DrawResultPolish(float w,float h)
         {
-            InitPolishStyles();bool win=victoryActor!=null&&victoryActor.Team==1;
+            InitPolishStyles();bool win=victoryActor!=null&&victoryActor.Team==LocalTeam;
             Plate(new Rect(0,0,w,151),new Color(.035f,.05f,.12f,.93f));
             GUI.Label(new Rect(20,19,w-40,39),win?"ПОБЕДА!":"ЕЩЁ ОДНА ПОПЫТКА?",numberStyle);
             GUI.Label(new Rect(20,62,w-40,23),finishReason,captionStyle);
-            GUI.Label(new Rect(20,94,w-40,27),"ТВОЯ ПЛАНЕТА  "+scores[1].ToString("F1")+"%",headerStyle);
+            GUI.Label(new Rect(20,94,w-40,27),"ТВОЯ ПЛАНЕТА  "+scores[LocalTeam].ToString("F1")+"%",headerStyle);
             GUI.Label(new Rect(20,123,w-40,23),"ЗАХВАТЫ "+capturesThisMatch+"   •   ЛУЧШИЙ +"+bestCapture.ToString("F2")+"%",captionStyle);
             Plate(new Rect(0,h-224,w,224),new Color(.035f,.05f,.12f,.93f));
             GUI.Label(new Rect(20,h-215,w-40,27),newRecord?"НОВЫЙ ЛИЧНЫЙ РЕКОРД!":"РЕКОРД: "+PlayerPrefs.GetFloat("BrainrotBestArea",0).ToString("F1")+"%",smallStyle);
-            if(FlatButton(new Rect(26,h-178,w-52,57),"ИГРАТЬ ЕЩЁ",new Color(.83f,.17f,.45f)))StartGame();
+            if(FlatButton(new Rect(26,h-178,w-52,57),IsNetworkReplica&&networkMessage.Length>0?networkMessage:"ИГРАТЬ ЕЩЁ",new Color(.83f,.17f,.45f)))RequestReplay();
             if(FlatButton(new Rect(26,h-107,w-52,52),"ВЫБРАТЬ ГЕРОЯ",new Color(.11f,.24f,.36f)))ReturnToMenu();
         }
     }

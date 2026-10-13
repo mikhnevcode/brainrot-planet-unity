@@ -9,6 +9,7 @@ namespace BrainrotPlanet
         private Material softMaterial;
         private void Awake()
         {
+            if(SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)return;
             softMaterial=new Material(Resources.Load<Shader>("SoftSpark"));
             for(int i=0;i<pool.Length;i++)
             {
@@ -28,6 +29,7 @@ namespace BrainrotPlanet
         }
         public void Burst(Vector3 position,Color color,int amount,float speed)
         {
+            if(softMaterial==null)return;
             var particle=pool[next];next=(next+1)%pool.Length;
             particle.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
             particle.transform.position=position;
@@ -44,6 +46,7 @@ namespace BrainrotPlanet
         /// </summary>
         public void HeroAbility(int hero,Vector3 direction,Color teamColor)
         {
+            if(softMaterial==null)return;
             Color accent;
             switch(hero)
             {
@@ -73,6 +76,7 @@ namespace BrainrotPlanet
 
         public void CaptureFlash(Vector3 direction,Color color,int count)
         {
+            if(softMaterial==null)return;
             Vector3 at=PlanetSurface.Point(direction,.7f);
             Burst(at,color,Mathf.Clamp(12+count/60,18,72),3.2f);
             var go=new GameObject("Circular paint wave on globe");

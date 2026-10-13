@@ -1,0 +1,58 @@
+Brainrot Planet.io — internet match private alpha, 2026-10-13
+
+Scope: one invited authoritative room on isolated homeserver runtime.
+Existing offline gameplay preserved. No TechFounder or shared Caddy service edits.
+Source baseline: 38830b1d0b2487afcdc825910fc7a92d3631ab54.
+Unity: 6000.2.7f2. Linux Dedicated Server Mono + Android ARM64 IL2CPP.
+APK: BrainrotPlanet-v0.7.0-network1.apk, versionCode 44, development test build.
+SHA256: c5a8d5f816390974ef870df7e59d6f96ec1bc7003b0672fba4b889af96846437
+Installed base.apk SHA256 matches on BOTH Realme RMX3151 and RMX2020.
+Installed with -r; no app-data clearing or corporate project changes.
+
+PASS — protocol smoke 24 assertions: RLE full baselines, frame bounds, malformed
+territory runs, NaN/Infinity, quaternion/team/trailing-payload validation.
+PASS — gateway 5 async tests: key/path rejection, binary echo, text rejection,
+oversize rejection, four-client capacity. Repeated after deployment fix.
+PASS — existing territory join smoke, outcome smoke (8), actor-collision smoke.
+PASS — existing network foundation 12 endpoint + 8 HTTP regression checks.
+PASS — Linux server, Windows development client, Android IL2CPP compilation/build.
+PASS — two independent external WSS peers, 169 byte-identical shared snapshots,
+different team assignment. Requests without key receive HTTP 401.
+PASS — PC full round, disconnected second client replaced with bot, server
+result, replay, then offline return (MATCH_QA_PASS result_replay_offline).
+PASS — two REAL phones simultaneously, same epoch/team1 vs team2, input/jumps/
+Bombardiro powers exercised. Initial second-phone failure was missing Wi-Fi/IP;
+user enabled Wi-Fi, then both connected through the public WSS tunnel.
+PASS — full round on both phones before final UI corrections: epoch5, winner3,
+replay epoch6, both emitted MATCH_QA_PASS result_replay_offline.
+PASS — FINAL APK + final server build: epoch1, winner4 on both phones and server;
+replay epoch2, both emitted MATCH_QA_PASS result_replay_offline.
+Observed steady five-second windows: RMX3151 about59-60fps, RMX2020 about57-59fps.
+Startup/world creation has visible loading spikes; not claiming zero stutter.
+Server steady about60fps; no runtime Exceptions in final server test log.
+PASS — manual QA screenshot shows rendered network world/hero/HUD/elimination
+message. Replay action tested programmatically through the same handler as UI;
+not claiming a separate exhaustive manual button-touch test.
+PASS — removed temporary auto-QA keys on both phones. Separate development-only
+manual invite key prefilled; phones restarted into ordinary menu, not autopilot.
+
+During development fixed dedicated-server shader stripping crash, late joins
+during result screen, local-team hardcoding, authority vs replica trail writes,
+initial stale score snapshots, network hint timers and TCP event cleanup.
+Rebuilt and repeated two-phone full-cycle test after functional fixes.
+Source line endings normalized back to repository LF; existing FBX ignore kept.
+
+Evidence (local ignored Logs folder): network-server-build3.log,
+network-android-build-final.log, network-foundation-regression-final.log,
+network-client-a.log, network-client-b.log, network-realme-rmx3151-final.txt,
+network-realme-rmx2020-final.txt, network-realme-first.png.
+Remote runtime logs: /home/user/brainrot-match-test/runtime/unity3.log,
+gateway.log, tunnel.log. Keys deliberately excluded from logs/source/APK.
+
+LIMITATIONS: one private room, temporary quick-tunnel URL, no public matchmaking,
+account identity, client prediction, reconnect slot recovery, spectator camera,
+iOS/TestFlight verification, cellular packet-loss test or prolonged load/soak.
+Network crystals disabled (offline keeps them). Projectile flight visuals pending;
+authoritative bomb impact paint/explosion/audio are replicated. Only Bombardiro
+human abilities exercised in full device test; all-hero network regression pending.
+Do not label this release-ready multiplayer or publish monetization integrations.

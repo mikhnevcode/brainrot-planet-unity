@@ -49,6 +49,21 @@ namespace BrainrotPlanet
             hasLast[team]=false;
         }
         public byte OwnerAt(Vector3 direction)=>owner[PlanetMath.ToCell(direction)];
+        public void CopyOwners(byte[] destination) { Array.Copy(owner,destination,owner.Length); }
+        public void ApplyNetworkOwners(byte[] source)
+        {
+            if(source.Length!=owner.Length)throw new ArgumentException("Wrong territory size");
+            Array.Copy(source,owner,owner.Length); dirty=true;
+        }
+        public void ApplyNetworkTrail(int team,IReadOnlyList<Vector3> directions)
+        {
+            trailVisualDirections[team].Clear(); trailOrder[team].Clear(); Trails[team].Clear();
+            foreach(Vector3 direction in directions)
+            {
+                trailVisualDirections[team].Add(direction);
+                int cell=PlanetMath.ToCell(direction); trailOrder[team].Add(cell); Trails[team].Add(cell);
+            }
+        }
         private bool IsCore(int team,int index)
         {
             if(team<=0 || team>4) return false;

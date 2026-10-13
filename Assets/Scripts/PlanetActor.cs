@@ -31,6 +31,27 @@ namespace BrainrotPlanet
         private Vector3 dropLanding;
         private SphereCollider bodyCollider;
         public Collider BodyCollider => bodyCollider;
+        private bool networkReplica;
+        private Vector3 networkPosition;
+        private Quaternion networkRotation;
+        public void SetNetworkReplica()
+        {
+            networkReplica=true; isDropping=false;
+            body.isKinematic=true; body.detectCollisions=false;
+            networkPosition=transform.position; networkRotation=transform.rotation;
+        }
+        public void ReceiveNetworkPose(Vector3 position,Quaternion rotation,Vector3 wish,bool active,bool grounded,float speed,float slow)
+        {
+            networkPosition=position; networkRotation=rotation;
+            if(game.LocalTeam!=Team)Wish=wish;
+            Active=active; Grounded=grounded; SpeedSeconds=speed; SlowSeconds=slow;
+            if((transform.position-position).sqrMagnitude>16f)transform.SetPositionAndRotation(position,rotation);
+        }
+        public void EliminateNetworkActor()
+        {
+            Active=false; Wish=Vector3.zero; body.linearVelocity=Vector3.zero;
+            body.isKinematic=true; body.detectCollisions=false;
+        }
 
         public static bool ShouldBounceOnHill(float incline,float uphillApproach)
         {
@@ -52,7 +73,7 @@ namespace BrainrotPlanet
             bodyCollider.center=new Vector3(0,.05f,0);
             // Half-size art should not retain the original oversized contact ball.
             bodyCollider.radius=ActorCollisionRules.Radius;
-            AvatarArt.Make(transform,character,Colors.Team(team));
+            if(!game.DedicatedMatchServer)AvatarArt.Make(transform,character,Colors.Team(team));
             visualAnimator=GetComponentInChildren<Animator>();
             if(visualAnimator!=null)
             {
@@ -211,7 +232,11 @@ namespace BrainrotPlanet
             if(damageCooldown>0)return;
             damageCooldown=1.6f;
             game.Effects.Burst(transform.position,Colors.Team(Team),36,3f);
-            if(Team==1)
+            if(game.DedicatedMatchServer)
+            {
+                if(game.NetworkActorLostLife(this))return;
+            }
+            else if(Team==game.LocalTeam)
             {
                 game.HurtPlayer();
                 if(game.State!=MatchState.Playing)return;
@@ -234,6 +259,7 @@ namespace BrainrotPlanet
         }
         private void FixedUpdate()
         {
+            if(networkReplica)return;
             if(body==null||!Active)return;
             float dt=Time.fixedDeltaTime;
             if(isDropping)
@@ -317,6 +343,12 @@ namespace BrainrotPlanet
         }
         private void Update()
         {
+            if(networkReplica && game!=null && game.State==MatchState.Playing)
+            {
+                float blend=1f-Mathf.Exp(-18f*Time.unscaledDeltaTime);
+                transform.SetPositionAndRotation(Vector3.Lerp(transform.position,networkPosition,blend),
+                    Quaternion.Slerp(transform.rotation,networkRotation,blend));
+            }
             if(body==null||!Active||game==null||game.State!=MatchState.Playing)return;
             if(visualAnimator!=null && visualAnimator.runtimeAnimatorController!=null)
             {
@@ -332,7 +364,7 @@ namespace BrainrotPlanet
                         " grounded="+Grounded);
                 }
             }
-            if(isDropping)return; // Falling is not a player paint trail.
+            if(isDropping||networkReplica)return; // Only the authority paints trails.
             Vector3 dir=transform.position.normalized;
             if(Vector3.Angle(lastDirection,dir)>.06f)
             {

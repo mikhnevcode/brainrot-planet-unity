@@ -78,6 +78,7 @@ namespace BrainrotPlanet
 
         private void Awake()
         {
+            SetupNetwork();
             Application.SetStackTraceLogType(LogType.Log,StackTraceLogType.None);
             Application.targetFrameRate=60;
             Screen.sleepTimeout=SleepTimeout.NeverSleep;
@@ -99,7 +100,7 @@ namespace BrainrotPlanet
             softCircle=CreateSoftCircle(96);
             SetupCamera();
             SetupLighting();
-            SetupPolish();
+            if(!DedicatedMatchServer)SetupPolish();
         }
         private static Texture2D CreateSoftCircle(int size)
         {
@@ -148,6 +149,7 @@ namespace BrainrotPlanet
             foreach(LineRenderer l in pathRenderers)if(l!=null)Destroy(l.gameObject);
             Array.Clear(pathRenderers,0,pathRenderers.Length);
             players.Clear();lives=3;
+            Array.Clear(scores,0,scores.Length);
             victoryActor=null;victoryReplayTimer=0f;
             balanceTelemetry=null;
             matchTime=145f;skillCooldown=0f;scoreTick=0f;
@@ -184,7 +186,7 @@ namespace BrainrotPlanet
             };
             for(int team=1;team<=4;team++)
             {
-                int hero=team==1?selectedHero:(selectedHero+team-1)%characters.Length;
+                int hero=IsNetworkMatch?networkHeroes[team]:(team==1?selectedHero:(selectedHero+team-1)%characters.Length);
                 var actorObject=new GameObject("Landing hero " + team);
                 actorObject.transform.SetParent(worldRoot);
                 actorObject.AddComponent<Rigidbody>();
@@ -193,8 +195,10 @@ namespace BrainrotPlanet
                 motor.Active=true;
                 players.Add(motor);
                 Territory.Seed(team,spawnDirections[team-1]);
-                if(team==1)Player=motor;
-                else actorObject.AddComponent<PlanetAI>().Configure(this,motor);
+                if(team==LocalTeam)Player=motor;
+                if(IsNetworkReplica)motor.SetNetworkReplica();
+                else if(DedicatedMatchServer?participants[team]?.joined!=true:team!=1)
+                    actorObject.AddComponent<PlanetAI>().Configure(this,motor);
                 LineRenderer renderer=new GameObject("Team " +team+ " unfinished glowing trail").AddComponent<LineRenderer>();
                 renderer.transform.SetParent(worldRoot);
                 renderer.useWorldSpace=true;
@@ -213,12 +217,17 @@ namespace BrainrotPlanet
             ApplyActorPassThrough("spawn");
 
             // The player now falls from above the planet during the camera approach.
-            Player.BeginDropFromOrbit();
+            if(DedicatedMatchServer)foreach(var actor in players)actor.BeginDropFromOrbit();
+            else if(!IsNetworkReplica)Player.BeginDropFromOrbit();
             orbitCamera.BeginDescent(Player.transform);
-            var gems=new GameObject("Crystal pickups").AddComponent<CrystalSystem>();
-            gems.transform.SetParent(worldRoot);
-            gems.Configure(this);
+            // Crystal replication is a separate milestone; offline retains all pickups.
+            if(!IsNetworkMatch)
+            {
+                var gems=new GameObject("Crystal pickups").AddComponent<CrystalSystem>();
+                gems.transform.SetParent(worldRoot); gems.Configure(this);
+            }
             CreateStars();
+            for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
             State=MatchState.Playing;
             sceneLoaded=true;
             balanceTelemetry=gameObjectRoot.AddComponent<AiBalanceTelemetry>();
@@ -272,6 +281,7 @@ namespace BrainrotPlanet
         }
         private void HandleCapture(int team,int changed,Vector3 direction)
         {
+            EmitNetworkEffect(2,team,direction,changed);
             if(balanceTelemetry!=null)balanceTelemetry.RecordCapture(team);
             Effects.CaptureFlash(direction,Colors.Team(team),changed);
             if(changed>=150 && !resolvingHeroSkill && !IsLanding)
@@ -285,13 +295,13 @@ namespace BrainrotPlanet
                         break;
                     }
             }
-            if(team==1)
+            if(team==LocalTeam && !DedicatedMatchServer)
             {
                 capturesThisMatch++;
                 if(!resolvingHeroSkill) { tutorialStep=2; captureStreak++; }
-                float before=scores[1];
-                scores[1]=Territory.Percentage(1);
-                float gain=Mathf.Max(0f,scores[1]-before);
+                float before=scores[LocalTeam];
+                scores[LocalTeam]=Territory.Percentage(LocalTeam);
+                float gain=Mathf.Max(0f,scores[LocalTeam]-before);
                 bestCapture=Mathf.Max(bestCapture,gain);
                 captureReward=gain;captureRewardTime=1.5f;
                 if(!resolvingBombImpact)GameSound.Play(GameCue.Capture,Mathf.Min(captureStreak,5));
@@ -303,13 +313,13 @@ namespace BrainrotPlanet
         private void HandleTrailLost(int team,Vector3 direction)
         {
             if(balanceTelemetry!=null)balanceTelemetry.RecordTrailLost(team);
-            if(team==1 && playerLandingGrace>0f)
+            if(!IsNetworkMatch && team==LocalTeam && playerLandingGrace>0f)
             {
                 // Player is invulnerable to trail hits while landing and learning to move.
                 return;
             }
             PlanetActor actor=players.Find(p=>p.Team==team);
-            if(team==1) { captureStreak=0; damageFlash=1f; GameSound.Play(GameCue.Hit); }
+            if(team==LocalTeam && !DedicatedMatchServer) { captureStreak=0; damageFlash=1f; GameSound.Play(GameCue.Hit); }
             if(Effects!=null)Effects.CaptureFlash(direction,Color.red,80);
             if(actor!=null)actor.HitTrail();
         }
@@ -337,18 +347,22 @@ namespace BrainrotPlanet
         public void Announce(string text){announcement=text;annTime=2.4f;}
         public void UseSkill()
         {
+            if(IsNetworkReplica){inputButtons|=2;return;}
             TryUseActorSkill(Player);
         }
 
         // Shared human/AI ability logic; UI messages and cooldown only for human.
         public bool TryUseActorSkill(PlanetActor caster)
         {
+            if(IsNetworkReplica)return false;
             if(State!=MatchState.Playing||caster==null||!caster.Active||IsLanding)
                 return false;
             int hero=caster.Character,team=caster.Team;
-            bool human=team==1;
+            bool human=team==LocalTeam&&!DedicatedMatchServer;
+            if(DedicatedMatchServer && networkCooldown[team]>0)return false;
             if(human && skillCooldown>0)return false;
             if(hero==10 && !caster.Grounded)return false;
+            if(DedicatedMatchServer)networkCooldown[team]=12f;
             if(human)skillCooldown=12f;
             resolvingHeroSkill=true;
             caster.PlaySpecial();
@@ -440,7 +454,7 @@ namespace BrainrotPlanet
                         if(human)Announce(" ФРУЛЛИ: ВОЗДУШНЫЙ ТАНЕЦ!");
                         break;
                     case 10: // Wheel frog bounces; real paint arrives on touchdown.
-                        if(!caster.SpringJump()){if(human)skillCooldown=0f;return false;}
+                        if(!caster.SpringJump()){if(human)skillCooldown=0f;if(DedicatedMatchServer)networkCooldown[team]=0f;return false;}
                         if(human)Announce(" БОНЕКА: ПРУЖИНА!");
                         break;
                     case 11: // Trippi: three separate shrimp-paint splashes
@@ -462,6 +476,7 @@ namespace BrainrotPlanet
                         break;
                 }
                 Effects.HeroAbility(hero,center,Colors.Team(team));
+                EmitNetworkEffect(0,team,center);
                 // Bombardiro sounds on actual impact, not a generic laser-like cue on launch.
                 if(human&&hero!=1)GameSound.Play(GameCue.Power);
                 Debug.Log("HERO_SPECIAL_ACTIVATED hero="+hero+" team="+team+
@@ -472,12 +487,15 @@ namespace BrainrotPlanet
         }
         private void Update()
         {
+            PollNetwork();
             if(Input.GetKeyDown(KeyCode.Escape) && State==MatchState.Playing)SetPaused(!paused);
+            if(IsNetworkReplica && State==MatchState.Playing){UpdateNetworkReplica();return;}
             if(paused)return;
             damageFlash=Mathf.Max(0,damageFlash-Time.deltaTime*1.7f);
             captureRewardTime=Mathf.Max(0,captureRewardTime-Time.deltaTime);
             if(State==MatchState.Menu)
             {
+                if(DedicatedMatchServer)return;
                 EnsureHeroPreview();
                 if(heroPreviewRig!=null)
                 {
@@ -514,13 +532,13 @@ namespace BrainrotPlanet
             float cooldownBefore=skillCooldown;
             skillCooldown=Mathf.Max(0,skillCooldown-dt);
             annTime=Mathf.Max(0,annTime-dt);
-            HandleInput();
+            if(!DedicatedMatchServer)HandleInput();
             if(cooldownBefore>0f && skillCooldown<=0f)
             {
                 Announce(" СПОСОБНОСТЬ ГОТОВА!");
                 GameSound.Play(GameCue.Ready);
                 if(Player!=null)Effects.Burst(Player.transform.position,
-                    Colors.Team(1),14,1.2f);
+                    Colors.Team(LocalTeam),14,1.2f);
                 Debug.Log("PLAYER_SKILL_READY hero="+selectedHero);
             }
             bool boostActive=Player!=null && Player.SpeedSeconds>0f;
@@ -547,7 +565,7 @@ namespace BrainrotPlanet
                     for(int i=0;i<players.Count;i++)
                     {
                         PlanetActor candidate=players[i];
-                        if(candidate==null||candidate.Team==1||!candidate.Active)continue;
+                        if(candidate==null||candidate.Team==LocalTeam||!candidate.Active)continue;
                         nearestEnemyDegrees=Mathf.Min(nearestEnemyDegrees,
                             Vector3.Angle(playerDirection,candidate.transform.position.normalized));
                     }
@@ -593,7 +611,7 @@ namespace BrainrotPlanet
             }
             movement=autoMoving ? savedSteering : Vector2.zero;
             if(autoMoving && tutorialStep==0)tutorialStep=1;
-            if(Input.GetKeyDown(KeyCode.Space))Player.Jump();
+            if(Input.GetKeyDown(KeyCode.Space))RequestJump();
             if(Input.GetKeyDown(KeyCode.E))UseSkill();
             float unit=GameScale();
             float virtualH=Screen.height/unit;
@@ -609,7 +627,7 @@ namespace BrainrotPlanet
                     {
                         if(p.y<96f)continue;
                         if(skillArea.Contains(p)){UseSkill();continue;}
-                        if(jumpArea.Contains(p)){Player.Jump();continue;}
+                        if(jumpArea.Contains(p)){RequestJump();continue;}
                         if(steerFinger<0){steerFinger=touch.fingerId;steerOrigin=p;}
                     }
                     if(touch.fingerId==steerFinger)
@@ -651,7 +669,15 @@ namespace BrainrotPlanet
             if(State==MatchState.End)return;
             GameSound.StopGameplay();
             for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
-            int winningTeam=MatchOutcome.Winner(scores,lives);
+            int winningTeam=DedicatedMatchServer?NetworkWinningTeam():IsNetworkReplica?networkWinner:MatchOutcome.Winner(scores,lives);
+            if(DedicatedMatchServer)
+            {
+                networkWinner=winningTeam;
+                foreach(var pawn in players){pawn.Wish=Vector3.zero;pawn.Active=false;}
+                State=MatchState.End;
+                Debug.Log("MATCH_SERVER_RESULT epoch="+networkEpoch+" winner="+winningTeam);
+                return;
+            }
             Debug.Log("MATCH_OUTCOME winner="+winningTeam+" playerLives="+lives+" reason="+finishReason);
             if(balanceTelemetry!=null)balanceTelemetry.Report(winningTeam,scores);
             foreach(var pawn in players)
@@ -664,12 +690,15 @@ namespace BrainrotPlanet
             foreach(var trail in pathRenderers)if(trail!=null)trail.enabled=false;
             var planet=worldRoot.GetComponentInChildren<PlanetSurface>();
             if(planet!=null)planet.GetComponent<Renderer>().enabled=false;
-            GameSound.Play(winningTeam==1?GameCue.Win:GameCue.Lose);
+            GameSound.Play(winningTeam==LocalTeam?GameCue.Win:GameCue.Lose);
+            if(!DedicatedMatchServer)
+            {
             float record=PlayerPrefs.GetFloat("BrainrotBestArea",0f);
-            newRecord=scores[1]>record+.01f;
-            if(newRecord)PlayerPrefs.SetFloat("BrainrotBestArea",scores[1]);
-            if(winningTeam==1)PlayerPrefs.SetInt("BrainrotWins",PlayerPrefs.GetInt("BrainrotWins",0)+1);
+            newRecord=scores[LocalTeam]>record+.01f;
+            if(newRecord)PlayerPrefs.SetFloat("BrainrotBestArea",scores[LocalTeam]);
+            if(winningTeam==LocalTeam)PlayerPrefs.SetInt("BrainrotWins",PlayerPrefs.GetInt("BrainrotWins",0)+1);
             PlayerPrefs.Save();
+            }
             State=MatchState.End;
             victoryReplayTimer=2.90f;
             if(victoryActor!=null)
@@ -827,6 +856,7 @@ namespace BrainrotPlanet
         }
         private void OnDestroy()
         {
+            CloseNetwork();
             Time.timeScale=1f;
             if(heroPreviewTexture!=null)
             {
@@ -855,7 +885,7 @@ namespace BrainrotPlanet
             if(Player==null||worldCamera==null)return;
             foreach(PlanetActor other in players)
             {
-                if(other==null||other.Team==1||!other.Active)continue;
+                if(other==null||other.Team==LocalTeam||!other.Active)continue;
                 Vector3 direction=other.transform.position.normalized;
                 Vector3 world=other.transform.position + direction*1.28f;
                 Vector3 screen=worldCamera.WorldToViewportPoint(world);
@@ -894,11 +924,13 @@ namespace BrainrotPlanet
         }
         private void OnGUI()
         {
+            if(DedicatedMatchServer)return;
             InitStyles();
             guiScale=GameScale();
             float logicalW=Screen.width/guiScale,logicalH=Screen.height/guiScale;
             var old=GUI.matrix;
             GUI.matrix=Matrix4x4.Scale(new Vector3(guiScale,guiScale,1f));
+            if(networkPanel && State==MatchState.Menu){DrawNetworkPanel(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.Playing){DrawPlayPolish(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.End){DrawResultPolish(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.Menu)
@@ -990,9 +1022,9 @@ namespace BrainrotPlanet
                     }
                 }
                 if(FlatButton(new Rect(26,logicalH-166,logicalW-52,60),
-                    "ДЕСАНТИРОВАТЬСЯ  >",Color.Lerp(heroColor,heroAccent,.30f)))StartGame();
-                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),
-                    "145 секунд · 13 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
+                    "ИГРАТЬ С БОТАМИ  >",Color.Lerp(heroColor,heroAccent,.30f)))StartGame();
+                if(FlatButton(new Rect(26,logicalH-92,logicalW-52,48),
+                    "СЕТЕВОЙ МАТЧ · ТЕСТ",new Color(.08f,.42f,.62f)))networkPanel=true;
             }
             GUI.matrix=old;
         }
