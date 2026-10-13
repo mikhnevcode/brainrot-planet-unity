@@ -1,0 +1,119 @@
+10-13 01:33:29.110 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:33:29.111 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:33:29.113 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:33:29.116 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:33:29.116 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:33:29.260 32318 32359 I Unity   : HERO_MENU_PREVIEW_READY index=0 color=14B8FF
+10-13 01:33:31.774 32318 32359 I Unity   : PERF_SAMPLE stage=menu fps=14.38 p95ms=34.0 maxms=2106.7 samples=72 avgTotalFps=14.38 managedMB=4.18 gcDelta=21/21/21 window=1
+10-13 01:33:33.165 32318 32359 I Unity   : HERO_MENU_SELECTED index=6 name=БРР БРР ПАТАПИМ
+10-13 01:33:33.358 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=leaf albedo=true normal=true opaque=true
+10-13 01:33:33.361 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=elephant albedo=true normal=true opaque=true
+10-13 01:33:33.364 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:33:33.366 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=wood albedo=true normal=true opaque=true
+10-13 01:33:33.427 32318 32359 I Unity   : HERO_MENU_PREVIEW_READY index=6 color=33C45E
+10-13 01:33:35.331 32318 32359 I Unity   : HERO_MOTION_RIG hero=6 torso=True head=True arms=True/True legs=True/True
+10-13 01:33:35.418 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=wood albedo=true normal=true opaque=true
+10-13 01:33:35.419 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=wood albedo=true normal=true opaque=true
+10-13 01:33:35.483 32318 32359 I Unity   : HERO_MOTION_RIG hero=7 torso=True head=True arms=True/True legs=True/True
+10-13 01:33:35.589 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:33:35.589 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=elephant albedo=true normal=true opaque=true
+10-13 01:33:35.590 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:33:35.593 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=leather albedo=true normal=true opaque=true
+10-13 01:33:35.676 32318 32359 I Unity   : HERO_MOTION_RIG hero=8 torso=True head=True arms=True/True legs=True/True
+10-13 01:33:35.724 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=feather albedo=true normal=true opaque=true
+10-13 01:33:35.725 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:33:35.725 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:33:35.726 32318 32359 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:33:35.765 32318 32359 I Unity   : HERO_MOTION_RIG hero=9 torso=True head=True arms=True/True legs=True/True
+10-13 01:33:35.773 32318 32359 I Unity   : HERO_MOTION_DROP hero=6
+10-13 01:33:35.773 32318 32359 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=6
+10-13 01:33:35.777 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=False
+10-13 01:33:35.779 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=drop authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:33:36.004 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-13 01:33:36.130 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-13 01:33:36.599 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-13 01:33:36.601 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Drop movement=0.00 grounded=False
+10-13 01:33:36.783 32318 32359 I Unity   : PERF_SAMPLE stage=landing fps=42.33 p95ms=34.0 maxms=804.0 samples=212 avgTotalFps=28.36 managedMB=8.33 gcDelta=9/9/9 window=2
+10-13 01:33:37.019 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-13 01:33:37.472 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=drop authored=-802706916 overlay=0.32 armL=True armR=True
+10-13 01:33:37.487 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-13 01:33:37.922 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-13 01:33:38.008 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Drop movement=0.00 grounded=False
+10-13 01:33:38.375 32318 32359 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-13 01:33:38.577 32318 32359 I Unity   : HERO_MOTION_TOUCHDOWN hero=6
+10-13 01:33:38.578 32318 32359 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=6
+10-13 01:33:39.273 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=skill authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:33:39.405 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:33:40.813 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True
+10-13 01:33:41.082 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:33:41.785 32318 32359 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=83.7 samples=295 avgTotalFps=38.54 managedMB=9.80 gcDelta=1/1/1 window=3
+10-13 01:33:42.220 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:42.891 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:43.627 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:44.700 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:45.035 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:45.428 32318 32359 I Unity   : TERRITORY_CAPTURE team=1 areaCells=79 totalNewCells=222 seamCells=28 selection=old-land+trail
+10-13 01:33:45.430 32318 32359 I Unity   : HERO_MOTION_VICTORY hero=6
+10-13 01:33:46.451 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:33:46.519 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=victory authored=-1090111034 overlay=0.22 armL=True armR=True
+10-13 01:33:46.802 32318 32359 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=67.0 samples=294 avgTotalFps=43.58 managedMB=9.84 gcDelta=3/3/3 window=4
+10-13 01:33:47.857 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:33:48.327 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=-1090111034 overlay=1.00 armL=True armR=True
+10-13 01:33:49.265 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:50.135 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:33:50.430 32318 32359 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=41 seamCells=29 selection=none
+10-13 01:33:50.672 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=1.00 grounded=True
+10-13 01:33:51.811 32318 32359 I Unity   : PERF_SAMPLE stage=game fps=59.50 p95ms=17.0 maxms=33.5 samples=298 avgTotalFps=46.76 managedMB=10.69 gcDelta=2/2/2 window=5
+10-13 01:33:51.945 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:52.079 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:53.485 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:53.752 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:54.893 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:55.047 32318 32359 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=54 seamCells=34 selection=none
+10-13 01:33:55.564 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:55.891 32318 32359 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=44 seamCells=36 selection=none
+10-13 01:33:56.300 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:56.819 32318 32359 I Unity   : PERF_SAMPLE stage=game fps=59.30 p95ms=17.0 maxms=33.5 samples=297 avgTotalFps=48.85 managedMB=11.30 gcDelta=2/2/2 window=6
+10-13 01:33:57.374 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:57.707 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:58.106 32318 32359 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=40 seamCells=30 selection=none
+10-13 01:33:59.114 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:33:59.183 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:33:59.339 32318 32359 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=38 seamCells=30 selection=none
+10-13 01:33:59.999 32318 32359 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=36 seamCells=25 selection=none
+10-13 01:34:00.523 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:34:00.992 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:34:01.825 32318 32359 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=33.5 samples=293 avgTotalFps=50.23 managedMB=11.65 gcDelta=2/2/2 window=7
+10-13 01:34:01.925 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:34:02.800 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:34:03.336 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:34:04.609 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:34:04.743 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Run movement=1.00 grounded=True
+10-13 01:34:05.791 32318 32359 I Unity   : HERO_MOTION_SKILL hero=8
+10-13 01:34:05.805 32318 32359 I Unity   : HERO_FX_ACTIVATED hero=8
+10-13 01:34:05.806 32318 32359 I Unity   : HERO_SPECIAL_ACTIVATED hero=8 team=3 cells=0 cooldown=0.0
+10-13 01:34:05.966 32318 32359 I Unity   : HERO_MOTION_SKILL hero=6
+10-13 01:34:05.983 32318 32359 I Unity   : HERO_FX_ACTIVATED hero=6
+10-13 01:34:05.984 32318 32359 I Unity   : HERO_SPECIAL_ACTIVATED hero=6 team=1 cells=13 cooldown=12.0
+10-13 01:34:06.150 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Special movement=0.00 grounded=True
+10-13 01:34:06.419 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=skill authored=-2083125633 overlay=0.29 armL=True armR=True
+10-13 01:34:06.828 32318 32359 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=83.7 samples=293 avgTotalFps=51.27 managedMB=13.65 gcDelta=1/1/1 window=8
+10-13 01:34:07.548 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True
+10-13 01:34:08.227 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:34:08.960 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True
+10-13 01:34:09.283 32318 32359 I Unity   : PLAYER_JUMP_BEGIN character=6
+10-13 01:34:09.433 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Jump movement=0.00 grounded=False
+10-13 01:34:09.567 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Jump movement=0.00 grounded=False
+10-13 01:34:09.701 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Jump movement=0.00 grounded=False
+10-13 01:34:09.839 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Jump movement=0.00 grounded=True
+10-13 01:34:09.969 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:34:10.030 32318 32359 I Unity   : HERO_MOTION_ACTIVE hero=6 state=idle authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:34:10.103 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:34:10.237 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:34:10.371 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:34:10.505 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:34:10.638 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Land movement=0.00 grounded=True
+10-13 01:34:10.773 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True
+10-13 01:34:10.907 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True
+10-13 01:34:11.041 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True
+10-13 01:34:11.174 32318 32359 I Unity   : TRALALERO_ANIMATION clip=Patapim_Armature|Idle movement=0.00 grounded=True

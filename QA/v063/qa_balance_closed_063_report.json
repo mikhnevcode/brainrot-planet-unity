@@ -1,0 +1,15 @@
+[
+  {
+    "level": "Medium",
+    "control_swipes": 96,
+    "early_end": true,
+    "winner": "1",
+    "player_won": true,
+    "balance_result": "10-13 02:20:27.871 14280 14322 I Unity   : AI_BALANCE_RESULT level=Medium winner=1 playerPct=3.71 aiPct=3.52,2.95,2.37 encounterStarts=19 visibleSeconds=75.9 nearSeconds=40.7 dangerSeconds=12.1 nearestEverDeg=3.1 playerMovingSeconds=75.4 captures=17/32 trailsLost=4 duration=76.0",
+    "player_captures": 14,
+    "player_trail_hits": 2,
+    "encounter_starts": 19,
+    "avg_fps": 58.99,
+    "fatal": false
+  }
+]

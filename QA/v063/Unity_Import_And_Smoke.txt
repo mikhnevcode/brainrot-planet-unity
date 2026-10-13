@@ -1,0 +1,36 @@
+TERRITORY_JOIN_SMOKE_PASS seam=41 oldPercent=1,11 capturedPercent=7,07 events=1
+AI_TACTICS_SMOKE_PASS priorities=5 skills=4 trailTarget=2 reset=OK
+AI_DIFFICULTY_SMOKE_PASS levels=3 priorityCases=7 decisionMs=1150/450/270
+AI_BALANCE_SMOKE_PASS encounterSpawns=3 equalSpeed=6.5
+ACTOR_COLLISION_SMOKE_PASS ignoredPairs=6 terrainContact=true radius=0,46 landingRefresh=true
+PLANET_SCALE_SMOKE_PASS oldRadius=14 radius=24 circumference=150,80 boostShare=0,319 aiRoute=4,48 collisionRadius=0,46
+PLANET_RELIEF_SMOKE_PASS hills=7 craters=6 minHill=1,47 minCrater=0,57 bounce=true primitiveProps=0
+GAMEPLAY_FEEDBACK_SMOKE_PASS risks=6 directions=3
+HERO_ANIMATION_UPGRADE_READY count=13
+REFERENCE_FACE_AXIS name=Tralalero local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Tralalero triangles=64990 actions=8
+REFERENCE_CAST_HERO_PASS name=Bombardiro triangles=70108 actions=8
+REFERENCE_FACE_AXIS name=Frigo local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Frigo triangles=51988 actions=8
+REFERENCE_FACE_AXIS name=Bombombini local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Bombombini triangles=64988 actions=8
+REFERENCE_FACE_AXIS name=Ballerina local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Ballerina triangles=64990 actions=8
+REFERENCE_FACE_AXIS name=Assassino local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Assassino triangles=64964 actions=8
+REFERENCE_FACE_AXIS name=Patapim local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Patapim triangles=64998 actions=8
+REFERENCE_FACE_AXIS name=TungSahur local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=TungSahur triangles=35228 actions=8
+REFERENCE_FACE_AXIS name=Lirili local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Lirili triangles=55900 actions=8
+REFERENCE_FACE_AXIS name=Frulli local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Frulli triangles=24144 actions=8
+REFERENCE_FACE_AXIS name=Boneca local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Boneca triangles=64994 actions=8
+REFERENCE_FACE_AXIS name=Trippi local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Trippi triangles=36196 actions=8
+REFERENCE_FACE_AXIS name=Troppa local=(0.00, 0.00, -1.00)
+REFERENCE_CAST_HERO_PASS name=Troppa triangles=56688 actions=8
+REFERENCE_CAST_SMOKE_PASS heroes=13 textures=10 newAIAbility=true
+BRAINROT_PLANET_APK=C:\Rabota\projects\BrainrotPlanetUnity\Builds\Android\BrainrotPlanet-v0.6.3.apk

@@ -1,0 +1,117 @@
+10-13 01:29:40.371 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:29:40.372 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:29:40.375 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:29:40.377 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:29:40.378 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:29:40.512 29792 29843 I Unity   : HERO_MENU_PREVIEW_READY index=0 color=14B8FF
+10-13 01:29:43.063 29792 29843 I Unity   : PERF_SAMPLE stage=menu fps=14.96 p95ms=34.0 maxms=2095.7 samples=75 avgTotalFps=14.96 managedMB=4.18 gcDelta=20/20/20 window=1
+10-13 01:29:43.854 29792 29843 I Unity   : HERO_MENU_SELECTED index=1 name=БОМБАРДИРО КРОКОДИЛО
+10-13 01:29:43.967 29792 29843 I Unity   : BOMBARDIRO_SCULPT_SKIN albedo=True normal=True opaque=True
+10-13 01:29:43.967 29792 29843 I Unity   : BOMBARDIRO_COLORED_RENDERERS=7
+10-13 01:29:44.045 29792 29843 I Unity   : BOMBARDIRO_RIG_LOADED animator=True
+10-13 01:29:44.046 29792 29843 I Unity   : HERO_MENU_PREVIEW_READY index=1 color=52C433
+10-13 01:29:45.873 29792 29843 I Unity   : BOMBARDIRO_COLORED_RENDERERS=7
+10-13 01:29:45.874 29792 29843 I Unity   : BOMBARDIRO_RIG_LOADED animator=True
+10-13 01:29:45.875 29792 29843 I Unity   : HERO_MOTION_RIG hero=1 torso=True head=True arms=True/True legs=False/False
+10-13 01:29:45.961 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:29:45.962 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:29:45.964 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=leather albedo=true normal=true opaque=true
+10-13 01:29:45.965 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:29:46.010 29792 29843 I Unity   : HERO_MOTION_RIG hero=2 torso=True head=True arms=True/True legs=True/True
+10-13 01:29:46.083 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:29:46.084 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=leather albedo=true normal=true opaque=true
+10-13 01:29:46.086 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=feather albedo=true normal=true opaque=true
+10-13 01:29:46.142 29792 29843 I Unity   : HERO_MOTION_RIG hero=3 torso=True head=True arms=True/True legs=True/True
+10-13 01:29:46.253 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:29:46.254 29792 29843 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:29:46.314 29792 29843 I Unity   : HERO_MOTION_RIG hero=4 torso=True head=True arms=True/True legs=True/True
+10-13 01:29:46.321 29792 29843 I Unity   : HERO_MOTION_DROP hero=1
+10-13 01:29:46.321 29792 29843 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=1
+10-13 01:29:46.325 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=False
+10-13 01:29:46.326 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=drop authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:29:46.555 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-13 01:29:46.685 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-13 01:29:47.137 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-13 01:29:47.155 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Drop movement=0.00 grounded=False
+10-13 01:29:47.573 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-13 01:29:48.025 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-13 01:29:48.027 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=drop authored=-802706916 overlay=0.32 armL=True armR=True
+10-13 01:29:48.076 29792 29843 I Unity   : PERF_SAMPLE stage=landing fps=42.33 p95ms=34.0 maxms=804.1 samples=212 avgTotalFps=28.64 managedMB=8.92 gcDelta=8/8/8 window=2
+10-13 01:29:48.476 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-13 01:29:48.561 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Drop movement=0.00 grounded=False
+10-13 01:29:48.928 29792 29843 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-13 01:29:49.131 29792 29843 I Unity   : HERO_MOTION_TOUCHDOWN hero=1
+10-13 01:29:49.132 29792 29843 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=1
+10-13 01:29:49.836 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=skill authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:29:49.970 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:29:51.374 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=True
+10-13 01:29:51.646 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:29:52.533 29792 29843 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=41 seamCells=31 selection=none
+10-13 01:29:52.783 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:29:52.847 29792 29843 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=51 seamCells=32 selection=none
+10-13 01:29:53.092 29792 29843 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.7 samples=288 avgTotalFps=38.26 managedMB=9.75 gcDelta=3/3/3 window=3
+10-13 01:29:53.454 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:29:54.191 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:29:55.260 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:29:55.590 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:29:55.783 29792 29843 I Unity   : TERRITORY_CAPTURE team=1 areaCells=79 totalNewCells=222 seamCells=28 selection=old-land+trail
+10-13 01:29:55.785 29792 29843 I Unity   : HERO_MOTION_VICTORY hero=1
+10-13 01:29:56.682 29792 29843 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=43 seamCells=32 selection=none
+10-13 01:29:57.005 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:29:57.073 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=victory authored=-1090111034 overlay=0.22 armL=True armR=True
+10-13 01:29:58.095 29792 29843 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=33.5 samples=293 avgTotalFps=43.32 managedMB=10.31 gcDelta=2/2/2 window=4
+10-13 01:29:58.411 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:29:58.886 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:29:59.819 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:00.691 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:30:01.034 29792 29843 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=44 seamCells=34 selection=none
+10-13 01:30:01.227 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:01.258 29792 29843 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=44 seamCells=28 selection=none
+10-13 01:30:02.500 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:02.633 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:03.107 29792 29843 I Unity   : PERF_SAMPLE stage=game fps=59.30 p95ms=17.0 maxms=33.5 samples=297 avgTotalFps=46.51 managedMB=11.65 gcDelta=2/2/2 window=5
+10-13 01:30:04.040 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:04.308 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:05.444 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:06.118 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:06.854 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:07.927 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:08.111 29792 29843 I Unity   : PERF_SAMPLE stage=game fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=48.71 managedMB=11.85 gcDelta=2/2/2 window=6
+10-13 01:30:08.262 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:08.494 29792 29843 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=43 seamCells=31 selection=none
+10-13 01:30:09.662 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:09.724 29792 29843 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=41 seamCells=31 selection=none
+10-13 01:30:09.736 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:11.068 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=1.00 grounded=True
+10-13 01:30:11.538 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:12.480 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:13.118 29792 29843 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=33.5 samples=294 avgTotalFps=50.14 managedMB=12.16 gcDelta=2/2/2 window=7
+10-13 01:30:13.355 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:13.892 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:15.163 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:15.290 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Run movement=1.00 grounded=True
+10-13 01:30:16.488 29792 29843 I Unity   : HERO_MOTION_SKILL hero=1
+10-13 01:30:16.492 29792 29843 I Unity   : HERO_FX_ACTIVATED hero=1
+10-13 01:30:16.493 29792 29843 I Unity   : HERO_SPECIAL_ACTIVATED hero=1 team=1 cells=0 cooldown=12.0
+10-13 01:30:16.705 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Special movement=0.00 grounded=True
+10-13 01:30:16.974 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=skill authored=-2083125633 overlay=0.29 armL=True armR=True
+10-13 01:30:17.982 29792 29843 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=46 seamCells=35 selection=none
+10-13 01:30:18.112 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=True
+10-13 01:30:18.128 29792 29843 I Unity   : PERF_SAMPLE stage=game fps=58.10 p95ms=17.0 maxms=67.0 samples=291 avgTotalFps=51.13 managedMB=13.21 gcDelta=1/1/1 window=8
+10-13 01:30:18.777 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:30:19.350 29792 29843 I Unity   : PLAYER_JUMP_BEGIN character=1
+10-13 01:30:19.493 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=False
+10-13 01:30:19.627 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Jump movement=0.00 grounded=False
+10-13 01:30:19.761 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Jump movement=0.00 grounded=False
+10-13 01:30:19.895 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Jump movement=0.00 grounded=True
+10-13 01:30:20.029 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:30:20.163 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:30:20.297 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:30:20.431 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:30:20.565 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:30:20.583 29792 29843 I Unity   : HERO_MOTION_ACTIVE hero=1 state=idle authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:30:20.699 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Land movement=0.00 grounded=True
+10-13 01:30:20.832 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=True
+10-13 01:30:20.968 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=True
+10-13 01:30:21.101 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=True
+10-13 01:30:21.235 29792 29843 I Unity   : TRALALERO_ANIMATION clip=Bombardiro_Armature|Idle movement=0.00 grounded=True

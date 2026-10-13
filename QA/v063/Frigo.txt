@@ -1,0 +1,115 @@
+10-13 01:30:25.572 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:30:25.573 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:30:25.574 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:30:25.576 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:30:25.578 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:30:25.579 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:30:25.712 30254 30312 I Unity   : HERO_MENU_PREVIEW_READY index=0 color=14B8FF
+10-13 01:30:28.251 30254 30312 I Unity   : PERF_SAMPLE stage=menu fps=18.56 p95ms=34.0 maxms=2110.1 samples=93 avgTotalFps=18.56 managedMB=4.30 gcDelta=21/21/21 window=1
+10-13 01:30:29.173 30254 30312 I Unity   : HERO_MENU_SELECTED index=2 name=ФРИГО КАМЕЛО
+10-13 01:30:29.257 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:30:29.257 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:30:29.260 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=leather albedo=true normal=true opaque=true
+10-13 01:30:29.260 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:30:29.304 30254 30312 I Unity   : HERO_MENU_PREVIEW_READY index=2 color=3DD1F5
+10-13 01:30:31.262 30254 30312 I Unity   : HERO_MOTION_RIG hero=2 torso=True head=True arms=True/True legs=True/True
+10-13 01:30:31.337 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:30:31.338 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=leather albedo=true normal=true opaque=true
+10-13 01:30:31.340 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=feather albedo=true normal=true opaque=true
+10-13 01:30:31.395 30254 30312 I Unity   : HERO_MOTION_RIG hero=3 torso=True head=True arms=True/True legs=True/True
+10-13 01:30:31.504 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:30:31.504 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:30:31.505 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:30:31.563 30254 30312 I Unity   : HERO_MOTION_RIG hero=4 torso=True head=True arms=True/True legs=True/True
+10-13 01:30:31.664 30254 30312 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:30:31.758 30254 30312 I Unity   : HERO_MOTION_RIG hero=5 torso=True head=True arms=True/True legs=True/True
+10-13 01:30:31.765 30254 30312 I Unity   : HERO_MOTION_DROP hero=2
+10-13 01:30:31.765 30254 30312 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=2
+10-13 01:30:31.769 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=False
+10-13 01:30:31.770 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=drop authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:30:31.982 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-13 01:30:32.097 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-13 01:30:32.534 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Drop movement=0.00 grounded=False
+10-13 01:30:32.567 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-13 01:30:33.003 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-13 01:30:33.254 30254 30312 I Unity   : PERF_SAMPLE stage=landing fps=48.32 p95ms=17.0 maxms=854.3 samples=242 avgTotalFps=33.44 managedMB=8.64 gcDelta=9/9/9 window=2
+10-13 01:30:33.455 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-13 01:30:33.457 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=drop authored=-802706916 overlay=0.32 armL=True armR=True
+10-13 01:30:33.907 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-13 01:30:33.942 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Drop movement=0.00 grounded=False
+10-13 01:30:34.359 30254 30312 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-13 01:30:34.561 30254 30312 I Unity   : HERO_MOTION_TOUCHDOWN hero=2
+10-13 01:30:34.562 30254 30312 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=2
+10-13 01:30:35.266 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=skill authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:30:35.349 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:30:36.755 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=True
+10-13 01:30:37.074 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:38.171 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:38.272 30254 30312 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=67.0 samples=294 avgTotalFps=41.86 managedMB=9.43 gcDelta=2/2/2 window=3
+10-13 01:30:38.892 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:39.579 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:40.701 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:40.978 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:41.155 30254 30312 I Unity   : TERRITORY_CAPTURE team=1 areaCells=79 totalNewCells=224 seamCells=28 selection=old-land+trail
+10-13 01:30:41.156 30254 30312 I Unity   : HERO_MOTION_VICTORY hero=2
+10-13 01:30:42.314 30254 30312 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=52 seamCells=27 selection=none
+10-13 01:30:42.393 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:30:42.511 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=victory authored=-1090111034 overlay=0.22 armL=True armR=True
+10-13 01:30:43.280 30254 30312 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=50.3 samples=295 avgTotalFps=46.12 managedMB=9.78 gcDelta=3/3/3 window=4
+10-13 01:30:43.800 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:30:44.319 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:45.207 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:46.129 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:30:46.522 30254 30312 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=51 seamCells=35 selection=none
+10-13 01:30:46.614 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:47.937 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:48.020 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:48.287 30254 30312 I Unity   : PERF_SAMPLE stage=game fps=59.50 p95ms=17.0 maxms=33.5 samples=298 avgTotalFps=48.79 managedMB=10.59 gcDelta=2/2/2 window=5
+10-13 01:30:49.426 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:49.747 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:50.832 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:51.556 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:52.245 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:53.297 30254 30312 I Unity   : PERF_SAMPLE stage=game fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=50.61 managedMB=12.12 gcDelta=1/1/1 window=6
+10-13 01:30:53.365 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:53.651 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:53.939 30254 30312 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=41 seamCells=27 selection=none
+10-13 01:30:55.058 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:55.212 30254 30312 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=44 seamCells=30 selection=none
+10-13 01:30:55.215 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:55.406 30254 30312 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=43 seamCells=31 selection=none
+10-13 01:30:56.462 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=1.00 grounded=True
+10-13 01:30:56.982 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:57.869 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:58.302 30254 30312 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=50.3 samples=293 avgTotalFps=51.74 managedMB=13.32 gcDelta=2/2/2 window=7
+10-13 01:30:58.792 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:30:59.279 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:30:59.898 30254 30312 I Unity   : HERO_MOTION_SKILL hero=5
+10-13 01:30:59.913 30254 30312 I Unity   : HERO_FX_ACTIVATED hero=5
+10-13 01:30:59.914 30254 30312 I Unity   : HERO_SPECIAL_ACTIVATED hero=5 team=4 cells=39 cooldown=0.0
+10-13 01:31:00.601 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:31:00.686 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Run movement=1.00 grounded=True
+10-13 01:31:01.967 30254 30312 I Unity   : HERO_MOTION_SKILL hero=2
+10-13 01:31:01.968 30254 30312 I Unity   : HERO_FX_ACTIVATED hero=2
+10-13 01:31:01.969 30254 30312 I Unity   : HERO_SPECIAL_ACTIVATED hero=2 team=1 cells=0 cooldown=12.0
+10-13 01:31:02.083 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Special movement=1.00 grounded=True
+10-13 01:31:02.402 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=skill authored=-2083125633 overlay=0.28 armL=True armR=True
+10-13 01:31:03.315 30254 30312 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=83.8 samples=294 avgTotalFps=52.61 managedMB=12.58 gcDelta=2/2/2 window=8
+10-13 01:31:03.499 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=True
+10-13 01:31:04.216 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:31:04.872 30254 30312 I Unity   : PLAYER_JUMP_BEGIN character=2
+10-13 01:31:05.023 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Jump movement=0.00 grounded=False
+10-13 01:31:05.158 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Jump movement=0.00 grounded=False
+10-13 01:31:05.291 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Jump movement=0.00 grounded=False
+10-13 01:31:05.424 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Jump movement=0.00 grounded=True
+10-13 01:31:05.560 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:31:05.694 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:31:05.827 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:31:05.955 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:31:06.029 30254 30312 I Unity   : HERO_MOTION_ACTIVE hero=2 state=idle authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:31:06.096 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:31:06.229 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Land movement=0.00 grounded=True
+10-13 01:31:06.362 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=True
+10-13 01:31:06.497 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=True
+10-13 01:31:06.636 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=True
+10-13 01:31:06.766 30254 30312 I Unity   : TRALALERO_ANIMATION clip=Frigo_Armature|Idle movement=0.00 grounded=True

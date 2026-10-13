@@ -1,0 +1,120 @@
+10-13 01:37:22.960  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:37:22.961  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:37:22.963  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:37:22.966  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:37:22.966  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:37:23.110  5038  5104 I Unity   : HERO_MENU_PREVIEW_READY index=0 color=14B8FF
+10-13 01:37:25.641  5038  5104 I Unity   : PERF_SAMPLE stage=menu fps=13.97 p95ms=34.0 maxms=2093.8 samples=70 avgTotalFps=13.97 managedMB=4.18 gcDelta=21/21/21 window=1
+10-13 01:37:27.402  5038  5104 I Unity   : HERO_MENU_SELECTED index=11 name=ТРИППИ ТРОППИ
+10-13 01:37:27.457  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:37:27.460  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:37:27.461  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:37:27.462  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:37:27.525  5038  5104 I Unity   : HERO_MENU_PREVIEW_READY index=11 color=E83DFA
+10-13 01:37:29.464  5038  5104 I Unity   : HERO_MOTION_RIG hero=11 torso=True head=True arms=True/True legs=True/True
+10-13 01:37:29.538  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:37:29.538  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:37:29.541  5038  5104 I Unity   : REFERENCE_SKIN_READY kind=fish albedo=true normal=true opaque=true
+10-13 01:37:29.610  5038  5104 I Unity   : HERO_MOTION_RIG hero=12 torso=True head=True arms=True/True legs=True/True
+10-13 01:37:29.619  5038  5104 I Unity   : HERO_MOTION_RIG hero=0 torso=True head=False arms=True/True legs=True/True
+10-13 01:37:29.735  5038  5104 I Unity   : BOMBARDIRO_SCULPT_SKIN albedo=True normal=True opaque=True
+10-13 01:37:29.736  5038  5104 I Unity   : BOMBARDIRO_COLORED_RENDERERS=7
+10-13 01:37:29.819  5038  5104 I Unity   : BOMBARDIRO_RIG_LOADED animator=True
+10-13 01:37:29.820  5038  5104 I Unity   : HERO_MOTION_RIG hero=1 torso=True head=True arms=True/True legs=False/False
+10-13 01:37:29.827  5038  5104 I Unity   : HERO_MOTION_DROP hero=11
+10-13 01:37:29.828  5038  5104 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=11
+10-13 01:37:29.831  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=False
+10-13 01:37:29.833  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=drop authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:37:30.051  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-13 01:37:30.164  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-13 01:37:30.632  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-13 01:37:30.669  5038  5104 I Unity   : PERF_SAMPLE stage=landing fps=38.41 p95ms=34.0 maxms=703.5 samples=193 avgTotalFps=26.21 managedMB=8.79 gcDelta=8/8/8 window=2
+10-13 01:37:30.756  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Drop movement=0.00 grounded=False
+10-13 01:37:31.070  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-13 01:37:31.521  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-13 01:37:31.524  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=drop authored=-802706916 overlay=0.32 armL=True armR=True
+10-13 01:37:31.991  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-13 01:37:32.176  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Drop movement=0.00 grounded=False
+10-13 01:37:32.426  5038  5104 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-13 01:37:32.628  5038  5104 I Unity   : HERO_MOTION_TOUCHDOWN hero=11
+10-13 01:37:32.629  5038  5104 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=11
+10-13 01:37:33.333  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=skill authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:37:33.584  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:37:34.987  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:37:35.146  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:37:35.678  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=56.50 p95ms=17.0 maxms=83.8 samples=283 avgTotalFps=36.29 managedMB=9.57 gcDelta=2/2/2 window=3
+10-13 01:37:36.261  5038  5104 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=33 seamCells=25 selection=none
+10-13 01:37:36.396  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:36.951  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:37.804  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:38.760  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:39.208  5038  5104 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=40 seamCells=25 selection=none
+10-13 01:37:39.214  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:39.522  5038  5104 I Unity   : TERRITORY_CAPTURE team=1 areaCells=80 totalNewCells=227 seamCells=28 selection=old-land+trail
+10-13 01:37:39.523  5038  5104 I Unity   : HERO_MOTION_VICTORY hero=11
+10-13 01:37:40.570  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=victory authored=-1090111034 overlay=0.21 armL=True armR=True
+10-13 01:37:40.619  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:37:40.686  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=58.30 p95ms=17.0 maxms=83.7 samples=292 avgTotalFps=41.79 managedMB=9.95 gcDelta=3/3/3 window=4
+10-13 01:37:40.795  5038  5104 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=44 seamCells=32 selection=none
+10-13 01:37:42.018  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:37:42.370  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=-1090111034 overlay=1.00 armL=True armR=True
+10-13 01:37:43.425  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:44.179  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:44.832  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:45.686  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=45.25 managedMB=10.86 gcDelta=2/2/2 window=5
+10-13 01:37:45.989  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:46.240  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:47.018  5038  5104 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=42 seamCells=32 selection=none
+10-13 01:37:47.646  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:47.797  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:49.052  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:49.607  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:50.461  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:50.696  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=59.50 p95ms=17.0 maxms=33.5 samples=298 avgTotalFps=47.62 managedMB=11.42 gcDelta=2/2/2 window=6
+10-13 01:37:51.417  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:51.868  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:53.226  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:53.274  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:53.339  5038  5104 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=40 seamCells=32 selection=none
+10-13 01:37:54.691  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:55.042  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:55.524  5038  5104 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=35 seamCells=25 selection=none
+10-13 01:37:55.724  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=297 avgTotalFps=49.27 managedMB=11.60 gcDelta=2/2/2 window=7
+10-13 01:37:56.096  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:56.848  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:57.033  5038  5104 I Unity   : HERO_MOTION_SKILL hero=0
+10-13 01:37:57.034  5038  5104 I Unity   : HERO_FX_ACTIVATED hero=0
+10-13 01:37:57.035  5038  5104 I Unity   : HERO_SPECIAL_ACTIVATED hero=0 team=3 cells=0 cooldown=0.0
+10-13 01:37:57.506  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:37:58.660  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:37:58.913  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Run movement=1.00 grounded=True
+10-13 01:38:00.200  5038  5104 I Unity   : HERO_MOTION_SKILL hero=11
+10-13 01:38:00.236  5038  5104 I Unity   : HERO_FX_ACTIVATED hero=11
+10-13 01:38:00.236  5038  5104 I Unity   : HERO_SPECIAL_ACTIVATED hero=11 team=1 cells=47 cooldown=11.9
+10-13 01:38:00.318  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Special movement=0.00 grounded=True
+10-13 01:38:00.472  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=skill authored=-2083125633 overlay=0.21 armL=True armR=True
+10-13 01:38:00.738  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=59.30 p95ms=17.0 maxms=50.3 samples=297 avgTotalFps=50.52 managedMB=13.49 gcDelta=1/1/1 window=8
+10-13 01:38:01.523  5038  5104 I Unity   : TERRITORY_CAPTURE team=3 areaCells=5 totalNewCells=16 seamCells=3 selection=old-land+trail
+10-13 01:38:01.727  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:38:02.279  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:38:03.129  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:38:03.536  5038  5104 I Unity   : PLAYER_JUMP_BEGIN character=11
+10-13 01:38:03.686  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Jump movement=0.00 grounded=False
+10-13 01:38:03.820  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Jump movement=0.00 grounded=False
+10-13 01:38:03.920  5038  5104 I Unity   : HERO_MOTION_SKILL hero=12
+10-13 01:38:03.935  5038  5104 I Unity   : HERO_FX_ACTIVATED hero=12
+10-13 01:38:03.935  5038  5104 I Unity   : HERO_SPECIAL_ACTIVATED hero=12 team=2 cells=37 cooldown=8.2
+10-13 01:38:03.960  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Jump movement=0.00 grounded=False
+10-13 01:38:04.088  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Jump movement=0.00 grounded=True
+10-13 01:38:04.090  5038  5104 I Unity   : HERO_MOTION_ACTIVE hero=11 state=idle authored=125937960 overlay=1.00 armL=True armR=True
+10-13 01:38:04.221  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:38:04.356  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:38:04.490  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:38:04.629  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:38:04.761  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:38:04.893  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Land movement=0.00 grounded=True
+10-13 01:38:05.025  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:38:05.160  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:38:05.294  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:38:05.428  5038  5104 I Unity   : TRALALERO_ANIMATION clip=Trippi_Armature|Idle movement=0.00 grounded=True
+10-13 01:38:05.745  5038  5104 I Unity   : PERF_SAMPLE stage=game fps=59.30 p95ms=17.0 maxms=33.5 samples=297 avgTotalFps=51.49 managedMB=14.34 gcDelta=1/1/1 window=9

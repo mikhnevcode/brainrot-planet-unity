@@ -1,0 +1,100 @@
+10-13 02:19:03.670 14280 14322 I Unity   : PERF_SAMPLE stage=menu fps=17.20 p95ms=34.0 maxms=2084.5 samples=86 avgTotalFps=17.20 managedMB=4.26 gcDelta=21/21/21 window=1
+10-13 02:19:08.801 14280 14322 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=9
+10-13 02:19:09.030 14280 14322 I Unity   : PERF_SAMPLE stage=landing fps=47.35 p95ms=17.0 maxms=770.5 samples=253 avgTotalFps=32.77 managedMB=8.23 gcDelta=10/10/10 window=2
+10-13 02:19:11.589 14280 14322 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=9
+10-13 02:19:14.022 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.30 p95ms=17.0 maxms=67.0 samples=292 avgTotalFps=41.10 managedMB=9.42 gcDelta=2/2/2 window=3
+10-13 02:19:14.767 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=2 totalNewCells=71 seamCells=33 selection=old-land+trail
+10-13 02:19:14.827 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=2 cooldown=12.0
+10-13 02:19:15.111 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=12 team=4 cells=49 cooldown=11.7
+10-13 02:19:16.529 14280 14322 I Unity   : HILL_BOUNCE team=1 incline=18.5 approach=0.99
+10-13 02:19:17.585 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=11 team=3 cells=54 cooldown=9.2
+10-13 02:19:17.701 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=1 totalNewCells=142 seamCells=55 selection=old-land+trail
+10-13 02:19:19.030 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=50.3 samples=294 avgTotalFps=45.43 managedMB=10.34 gcDelta=3/3/3 window=4
+10-13 02:19:20.056 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=10 team=2 cells=0 cooldown=6.4
+10-13 02:19:24.042 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=59.50 p95ms=17.0 maxms=33.5 samples=298 avgTotalFps=48.21 managedMB=11.59 gcDelta=2/2/2 window=5
+10-13 02:19:28.197 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=18 cooldown=12.0
+10-13 02:19:28.763 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=2 totalNewCells=46 seamCells=25 selection=old-land+trail
+10-13 02:19:29.047 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=33.5 samples=295 avgTotalFps=49.97 managedMB=12.39 gcDelta=2/2/2 window=6
+10-13 02:19:29.430 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=57 seamCells=37 selection=none
+10-13 02:19:34.060 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=59.30 p95ms=17.0 maxms=33.5 samples=297 avgTotalFps=51.29 managedMB=11.72 gcDelta=3/3/3 window=7
+10-13 02:19:35.684 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=40 seamCells=24 selection=none
+10-13 02:19:38.837 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=12 team=4 cells=36 cooldown=1.0
+10-13 02:19:39.000 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=11 team=3 cells=41 cooldown=0.8
+10-13 02:19:39.067 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=33.5 samples=295 avgTotalFps=52.23 managedMB=13.72 gcDelta=1/1/1 window=8
+10-13 02:19:39.937 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=10 team=2 cells=0 cooldown=0.0
+10-13 02:19:43.672 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=0 cooldown=12.0
+10-13 02:19:44.078 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=52.99 managedMB=13.32 gcDelta=2/2/2 window=9
+10-13 02:19:45.600 14280 14322 I Unity   : HILL_BOUNCE team=1 incline=10.9 approach=0.96
+10-13 02:19:45.768 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=44 seamCells=14 selection=none
+10-13 02:19:48.730 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=1 totalNewCells=74 seamCells=32 selection=old-land+trail
+10-13 02:19:49.087 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=33.5 samples=295 avgTotalFps=53.58 managedMB=16.00 gcDelta=1/1/1 window=10
+10-13 02:19:54.094 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=33.5 samples=294 avgTotalFps=54.04 managedMB=15.24 gcDelta=2/2/2 window=11
+10-13 02:19:54.630 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=12 team=4 cells=26 cooldown=0.8
+10-13 02:19:55.230 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=1 totalNewCells=38 seamCells=28 selection=old-land+trail
+10-13 02:19:57.084 14280 14322 I Unity   : HILL_BOUNCE team=4 incline=11.8 approach=0.64
+10-13 02:19:57.561 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=10 cooldown=12.0
+10-13 02:19:58.044 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=1 totalNewCells=54 seamCells=36 selection=old-land+trail
+10-13 02:19:59.103 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=33.5 samples=295 avgTotalFps=54.44 managedMB=14.18 gcDelta=2/2/2 window=12
+10-13 02:19:59.769 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=1 totalNewCells=17 seamCells=0 selection=old-land+trail
+10-13 02:20:02.335 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=38 seamCells=24 selection=none
+10-13 02:20:03.611 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=10 team=2 cells=0 cooldown=5.7
+10-13 02:20:04.112 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=33.5 samples=294 avgTotalFps=54.77 managedMB=14.45 gcDelta=2/2/2 window=13
+10-13 02:20:04.945 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=45 seamCells=34 selection=none
+10-13 02:20:06.092 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=11 team=3 cells=54 cooldown=3.1
+10-13 02:20:06.119 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=10 seamCells=0 selection=none
+10-13 02:20:09.121 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=58.30 p95ms=17.0 maxms=50.3 samples=292 avgTotalFps=55.02 managedMB=15.84 gcDelta=1/1/1 window=14
+10-13 02:20:12.836 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=0 cooldown=12.0
+10-13 02:20:14.129 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=55.33 managedMB=16.63 gcDelta=1/1/1 window=15
+10-13 02:20:14.242 14280 14322 I Unity   : TERRITORY_CAPTURE team=1 areaCells=1 totalNewCells=33 seamCells=0 selection=old-land+trail
+10-13 02:20:19.138 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=55.57 managedMB=18.04 gcDelta=1/1/1 window=16
+10-13 02:20:21.855 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=10 team=2 cells=0 cooldown=2.9
+10-13 02:20:23.415 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=12 team=4 cells=132 cooldown=1.3
+10-13 02:20:24.146 14280 14322 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=55.77 managedMB=16.55 gcDelta=2/2/2 window=17
+10-13 02:20:26.823 14280 14322 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=0 cooldown=12.0
+10-13 02:20:27.871 14280 14322 I Unity   : AI_BALANCE_RESULT level=Medium winner=1 playerPct=3.71 aiPct=3.52,2.95,2.37 encounterStarts=19 visibleSeconds=75.9 nearSeconds=40.7 dangerSeconds=12.1 nearestEverDeg=3.1 playerMovingSeconds=75.4 captures=17/32 trailsLost=4 duration=76.0
+10-13 02:20:27.872 14280 14322 I Unity   : VICTORY_STAGE_READY team=1 worldUp=true center=(0.00, 38.00, -55.00)
+10-13 02:20:27.874 14280 14322 I Unity   : VICTORY_FOOTING character=9 floorY=38.205
+10-13 02:20:27.875 14280 14322 I Unity   : HERO_VICTORY_STAGE team=1 position=(0.00,38.18,-55.00) upDot=1.000
+10-13 02:20:27.875 14280 14322 I Unity   : CAM_VICTORY_FOCUS_STARTED teamActor=Landing hero 1 stableStage=true
+10-13 02:20:27.877 14280 14322 I Unity   : HERO_MATCH_VICTORY team=1 cameraFocus=True
+10-13 02:20:29.146 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.10 p95ms=17.0 maxms=50.2 samples=296 avgTotalFps=55.96 managedMB=19.31 gcDelta=0/0/0 window=18
+10-13 02:20:29.197 14280 14322 I Unity   : CAM_VICTORY_STABLE upDot=0.968 faceDot=0.818 screen=(0.500,0.520,4.78)
+10-13 02:20:30.772 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:33.686 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:34.154 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=56.15 managedMB=17.27 gcDelta=1/1/1 window=19
+10-13 02:20:36.600 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:39.163 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=56.33 managedMB=17.71 gcDelta=0/0/0 window=20
+10-13 02:20:39.516 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:42.430 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:44.172 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=56.49 managedMB=18.17 gcDelta=0/0/0 window=21
+10-13 02:20:45.345 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:48.259 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:49.179 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=56.63 managedMB=18.63 gcDelta=0/0/0 window=22
+10-13 02:20:51.174 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:54.089 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:54.189 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=56.77 managedMB=19.12 gcDelta=0/0/0 window=23
+10-13 02:20:57.003 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:20:59.204 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.50 p95ms=17.0 maxms=33.5 samples=298 avgTotalFps=56.88 managedMB=19.70 gcDelta=0/0/0 window=24
+10-13 02:20:59.925 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:02.839 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:04.212 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=56.99 managedMB=20.18 gcDelta=0/0/0 window=25
+10-13 02:21:05.753 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:08.668 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:09.221 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=57.10 managedMB=20.66 gcDelta=0/0/0 window=26
+10-13 02:21:11.584 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:14.229 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.50 p95ms=17.0 maxms=33.5 samples=298 avgTotalFps=57.19 managedMB=13.92 gcDelta=2/2/2 window=27
+10-13 02:21:14.498 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:17.413 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:19.238 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=57.28 managedMB=14.37 gcDelta=0/0/0 window=28
+10-13 02:21:20.327 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:23.242 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:24.245 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=57.36 managedMB=14.84 gcDelta=0/0/0 window=29
+10-13 02:21:26.157 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:29.071 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:29.255 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=57.44 managedMB=15.31 gcDelta=0/0/0 window=30
+10-13 02:21:31.985 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:34.264 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=57.51 managedMB=15.79 gcDelta=0/0/0 window=31
+10-13 02:21:34.901 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:37.815 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1
+10-13 02:21:39.272 14280 14322 I Unity   : PERF_SAMPLE stage=end fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=57.58 managedMB=16.27 gcDelta=0/0/0 window=32
+10-13 02:21:40.729 14280 14322 I Unity   : HERO_MATCH_VICTORY_REPLAY team=1

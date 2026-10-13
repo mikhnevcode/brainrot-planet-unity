@@ -1,0 +1,123 @@
+10-13 01:35:48.882  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:48.883  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:48.886  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:35:48.888  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:35:48.889  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=cloth albedo=true normal=true opaque=true
+10-13 01:35:49.032  3667  3760 I Unity   : HERO_MENU_PREVIEW_READY index=0 color=14B8FF
+10-13 01:35:51.579  3667  3760 I Unity   : PERF_SAMPLE stage=menu fps=13.76 p95ms=34.0 maxms=2079.6 samples=69 avgTotalFps=13.76 managedMB=4.17 gcDelta=21/21/21 window=1
+10-13 01:35:53.357  3667  3760 I Unity   : HERO_MENU_SELECTED index=9 name=ФРУЛЛИ ФРУЛЛА
+10-13 01:35:53.424  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=feather albedo=true normal=true opaque=true
+10-13 01:35:53.427  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:35:53.427  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:53.428  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:53.468  3667  3760 I Unity   : HERO_MENU_PREVIEW_READY index=9 color=38B2FF
+10-13 01:35:55.440  3667  3760 I Unity   : HERO_MOTION_RIG hero=9 torso=True head=True arms=True/True legs=True/True
+10-13 01:35:55.578  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=rubber albedo=true normal=true opaque=true
+10-13 01:35:55.578  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:55.579  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:55.580  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:55.662  3667  3760 I Unity   : HERO_MOTION_RIG hero=10 torso=True head=True arms=True/True legs=True/True
+10-13 01:35:55.699  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:55.700  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:35:55.701  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:55.757  3667  3760 I Unity   : HERO_MOTION_RIG hero=11 torso=True head=True arms=True/True legs=True/True
+10-13 01:35:55.826  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=fur albedo=true normal=true opaque=true
+10-13 01:35:55.827  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=hide albedo=true normal=true opaque=true
+10-13 01:35:55.830  3667  3760 I Unity   : REFERENCE_SKIN_READY kind=fish albedo=true normal=true opaque=true
+10-13 01:35:55.899  3667  3760 I Unity   : HERO_MOTION_RIG hero=12 torso=True head=True arms=True/True legs=True/True
+10-13 01:35:55.906  3667  3760 I Unity   : HERO_MOTION_DROP hero=9
+10-13 01:35:55.907  3667  3760 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=9
+10-13 01:35:55.910  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=False
+10-13 01:35:55.912  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=drop authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:35:56.130  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-13 01:35:56.271  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-13 01:35:56.591  3667  3760 I Unity   : PERF_SAMPLE stage=landing fps=37.34 p95ms=34.0 maxms=837.5 samples=187 avgTotalFps=25.55 managedMB=8.72 gcDelta=8/8/8 window=2
+10-13 01:35:56.723  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-13 01:35:56.725  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Drop movement=0.00 grounded=False
+10-13 01:35:57.159  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-13 01:35:57.613  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=drop authored=-802706916 overlay=0.32 armL=True armR=True
+10-13 01:35:57.628  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-13 01:35:58.063  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-13 01:35:58.132  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Drop movement=0.00 grounded=False
+10-13 01:35:58.532  3667  3760 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-13 01:35:58.734  3667  3760 I Unity   : HERO_MOTION_TOUCHDOWN hero=9
+10-13 01:35:58.735  3667  3760 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=9
+10-13 01:35:59.421  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=skill authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:35:59.538  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:00.889  3667  3760 I Unity   : TERRITORY_CAPTURE team=4 areaCells=0 totalNewCells=36 seamCells=27 selection=none
+10-13 01:36:00.945  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:01.232  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:36:01.599  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=54.91 p95ms=34.0 maxms=83.8 samples=275 avgTotalFps=35.33 managedMB=9.75 gcDelta=2/2/2 window=3
+10-13 01:36:01.880  3667  3760 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=38 seamCells=30 selection=none
+10-13 01:36:02.350  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:03.040  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:03.761  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:04.849  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:05.168  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:05.444  3667  3760 I Unity   : TERRITORY_CAPTURE team=1 areaCells=79 totalNewCells=224 seamCells=28 selection=old-land+trail
+10-13 01:36:05.446  3667  3760 I Unity   : HERO_MOTION_VICTORY hero=9
+10-13 01:36:05.697  3667  3760 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=35 seamCells=25 selection=none
+10-13 01:36:06.571  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:36:06.608  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=67.0 samples=293 avgTotalFps=41.12 managedMB=10.16 gcDelta=3/3/3 window=4
+10-13 01:36:06.655  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=victory authored=-1090111034 overlay=0.22 armL=True armR=True
+10-13 01:36:07.981  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|VictoryShow movement=1.00 grounded=True
+10-13 01:36:08.474  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=-1090111034 overlay=1.00 armL=True armR=True
+10-13 01:36:09.054  3667  3760 I Unity   : HERO_MOTION_SKILL hero=12
+10-13 01:36:09.067  3667  3760 I Unity   : HERO_FX_ACTIVATED hero=12
+10-13 01:36:09.067  3667  3760 I Unity   : HERO_SPECIAL_ACTIVATED hero=12 team=4 cells=177 cooldown=0.0
+10-13 01:36:09.389  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:10.276  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:36:10.796  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=1.00 grounded=True
+10-13 01:36:10.862  3667  3760 I Unity   : HERO_MOTION_SKILL hero=11
+10-13 01:36:10.897  3667  3760 I Unity   : HERO_FX_ACTIVATED hero=11
+10-13 01:36:10.897  3667  3760 I Unity   : HERO_SPECIAL_ACTIVATED hero=11 team=3 cells=45 cooldown=0.0
+10-13 01:36:10.924  3667  3760 I Unity   : TERRITORY_CAPTURE team=3 areaCells=0 totalNewCells=0 seamCells=0 selection=none
+10-13 01:36:11.615  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=59.30 p95ms=17.0 maxms=33.5 samples=297 avgTotalFps=44.76 managedMB=11.29 gcDelta=2/2/2 window=5
+10-13 01:36:12.086  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:12.203  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:13.608  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:13.893  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:15.016  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:15.706  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:16.425  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:16.626  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=59.70 p95ms=17.0 maxms=16.8 samples=299 avgTotalFps=47.25 managedMB=11.49 gcDelta=2/2/2 window=6
+10-13 01:36:17.513  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:17.832  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:18.367  3667  3760 I Unity   : TERRITORY_CAPTURE team=1 areaCells=0 totalNewCells=47 seamCells=30 selection=none
+10-13 01:36:19.239  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:19.324  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:20.638  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:21.139  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:21.633  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=33.5 samples=294 avgTotalFps=48.88 managedMB=12.07 gcDelta=2/2/2 window=7
+10-13 01:36:22.056  3667  3760 I Unity   : TERRITORY_CAPTURE team=2 areaCells=0 totalNewCells=42 seamCells=31 selection=none
+10-13 01:36:22.065  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:22.940  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:23.480  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:24.750  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-13 01:36:24.883  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Run movement=1.00 grounded=True
+10-13 01:36:26.193  3667  3760 I Unity   : HERO_MOTION_SKILL hero=9
+10-13 01:36:26.209  3667  3760 I Unity   : HERO_FX_ACTIVATED hero=9
+10-13 01:36:26.210  3667  3760 I Unity   : HERO_SPECIAL_ACTIVATED hero=9 team=1 cells=1 cooldown=12.0
+10-13 01:36:26.290  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Special movement=0.00 grounded=True
+10-13 01:36:26.559  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=skill authored=-2083125633 overlay=0.26 armL=True armR=True
+10-13 01:36:26.643  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=50.16 managedMB=13.18 gcDelta=1/1/1 window=8
+10-13 01:36:27.697  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:28.368  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=idle authored=2081823275 overlay=1.00 armL=True armR=True
+10-13 01:36:29.100  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:29.473  3667  3760 I Unity   : PLAYER_JUMP_BEGIN character=9
+10-13 01:36:29.624  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Jump movement=0.00 grounded=False
+10-13 01:36:29.757  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Jump movement=0.00 grounded=False
+10-13 01:36:29.892  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Jump movement=0.00 grounded=False
+10-13 01:36:30.025  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Jump movement=0.00 grounded=True
+10-13 01:36:30.160  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:30.176  3667  3760 I Unity   : HERO_MOTION_ACTIVE hero=9 state=idle authored=137525990 overlay=1.00 armL=True armR=True
+10-13 01:36:30.306  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:30.445  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:30.578  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:30.713  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:30.847  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Land movement=0.00 grounded=True
+10-13 01:36:30.980  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:31.115  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:31.249  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:31.382  3667  3760 I Unity   : TRALALERO_ANIMATION clip=Frulli_Armature|Idle movement=0.00 grounded=True
+10-13 01:36:31.651  3667  3760 I Unity   : PERF_SAMPLE stage=game fps=58.90 p95ms=17.0 maxms=33.5 samples=295 avgTotalFps=51.13 managedMB=13.73 gcDelta=1/1/1 window=9
