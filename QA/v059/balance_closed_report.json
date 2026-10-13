@@ -1,0 +1,41 @@
+[
+  {
+    "level": "Easy",
+    "control_swipes": 153,
+    "early_end": false,
+    "winner": "1",
+    "player_won": true,
+    "balance_result": "10-12 11:17:42.947 14398 14456 I Unity   : AI_BALANCE_RESULT level=Easy winner=1 playerPct=7.82 aiPct=2.36,2.08,1.92 encounterStarts=8 visibleSeconds=102.5 nearSeconds=23.1 dangerSeconds=11.6 nearestEverDeg=3.3 playerMovingSeconds=144.3 captures=19/24 trailsLost=6 duration=145.0",
+    "player_captures": 19,
+    "player_trail_hits": 2,
+    "encounter_starts": 8,
+    "avg_fps": 59.36,
+    "fatal": false
+  },
+  {
+    "level": "Medium",
+    "control_swipes": 120,
+    "early_end": true,
+    "winner": "1",
+    "player_won": true,
+    "balance_result": "10-12 11:19:40.634 15676 15742 I Unity   : AI_BALANCE_RESULT level=Medium winner=1 playerPct=5.65 aiPct=3.79,3.09,3.07 encounterStarts=9 visibleSeconds=75.4 nearSeconds=21.1 dangerSeconds=7.5 nearestEverDeg=0.2 playerMovingSeconds=98.6 captures=15/45 trailsLost=11 duration=99.6",
+    "player_captures": 15,
+    "player_trail_hits": 2,
+    "encounter_starts": 9,
+    "avg_fps": 59.1,
+    "fatal": false
+  },
+  {
+    "level": "Hard",
+    "control_swipes": 112,
+    "early_end": true,
+    "winner": "1",
+    "player_won": true,
+    "balance_result": "10-12 11:22:17.250 16952 16980 I Unity   : AI_BALANCE_RESULT level=Hard winner=1 playerPct=4.20 aiPct=2.88,3.24,3.39 encounterStarts=11 visibleSeconds=89.5 nearSeconds=63.4 dangerSeconds=25.1 nearestEverDeg=0.0 playerMovingSeconds=90.0 captures=30/65 trailsLost=12 duration=93.4",
+    "player_captures": 30,
+    "player_trail_hits": 2,
+    "encounter_starts": 11,
+    "avg_fps": 58.68,
+    "fatal": false
+  }
+]

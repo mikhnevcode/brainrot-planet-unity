@@ -26,6 +26,10 @@ namespace BrainrotPlanet
         private float victoryTime = -1f;
         private Vector3 victoryStartPosition;
         private Quaternion victoryStartRotation;
+        private Vector3 victoryCameraPosition;
+        private Quaternion victoryCameraRotation;
+        private Vector3 victoryLookAt;
+        private bool victoryDiagnosticsLogged;
         private const float VictoryFocusDuration = 1.35f;
 
         private void Awake()
@@ -57,7 +61,7 @@ namespace BrainrotPlanet
 
         // Smoothly turn the camera from the player toward the actual winner,
         // then remain close enough to see the victory dance on mobile.
-        public void BeginVictoryFocus(Transform winner)
+        public void BeginVictoryFocus(Transform winner,Vector3 stageCenter)
         {
             if(winner==null)return;
             victoryStartPosition=transform.position;
@@ -65,15 +69,13 @@ namespace BrainrotPlanet
             victoryTime=0f;
             descentTime=DescentDuration;
             Target=winner;
-            Vector3 normal=winner.position.normalized;
-            if(normal.sqrMagnitude<.1f)normal=Vector3.up;
-            stableNormal=normal;
-            lastNormal=normal;
-            tangentUp=Vector3.ProjectOnPlane(Vector3.forward,normal);
-            if(tangentUp.sqrMagnitude<.02f)
-                tangentUp=Vector3.ProjectOnPlane(Vector3.right,normal);
-            tangentUp.Normalize();
-            Debug.Log("CAM_VICTORY_FOCUS_STARTED teamActor="+winner.name);
+            victoryLookAt=stageCenter+Vector3.up*1.30f;
+            victoryCameraPosition=stageCenter+Vector3.up*2.50f+Vector3.back*4.65f;
+            victoryCameraRotation=Quaternion.LookRotation(
+                victoryLookAt-victoryCameraPosition,Vector3.up);
+            victoryDiagnosticsLogged=false;
+            Debug.Log("CAM_VICTORY_FOCUS_STARTED teamActor="+winner.name+
+                " stableStage=true");
         }
 
         private void LateUpdate()
@@ -83,6 +85,35 @@ namespace BrainrotPlanet
 
             float dt = Mathf.Min(Time.deltaTime, .05f);
             if (dt <= 0f) return;
+
+            // The result scene uses a fixed world-up frame. It deliberately
+            // bypasses the spherical surface normal used during gameplay so a
+            // winner on the far side of the planet can never flip the camera.
+            if(victoryTime>=0f)
+            {
+                victoryTime+=dt;
+                float t=Mathf.Clamp01(victoryTime/VictoryFocusDuration);
+                float eased=t*t*(3f-2f*t);
+                transform.position=Vector3.Lerp(
+                    victoryStartPosition,victoryCameraPosition,eased);
+                transform.rotation=Quaternion.Slerp(
+                    victoryStartRotation,victoryCameraRotation,eased);
+                view.fieldOfView=Mathf.Lerp(GameplayFov,43f,eased);
+                if(t>=1f&&!victoryDiagnosticsLogged)
+                {
+                    victoryDiagnosticsLogged=true;
+                    Vector3 facing=Vector3.ProjectOnPlane(
+                        transform.position-Target.position,Vector3.up).normalized;
+                    Vector3 viewport=view.WorldToViewportPoint(
+                        Target.position+Vector3.up*1.2f);
+                    Debug.Log(string.Format(
+                        "CAM_VICTORY_STABLE upDot={0:F3} faceDot={1:F3} screen=({2:F3},{3:F3},{4:F2})",
+                        Vector3.Dot(transform.up,Vector3.up),
+                        Vector3.Dot(Target.right,facing),
+                        viewport.x,viewport.y,viewport.z));
+                }
+                return;
+            }
 
             Vector3 normal = Target.position.normalized;
             if (normal.sqrMagnitude < 0.1f) return;
@@ -110,20 +141,7 @@ namespace BrainrotPlanet
             Quaternion gameplayRotation =
                 Quaternion.LookRotation(anchor - gameplayPosition, tangentUp);
 
-            if(victoryTime>=0f)
-            {
-                victoryTime+=dt;
-                float t=Mathf.Clamp01(victoryTime/VictoryFocusDuration);
-                float eased=t*t*(3f-2f*t);
-                Vector3 winnerPosition=anchor+stableNormal*6.7f-tangentUp*2.1f;
-                Quaternion winnerRotation=Quaternion.LookRotation(
-                    anchor-winnerPosition,tangentUp);
-                transform.position=Vector3.Lerp(victoryStartPosition,winnerPosition,eased);
-                transform.rotation=Quaternion.Slerp(
-                    victoryStartRotation,winnerRotation,eased);
-                view.fieldOfView=Mathf.Lerp(GameplayFov,48f,eased);
-            }
-            else if (IsDescending)
+            if (IsDescending)
             {
                 descentTime += dt;
                 float t = Mathf.Clamp01(descentTime / DescentDuration);

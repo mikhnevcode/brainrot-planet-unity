@@ -1,0 +1,58 @@
+{
+  "build": "0.5.9",
+  "phone": "Realme RMX3151",
+  "hero_ignores_physical_other_heroes": true,
+  "pair_details": [
+    [
+      "spawn",
+      "6",
+      "6"
+    ],
+    [
+      "after_descent",
+      "6",
+      "6"
+    ],
+    [
+      "spawn",
+      "6",
+      "6"
+    ],
+    [
+      "after_descent",
+      "6",
+      "6"
+    ]
+  ],
+  "ground_actor_radius_samples": [
+    24.93,
+    24.93,
+    24.94,
+    25.09,
+    25.2,
+    24.95,
+    25.03,
+    25.0,
+    25.03,
+    24.91,
+    24.9,
+    24.96,
+    24.91,
+    24.91,
+    25.05,
+    25.07,
+    24.99,
+    24.92,
+    24.99,
+    25.22
+  ],
+  "ground_actor_radius_mean": 24.972,
+  "larger_planet_confirmed": true,
+  "landing": true,
+  "player_capture_count": 1,
+  "territory_seam_repair_count": 1,
+  "player_movement": true,
+  "fps_average": 58.02,
+  "fps_samples": 5,
+  "fatal_android_error": false
+}

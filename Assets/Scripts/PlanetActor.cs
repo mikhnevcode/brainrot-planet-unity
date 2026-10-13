@@ -121,6 +121,33 @@ namespace BrainrotPlanet
                visualAnimator.runtimeAnimatorController!=null)
                 visualAnimator.SetTrigger("Victory");
         }
+        public void EnterVictoryStage(Vector3 position,Vector3 faceDirection)
+        {
+            // All authored Blender heroes use local +X as their visual front.
+            // Build a world-up rotation whose right axis points at the camera.
+            Vector3 flatFace=Vector3.ProjectOnPlane(faceDirection,Vector3.up).normalized;
+            if(flatFace.sqrMagnitude<.01f)flatFace=Vector3.back;
+            Quaternion stageRotation=Quaternion.LookRotation(
+                Vector3.Cross(flatFace,Vector3.up),Vector3.up);
+            Wish=Vector3.zero;
+            Active=false;
+            isDropping=false;
+            Grounded=true;
+            if(body!=null)
+            {
+                body.linearVelocity=Vector3.zero;
+                body.angularVelocity=Vector3.zero;
+                body.isKinematic=true;
+                body.position=position;
+                body.rotation=stageRotation;
+            }
+            transform.SetPositionAndRotation(position,stageRotation);
+            if(bodyCollider!=null)bodyCollider.enabled=false;
+            Debug.Log(string.Format(
+                "HERO_VICTORY_STAGE team={0} position=({1:F2},{2:F2},{3:F2}) upDot={4:F3}",
+                Team,position.x,position.y,position.z,
+                Vector3.Dot(transform.up,Vector3.up)));
+        }
         public void PlaySpecial()
         {
             if(heroMotion!=null)heroMotion.PerformSkill();

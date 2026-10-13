@@ -1,0 +1,26 @@
+{
+  "build": "0.5.9",
+  "phone": "Realme RMX3151",
+  "arrow_frame": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\qa_victory_stage_059\\EnemyArrows_NoLabels_059.png",
+  "results": [
+    {
+      "scenario": "player_win",
+      "winner": 1,
+      "winner_ok": true,
+      "stage_world_up": true,
+      "hero_world_up": true,
+      "camera_stable": true,
+      "camera_metrics": {
+        "up_dot": 0.968,
+        "face_dot": 1.0,
+        "screen_x": 0.5,
+        "screen_y": 0.57,
+        "depth": 4.73
+      },
+      "fatal": false,
+      "control_swipes": 168,
+      "play_again": true,
+      "screenshot": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\qa_victory_stage_059\\PlayerVictory_Stable_059_a.png"
+    }
+  ]
+}

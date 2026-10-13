@@ -47,7 +47,7 @@ namespace BrainrotPlanet
         private int heroPage;
         private Rect skillArea,jumpArea;
         private Texture2D whitePixel;
-        private GUIStyle headerStyle,menuStyle,buttonStyle,smallStyle;
+        private GUIStyle headerStyle,menuStyle,buttonStyle,smallStyle,enemyArrowStyle;
         private float pathUpdate;
         private Transform worldRoot;
         private bool sceneLoaded;
@@ -586,13 +586,43 @@ namespace BrainrotPlanet
             victoryReplayTimer=2.90f;
             if(victoryActor!=null)
             {
-                orbitCamera.BeginVictoryFocus(victoryActor.transform);
+                Vector3 stageCenter=CreateVictoryStage(winningTeam);
+                Vector3 winnerPosition=stageCenter+Vector3.up*.37f;
+                Vector3 cameraSide=Vector3.back;
+                victoryActor.EnterVictoryStage(winnerPosition,cameraSide);
+                orbitCamera.BeginVictoryFocus(victoryActor.transform,stageCenter);
                 victoryActor.Celebrate();
                 Effects.Burst(victoryActor.transform.position,
                               Colors.Team(winningTeam),55,3.8f);
             }
             Debug.Log("HERO_MATCH_VICTORY team="+winningTeam+
                 " cameraFocus="+(victoryActor!=null));
+        }
+        private Vector3 CreateVictoryStage(int winningTeam)
+        {
+            Vector3 center=new Vector3(0f,38f,-55f);
+            GameObject baseObject=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            baseObject.name="Stable victory platform base";
+            baseObject.transform.SetParent(worldRoot);
+            baseObject.transform.position=center-Vector3.up*.18f;
+            baseObject.transform.localScale=new Vector3(3.35f,.28f,3.35f);
+            baseObject.GetComponent<Renderer>().sharedMaterial=
+                Colors.New(new Color(.075f,.09f,.16f));
+            Collider baseCollider=baseObject.GetComponent<Collider>();
+            if(baseCollider!=null)Destroy(baseCollider);
+
+            GameObject top=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            top.name="Stable victory platform team colour";
+            top.transform.SetParent(worldRoot);
+            top.transform.position=center;
+            top.transform.localScale=new Vector3(3.05f,.20f,3.05f);
+            top.GetComponent<Renderer>().sharedMaterial=
+                Colors.New(Colors.Team(winningTeam),true);
+            Collider topCollider=top.GetComponent<Collider>();
+            if(topCollider!=null)Destroy(topCollider);
+            Debug.Log("VICTORY_STAGE_READY team="+winningTeam+
+                " worldUp=true center="+center);
+            return center;
         }
         private float GameScale(){return Mathf.Max(.60f,Mathf.Min(Screen.width/420f,Screen.height/790f));}
         private void InitStyles()
@@ -604,29 +634,43 @@ namespace BrainrotPlanet
             menuStyle.normal.textColor=new Color(.92f,.94f,1f);
             smallStyle=new GUIStyle(GUI.skin.label){fontSize=13,alignment=TextAnchor.MiddleCenter,wordWrap=true};
             smallStyle.normal.textColor=Color.white;
+            enemyArrowStyle=new GUIStyle(GUI.skin.label){fontSize=40,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter};
+            enemyArrowStyle.normal.textColor=Color.white;
             buttonStyle=new GUIStyle(GUI.skin.button){fontSize=17,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter,wordWrap=true};
         }
         private void DrawEnemySignals(float logicalW,float logicalH)
         {
             if(Player==null||worldCamera==null)return;
-            Vector3 playerNormal=Player.transform.position.normalized;
             foreach(PlanetActor other in players)
             {
                 if(other==null||other.Team==1||!other.Active)continue;
                 Vector3 direction=other.transform.position.normalized;
-                if(Vector3.Dot(playerNormal,direction)<.34f)continue;
                 Vector3 world=other.transform.position + direction*1.28f;
                 Vector3 screen=worldCamera.WorldToViewportPoint(world);
-                if(screen.z<=0f)continue;
-                bool offscreen=screen.x<.04f||screen.x>.96f||
-                               screen.y<.16f||screen.y>.88f;
-                float x=Mathf.Clamp(screen.x*logicalW-44f,5f,logicalW-93f);
-                float y=Mathf.Clamp((1f-screen.y)*logicalH-30f,199f,logicalH-235f);
-                Color paint=Colors.Team(other.Team);
-                paint.a=.84f;
-                Plate(new Rect(x,y,89f,27f),paint);
-                GUI.Label(new Rect(x+2f,y,85f,26f),
-                    (offscreen?"! ":"")+"ВРАГ "+other.Team,smallStyle);
+                Vector2 arrowDirection=new Vector2(screen.x-.5f,.5f-screen.y);
+                if(screen.z<0f)arrowDirection=-arrowDirection;
+                if(arrowDirection.sqrMagnitude<.001f)arrowDirection=Vector2.up;
+                arrowDirection.Normalize();
+                bool onScreen=screen.z>0f&&screen.x>.08f&&screen.x<.92f&&
+                              screen.y>.19f&&screen.y<.86f;
+                Vector2 center=new Vector2(logicalW*.5f,logicalH*.53f);
+                Vector2 point=onScreen?
+                    new Vector2(screen.x*logicalW,(1f-screen.y)*logicalH):
+                    center+new Vector2(arrowDirection.x*logicalW*.41f,
+                                       arrowDirection.y*logicalH*.30f);
+                point.x=Mathf.Clamp(point.x,24f,logicalW-24f);
+                point.y=Mathf.Clamp(point.y,205f,logicalH-235f);
+                float angle=Mathf.Atan2(arrowDirection.y,arrowDirection.x)*
+                            Mathf.Rad2Deg+90f;
+                Matrix4x4 oldMatrix=GUI.matrix;
+                GUIUtility.RotateAroundPivot(angle,point);
+                Color oldColor=GUI.color;
+                GUI.color=new Color(0f,0f,0f,.72f);
+                GUI.Label(new Rect(point.x-17f,point.y-15f,38f,38f),"^",enemyArrowStyle);
+                GUI.color=Colors.Team(other.Team);
+                GUI.Label(new Rect(point.x-19f,point.y-17f,38f,38f),"^",enemyArrowStyle);
+                GUI.color=oldColor;
+                GUI.matrix=oldMatrix;
             }
         }
 
