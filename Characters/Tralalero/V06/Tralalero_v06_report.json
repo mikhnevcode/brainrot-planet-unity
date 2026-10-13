@@ -1,0 +1,28 @@
+{
+  "source": "Tralalero_v05.blend",
+  "output": "Tralalero_v06.blend",
+  "triangles": 62734,
+  "removed": [
+    "Combined_Fin_L",
+    "Combined_Fin_R",
+    "Combined_Shin_L",
+    "Combined_Shin_R",
+    "Combined_Shin_Rear",
+    "Combined_Thigh_L",
+    "Combined_Thigh_R",
+    "Combined_Thigh_Rear"
+  ],
+  "continuous_fins": 3,
+  "rest_skeleton_preserved": true,
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "blender": "5.2.2 LTS"
+}

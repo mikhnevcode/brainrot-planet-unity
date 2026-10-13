@@ -448,7 +448,7 @@ namespace BrainrotPlanet
             {
                 // Authored in Blender with an actual three-legged skeleton and
                 // imported Animator clips. Retain old geometry as a fallback.
-                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v05");
+                GameObject prefab=Resources.Load<GameObject>("Characters/Tralalero_v06");
                 if(prefab!=null)
                 {
                     GameObject visual=Object.Instantiate(prefab,art,false);

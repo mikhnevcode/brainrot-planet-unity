@@ -21,7 +21,7 @@ namespace BrainrotPlanet.Editor
             string[] actions={"Drop","Idle","Jump","Land","Run","Special","Victory","VictoryShow"};
             foreach(string name in names)
             {
-                string version=name=="Tralalero"?"v05":name=="Bombardiro"?"v06":name=="Troppa"?"v01":"v04";
+                string version=name=="Tralalero"?"v06":name=="Bombardiro"?"v06":name=="Troppa"?"v01":"v04";
                 string path="Assets/Resources/Characters/"+name+"_"+version+".fbx";
                 var model=AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 if(model==null)throw new Exception("Missing reference hero "+name);

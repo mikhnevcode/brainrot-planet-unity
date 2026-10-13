@@ -648,13 +648,8 @@ namespace BrainrotPlanet
         {
             if(State==MatchState.End)return;
             for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
-            int winningTeam=1;
-            float best=float.MinValue;
-            for(int team=1;team<=4;team++)
-                if(scores[team]>best)
-                {
-                    best=scores[team];winningTeam=team;
-                }
+            int winningTeam=MatchOutcome.Winner(scores,lives);
+            Debug.Log("MATCH_OUTCOME winner="+winningTeam+" playerLives="+lives+" reason="+finishReason);
             if(balanceTelemetry!=null)balanceTelemetry.Report(winningTeam,scores);
             foreach(var pawn in players)
             {

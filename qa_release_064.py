@@ -1,13 +1,14 @@
 """Real device QA for the exact release APK. No game state injection.
 Uses touch input, screenshot capture and aggregate runtime logs only.
 """
-import argparse,hashlib,json,re,statistics,subprocess,time
+import argparse,hashlib,json,re,statistics,subprocess,time,os
 from pathlib import Path
 
-APK=Path(__file__).resolve().parent/'Builds/Android/BrainrotPlanet-v0.6.4.apk'
+VERSION=os.environ.get('BRAINROT_QA_VERSION','0.6.4')
+APK=Path(__file__).resolve().parent/('Builds/Android/BrainrotPlanet-v'+VERSION+'.apk')
 APK_HASH=hashlib.sha256(APK.read_bytes()).hexdigest()
-ROOT=Path(__file__).resolve().parent/'qa_release_064'/APK_HASH[:12]
-ROOT.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parent/('qa_release_'+VERSION.replace('.',''))/APK_HASH[:12]
+ROOT.mkdir(exist_ok=True,parents=True)
 ADB=[r'C:\adb\adb.exe','-s','E6ZTMFVCEA895HAA']
 PACKAGE='com.mikhnevcode.brainrotplanet'
 ACTIVITY=PACKAGE+'/com.unity3d.player.UnityPlayerGameActivity'
@@ -61,8 +62,8 @@ def hero_test(hero):
     for step in range(12):
         x,y=[(720,1100),(500,880),(280,1100),(500,1320)][step%4]
         call('shell','input','swipe','500','1100',str(x),str(y),'750');time.sleep(.25)
-        if step==1:tap(910,2250);shot(name+'_jump')
-        if step==4:tap(910,2045);time.sleep(.25);shot(name+'_special')
+        if step==1:tap(1030,2250);shot(name+'_jump')
+        if step==4:tap(1030,2045);time.sleep(.25);shot(name+'_special')
         if step%4==3:parts.append(logs())
     time.sleep(1);shot(name+'_capture');parts.append(logs())
     log='\n'.join(dict.fromkeys('\n'.join(parts).splitlines()))
@@ -75,12 +76,20 @@ def match(hero,difficulty,mode,number):
     name=f'match_{number}_{mode}_{difficulty}_{NAMES[hero]}'
     menu(hero,difficulty);tap(530,2050);time.sleep(4);start=time.monotonic();step=0;parts=[]
     while time.monotonic()-start<185:
-        if mode=='loops':
+        # Read every step, before issuing another input. The right edge of the
+        # gameplay buttons is outside both result buttons (x=1030 vs max 1013)
+        # so even an end-of-match transition cannot turn a skill into replay.
+        raw=logs();parts.append(raw)
+        if 'MATCH_PAUSED' in raw:
+            save(name+'_interrupted','\n'.join(parts),dict(interrupted=True,reason='External pause; not a completed match'))
+            raise RuntimeError('Game was paused externally; stopping device QA')
+        if 'AI_BALANCE_RESULT ' in raw:break
+        if mode in ('loops','tight'):
             x,y=[(700,1100),(500,900),(300,1100),(500,1300)][step%4]
-            call('shell','input','swipe','500','1100',str(x),str(y),'450')
-            if step%8==0:tap(910,2045)
-            if step%12==5:tap(910,2250)
-        time.sleep(.75 if mode=='loops' else 3)
+            call('shell','input','swipe','500','1100',str(x),str(y),'180' if mode=='tight' else '450')
+            if step%8==0:tap(1030,2045)
+            if step%12==5:tap(1030,2250)
+        time.sleep(.05 if mode=='tight' else .75 if mode=='loops' else 3)
         if step%4==0:
             raw=logs();parts.append(raw)
             if 'MATCH_PAUSED' in raw:
@@ -97,12 +106,16 @@ def match(hero,difficulty,mode,number):
     data['front_facing']=bool(pose and float(pose[1])>.9 and float(pose[2])>.85)
     if not data['match_results']:
         save(name+'_incomplete',log,data);raise RuntimeError('Match did not complete; no result UI taps will be sent')
-    # Confirm both result buttons rather than assuming they are clickable.
+    # Confirm replay through a fresh match and landing, then exit via pause.
     call('logcat','-c');tap(530,2030);deadline=time.monotonic()+20
     replay=logs()
     while 'PLAYER_DROP_LANDED' not in replay and time.monotonic()<deadline:
         time.sleep(.6);replay=logs()
     data['replay']='AI_DIFFICULTY_MATCH ' in replay and 'PLAYER_DROP_LANDED' in replay
+    outcome=re.search(r'MATCH_OUTCOME winner=(\d+) playerLives=(-?\d+) reason=([^\n]+)',log)
+    data['outcome']=dict(winner=int(outcome[1]),player_lives=int(outcome[2]),reason=outcome[3]) if outcome else None
+    data['eliminated_player_awarded_win']=bool(outcome and int(outcome[1])==1 and int(outcome[2])<=0)
+    data['pass']=data['stable_camera'] and data['front_facing'] and data['replay'] and not data['errors'] and not data['eliminated_player_awarded_win'] and (VERSION=='0.6.4' or outcome is not None)
     log+='\nREPLAY_PHASE\n'+replay
     tap(965,190);time.sleep(.3);tap(530,1460);time.sleep(1)
     save(name,log,data);return data
@@ -119,6 +132,7 @@ if __name__=='__main__':
     if args.stress:
         # No process restarts: use replay/menu during a continuous session.
         menu(1);tap(530,2050);time.sleep(4);start=time.monotonic();step=0;parts=[];completed=0;last_result='';memory=[dict(seconds=0,pss_kib=memory_pss())]
+        initial_pid=call('shell','pidof',PACKAGE).strip();replays=[]
         while time.monotonic()-start<args.stress*60:
             raw=logs();parts.append(raw)
             if raw.rfind('MATCH_PAUSED')>raw.rfind('MATCH_RESUMED'):
@@ -126,11 +140,25 @@ if __name__=='__main__':
                 raise RuntimeError('Game was paused externally; stopping stress QA')
             rows=[line for line in raw.splitlines() if 'AI_BALANCE_RESULT ' in line]
             if rows and rows[-1]!=last_result:
-                completed+=1;last_result=rows[-1];shot('stress_result_'+str(completed));tap(530,2030);time.sleep(4)
+                completed+=1;last_result=rows[-1];shot('stress_result_'+str(completed))
+                previous_landings=raw.count('PLAYER_DROP_LANDED')
+                tap(530,2030);deadline=time.monotonic()+20;replay=logs()
+                while replay.count('PLAYER_DROP_LANDED')<=previous_landings and time.monotonic()<deadline:
+                    time.sleep(.6);replay=logs()
+                landed=replay.count('PLAYER_DROP_LANDED')>previous_landings
+                replays.append(dict(match=completed,landed=landed))
+                if not landed:
+                    save('stress_replay_failed',replay,dict(replays=replays,seconds=round(time.monotonic()-start,1)))
+                    raise RuntimeError('Replay did not reach a fresh landing')
             x,y=[(700,1100),(500,900),(300,1100),(500,1300)][step%4]
             call('shell','input','swipe','500','1100',str(x),str(y),'650')
-            if step%8==0:tap(910,2045)
+            if step%8==0:tap(1030,2045)
             time.sleep(.7);step+=1
             if step%20==0:
                 seconds=round(time.monotonic()-start);memory.append(dict(seconds=seconds,pss_kib=memory_pss()));print('STRESS_SECONDS',seconds,flush=True)
-        log='\n'.join(dict.fromkeys('\n'.join(parts).splitlines()));data=result(log);data.update(seconds=round(time.monotonic()-start,1),completed_matches=completed,memory=memory);save('stress_report',log,data)
+        parts.append(logs());memory.append(dict(seconds=round(time.monotonic()-start),pss_kib=memory_pss()))
+        final_pid=call('shell','pidof',PACKAGE).strip()
+        log='\n'.join(dict.fromkeys('\n'.join(parts).splitlines()));data=result(log)
+        data.update(seconds=round(time.monotonic()-start,1),completed_matches=completed,memory=memory,replays=replays,initial_pid=initial_pid,final_pid=final_pid,same_process=bool(initial_pid and initial_pid==final_pid))
+        data['pass']=data['same_process'] and not data['errors'] and all(r['landed'] for r in replays) and completed>=2
+        save('stress_report',log,data)

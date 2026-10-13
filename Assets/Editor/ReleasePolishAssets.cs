@@ -10,7 +10,7 @@ namespace BrainrotPlanet.Editor
     public static class ReleasePolishAssets
     {
         private static readonly string[] Names={"Tralalero","Bombardiro","Frigo","Bombombini","Ballerina","Assassino","Patapim","TungSahur","Lirili","Frulli","Boneca","Trippi","Troppa"};
-        private static string Model(int i)=>"Assets/Resources/Characters/"+Names[i]+"_"+(i==0?"v05":i==1?"v06":i==12?"v01":"v04")+".fbx";
+        private static string Model(int i)=>"Assets/Resources/Characters/"+Names[i]+"_"+(i==0?"v06":i==1?"v06":i==12?"v01":"v04")+".fbx";
         public static void Prepare()
         {
             const string dir="Assets/Resources/Characters/Victory064";
