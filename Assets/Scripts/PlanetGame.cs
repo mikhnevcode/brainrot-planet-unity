@@ -18,6 +18,22 @@ namespace BrainrotPlanet
         private readonly LineRenderer[] pathRenderers = new LineRenderer[5];
         private readonly string[] characters={"ТРАЛАЛЕРО ТРАЛАЛА ","БОМБАРДИРО КРОКОДИЛО ","ФРИГО КАМЕЛО ","БОМБОМБИНИ ГУСИНИ ","БАЛЕРИНА КАПУЧИНО ","КАПУЧИНО АССАСИНО ","БРР БРР ПАТАПИМ ","ТУНГ ТУНГ ТУНГ САХУР ","ЛИРИЛИ ЛАРИЛА ","ФРУЛЛИ ФРУЛЛА ","БОНЕКА АМБАЛАБУ ","ТРИППИ ТРОППИ "};
         private readonly string[] skillNames={"АКУЛИЙ РЫВОК","3 БОМБЫ","ЛЕДЯНАЯ ВОЛНА","ТУРБО","КОФЕЙНЫЙ ВИХРЬ","ТЕНЕВОЙ РЫВОК","ЛЕСНАЯ ХВАТКА","БАРАБАННЫЙ УДАР","КАКТУСНАЯ БУРЯ","ВОЗДУШНЫЙ ТАНЕЦ","ПРУЖИНА","ВСПЛЕСК КРАСКИ"};
+        private static readonly Color[] HeroColors={
+            new Color(.08f,.72f,1f),new Color(.32f,.77f,.20f),
+            new Color(.24f,.82f,.96f),new Color(1f,.48f,.12f),
+            new Color(1f,.30f,.67f),new Color(.61f,.31f,.94f),
+            new Color(.20f,.77f,.37f),new Color(.82f,.50f,.16f),
+            new Color(.49f,.82f,.20f),new Color(.22f,.70f,1f),
+            new Color(1f,.40f,.22f),new Color(.91f,.24f,.98f)};
+        private static readonly Color[] HeroAccents={
+            new Color(.77f,.96f,1f),new Color(.92f,1f,.33f),
+            new Color(.82f,.98f,1f),new Color(1f,.88f,.27f),
+            new Color(1f,.77f,.91f),new Color(.90f,.72f,1f),
+            new Color(.76f,1f,.43f),new Color(1f,.79f,.34f),
+            new Color(.91f,1f,.48f),new Color(.70f,.94f,1f),
+            new Color(1f,.82f,.35f),new Color(.52f,.94f,1f)};
+        private static readonly Color[] DifficultyColors={
+            new Color(.15f,.72f,.92f),new Color(1f,.57f,.14f),new Color(.94f,.20f,.38f)};
         private static readonly string[] DifficultyLabels={"ЛЕГКО","СРЕДНЕ","СЛОЖНО"};
         private int selectedHero=0;
         private AiDifficulty chosenDifficulty=AiDifficulty.Medium;
@@ -46,8 +62,14 @@ namespace BrainrotPlanet
         private Vector2 steerOrigin;
         private int heroPage;
         private Rect skillArea,jumpArea;
-        private Texture2D whitePixel;
+        private Texture2D whitePixel,softCircle;
+        private RenderTexture heroPreviewTexture;
+        private Camera heroPreviewCamera;
+        private GameObject heroPreviewRoot,heroPreviewRig;
+        private int previewHero=-1;
+        private bool heroMenuLogged;
         private GUIStyle headerStyle,menuStyle,buttonStyle,smallStyle,enemyArrowStyle;
+        private GUIStyle heroNameStyle,heroSkillStyle,heroBadgeStyle,clearButtonStyle;
         private float pathUpdate;
         private Transform worldRoot;
         private bool sceneLoaded;
@@ -67,8 +89,25 @@ namespace BrainrotPlanet
             Destroy(requiredTypes);
             whitePixel=new Texture2D(1,1);
             whitePixel.SetPixel(0,0,Color.white);whitePixel.Apply();
+            softCircle=CreateSoftCircle(96);
             SetupCamera();
             SetupLighting();
+        }
+        private static Texture2D CreateSoftCircle(int size)
+        {
+            var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);
+            texture.name="Hero menu soft glow";
+            texture.wrapMode=TextureWrapMode.Clamp;
+            var pixels=new Color[size*size];
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                float px=(x+.5f)/size*2f-1f;
+                float py=(y+.5f)/size*2f-1f;
+                float alpha=Mathf.Clamp01(1f-Mathf.Sqrt(px*px+py*py));
+                pixels[y*size+x]=new Color(1f,1f,1f,alpha*alpha);
+            }
+            texture.SetPixels(pixels);texture.Apply(false,true);
+            return texture;
         }
         private void SetupCamera()
         {
@@ -92,6 +131,7 @@ namespace BrainrotPlanet
         }
         public void StartGame()
         {
+            HideHeroPreview();
             Debug.Log("AI_DIFFICULTY_MATCH level="+chosenDifficulty);
             if(worldRoot!=null)Destroy(worldRoot.gameObject);
             foreach(LineRenderer l in pathRenderers)if(l!=null)Destroy(l.gameObject);
@@ -409,6 +449,14 @@ namespace BrainrotPlanet
         }
         private void Update()
         {
+            if(State==MatchState.Menu)
+            {
+                EnsureHeroPreview();
+                if(heroPreviewRig!=null)
+                    heroPreviewRig.transform.localRotation=Quaternion.Euler(
+                        0f,Mathf.Sin(Time.unscaledTime*.72f)*7f,0f);
+                return;
+            }
             if(State==MatchState.End)
             {
                 if(victoryActor!=null)
@@ -637,6 +685,116 @@ namespace BrainrotPlanet
             enemyArrowStyle=new GUIStyle(GUI.skin.label){fontSize=40,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter};
             enemyArrowStyle.normal.textColor=Color.white;
             buttonStyle=new GUIStyle(GUI.skin.button){fontSize=17,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter,wordWrap=true};
+            heroNameStyle=new GUIStyle(GUI.skin.label){fontSize=15,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleLeft,wordWrap=true};
+            heroNameStyle.normal.textColor=Color.white;
+            heroSkillStyle=new GUIStyle(GUI.skin.label){fontSize=11,alignment=TextAnchor.MiddleLeft,wordWrap=true};
+            heroSkillStyle.normal.textColor=new Color(.92f,.96f,1f);
+            heroBadgeStyle=new GUIStyle(GUI.skin.label){fontSize=11,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter};
+            heroBadgeStyle.normal.textColor=Color.white;
+            clearButtonStyle=new GUIStyle(GUI.skin.button){fontSize=16,fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter,wordWrap=true};
+            clearButtonStyle.normal.background=null;clearButtonStyle.hover.background=null;
+            clearButtonStyle.active.background=null;clearButtonStyle.focused.background=null;
+            clearButtonStyle.normal.textColor=Color.white;clearButtonStyle.hover.textColor=Color.white;
+            clearButtonStyle.active.textColor=Color.white;clearButtonStyle.focused.textColor=Color.white;
+        }
+        private static void SetLayerRecursively(GameObject root,int layer)
+        {
+            root.layer=layer;
+            foreach(Transform child in root.transform)SetLayerRecursively(child.gameObject,layer);
+        }
+        private void EnsureHeroPreview()
+        {
+            const int previewLayer=30;
+            if(heroPreviewCamera==null)
+            {
+                var cameraObject=new GameObject("Hero menu portrait camera");
+                heroPreviewCamera=cameraObject.AddComponent<Camera>();
+                heroPreviewCamera.clearFlags=CameraClearFlags.SolidColor;
+                heroPreviewCamera.backgroundColor=new Color(0f,0f,0f,0f);
+                heroPreviewCamera.cullingMask=1<<previewLayer;
+                heroPreviewCamera.fieldOfView=31f;
+                heroPreviewCamera.nearClipPlane=.03f;heroPreviewCamera.farClipPlane=30f;
+                heroPreviewCamera.allowHDR=false;heroPreviewCamera.allowMSAA=true;
+                heroPreviewTexture=new RenderTexture(512,512,24,RenderTextureFormat.ARGB32);
+                heroPreviewTexture.name="Selected hero portrait";
+                heroPreviewTexture.antiAliasing=4;
+                heroPreviewTexture.Create();
+                heroPreviewCamera.targetTexture=heroPreviewTexture;
+                if(worldCamera!=null)worldCamera.cullingMask&=~(1<<previewLayer);
+
+                var keyObject=new GameObject("Hero menu key light");
+                keyObject.transform.SetParent(cameraObject.transform,false);
+                keyObject.transform.localRotation=Quaternion.Euler(28f,-32f,0f);
+                var key=keyObject.AddComponent<Light>();key.type=LightType.Directional;
+                key.color=new Color(1f,.88f,.73f);key.intensity=1.25f;key.cullingMask=1<<previewLayer;
+                var fillObject=new GameObject("Hero menu fill light");
+                fillObject.transform.SetParent(cameraObject.transform,false);
+                fillObject.transform.localPosition=new Vector3(-2f,1.5f,-2f);
+                var fill=fillObject.AddComponent<Light>();fill.type=LightType.Point;
+                fill.color=new Color(.28f,.68f,1f);fill.intensity=2.3f;fill.range=7f;
+                fill.cullingMask=1<<previewLayer;
+            }
+            heroPreviewCamera.enabled=true;
+            if(previewHero==selectedHero&&heroPreviewRoot!=null)return;
+            if(heroPreviewRoot!=null)Destroy(heroPreviewRoot);
+            heroPreviewRoot=new GameObject("Selected hero menu preview");
+            heroPreviewRig=new GameObject("Portrait turntable");
+            heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
+            AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
+            SetLayerRecursively(heroPreviewRoot,previewLayer);
+
+            Renderer[] renderers=heroPreviewRig.GetComponentsInChildren<Renderer>(true);
+            if(renderers.Length>0)
+            {
+                Bounds bounds=renderers[0].bounds;
+                for(int i=1;i<renderers.Length;i++)bounds.Encapsulate(renderers[i].bounds);
+                float footprint=Mathf.Max(bounds.size.x,bounds.size.z)*.72f;
+                var platform=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                platform.name="Hero portrait colour podium";
+                platform.transform.SetParent(heroPreviewRoot.transform,false);
+                platform.transform.position=new Vector3(bounds.center.x,bounds.min.y-.035f,bounds.center.z);
+                platform.transform.localScale=new Vector3(Mathf.Max(.42f,footprint),.035f,Mathf.Max(.42f,footprint));
+                platform.GetComponent<Renderer>().sharedMaterial=Colors.New(HeroColors[selectedHero],true);
+                Collider collider=platform.GetComponent<Collider>();if(collider!=null)Destroy(collider);
+                SetLayerRecursively(platform,previewLayer);
+
+                float largest=Mathf.Max(bounds.size.y,Mathf.Max(bounds.size.x,bounds.size.z));
+                float distance=Mathf.Max(1.75f,largest*1.85f);
+                Vector3 target=bounds.center+Vector3.up*(bounds.size.y*.035f);
+                heroPreviewCamera.transform.position=target+new Vector3(0f,bounds.size.y*.04f,-distance);
+                heroPreviewCamera.transform.LookAt(target);
+            }
+            previewHero=selectedHero;
+            Debug.Log("HERO_MENU_PREVIEW_READY index="+selectedHero+
+                " color="+ColorUtility.ToHtmlStringRGB(HeroColors[selectedHero]));
+        }
+        private void HideHeroPreview()
+        {
+            if(heroPreviewCamera!=null)heroPreviewCamera.enabled=false;
+            if(heroPreviewRoot!=null)Destroy(heroPreviewRoot);
+            heroPreviewRoot=null;heroPreviewRig=null;previewHero=-1;
+        }
+        private void OnDestroy()
+        {
+            if(heroPreviewTexture!=null)
+            {
+                heroPreviewTexture.Release();
+                Destroy(heroPreviewTexture);
+            }
+            if(softCircle!=null)Destroy(softCircle);
+            if(whitePixel!=null)Destroy(whitePixel);
+        }
+        private void DrawGlow(Rect rect,Color color)
+        {
+            Color original=GUI.color;GUI.color=color;
+            GUI.DrawTexture(rect,softCircle,ScaleMode.StretchToFill,true);GUI.color=original;
+        }
+        private bool FlatButton(Rect rect,string label,Color color)
+        {
+            Plate(new Rect(rect.x+2f,rect.y+4f,rect.width,rect.height),new Color(0f,0f,0f,.30f));
+            Plate(rect,color);
+            Plate(new Rect(rect.x+2f,rect.y+2f,rect.width-4f,2f),new Color(1f,1f,1f,.24f));
+            return GUI.Button(rect,label,clearButtonStyle);
         }
         private void DrawEnemySignals(float logicalW,float logicalH)
         {
@@ -688,46 +846,87 @@ namespace BrainrotPlanet
             GUI.matrix=Matrix4x4.Scale(new Vector3(guiScale,guiScale,1f));
             if(State==MatchState.Menu)
             {
-                Plate(new Rect(0,0,logicalW,logicalH),new Color(.055f,.065f,.13f,.97f));
-                GUI.Label(new Rect(16,45,logicalW-32,55)," BRAINROT PLANET.IO",headerStyle);
-                GUI.Label(new Rect(22,102,logicalW-44,74),"Десантируйся на планету. Оставляй след и замыкай его, чтобы захватить поверхность!",menuStyle);
-                // Paged hero picker: unlike IMGUI scroll views, taps work reliably on Android.
-                int pageSize=Mathf.Max(3,Mathf.Min(5,Mathf.FloorToInt((logicalH-440)/84f)));
+                Color heroColor=HeroColors[selectedHero];
+                Color heroAccent=HeroAccents[selectedHero];
+                Plate(new Rect(0,0,logicalW,logicalH),new Color(.025f,.035f,.095f,1f));
+                DrawGlow(new Rect(-105,-95,330,330),new Color(heroColor.r,heroColor.g,heroColor.b,.43f));
+                DrawGlow(new Rect(logicalW-205,145,330,330),new Color(heroAccent.r,heroAccent.g,heroAccent.b,.20f));
+                DrawGlow(new Rect(65,logicalH-300,300,300),new Color(.75f,.12f,.95f,.13f));
+                Plate(new Rect(0,0,logicalW,58f),new Color(.04f,.055f,.14f,.82f));
+                GUI.Label(new Rect(14,8,logicalW-28,32),"BRAINROT PLANET.IO",headerStyle);
+                GUI.Label(new Rect(14,36,logicalW-28,19),"СОБЕРИ СВОЕГО ЧЕМПИОНА",smallStyle);
+
+                Rect spotlight=new Rect(18,68,logicalW-36,188);
+                Plate(new Rect(spotlight.x-3,spotlight.y-3,spotlight.width+6,spotlight.height+6),
+                    new Color(heroColor.r,heroColor.g,heroColor.b,.90f));
+                Plate(spotlight,new Color(.045f,.065f,.15f,.94f));
+                Plate(new Rect(spotlight.x,spotlight.y,7f,spotlight.height),heroAccent);
+                DrawGlow(new Rect(18,64,195,195),new Color(heroColor.r,heroColor.g,heroColor.b,.44f));
+                if(heroPreviewTexture!=null)
+                    GUI.DrawTexture(new Rect(21,71,176,180),heroPreviewTexture,ScaleMode.ScaleToFit,true);
+                Plate(new Rect(201,82,79,24),new Color(heroColor.r,heroColor.g,heroColor.b,.90f));
+                GUI.Label(new Rect(201,82,79,24),"ГЕРОЙ "+(selectedHero+1).ToString("00"),heroBadgeStyle);
+                GUI.Label(new Rect(200,109,spotlight.width-193,61),characters[selectedHero].Trim(),heroNameStyle);
+                GUI.Label(new Rect(200,172,spotlight.width-193,20),"СУПЕРСИЛА",heroSkillStyle);
+                GUI.Label(new Rect(200,191,spotlight.width-193,43),skillNames[selectedHero],heroNameStyle);
+
+                // Four large colour cards per page remain reliable touch targets on Android.
+                const int pageSize=4;
                 int pageCount=(characters.Length+pageSize-1)/pageSize;
                 heroPage=Mathf.Clamp(heroPage,0,pageCount-1);
-                GUI.Label(new Rect(84,184,logicalW-168,34),
-                    "ВЫБЕРИ ГЕРОЯ  "+(heroPage+1)+"/"+pageCount,headerStyle);
-                if(heroPage>0 && GUI.Button(new Rect(20,183,56,37),"<<",buttonStyle))
+                GUI.Label(new Rect(83,270,logicalW-166,38),
+                    "ВЫБОР ГЕРОЯ  "+(heroPage+1)+"/"+pageCount,headerStyle);
+                if(heroPage>0 && FlatButton(new Rect(20,271,53,36),"<",new Color(heroColor.r,heroColor.g,heroColor.b,.84f)))
+                {
                     heroPage--;
+                    Debug.Log("HERO_MENU_PAGE page="+(heroPage+1)+"/"+pageCount);
+                }
                 if(heroPage<pageCount-1 &&
-                   GUI.Button(new Rect(logicalW-76,183,56,37),">>",buttonStyle))
+                   FlatButton(new Rect(logicalW-73,271,53,36),">",new Color(heroColor.r,heroColor.g,heroColor.b,.84f)))
+                {
                     heroPage++;
+                    Debug.Log("HERO_MENU_PAGE page="+(heroPage+1)+"/"+pageCount);
+                }
+                float cardWidth=(logicalW-52f)/2f;
                 for(int slot=0;slot<pageSize;slot++)
                 {
                     int i=heroPage*pageSize+slot;
                     if(i>=characters.Length)break;
-                    float y=222+slot*84;
-                    Plate(new Rect(19,y,logicalW-38,78),
-                        i==selectedHero?new Color(.90f,.25f,.52f,.85f):
-                                        new Color(.25f,.34f,.52f,.72f));
-                    if(GUI.Button(new Rect(28,y+7,logicalW-56,65),
-                        characters[i]+"\n"+skillNames[i],buttonStyle))
+                    int column=slot%2,row=slot/2;
+                    Rect card=new Rect(21f+column*(cardWidth+10f),316f+row*88f,cardWidth,80f);
+                    Color cardColor=HeroColors[i],cardAccent=HeroAccents[i];
+                    Plate(new Rect(card.x+2f,card.y+4f,card.width,card.height),new Color(0f,0f,0f,.32f));
+                    if(i==selectedHero)
+                        Plate(new Rect(card.x-3f,card.y-3f,card.width+6f,card.height+6f),cardAccent);
+                    Plate(card,Color.Lerp(new Color(.045f,.06f,.14f,.98f),cardColor,.38f));
+                    Plate(new Rect(card.x,card.y,6f,card.height),cardColor);
+                    Plate(new Rect(card.x+card.width-31f,card.y+7f,24f,22f),new Color(cardColor.r,cardColor.g,cardColor.b,.93f));
+                    GUI.Label(new Rect(card.x+card.width-31f,card.y+7f,24f,22f),(i+1).ToString("00"),heroBadgeStyle);
+                    GUI.Label(new Rect(card.x+13f,card.y+5f,card.width-48f,39f),characters[i].Trim(),heroNameStyle);
+                    GUI.Label(new Rect(card.x+13f,card.y+44f,card.width-21f,29f),skillNames[i],heroSkillStyle);
+                    if(GUI.Button(card,"",clearButtonStyle))
                     {
                         selectedHero=i;
-                        Debug.Log("HERO_MENU_SELECTED index="+i);
+                        previewHero=-1;
+                        Debug.Log("HERO_MENU_SELECTED index="+i+" name="+characters[i].Trim());
                     }
                 }
-                // Always-visible difficulty selector under the current hero page.
+                if(!heroMenuLogged)
+                {
+                    heroMenuLogged=true;
+                    Debug.Log("HERO_MENU_PRESENTED colorfulCards=12 pages="+pageCount+" preview=3D");
+                }
+
                 float diffY=logicalH-226f;
                 float diffWidth=(logicalW-68f)/3f;
+                GUI.Label(new Rect(22,diffY-30f,logicalW-44f,25f),"СЛОЖНОСТЬ СОПЕРНИКОВ",smallStyle);
                 for(int i=0;i<3;i++)
                 {
                     float x=26f+i*(diffWidth+8f);
                     bool picked=(int)chosenDifficulty==i;
-                    Plate(new Rect(x-3f,diffY-3f,diffWidth+6f,48f),
-                        picked?new Color(.92f,.31f,.58f,.95f):
-                               new Color(.18f,.25f,.39f,.92f));
-                    if(GUI.Button(new Rect(x,diffY,diffWidth,42f),DifficultyLabels[i],buttonStyle))
+                    if(picked)Plate(new Rect(x-3f,diffY-3f,diffWidth+6f,48f),HeroAccents[selectedHero]);
+                    Color difficultyColor=picked?DifficultyColors[i]:Color.Lerp(new Color(.08f,.10f,.20f),DifficultyColors[i],.27f);
+                    if(FlatButton(new Rect(x,diffY,diffWidth,42f),DifficultyLabels[i],difficultyColor))
                     {
                         chosenDifficulty=(AiDifficulty)i;
                         PlayerPrefs.SetInt("BrainrotAiDifficulty",i);
@@ -735,8 +934,10 @@ namespace BrainrotPlanet
                         Debug.Log("AI_DIFFICULTY_SELECTED level="+chosenDifficulty);
                     }
                 }
-                if(GUI.Button(new Rect(26,logicalH-166,logicalW-52,60)," ДЕСАНТИРОВАТЬСЯ",buttonStyle))StartGame();
-                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),"145 секунд · 12 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
+                if(FlatButton(new Rect(26,logicalH-166,logicalW-52,60),
+                    "ДЕСАНТИРОВАТЬСЯ  >",Color.Lerp(heroColor,heroAccent,.30f)))StartGame();
+                GUI.Label(new Rect(25,logicalH-94,logicalW-50,70),
+                    "145 секунд · 12 героев · планетная физика\nБез рекламы и интернет-подключения",smallStyle);
             }
             else if(State==MatchState.Playing)
             {
