@@ -1,0 +1,14 @@
+{
+  "replays": [
+    {
+      "match": 1,
+      "landed": true
+    },
+    {
+      "match": 2,
+      "landed": false
+    }
+  ],
+  "seconds": 313.7,
+  "apk_sha256": "7494670453d8187052ede8af6977671fc49799e3dbd42debe84055446dc5e397"
+}

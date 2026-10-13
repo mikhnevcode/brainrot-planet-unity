@@ -1,0 +1,24 @@
+{
+  "errors": [],
+  "fps_windows": 29,
+  "fps_mean": 58.29,
+  "fps_min": 47.92,
+  "match_results": [
+    "10-13 07:06:45.192 14573 14608 I Unity   : AI_BALANCE_RESULT level=Easy winner=1 playerPct=14.40 aiPct=3.73,3.12,2.09 encounterStarts=10 visibleSeconds=72.4 nearSeconds=37.7 dangerSeconds=17.1 nearestEverDeg=2.7 playerMovingSeconds=144.3 captures=51/45 trailsLost=0 duration=145.0"
+  ],
+  "hero": 4,
+  "difficulty": 0,
+  "mode": "tight",
+  "wall_seconds": 151.5,
+  "stable_camera": true,
+  "front_facing": true,
+  "replay": true,
+  "outcome": {
+    "winner": 1,
+    "player_lives": 3,
+    "reason": "ВРЕМЯ ВЫШЛО"
+  },
+  "eliminated_player_awarded_win": false,
+  "pass": true,
+  "apk_sha256": "7494670453d8187052ede8af6977671fc49799e3dbd42debe84055446dc5e397"
+}

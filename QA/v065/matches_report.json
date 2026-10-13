@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "errors": [],
+      "fps_windows": 9,
+      "fps_mean": 57.86,
+      "fps_min": 50.11,
+      "match_results": [
+        "10-13 06:52:59.020 11915 11940 I Unity   : AI_BALANCE_RESULT level=Easy winner=2 playerPct=5.62 aiPct=2.11,1.50,1.74 encounterStarts=6 visibleSeconds=45.3 nearSeconds=33.2 dangerSeconds=17.6 nearestEverDeg=0.9 playerMovingSeconds=42.7 captures=19/17 trailsLost=3 duration=45.6"
+      ],
+      "hero": 4,
+      "difficulty": 0,
+      "mode": "loops",
+      "wall_seconds": 52.4,
+      "stable_camera": true,
+      "front_facing": true,
+      "replay": true,
+      "outcome": {
+        "winner": 2,
+        "player_lives": 0,
+        "reason": "ЗАКОНЧИЛИСЬ ЖИЗНИ"
+      },
+      "eliminated_player_awarded_win": false,
+      "pass": true,
+      "apk_sha256": "7494670453d8187052ede8af6977671fc49799e3dbd42debe84055446dc5e397"
+    },
+    {
+      "errors": [],
+      "fps_windows": 29,
+      "fps_mean": 59.19,
+      "fps_min": 53.51,
+      "match_results": [
+        "10-13 06:55:46.318 12793 12822 I Unity   : AI_BALANCE_RESULT level=Medium winner=3 playerPct=1.11 aiPct=3.76,4.67,3.92 encounterStarts=10 visibleSeconds=144.7 nearSeconds=9.5 dangerSeconds=0.0 nearestEverDeg=19.0 playerMovingSeconds=0.0 captures=0/32 trailsLost=0 duration=145.0"
+      ],
+      "hero": 1,
+      "difficulty": 1,
+      "mode": "idle",
+      "wall_seconds": 152.6,
+      "stable_camera": true,
+      "front_facing": true,
+      "replay": true,
+      "outcome": {
+        "winner": 3,
+        "player_lives": 3,
+        "reason": "ВРЕМЯ ВЫШЛО"
+      },
+      "eliminated_player_awarded_win": false,
+      "pass": true,
+      "apk_sha256": "7494670453d8187052ede8af6977671fc49799e3dbd42debe84055446dc5e397"
+    },
+    {
+      "errors": [],
+      "fps_windows": 29,
+      "fps_mean": 58.96,
+      "fps_min": 52.91,
+      "match_results": [
+        "10-13 06:58:34.928 13556 13584 I Unity   : AI_BALANCE_RESULT level=Hard winner=2 playerPct=0.05 aiPct=6.02,5.37,5.54 encounterStarts=24 visibleSeconds=144.3 nearSeconds=64.9 dangerSeconds=17.1 nearestEverDeg=2.6 playerMovingSeconds=0.0 captures=0/78 trailsLost=0 duration=145.0"
+      ],
+      "hero": 0,
+      "difficulty": 2,
+      "mode": "idle",
+      "wall_seconds": 151.1,
+      "stable_camera": true,
+      "front_facing": true,
+      "replay": true,
+      "outcome": {
+        "winner": 2,
+        "player_lives": 3,
+        "reason": "ВРЕМЯ ВЫШЛО"
+      },
+      "eliminated_player_awarded_win": false,
+      "pass": true,
+      "apk_sha256": "7494670453d8187052ede8af6977671fc49799e3dbd42debe84055446dc5e397"
+    }
+  ],
+  "apk_sha256": "7494670453d8187052ede8af6977671fc49799e3dbd42debe84055446dc5e397"
+}
