@@ -1,4 +1,4 @@
-# Brainrot Planet.io — отчёт о доводке 0.6.1
+# Brainrot Planet.io — отчёт о доводке 0.6.2
 
 Дата завершения: 13 октября 2026 года
 Проект: `mikhnevcode/brainrot-planet-unity`
@@ -14,6 +14,7 @@
 - Процедурные вторичные движения приглушаются во время авторских Drop, Special и VictoryShow, поэтому Animator и `HeroMotion` не выполняют двойные вращения.
 - Планета получила 7 отдельных сглаженных холмов и 6 кратеров с вогнутыми чашами вместо цилиндров. Гряд нет; герои подпрыгивают только на холмах, но не на кромках кратеров.
 - Меню выбора показывает все 12 героев на трёх цветных страницах. У выбранного героя есть живой 3D-портрет из его FBX, индивидуальная палитра, название способности и крупная подсветка выбора.
+- Bombardiro v06 получил цельную органическую голову с текстурой чешуи и картой нормалей; исправлен просвечивающий фюзеляж (обратные нормали и открытые торцы). Плотный Blender-источник для Sculpt Mode сохранён отдельно от мобильной сетки.
 
 ## Карта архитектуры
 
@@ -33,7 +34,8 @@
 3. `1a0e4cb` — стабильная victory-сцена, фронтальная ориентация победителя, цветные шевроны врагов и воспроизводимый Android QA.
 4. `7865a39` — детализированный mesh-native рельеф: отдельные кратеры и холмы, нормали шва/полюсов, прыжки на холмах и PlanetRelief smoke.
 5. `3bd8ba4` — цветное меню 12 героев с реальными 3D-превью, цветными карточками и новой навигацией 2×2.
-6. Bombardiro v04 — новая детализированная Blender-модель с сохранением всех 8 анимаций, отдельный трёхчетвертной портрет и Android QA.
+6. `2fce890` — Bombardiro v04 с сохранением всех 8 анимаций, отдельный трёхчетвертной портрет и Android QA.
+7. `88bff71` — Bombardiro v06: цельная крокодилья морда, карты кожи, исходник для Sculpt Mode, исправленные нормали корпуса и размеры портрета.
 
 ## Герои и анимации
 
@@ -63,10 +65,13 @@
 | Последний короткий регресс | 58,02 FPS; landing/movement/collision/territory PASS; fatal=false |
 | Рельеф 0.6.0 | 7 холмов, 6 кратеров, primitiveProps=0; маршрут кратера без ложного bounce; маршрут холма — bounce; 58,63 FPS в среднем |
 | Меню 0.6.0 | 3/3 страницы, 12/12 выборов и 3D-превью; длинные имена читаются; выбранный герой запускается в матч |
-| 12 героев, финальный APK | 12/12 selection/preview/Drop/Land/Run/Special/VFX; 56,70–58,90 FPS; fatal=false |
+| 12 героев, APK 0.6.0 | 12/12 selection/preview/Drop/Land/Run/Special/VFX; 56,70–58,90 FPS; fatal=false |
 | Victory игрока, 0.6.0 | team 1; 168 свайпов; upDot=0,968; faceDot=1,000; 58,46 FPS; Play Again=true |
 | Victory AI, 0.6.0 | Hard без ввода; team 2; upDot=0,968; faceDot=1,000; 59,06 FPS; Play Again=true |
 | Bombardiro v04, 0.6.1 | 7/7 renderer-секций; Drop/Land/Run/Special/VFX — PASS; 57,5–59,5 FPS; fatal=false |
+| 12 героев, APK 0.6.2 | 12/12 selection/preview/Drop/Land/Run/Special/VFX; 56,1–59,1 FPS (среднее 57,92); fatal=false |
+| Победа Bombardiro, 0.6.2 | team 1; 168 свайпов; upDot=0,968; faceDot=1,000; 59,06 FPS; Play Again=true |
+| Победа AI Bombardiro, 0.6.2 | Hard без ввода; team 2; upDot=0,968; faceDot=1,000; 59,10 FPS; Play Again=true |
 
 Цель не ниже 55 FPS в среднем выполнена во всех перечисленных игровых измерениях. Medium и Hard не шли ровно 145 секунд, поскольку штатное условие победы завершило матч раньше; это зафиксировано как результат, а не представлено как полный 145-секундный геймплей.
 
@@ -78,9 +83,9 @@
 
 ## APK
 
-- URL: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.6.1.apk
-- Размер: 53 852 238 байт.
-- SHA-256: `9CE08C2E7B7CDF16C1B24448B26C62308208CA471A12C6DCC7729DCAD9398794`.
+- URL: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.6.2.apk
+- Размер: 60 058 976 байт.
+- SHA-256: `9F642597B1ED7DBCB39FE4A08A147C6392184F84D3C0A58E3AC0716CC75F6A6F`.
 - Сервер и повторно скачанная HTTPS-копия дали одинаковую контрольную сумму; HTTP status — 200.
 
 ## QA-материалы
@@ -103,6 +108,11 @@
 - `QA/v061/Bombardiro_Menu_Realme_061.png`
 - `QA/v061/Bombardiro_Landed_Realme_061.png`
 - `QA/v061/Bombardiro_Special_Realme_061.png`
+- `QA/v062/All12_Realme_062.jpg`
+- `QA/v062/Bombardiro_Menu_Realme_062.png`
+- `QA/v062/PlayerVictory_Stable_062.png`
+- `QA/v062/AI_Victory_Stable_062.png`
+- `QA_BOMBARDIRO_V06.md` — исправление нормалей, органическая сетка, скульпт-источник и границы Android-проверки.
 
 ## Ограничения и рекомендации
 

@@ -1,0 +1,45 @@
+{
+  "build": "0.6.2",
+  "phone": "Realme RMX3151",
+  "results": [
+    {
+      "scenario": "player_win_controlled",
+      "winner": 1,
+      "winner_ok": true,
+      "stage_world_up": true,
+      "hero_world_up": true,
+      "camera_stable": true,
+      "camera_metrics": {
+        "up_dot": 0.968,
+        "face_dot": 1.0,
+        "screen_x": 0.5,
+        "screen_y": 0.57,
+        "depth": 4.73
+      },
+      "steady_fps": 59.06,
+      "fatal": false,
+      "control_swipes": 168,
+      "screenshot": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\qa_victory_stage_062\\PlayerVictory_Stable_062.png",
+      "play_again": true
+    },
+    {
+      "scenario": "ai_win_no_input_hard",
+      "winner": 2,
+      "winner_ok": true,
+      "stage_world_up": true,
+      "hero_world_up": true,
+      "camera_stable": true,
+      "camera_metrics": {
+        "up_dot": 0.968,
+        "face_dot": 1.0,
+        "screen_x": 0.5,
+        "screen_y": 0.57,
+        "depth": 4.73
+      },
+      "steady_fps": 59.1,
+      "fatal": false,
+      "screenshot": "C:\\Rabota\\projects\\BrainrotPlanetUnity\\qa_victory_stage_062\\AI_Victory_Stable_062.png",
+      "play_again": true
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+[
+  {
+    "hero": 0,
+    "name": "Tralalero",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:45:18.099 10256 10314 I Unity   : PERF_SAMPLE stage=game fps=56.70 p95ms=17.0 maxms=83.8 samples=284 avgTotalFps=38.58 managedMB=9.56 gcDelta=2/2/2 window=3",
+      "10-12 23:45:23.096 10256 10314 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=50.3 samples=296 avgTotalFps=43.71 managedMB=9.73 gcDelta=2/2/2 window=4"
+    ]
+  },
+  {
+    "hero": 1,
+    "name": "Bombardiro",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:40:37.552  5599  5641 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.8 samples=288 avgTotalFps=37.01 managedMB=9.71 gcDelta=2/2/2 window=3",
+      "10-12 23:40:42.557  5599  5641 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=33.5 samples=293 avgTotalFps=42.38 managedMB=10.86 gcDelta=2/2/2 window=4"
+    ]
+  },
+  {
+    "hero": 2,
+    "name": "Frigo",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:41:00.188  5898  5957 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.7 samples=288 avgTotalFps=39.52 managedMB=9.41 gcDelta=3/3/3 window=3",
+      "10-12 23:41:05.187  5898  5957 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=44.41 managedMB=10.16 gcDelta=2/2/2 window=4"
+    ]
+  },
+  {
+    "hero": 3,
+    "name": "Bombombini",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:41:22.618  6189  6237 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.8 samples=288 avgTotalFps=36.79 managedMB=9.39 gcDelta=2/2/2 window=3",
+      "10-12 23:41:27.625  6189  6237 I Unity   : PERF_SAMPLE stage=game fps=59.10 p95ms=17.0 maxms=33.5 samples=296 avgTotalFps=42.37 managedMB=10.64 gcDelta=2/2/2 window=4"
+    ]
+  },
+  {
+    "hero": 4,
+    "name": "Ballerina",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:41:45.221  6529  6585 I Unity   : PERF_SAMPLE stage=game fps=57.90 p95ms=17.0 maxms=83.7 samples=290 avgTotalFps=40.12 managedMB=9.47 gcDelta=2/2/2 window=3",
+      "10-12 23:41:50.225  6529  6585 I Unity   : PERF_SAMPLE stage=game fps=58.10 p95ms=17.0 maxms=67.0 samples=291 avgTotalFps=44.62 managedMB=9.78 gcDelta=3/3/3 window=4"
+    ]
+  },
+  {
+    "hero": 5,
+    "name": "Assassino",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:42:08.475  6994  7050 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=83.7 samples=293 avgTotalFps=39.95 managedMB=9.14 gcDelta=2/2/2 window=3",
+      "10-12 23:42:13.483  6994  7050 I Unity   : PERF_SAMPLE stage=game fps=57.70 p95ms=17.0 maxms=67.0 samples=289 avgTotalFps=44.39 managedMB=9.94 gcDelta=3/3/3 window=4"
+    ]
+  },
+  {
+    "hero": 6,
+    "name": "Patapim",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:42:31.710  7313  7382 I Unity   : PERF_SAMPLE stage=game fps=57.10 p95ms=17.0 maxms=83.8 samples=286 avgTotalFps=37.53 managedMB=10.04 gcDelta=2/2/2 window=3",
+      "10-12 23:42:36.726  7313  7382 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.8 samples=288 avgTotalFps=42.52 managedMB=10.36 gcDelta=3/3/3 window=4"
+    ]
+  },
+  {
+    "hero": 7,
+    "name": "TungSahur",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:42:54.659  7672  7748 I Unity   : PERF_SAMPLE stage=game fps=58.10 p95ms=17.0 maxms=83.8 samples=291 avgTotalFps=41.55 managedMB=9.67 gcDelta=2/2/2 window=3",
+      "10-12 23:42:59.659  7672  7748 I Unity   : PERF_SAMPLE stage=game fps=58.70 p95ms=17.0 maxms=67.0 samples=294 avgTotalFps=45.84 managedMB=10.27 gcDelta=2/2/2 window=4"
+    ]
+  },
+  {
+    "hero": 8,
+    "name": "Lirili",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:43:17.608  8193  8228 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=83.7 samples=293 avgTotalFps=38.81 managedMB=8.83 gcDelta=3/3/3 window=3",
+      "10-12 23:43:22.609  8193  8228 I Unity   : PERF_SAMPLE stage=game fps=58.30 p95ms=17.0 maxms=67.0 samples=292 avgTotalFps=43.68 managedMB=9.88 gcDelta=2/2/2 window=4"
+    ]
+  },
+  {
+    "hero": 9,
+    "name": "Frulli",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:43:41.223  8567  8746 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=83.7 samples=293 avgTotalFps=40.73 managedMB=9.45 gcDelta=2/2/2 window=3",
+      "10-12 23:43:46.231  8567  8746 I Unity   : PERF_SAMPLE stage=game fps=56.50 p95ms=17.0 maxms=83.8 samples=283 avgTotalFps=44.67 managedMB=10.13 gcDelta=3/3/3 window=4"
+    ]
+  },
+  {
+    "hero": 10,
+    "name": "Boneca",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:44:04.650  9089  9111 I Unity   : PERF_SAMPLE stage=game fps=56.10 p95ms=34.0 maxms=67.0 samples=281 avgTotalFps=36.79 managedMB=9.68 gcDelta=2/2/2 window=3",
+      "10-12 23:44:09.662  9089  9111 I Unity   : PERF_SAMPLE stage=game fps=58.30 p95ms=17.0 maxms=67.0 samples=292 avgTotalFps=42.16 managedMB=9.71 gcDelta=3/3/3 window=4"
+    ]
+  },
+  {
+    "hero": 11,
+    "name": "Trippi",
+    "selected": true,
+    "preview": true,
+    "rig": true,
+    "drop": true,
+    "landed": true,
+    "run": true,
+    "ability": true,
+    "animated_ability": true,
+    "vfx": true,
+    "fatal": false,
+    "fps_samples": [
+      "10-12 23:44:28.426  9585  9643 I Unity   : PERF_SAMPLE stage=game fps=57.70 p95ms=17.0 maxms=67.0 samples=289 avgTotalFps=37.15 managedMB=9.22 gcDelta=2/2/2 window=3",
+      "10-12 23:44:33.437  9585  9643 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=67.0 samples=288 avgTotalFps=42.24 managedMB=10.82 gcDelta=2/2/2 window=4"
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+10-12 23:40:25.360  5599  5641 I Unity   : HERO_MENU_PREVIEW_READY index=0 color=14B8FF
+10-12 23:40:27.538  5599  5641 I Unity   : PERF_SAMPLE stage=menu fps=11.38 p95ms=50.0 maxms=2093.2 samples=57 avgTotalFps=11.38 managedMB=4.09 gcDelta=20/20/20 window=1
+10-12 23:40:28.193  5599  5641 I Unity   : HERO_MENU_SELECTED index=1 name=БОМБАРДИРО КРОКОДИЛО
+10-12 23:40:28.320  5599  5641 I Unity   : BOMBARDIRO_SCULPT_SKIN albedo=True normal=True opaque=True
+10-12 23:40:28.321  5599  5641 I Unity   : BOMBARDIRO_COLORED_RENDERERS=7
+10-12 23:40:28.404  5599  5641 I Unity   : BOMBARDIRO_RIG_LOADED animator=True
+10-12 23:40:28.405  5599  5641 I Unity   : HERO_MENU_PREVIEW_READY index=1 color=52C433
+10-12 23:40:30.194  5599  5641 I Unity   : BOMBARDIRO_COLORED_RENDERERS=7
+10-12 23:40:30.195  5599  5641 I Unity   : BOMBARDIRO_RIG_LOADED animator=True
+10-12 23:40:30.198  5599  5641 I Unity   : HERO_MOTION_RIG hero=1 torso=True head=True arms=True/True legs=False/False
+10-12 23:40:30.238  5599  5641 I Unity   : HERO_MOTION_RIG hero=2 torso=True head=True arms=True/True legs=True/True
+10-12 23:40:30.335  5599  5641 I Unity   : HERO_MOTION_RIG hero=3 torso=True head=True arms=True/True legs=True/True
+10-12 23:40:30.614  5599  5641 I Unity   : HERO_MOTION_RIG hero=4 torso=True head=True arms=True/True legs=True/True
+10-12 23:40:30.622  5599  5641 I Unity   : HERO_MOTION_DROP hero=1
+10-12 23:40:30.623  5599  5641 I Unity   : PLAYER_DROP_BEGIN altitude=9.00 duration=2.90 character=1
+10-12 23:40:30.628  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=drop authored=2081823275 overlay=1.00 armL=True armR=True
+10-12 23:40:30.854  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=0.02 height=9.00
+10-12 23:40:30.989  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=0.46 height=9.00
+10-12 23:40:31.440  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=0.92 height=8.64
+10-12 23:40:31.877  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=1.36 height=6.88
+10-12 23:40:32.331  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=drop authored=-802706916 overlay=0.32 armL=True armR=True
+10-12 23:40:32.346  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=1.82 height=4.23
+10-12 23:40:32.547  5599  5641 I Unity   : PERF_SAMPLE stage=landing fps=42.13 p95ms=34.0 maxms=804.0 samples=211 avgTotalFps=26.76 managedMB=8.52 gcDelta=8/8/8 window=2
+10-12 23:40:32.780  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=2.26 height=1.77
+10-12 23:40:33.232  5599  5641 I Unity   : PLAYER_DROP_PROGRESS t=2.72 height=0.16
+10-12 23:40:33.435  5599  5641 I Unity   : HERO_MOTION_TOUCHDOWN hero=1
+10-12 23:40:33.436  5599  5641 I Unity   : PLAYER_DROP_LANDED altitude=0.00 character=1
+10-12 23:40:34.140  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=skill authored=137525990 overlay=1.00 armL=True armR=True
+10-12 23:40:35.745  5599  5641 I Unity   : HERO_MOTION_SKILL hero=3
+10-12 23:40:35.746  5599  5641 I Unity   : HERO_FX_ACTIVATED hero=3
+10-12 23:40:35.747  5599  5641 I Unity   : HERO_SPECIAL_ACTIVATED hero=3 team=3 cells=0 cooldown=0.0
+10-12 23:40:35.960  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=2081823275 overlay=1.00 armL=True armR=True
+10-12 23:40:37.552  5599  5641 I Unity   : PERF_SAMPLE stage=game fps=57.50 p95ms=17.0 maxms=83.8 samples=288 avgTotalFps=37.01 managedMB=9.71 gcDelta=2/2/2 window=3
+10-12 23:40:37.766  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-12 23:40:37.850  5599  5641 I Unity   : HERO_MOTION_SKILL hero=4
+10-12 23:40:37.863  5599  5641 I Unity   : HERO_FX_ACTIVATED hero=4
+10-12 23:40:37.864  5599  5641 I Unity   : HERO_SPECIAL_ACTIVATED hero=4 team=4 cells=72 cooldown=0.0
+10-12 23:40:38.679  5599  5641 I Unity   : HERO_MOTION_SKILL hero=1
+10-12 23:40:38.682  5599  5641 I Unity   : HERO_FX_ACTIVATED hero=1
+10-12 23:40:38.682  5599  5641 I Unity   : HERO_SPECIAL_ACTIVATED hero=1 team=1 cells=0 cooldown=12.0
+10-12 23:40:39.585  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=skill authored=-2083125633 overlay=0.16 armL=True armR=True
+10-12 23:40:41.384  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
+10-12 23:40:41.652  5599  5641 I Unity   : HERO_MOTION_SKILL hero=2
+10-12 23:40:41.654  5599  5641 I Unity   : HERO_FX_ACTIVATED hero=2
+10-12 23:40:41.655  5599  5641 I Unity   : HERO_SPECIAL_ACTIVATED hero=2 team=2 cells=0 cooldown=8.9
+10-12 23:40:42.557  5599  5641 I Unity   : PERF_SAMPLE stage=game fps=58.50 p95ms=17.0 maxms=33.5 samples=293 avgTotalFps=42.38 managedMB=10.86 gcDelta=2/2/2 window=4
+10-12 23:40:43.194  5599  5641 I Unity   : HERO_MOTION_ACTIVE hero=1 state=run authored=1748754976 overlay=1.00 armL=True armR=True
