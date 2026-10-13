@@ -1,0 +1,14 @@
+{
+  "build": "0.6.0",
+  "version_code": 37,
+  "phone": "Realme RMX3151",
+  "relief_ready": true,
+  "landing": true,
+  "crater_route_player_bounces": 0,
+  "crater_route_radius_min": 24.71,
+  "crater_route_radius_max": 25.03,
+  "hill_player_bounces": 1,
+  "steady_fps_average": 58.63,
+  "steady_fps_min": 57.7,
+  "fatal_android_error": false
+}
