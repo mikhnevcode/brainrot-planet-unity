@@ -1,0 +1,22 @@
+{
+  "errors": [],
+  "fps_windows": 1,
+  "fps_mean": 52.71,
+  "fps_min": 52.71,
+  "match_results": [],
+  "pause_timer_frozen": true,
+  "paused_remaining": [
+    "144.21",
+    "143.78",
+    "143.22"
+  ],
+  "resumed_remaining": [
+    "144.21",
+    "143.78",
+    "143.22"
+  ],
+  "background_timer_frozen": true,
+  "settings_persistence": "Requires visual comparison of toggled and after_restart screenshots",
+  "settings_restored": "Requires visual check: sound on, haptics off",
+  "apk_sha256": "2fc9480e2622fe42a1b1e619b6c060662fdbbedaac2b446bca9f70a62d07655d"
+}
