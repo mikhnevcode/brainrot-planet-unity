@@ -1,0 +1,48 @@
+Brainrot Planet: TechFounder networking reuse, stage 1
+Date: 2026-10-13 (Asia/Krasnoyarsk)
+
+Source inspected: TechFounder release/techfounder-beta-r103-20261009,
+client commit ed937bf69d0fab3a062e538b8dd49259530ac19c.
+Source code and TechFounder runtime services/data were not modified.
+
+Decision:
+Reuse the bounded async HTTP request wrapper and its regression tests for
+future lobby/account APIs. Adapt the HTTPS base-URL validation without a
+default endpoint. No identities, tokens, saved games or server address copied.
+TechFounder cooperative state polls every 2.5 seconds (project) / 5 seconds
+(social). This is not a real-time action-game replication implementation.
+Do not reuse that polling loop for Brainrot movement or explosions.
+Authentication/save logic needs a separate security and child-data review;
+it has not been ported. Client-authoritative saves must not grant PvP rewards.
+
+Implemented:
+Assets/Scripts/ManagedHttpRequest.cs
+Assets/Scripts/ServerEndpointConfiguration.cs
+Assets/Editor/ManagedHttpRequestQa.cs
+Assets/Editor/NetworkFoundationSmoke.cs
+
+Verified on Unity 6000.2.7f2, Windows Editor, two runs:
+NETWORK_ENDPOINT_SMOKE_PASS cases=12
+MANAGED_HTTP_QA_PASS tests=8
+NETWORK_FOUNDATION_SMOKE_PASS endpointCases=12 httpCases=8 realTimeMatch=false
+Editor exit code 0. Tests contact only loopback test servers.
+HTTP cases: success, protocol error body, empty response, timeout, abort,
+declared/streamed response size limit, redirect not followed.
+First run: Unity Android target enumeration emitted an InvalidOperationException
+for an already-exited discovery process before tests; tests still passed.
+Repeat run: no exception or C# compile error found in the log, same 20 passes.
+Local logs: Logs/network-foundation-smoke.log and
+Logs/network-foundation-smoke-repeat.log (not committed).
+
+Not implemented/verified in this stage:
+No lobby UI/service, account provisioning, live multiplayer, server simulation,
+prediction/interpolation, reconnect, Android/iOS network runtime test, or new APK.
+No game-loop changes, SDK advertising, billing, server deployment or open port.
+Existing public 0.6.6 APK remains unchanged. Foundation code is not called by
+gameplay yet, and therefore does not change offline behaviour.
+
+Next stage: authoritative match vertical slice, explicit local player identity,
+movement/ability command stream and state replication; validate first with one
+computer and Realme, then with the second phone when available. Keep offline
+mode intact. Brainrot services, credentials and databases must be separate
+from TechFounder. Do not expose an unauthenticated LAN prototype publicly.
