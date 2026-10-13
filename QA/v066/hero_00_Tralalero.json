@@ -1,0 +1,21 @@
+{
+  "errors": [],
+  "fps_windows": 6,
+  "fps_mean": 58.53,
+  "fps_min": 54.71,
+  "match_results": [],
+  "hero": 0,
+  "name": "Tralalero",
+  "selected": true,
+  "preview": true,
+  "landed": true,
+  "rig": true,
+  "ability": true,
+  "animated_ability": true,
+  "vfx": true,
+  "captures": 0,
+  "jump": true,
+  "interrupted": false,
+  "pass": true,
+  "apk_sha256": "c9bb3e11e662a6a25bfd2b43c3a53df1712cf06106d701ec843c42874c66e6d3"
+}

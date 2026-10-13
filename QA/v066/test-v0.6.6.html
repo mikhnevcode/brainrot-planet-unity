@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#10172d">
+<title>Brainrot Planet.io — тестовая версия 0.6.6</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#edf4ff;font:17px/1.6 system-ui,sans-serif}main{max-width:880px;margin:auto;padding:40px 20px 64px}h1{font-size:clamp(32px,7vw,52px);line-height:1.1;margin:20px 0}h2{font-size:24px;line-height:1.25}p{margin:12px 0}.tag{display:inline-block;padding:6px 14px;border-radius:24px;background:#203c59;color:#a8ecff;font-weight:700}.lead{color:#bdcde4;font-size:20px}.download{display:block;padding:18px 24px;margin:26px 0 10px;border-radius:24px;background:#92e344;color:#14230b;text-decoration:none;text-align:center;font-size:22px;font-weight:800;box-shadow:0 6px 0 #3f6c19}.download:hover{background:#b0ef74}.download:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:5px}.meta{color:#adbed7;font-size:14px}.panel{margin-top:24px;padding:22px;border-radius:24px;background:#17223a;border:1px solid #304365}.warning{border-color:#a3773d;background:#302619}ul,ol{padding-left:23px}li{margin:9px 0}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}figure{margin:0}img{display:block;width:100%;height:auto;border-radius:20px;border:1px solid #304365}figcaption{color:#bdcde4;font-size:14px;padding:8px 3px}code{font-size:12px;overflow-wrap:anywhere}a{color:#8ce0ff}footer{margin-top:28px;color:#adbed7;font-size:14px}@media(max-width:420px){main{padding:26px 16px}.panel{padding:17px}.gallery{gap:8px}}
+</style>
+</head>
+<body><main>
+<span class="tag">Промежуточная сборка · 13 октября 2026</span>
+<h1>Brainrot Planet.io</h1>
+<p class="lead">Версия 0.6.6: взрывы вместо «пю-пю», большие плавники Тралалеро и исправленные правила победы.</p>
+<a class="download" href="BrainrotPlanet-v0.6.6.apk" download>Скачать APK · 40,2 МиБ</a>
+<p class="meta">Android 8.0 и новее · ARM64 · versionCode 43 · офлайн-игра с ботами</p>
+<section class="panel"><h2>Бомбы теперь звучат при попадании</h2><p>Удар, низкий гул и затухающий раскат вместо высокого сигнала. Три варианта взрыва; далёкие бомбы тише. Отдельный сигнал захвата больше не накладывается на взрыв.</p><p>Пример одного взрыва без музыки и игрового микширования:</p><audio controls preload="none" src="test-v066-explosion.wav" style="width:100%">Аудио можно <a href="test-v066-explosion.wav">скачать в WAV</a>.</audio></section>
+<section class="panel"><h2>Что нового после 0.6.4</h2>
+<ul><li>У Тралалеро вместо отдельных цилиндрических бёдер и голеней — три цельных плавника в кроссовках. Хвост стал шире; модель доработана в Blender, а анимации сохранены.</li><li>После потери всех жизней игрок больше не может стать победителем за счёт ранее захваченной территории.</li><li>Обновлён портрет акулы в меню выбора.</li></ul>
+<figure><img src="test-v065-tralalero.png" alt="Новая модель Тралалеро с цельными плавниками и кроссовками, вид в три четверти" loading="lazy"><figcaption>Модель в Blender. Ниже — настоящие снимки с телефона.</figcaption></figure></section>
+<section class="panel"><h2>Что проверено</h2>
+<p>В предыдущей проверенной точке 0.6.5 на Realme RMX3151 проверены новая акула, прыжок и способность; завершены четыре матча на трёх уровнях сложности. Побеждали и игрок, и боты. Во всех четырёх случаях камера оставалась ровной, победитель смотрел к зрителю, а «Играть ещё» запускала новый матч. Эти исправления входят и в 0.6.6.</p>
+<p id="audio-check">В окончательной 0.6.6 на этом телефоне повторно проверены Тралалеро, прыжок и способность. У Бомбардиро проверены три звука при попадании, отключение звука и его повторное включение. Оценить характер звучания на своём динамике можно по примеру выше и в игре.</p>
+<p id="endurance">Пройден непрерывный 6-минутный прогон без перезапуска приложения: два полных матча и два успешных повтора, без обнаруженных runtime-ошибок. Среднее 70 пятисекундных игровых окон — 58,8 FPS, минимальное окно — 56,9 FPS. Двадцатиминутная проверка ещё не пройдена; результат относится к одному телефону.</p></section>
+<div class="gallery"><figure><img src="test-v066-menu.png" alt="Тралалеро в меню выбора героев версии 0.6.6" loading="lazy"><figcaption>Плавники в игре, снимок 0.6.6</figcaption></figure><figure><img src="test-v066-victory.png" alt="Победа Бомбардиро с 6,2 процента территории и рабочими кнопками результата" loading="lazy"><figcaption>Победа игрока, снимок 0.6.6</figcaption></figure></div>
+<section class="panel warning"><h2>Это ещё не финальный релиз</h2>
+<p>Графика и модели продолжают улучшаться. При начале матча возможна задержка загрузки. Баланс и удобство управления ещё требуют обычных игровых тестов пальцами; автоматические касания их не заменяют.</p>
+<p>Полная проверка всех 13 героев на телефоне относится к 0.6.4. В 0.6.6 все 13 моделей и их победные позы прошли проверки в редакторе Unity; на телефоне повторно проверялись Тралалеро и звуки Бомбардиро.</p></section>
+<section class="panel"><h2>Как установить</h2><ol><li>Открой эту страницу на Android и скачай APK.</li><li>Открой скачанный файл. Если Android запросит разрешение установки из браузера или файлового менеджера, разреши его только для этой установки.</li><li>Установи обновление поверх прежней совместимой сборки. Не удаляй игру: удаление стирает локальные рекорды и настройки. Если обновление отклонено, пришли текст ошибки.</li></ol><p class="meta">Сохраняется прежняя тестовая подпись Android. Для публикации в магазине нужен отдельный релизный процесс.</p></section>
+<section class="panel"><h2>Что попробовать</h2><p>Выбери Бомбардиро и примени «3 бомбы». Звук должен появляться при попадании в землю, а не при нажатии кнопки. Оцени взрыв на динамике телефона при обычной громкости. Затем попробуй Тралалеро: пробеги через холмы, прыгни и оцени силуэт плавников.</p><p>Если заметишь застревание или дрожание ботов, пришли героя, сложность и короткое видео. Звук и вибрацию можно переключать в паузе.</p></section>
+<footer><p id="apk-integrity">APK: 42 182 629 байт. SHA-256:<br><code>c9bb3e11e662a6a25bfd2b43c3a53df1712cf06106d701ec843c42874c66e6d3</code></p><p>Исходники: <a href="https://github.com/mikhnevcode/brainrot-planet-unity/tree/polish/v0.6.6">polish/v0.6.6</a>. <a href="test-v0.6.4.html">Страница предыдущей версии 0.6.4</a> сохранена; вернуться к старому APK поверх нового Android может не разрешить.</p></footer>
+</main></body></html>

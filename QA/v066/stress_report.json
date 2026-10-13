@@ -1,0 +1,73 @@
+{
+  "errors": [],
+  "fps_windows": 70,
+  "fps_mean": 58.77,
+  "fps_min": 56.9,
+  "match_results": [
+    "10-13 07:32:27.406 27814 27852 I Unity   : AI_BALANCE_RESULT level=Easy winner=1 playerPct=6.23 aiPct=3.42,3.31,3.13 encounterStarts=32 visibleSeconds=140.2 nearSeconds=71.9 dangerSeconds=14.1 nearestEverDeg=2.5 playerMovingSeconds=143.7 captures=66/43 trailsLost=0 duration=145.0",
+    "10-13 07:34:58.481 27814 27852 I Unity   : AI_BALANCE_RESULT level=Easy winner=1 playerPct=7.21 aiPct=3.30,3.28,2.63 encounterStarts=13 visibleSeconds=95.0 nearSeconds=16.1 dangerSeconds=0.5 nearestEverDeg=14.2 playerMovingSeconds=144.4 captures=35/33 trailsLost=0 duration=145.0"
+  ],
+  "seconds": 360.7,
+  "completed_matches": 2,
+  "memory": [
+    {
+      "seconds": 0,
+      "pss_kib": 323673
+    },
+    {
+      "seconds": 35,
+      "pss_kib": 366238
+    },
+    {
+      "seconds": 73,
+      "pss_kib": 369116
+    },
+    {
+      "seconds": 111,
+      "pss_kib": 382200
+    },
+    {
+      "seconds": 155,
+      "pss_kib": 391203
+    },
+    {
+      "seconds": 193,
+      "pss_kib": 376815
+    },
+    {
+      "seconds": 232,
+      "pss_kib": 378351
+    },
+    {
+      "seconds": 271,
+      "pss_kib": 391434
+    },
+    {
+      "seconds": 315,
+      "pss_kib": 396884
+    },
+    {
+      "seconds": 354,
+      "pss_kib": 391810
+    },
+    {
+      "seconds": 360,
+      "pss_kib": 391996
+    }
+  ],
+  "replays": [
+    {
+      "match": 1,
+      "landed": true
+    },
+    {
+      "match": 2,
+      "landed": true
+    }
+  ],
+  "initial_pid": "27814",
+  "final_pid": "27814",
+  "same_process": true,
+  "pass": true,
+  "apk_sha256": "c9bb3e11e662a6a25bfd2b43c3a53df1712cf06106d701ec843c42874c66e6d3"
+}
