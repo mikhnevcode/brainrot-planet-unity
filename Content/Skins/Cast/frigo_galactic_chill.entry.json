@@ -1,0 +1,11 @@
+{
+  "id": "frigo_galactic_chill",
+  "hero": 2,
+  "title": "ГАЛАКТИЧЕСКИЙ ХОЛОД",
+  "titleEn": "Galactic Chill",
+  "description": "Звёздная панель · космический ранец",
+  "file": "frigo_galactic_chill-064da12ed4e0960e00bf09f355df2cbeffe1e50e02a3a3526c72ac809a697963.json",
+  "sha256": "064da12ed4e0960e00bf09f355df2cbeffe1e50e02a3a3526c72ac809a697963",
+  "bytes": 172221,
+  "swatch": "#77BFD8"
+}

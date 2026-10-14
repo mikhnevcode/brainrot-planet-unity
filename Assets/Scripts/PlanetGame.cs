@@ -78,6 +78,7 @@ namespace BrainrotPlanet
 
         private void Awake()
         {
+            Debug.Log("BRAINROT_BOOT_GAME_AWAKE");
             SetupNetwork();
             SetupWardrobe();
             Application.SetStackTraceLogType(LogType.Log,StackTraceLogType.None);
@@ -498,8 +499,8 @@ namespace BrainrotPlanet
             if(State==MatchState.Menu)
             {
                 if(DedicatedMatchServer)return;
-                EnsureHeroPreview();
                 RefreshWardrobePreview();
+                EnsureHeroPreview();
                 if(heroPreviewRig!=null)
                 {
                     Quaternion portrait=selectedHero==1?Quaternion.Euler(0f,148f,0f):
@@ -694,7 +695,7 @@ namespace BrainrotPlanet
             var planet=worldRoot.GetComponentInChildren<PlanetSurface>();
             if(planet!=null)planet.GetComponent<Renderer>().enabled=false;
             GameSound.Play(winningTeam==LocalTeam?GameCue.Win:GameCue.Lose);
-            if(!DedicatedMatchServer)
+            if(!DedicatedMatchServer&&!isWardrobeQa)
             {
             float record=PlayerPrefs.GetFloat("BrainrotBestArea",0f);
             newRecord=scores[LocalTeam]>record+.01f;
@@ -813,7 +814,8 @@ namespace BrainrotPlanet
             heroPreviewRig=new GameObject("Portrait turntable");
             heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
             AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
-            if(selectedHero==1&&skinCatalog!=null)SkinVisual.Apply(heroPreviewRig.transform,skinCatalog.Pack(wardrobeOpen?previewSkin:equippedSkin));
+            var previewPack=skinCatalog?.Pack(wardrobeOpen?previewSkin:equippedSkin);
+            if(previewPack!=null&&previewPack.hero==selectedHero)SkinVisual.Apply(heroPreviewRig.transform,previewPack);
             previewFacing=AvatarArt.LocalFacing(heroPreviewRig.transform);
             heroPreviewRig.transform.localRotation=selectedHero==1?Quaternion.Euler(0f,148f,0f):
                 Quaternion.AngleAxis(18f,Vector3.up)*AvatarArt.AlignFacing(previewFacing,Vector3.back);
@@ -822,15 +824,11 @@ namespace BrainrotPlanet
             Renderer[] renderers=heroPreviewRig.GetComponentsInChildren<Renderer>(true);
             if(renderers.Length>0)
             {
-                Bounds bounds=new Bounds(heroPreviewRig.transform.position,Vector3.zero);
-                bool boundsReady=false;
                 foreach(Renderer renderer in renderers)
                 {
                     if(renderer.name=="Paint aura"){renderer.enabled=false;continue;}
-                    if(!renderer.enabled)continue;
-                    if(!boundsReady){bounds=renderer.bounds;boundsReady=true;}
-                    else bounds.Encapsulate(renderer.bounds);
                 }
+                Bounds bounds=AvatarArt.PoseBounds(heroPreviewRig.transform);
                 float footprint=Mathf.Max(bounds.size.x,bounds.size.z)*.72f;
                 var platform=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 platform.name="Hero portrait colour podium";
@@ -1009,8 +1007,8 @@ namespace BrainrotPlanet
                 }
 
                 DrawMenuPolish(logicalW,logicalH);
-                if(FlatButton(new Rect(26,492,logicalW-52,34),"ГАРДЕРОБ БОМБАРДИРО",new Color(.36f,.22f,.60f)))
-                {selectedHero=1;previewSkin=equippedSkin;previewHero=-1;wardrobeOpen=true;}
+                if(FlatButton(new Rect(26,492,logicalW-52,34),"ГАРДЕРОБ ГЕРОЯ",new Color(.36f,.22f,.60f)))
+                {previewSkin=equippedSkin;previewHero=-1;wardrobeScroll=Vector2.zero;wardrobeOpen=true;}
                 float diffY=logicalH-226f;
                 float diffWidth=(logicalW-68f)/3f;
                 GUI.Label(new Rect(22,diffY-30f,logicalW-44f,25f),"СЛОЖНОСТЬ СОПЕРНИКОВ",smallStyle);

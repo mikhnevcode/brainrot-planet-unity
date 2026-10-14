@@ -169,7 +169,7 @@ namespace BrainrotPlanet
                 if (r.ReadInt32() != MatchProtocol.Version) throw new InvalidDataException("Protocol mismatch");
                 int hero = r.ReadByte(); if (hero >= characters.Length) throw new InvalidDataException("Invalid hero");
                 string skin=r.ReadString();if(!SkinCatalog.ValidReference(skin))throw new InvalidDataException("Invalid cosmetic reference");
-                MatchProtocol.End(r); networkHeroes[team] = hero; networkSkins[team]=hero==1?skin:""; p.joined = true;
+                MatchProtocol.End(r); networkHeroes[team] = hero; networkSkins[team]=skin; p.joined = true;
                 Debug.Log("MATCH_PEER_JOINED team=" + team + " hero=" + hero); return;
             }
             if (kind != MatchProtocol.Input || !p.joined) throw new InvalidDataException("Unexpected command");

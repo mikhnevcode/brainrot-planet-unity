@@ -1,0 +1,11 @@
+{
+  "id": "bombardiro_orbital",
+  "hero": 1,
+  "title": "ОРБИТАЛЬНЫЙ СПАСАТЕЛЬ",
+  "titleEn": "Orbital Rescuer",
+  "description": "Солнечные крылья · спасательные реакторы",
+  "file": "bombardiro_orbital-16e059fdfc5650f6d9a54d8c0db1ef7614360759f7907055fe5129db4850f3f3.json",
+  "sha256": "16e059fdfc5650f6d9a54d8c0db1ef7614360759f7907055fe5129db4850f3f3",
+  "bytes": 162521,
+  "swatch": "#43BEEB"
+}

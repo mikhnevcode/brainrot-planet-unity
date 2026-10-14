@@ -1,0 +1,11 @@
+{
+  "id": "assassino_ice_ninja",
+  "hero": 5,
+  "title": "ЛЕДЯНОЙ НИНДЗЯ",
+  "titleEn": "Ice Ninja",
+  "description": "Ледяная броня · снежный знак",
+  "file": "assassino_ice_ninja-259f62be6ab9e05dba429c66cc1d0d1829c8e575d6309a3eae2bca39616747f7.json",
+  "sha256": "259f62be6ab9e05dba429c66cc1d0d1829c8e575d6309a3eae2bca39616747f7",
+  "bytes": 110757,
+  "swatch": "#AEDFE6"
+}

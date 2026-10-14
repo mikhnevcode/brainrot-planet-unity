@@ -1,0 +1,11 @@
+{
+  "id": "frigo_retro_soda",
+  "hero": 2,
+  "title": "РЕТРО-ЛИМОНАД",
+  "titleEn": "Retro Soda",
+  "description": "Ретро-дверцы · арочный приборный щиток",
+  "file": "frigo_retro_soda-29d5db7e899a08c2891dd33687691cc46ac642d4e46c187c598be685360928ad.json",
+  "sha256": "29d5db7e899a08c2891dd33687691cc46ac642d4e46c187c598be685360928ad",
+  "bytes": 183286,
+  "swatch": "#E8AF55"
+}

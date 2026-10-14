@@ -1,0 +1,90 @@
+Brainrot wardrobe 0.7.2-wardrobe65 — 2026-10-14
+
+65 cosmetic appearances: exactly 5 per each of the 13 existing heroes, plus each
+hero's original/classic appearance. 64 schema-2 designs were authored in Blender;
+the already verified Bombardiro lava skin is reused as the 65th appearance.
+Original models, gameplay rig, controller, skills and physical colliders remain
+the base. New outfits use geometry bound to the original named bones and material
+patches preserving the base textures and normal maps.
+
+Authoring
+Characters/build_cast_skins_v072.py creates the complete collection. Its 13 first
+design functions establish the character-specific outfit; cast_skin_variants_v072.py
+adds four designs with distinct geometry and palettes. Blender 5.2.2 was used.
+Run Blender --background --python Characters/build_cast_skins_v072.py.
+An optional -- HeroName regenerates that hero's five entries and then assembles
+the catalog from all existing .entry.json files. Verify catalog count afterwards.
+Authoring outputs are Content/Skins/Cast/<id>.blend, <id>.entry.json and
+<id>-<sha256>.json. The legacy lava source/package stays in Content/Skins/.
+The .blend files contain the original editable base, rig and SKIN-prefixed parts.
+Only SKIN parts enter the downloaded mesh package; the base is already in the app.
+All packages are outside Assets/Resources and are downloaded, not bundled in APK.
+
+Publication
+New clients fetch catalog-cast-v1.json from:
+https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/skins/
+The original catalog.json is kept for 0.7.1 clients. The new client accepts schema
+1 Bombardiro packages and schema 2 packages for all 13 heroes. Manifest revision
+is 2 for this 65-item collection. Upload immutable package files BEFORE replacing
+the manifest. Validate SHA256/byte lengths; retain earlier files for rollback.
+A new outfit supported by schema 2 needs a catalog/content update, not a new APK.
+Adding a new hero, bone type, animation, shader or unsupported mechanic needs code.
+
+Data contract
+Manifest schema 2: at most 128 entries / 128 KiB UTF-8. Each entry has id, hero
+(0..12), title, titleEn, description, swatch=#RRGGBB, file=id-sha256.json, bytes,
+sha256. IDs are stable lowercase alphanumeric/underscore/hyphen, maximum 48 chars.
+Package schema 2: id, hero, bindings[], meshes[]. bindings target exact authored
+material names, with opaque color, metallic, smoothness and optional emission.
+SkinRigProfile maps Bombardiro's runtime material prefix and approved bones.
+Each mesh has name, anchor, vertices, normals, triangles, color, glow. Coordinates
+are Unity model-local rest-pose coordinates, converted from Blender (x,z,-y).
+SkinRestBindings captures model-to-bone matrices before Animator setup; SkinVisual
+converts positions/normals to this original space. A late download therefore fits
+the current animated pose. Keep
+accessories on Head/Skirt/Foot/Wing/etc separate from Body parts across joints.
+Do not place rigid outfits across a moving joint without dividing geometry.
+Limits: <=2 MiB/package, 24 parts, 12000 vertices, 24000 triangles. Every normal
+must be finite/unit length; no downloaded physics, scripts, arbitrary URLs or shaders.
+
+Runtime
+Catalog metadata loads first. Packages load when selected or needed for a remote
+actor. Valid disk cache is reused and file replacement is atomic. Up to 16 parsed
+packages are retained in memory using LRU; instantiated meshes/materials are owned
+by SkinVisual and released when the avatar is destroyed. Old cached files are
+retained on disk; production disk-budget/eviction work is still pending.
+Each hero has its own BrainrotSkin<heroIndex> preference. Classic is the empty ID.
+Missing, invalid or wrong-hero packages leave the original avatar available.
+Match protocol 2 transmits id@sha256. A replica downloads only a reference listed
+in its validated catalog and applies it to the correct existing actor/epoch.
+The dedicated server does not load cosmetic packages. Update its code together
+with clients: it now preserves cosmetic references for every hero, not only hero 1.
+These are free test appearances; this does not implement paid ownership or receipts.
+
+Verification tools
+SkinCatalogSmoke.Run validates schemas, integrity, anchors and a 65-entry manifest.
+CastSkinSmoke.Run checks all 65 appearances, all 13 rigs, exact source material
+matching, opacity, physics count and 15 animation samples per outfit (975 poses).
+SkinPreviewRender.Run writes 3 angle previews per item and one five-item PNG sheet
+per hero under Builds/CastSkinsPreview, including captions.
+MatchNetworkBuild.Android/Windows/Server run the catalog and rig checks before build.
+Android development-only .wardrobe-cast-qa opts into all 65 previews and 13
+game/jump/skill/forced-player-victory fixtures. It writes cast-qa screenshots under
+app persistent storage and suppresses profile rewards. Remove the marker afterwards.
+Android uses UnityPlayerActivity (applicationEntry=Activity). The previous native
+GameActivity repeatedly stalled before scene Awake on the connected RMX3151;
+three consecutive standard-Activity cold launches reached the menu and catalog.
+This is device-specific verification, not a claim about all Android devices.
+Network QA can use BRAINROT_QA_SKIN or .skin-qa-selection to pick a hero/outfit;
+room keys remain external private QA input and never belong in source or APK.
+
+Art rules for further work
+Keep the anatomical front, recognizable face and base silhouette. Tralalero has
+large fins inside three sneakers; Trippi is cat/shrimp, Troppa is fish/bear.
+Preserve rig names and classic model versions. Hardware can use rounded machined
+panels; organic ornament needs formed surfaces, leaves, shells and readable curves.
+Check front, overhead game view and back, then moving joints and victory camera.
+Every new design needs actual geometry differences, not palette-only duplication.
+Preserve eye contrast, mouth, whiskers, feathers/scales and existing team aura.
+Keep excess glow restrained: it must not obscure trails or enemy indicators.
+Save a new ID/hash for new content and do not overwrite immutable package files.

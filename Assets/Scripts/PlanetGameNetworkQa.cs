@@ -12,6 +12,8 @@ namespace BrainrotPlanet
         private IEnumerator Start()
         {
             if(DedicatedMatchServer)yield break;
+            if(File.Exists(Path.Combine(Application.persistentDataPath,".wardrobe-cast-qa")))
+            {yield return RunWardrobeCastQa();yield break;}
             string key=Environment.GetEnvironmentVariable("BRAINROT_QA_KEY");
             string path=Path.Combine(Application.persistentDataPath,".network-qa-key");
             if(string.IsNullOrEmpty(key) && File.Exists(path))key=File.ReadAllText(path).Trim();
@@ -21,8 +23,19 @@ namespace BrainrotPlanet
             float catalogDeadline=Time.unscaledTime+40f;
             while(skinCatalog!=null&&skinCatalog.Busy&&Time.unscaledTime<catalogDeadline)yield return null;
             string skinPath=Path.Combine(Application.persistentDataPath,".skin-qa-selection");
-            if(File.Exists(skinPath))equippedSkin=File.ReadAllText(skinPath).Trim();
-            selectedHero=1; networkKey=key; networkPanel=true; ConnectMatch();
+            selectedHero=1;
+            string qaSkin=Environment.GetEnvironmentVariable("BRAINROT_QA_SKIN");
+            if(string.IsNullOrEmpty(qaSkin)&&File.Exists(skinPath))qaSkin=File.ReadAllText(skinPath).Trim();
+            if(!string.IsNullOrEmpty(qaSkin))
+            {
+                string id=qaSkin;var entry=skinCatalog?.Entry(id);
+                if(entry!=null)
+                {
+                    selectedHero=entry.hero;equippedSkin=id;skinCatalog.EnsureLoaded(id);
+                    while(!skinCatalog.Available(id)&&Time.unscaledTime<catalogDeadline)yield return null;
+                }
+            }
+            networkKey=key; networkPanel=true; ConnectMatch();
             float deadline=Time.unscaledTime+35f;
             while(State!=MatchState.Playing && Time.unscaledTime<deadline)yield return null;
             if(State!=MatchState.Playing){Debug.LogError("MATCH_QA_FAIL no_start");yield break;}

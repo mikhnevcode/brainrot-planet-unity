@@ -1,0 +1,11 @@
+{
+  "id": "boneca_rally_amphibian",
+  "hero": 10,
+  "title": "РАЛЛИ-АМФИБИЯ",
+  "titleEn": "Rally Amphibian",
+  "description": "Гоночная шина · фонари и козырёк",
+  "file": "boneca_rally_amphibian-28b860436ab5f850f82864c66d4f7ff77806246d12ccae180e6454e4f48a0dea.json",
+  "sha256": "28b860436ab5f850f82864c66d4f7ff77806246d12ccae180e6454e4f48a0dea",
+  "bytes": 101967,
+  "swatch": "#F1A52F"
+}

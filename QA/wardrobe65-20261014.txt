@@ -1,0 +1,80 @@
+Brainrot Planet.io — 65-skin wardrobe verification — 2026-10-14
+
+Scope
+Five additional cosmetic appearances for each of the existing 13 heroes (65 total).
+Classic remains selectable separately. 64 editable full-character Blender sources
+and schema-2 mesh packages; the existing verified Bombardiro lava appearance is
+reused as item 65. Original base models, rigs, animations and physics are retained.
+Every new design has geometry and material differences; no paid ownership yet.
+
+Build
+Unity 6000.2.7f2; Blender 5.2.2 LTS.
+Android development IL2CPP: 0.7.2-wardrobe65, versionCode 46.
+APK: Builds/Android/BrainrotPlanet-v0.7.2-wardrobe65.apk
+Bytes: 105234290
+SHA256: 70e69b1cc2e68473911cff5945f28a55d4507495bc8d32e5cdba39a76e1cd5cc
+Windows client and Linux dedicated server also built successfully.
+
+PASS — source/content
+SkinCatalogSmoke: 216 cases (schemas, SHA256/size, invalid paths/IDs/bones, budgets).
+CastSkinSmoke: 13 heroes, 65 skins, 975 animation pose samples; physics unchanged.
+Late binding: all 65 outfits compared before/after sampling Run at 0.37.
+Other build gates: protocol 24, outcome 8, territory join, actor collision.
+195 three-angle previews and 13 five-item collection sheets rendered in Unity.
+HTTPS catalog schema 2 revision 2: exactly 5 entries per hero; 65 immutable packs.
+Total downloaded pack bytes: 10775225. Metadata first, selected packages on demand.
+Packages are outside Resources/Assets; parsed memory cache bounded to 16 entries.
+SkinRestBindings captures original bone space before animation; late downloads do
+not bind accessories in the current animated pose. Dead cached base materials
+are recreated, preventing repeated-preview fallback to grey generic materials.
+
+PASS — Android startup
+Connected device: Realme RMX3151, Android 13, serial E6ZTMFVCEA895HAA.
+GameActivity repeatedly stalled before scene Awake and triggered FocusEvent ANR.
+Standard UnityPlayerActivity selected in the Android build. Three consecutive
+force-stop/cold launches reached both Awake markers, menu and 65-entry catalog.
+Existing app profile and cached outfits were retained. This is not an all-device
+compatibility claim. No root, reboot or whole-app data clearing was performed.
+
+PASS — Android wardrobe fixture on the final standard-Activity APK
+65/65 downloaded/cached appearances previewed through the actual wardrobe.
+13/13 gameplay/jump/skill/forced-player-victory paths; skin present on game and
+victory actors. CAST_WARDROBE_QA_PASS heroes=13 skins=65 profileRewardsUnchanged=true.
+91 screenshots pulled to Logs/wardrobe65-activity-device. Trippi victory inspected:
+upright, head accessory attached, stage/result/replay UI readable.
+Logs/wardrobe65-activity-cast-pass.log preserves full fixture and startup evidence.
+
+PASS — real two-peer network round (phone + Windows, not two phones)
+Live isolated Linux server65; original gateway and private test room reused.
+Windows: Ballerina / ballerina_matcha_fairy, team 1.
+Android: Trippi / trippi_royal_reef, team 2.
+Both clients received correct id@hash references for both heroes. Windows initially
+used classic for the uncached remote Trippi, downloaded it during the match and
+logged MATCH_SKIN_LATE team=2 applied=trippi_royal_reef.
+Both logged MATCH_QA_RESULT epoch=3 winner=3 actions=12, then
+MATCH_QA_PASS result_replay_offline. Bot team 3 won this actual timed round.
+Phone gameplay samples near the round end: approximately 59 FPS; not a full-device
+performance guarantee or long soak. Logs/wardrobe65-network-phone.log and
+Logs/wardrobe65-network-windows2.log. QA markers removed; exact test PC process stopped.
+Final APK published at the existing cast HTTPS directory; HTTP 200 and byte length
+105234290 verified, remote SHA256 matches the local final APK.
+
+PASS — normal touch wardrobe and persistence
+Opened Troppa wardrobe from the normal menu, swiped the list to expose appearance
+five without selecting the row during drag, selected Festival Gourmet and pressed
+Equip. SKIN_EQUIPPED id=troppa_festival_gourmet. After a full force-stop/relaunch,
+the normal menu displayed the same outfit; SKIN_APPLIED confirms cached restore.
+Screens: Logs/wardrobe65-manual-{menu,open,scroll,selected,restored}.png.
+Phone left in the normal menu with this demonstration outfit equipped. Original
+hero choice and gameplay profile retained; no QA opt-in markers remain.
+
+Known boundaries / release work
+These are free art-alpha outfits, not a secure storefront. Server-authoritative
+ownership, receipts, refunds and entitlement restoration remain future work.
+The manifest currently supports at most 128 outfits and a fixed 13-hero rig list.
+New heroes/bones/shaders/mechanics require an app update; supported schema-2
+outfits can be published with immutable packets and a new manifest without one.
+Downloaded disk cache has no automatic eviction yet. Add a production disk budget.
+No iOS build, second-phone verification, low-end device matrix or long soak claim.
+Do not treat automated forced-victory fixtures as game-balance or store-release QA.
+Raw logs/screens remain under ignored Logs/; keys remain outside Git and APK.

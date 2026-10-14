@@ -1,0 +1,11 @@
+{
+  "id": "bombardiro_lava",
+  "hero": 1,
+  "title": "ЛАВОВЫЙ ПЕРЕХВАТЧИК",
+  "description": "Обсидиановая броня · огненные швы",
+  "file": "bombardiro_lava-4fdeaa3f0e2f3ea53739fe32e76bf960f3c9cc027d61adf6dd6880232a18420f.json",
+  "sha256": "4fdeaa3f0e2f3ea53739fe32e76bf960f3c9cc027d61adf6dd6880232a18420f",
+  "bytes": 172199,
+  "swatch": "#EF813B",
+  "titleEn": "Lava Interceptor"
+}

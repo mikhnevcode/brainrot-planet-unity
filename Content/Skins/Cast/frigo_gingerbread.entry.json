@@ -1,0 +1,11 @@
+{
+  "id": "frigo_gingerbread",
+  "hero": 2,
+  "title": "ПРЯНИЧНЫЙ ФРИГО",
+  "titleEn": "Gingerbread Frigo",
+  "description": "Пряничные дверцы · сахарная отделка",
+  "file": "frigo_gingerbread-17f91e579dd5ff2679add59f1c39e97dd6d7fcb53f8396def441fe06e7bd076a.json",
+  "sha256": "17f91e579dd5ff2679add59f1c39e97dd6d7fcb53f8396def441fe06e7bd076a",
+  "bytes": 208734,
+  "swatch": "#D06C59"
+}

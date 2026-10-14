@@ -1,0 +1,11 @@
+{
+  "id": "boneca_neon_rally",
+  "hero": 10,
+  "title": "НЕОНОВОЕ РАЛЛИ",
+  "titleEn": "Neon Rally",
+  "description": "Неоновые ободы · гоночный номер",
+  "file": "boneca_neon_rally-156f5527165b25d00be692c3120e73a4964704758520d2fa67dcdfbd492aecdb.json",
+  "sha256": "156f5527165b25d00be692c3120e73a4964704758520d2fa67dcdfbd492aecdb",
+  "bytes": 131168,
+  "swatch": "#BA88D7"
+}

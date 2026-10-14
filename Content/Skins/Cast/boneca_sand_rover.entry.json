@@ -1,0 +1,11 @@
+{
+  "id": "boneca_sand_rover",
+  "hero": 10,
+  "title": "ПЕСКОХОД",
+  "titleEn": "Sand Rover",
+  "description": "Пустынная сбруя · песочные накладки",
+  "file": "boneca_sand_rover-d6087830b9bbd13643716b9bf8a88f4b431a3dd5e54f881345bb9edbba41b96f.json",
+  "sha256": "d6087830b9bbd13643716b9bf8a88f4b431a3dd5e54f881345bb9edbba41b96f",
+  "bytes": 124199,
+  "swatch": "#D1AE6B"
+}

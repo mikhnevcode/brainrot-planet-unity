@@ -1,0 +1,11 @@
+{
+  "id": "bombardiro_storm_pilot",
+  "hero": 1,
+  "title": "ШТОРМОВОЙ ПИЛОТ",
+  "titleEn": "Storm Pilot",
+  "description": "Грозовые крылья · навигационные антенны",
+  "file": "bombardiro_storm_pilot-6ece088e563a1ebde165c528239cfb4cb64710eb8ba4f9ace7e7a37f5b4b2b20.json",
+  "sha256": "6ece088e563a1ebde165c528239cfb4cb64710eb8ba4f9ace7e7a37f5b4b2b20",
+  "bytes": 194109,
+  "swatch": "#DFB14D"
+}

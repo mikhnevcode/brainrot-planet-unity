@@ -1,0 +1,11 @@
+{
+  "id": "frigo_desert_caravan",
+  "hero": 2,
+  "title": "ПУСТЫННЫЙ КАРАВАН",
+  "titleEn": "Desert Caravan",
+  "description": "Тканый шарф · походный багаж",
+  "file": "frigo_desert_caravan-5d0aebb7dd2e9587b4b55962c57f14ec05b14b28877ee3eb86b65f1bd6cc1bc7.json",
+  "sha256": "5d0aebb7dd2e9587b4b55962c57f14ec05b14b28877ee3eb86b65f1bd6cc1bc7",
+  "bytes": 178295,
+  "swatch": "#A95840"
+}

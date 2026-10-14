@@ -1,0 +1,11 @@
+{
+  "id": "bombardiro_tropical_rescuer",
+  "hero": 1,
+  "title": "ТРОПИЧЕСКИЙ СПАСАТЕЛЬ",
+  "titleEn": "Tropical Rescuer",
+  "description": "Посадочные поплавки · цветные крылья",
+  "file": "bombardiro_tropical_rescuer-645abd85d5e4dea25a20566b49b15b690116c89fb849f07cffcd63c635f5e998.json",
+  "sha256": "645abd85d5e4dea25a20566b49b15b690116c89fb849f07cffcd63c635f5e998",
+  "bytes": 240414,
+  "swatch": "#EFA36B"
+}

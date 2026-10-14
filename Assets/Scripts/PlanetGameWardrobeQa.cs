@@ -1,0 +1,82 @@
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+using System;
+using System.Collections;
+using System.IO;
+using UnityEngine;
+namespace BrainrotPlanet
+{
+    public sealed partial class PlanetGame
+    {
+        // Opt-in device fixture. Profile rewards are suppressed and the selected
+        // hero preference is restored; cosmetic selections below are in-memory only.
+        private IEnumerator RunWardrobeCastQa()
+        {
+            isWardrobeQa=true;Application.runInBackground=true;
+            int originalHero=selectedHero;bool hadHero=PlayerPrefs.HasKey("BrainrotSelectedHero");
+            int savedHero=PlayerPrefs.GetInt("BrainrotSelectedHero",0);
+            var originalSkins=(string[])equippedSkins.Clone();
+            string folder=Path.Combine(Application.persistentDataPath,"cast-qa");Directory.CreateDirectory(folder);
+            try
+            {
+                float deadline=Time.unscaledTime+35f;
+                while(skinCatalog.Manifest.skins.Length<65&&Time.unscaledTime<deadline)yield return null;
+                if(skinCatalog.Manifest.skins.Length<65){Debug.LogError("CAST_WARDROBE_QA_FAIL catalog");yield break;}
+                for(int hero=0;hero<SkinRigProfile.HeroCount;hero++)
+                {
+                    ReturnToMenu();selectedHero=hero;networkPanel=false;previewHero=-1;wardrobeOpen=true;
+                    var entries=new System.Collections.Generic.List<SkinEntry>();foreach(var e in skinCatalog.Manifest.skins)if(e.hero==hero)entries.Add(e);
+                    if(entries.Count!=5){Debug.LogError("CAST_WARDROBE_QA_FAIL five_skins="+hero);yield break;}
+                    for(int variant=0;variant<entries.Count;variant++)
+                    {
+                        var candidate=entries[variant];previewSkin=candidate.id;skinCatalog.EnsureLoaded(candidate.id);deadline=Time.unscaledTime+25f;
+                        while(!skinCatalog.Available(candidate.id)&&Time.unscaledTime<deadline)yield return null;
+                        if(!skinCatalog.Available(candidate.id)){Debug.LogError("CAST_WARDROBE_QA_FAIL download="+candidate.id);yield break;}
+                        equippedSkin=candidate.id;previewHero=-1;wardrobeScroll=new Vector2(0,Mathf.Max(0,(variant-2)*78));yield return new WaitForSecondsRealtime(.7f);
+                        yield return CaptureWardrobeQa(Path.Combine(folder,"hero"+hero.ToString("D2")+"-variant"+variant+"-wardrobe.png"));
+                        Debug.Log("CAST_WARDROBE_QA_PREVIEW_PASS hero="+hero+" id="+candidate.id);
+                    }
+                    var entry=entries[hero%5];equippedSkin=entry.id;
+                    wardrobeOpen=false;StartGame();deadline=Time.unscaledTime+15f;
+                    while(IsLanding&&Time.unscaledTime<deadline)yield return null;
+                    if(Player==null||SkinRigProfile.Visual(Player.transform,hero)?.GetComponent<SkinVisual>()==null)
+                    {Debug.LogError("CAST_WARDROBE_QA_FAIL actor="+hero);yield break;}
+                    paused=false;autoMoving=true;savedSteering=new Vector2(.35f,.9f).normalized;
+                    RequestJump();UseSkill();yield return new WaitForSecondsRealtime(2.3f);
+                    yield return CaptureWardrobeQa(Path.Combine(folder,"hero"+hero.ToString("D2")+"-game.png"));
+                    yield return new WaitForSecondsRealtime(.4f);
+                    // Force a known player winner to exercise the actual stage and
+                    // result path. This is a skin fixture, not a balance benchmark.
+                    var owners=new byte[PlanetMath.CellCount];for(int cell=0;cell<owners.Length;cell++)owners[cell]=1;
+                    Territory.ApplyNetworkOwners(owners);Finish();
+                    yield return new WaitForSecondsRealtime(1.4f);
+                    yield return CaptureWardrobeQa(Path.Combine(folder,"hero"+hero.ToString("D2")+"-victory.png"));
+                    yield return new WaitForSecondsRealtime(.6f);
+                    if(victoryActor==null||SkinRigProfile.Visual(victoryActor.transform,hero)?.GetComponent<SkinVisual>()==null)
+                    {Debug.LogError("CAST_WARDROBE_QA_FAIL stage="+hero);yield break;}
+                    Debug.Log("CAST_WARDROBE_QA_HERO_PASS hero="+hero+" id="+entry.id+" preview_game_jump_skill_victory=true");
+                }
+                Debug.Log("CAST_WARDROBE_QA_PASS heroes=13 skins=65 profileRewardsUnchanged=true");
+            }
+            finally
+            {
+                ReturnToMenu();wardrobeOpen=false;selectedHero=originalHero;previewHero=-1;
+                Array.Copy(originalSkins,equippedSkins,equippedSkins.Length);
+                if(hadHero)PlayerPrefs.SetInt("BrainrotSelectedHero",savedHero);else PlayerPrefs.DeleteKey("BrainrotSelectedHero");
+                PlayerPrefs.Save();isWardrobeQa=false;
+            }
+        }
+        private IEnumerator CaptureWardrobeQa(string path)
+        {
+            yield return new WaitForEndOfFrame();
+            var previous=RenderTexture.active;RenderTexture.active=null;
+            var image=new Texture2D(Screen.width,Screen.height,TextureFormat.RGB24,false);
+            try
+            {
+                image.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0);image.Apply();
+                File.WriteAllBytes(path,image.EncodeToPNG());
+            }
+            finally {RenderTexture.active=previous;Destroy(image);}
+        }
+    }
+}
+#endif

@@ -13,14 +13,18 @@ namespace BrainrotPlanet.Editor
         public static void Windows() => Build(BuildTarget.StandaloneWindows64, "Builds/NetworkWindows/BrainrotMatch.exe", false);
         public static void Android()
         {
-            PlayerSettings.bundleVersion="0.7.1-wardrobe1";
-            PlayerSettings.Android.bundleVersionCode=45;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.1-wardrobe1.apk",false);
+            // Use the standard Java Activity: the native GameActivity entry froze
+            // before scene Awake on repeated RMX3151 Android 13 cold starts.
+            PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
+            PlayerSettings.bundleVersion="0.7.2-wardrobe65";
+            PlayerSettings.Android.bundleVersionCode=46;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.2-wardrobe65.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {
             MatchProtocolSmoke.Run();
             SkinCatalogSmoke.Run();
+            CastSkinSmoke.Run();
             TerritoryJoinSmoke.Run(); MatchOutcomeSmoke.Run(); ActorCollisionSmoke.Run();
             RuntimeShaderAssets.Ensure();
             Directory.CreateDirectory(Path.GetDirectoryName(output));

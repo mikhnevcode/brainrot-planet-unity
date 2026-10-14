@@ -85,7 +85,7 @@ namespace BrainrotPlanet
         {
             if(source==null || !source.name.StartsWith("Ref63 ",System.StringComparison.Ordinal))return null;
             string name=source.name;
-            if(ReferenceMaterials.TryGetValue(name,out Material cached))return cached;
+            if(ReferenceMaterials.TryGetValue(name,out Material cached)&&cached!=null)return cached;
             string[] tokens=name.Split(' ');
             if(tokens.Length<3 || !ColorUtility.TryParseHtmlString(tokens[2],out Color color))
                 throw new System.InvalidOperationException("Invalid reference material: "+name);
@@ -112,7 +112,7 @@ namespace BrainrotPlanet
         {
             Material reference=ReferencePalette(source);if(reference!=null)return reference;
             string n=(source!=null?source.name:fallback).ToLowerInvariant();
-            if(SharkMaterials.TryGetValue(n,out Material cached))return cached;
+            if(SharkMaterials.TryGetValue(n,out Material cached)&&cached!=null)return cached;
             Color c;
             if(n.Contains("deep dorsal"))c=new Color(.065f,.27f,.42f);
             else if(n.Contains("blue grey")||n.Contains("shark skin"))c=new Color(.16f,.49f,.70f);
@@ -137,7 +137,7 @@ namespace BrainrotPlanet
             if(m.HasProperty("_SpecularHighlights"))m.SetFloat("_SpecularHighlights",0f);
             if(m.HasProperty("_GlossyReflections"))m.SetFloat("_GlossyReflections",0f);
             m.name="Tralalero / "+n;
-            SharkMaterials.Add(n,m);
+            SharkMaterials[n]=m;
             return m;
         }
         private static readonly Dictionary<string,Material> AircraftMaterials=new Dictionary<string,Material>();
@@ -160,7 +160,7 @@ namespace BrainrotPlanet
         private static Material AircraftPalette(Material source)
         {
             string n=(source!=null?source.name:"unknown").ToLowerInvariant();
-            if(AircraftMaterials.TryGetValue(n,out Material cached))return cached;
+            if(AircraftMaterials.TryGetValue(n,out Material cached)&&cached!=null)return cached;
             Color c;
             if(n.Contains("sculpted textured skin"))c=Color.white;
             else if(n.Contains("crocodile dark"))c=new Color(.12f,.34f,.19f);
@@ -200,7 +200,7 @@ namespace BrainrotPlanet
                     " normal="+(normal!=null)+" opaque="+(m.GetFloat("_Mode")==0f));
             }
             m.name="Bombardiro / "+n;
-            AircraftMaterials.Add(n,m);
+            AircraftMaterials[n]=m;
             return m;
         }
         private static void RecolorAircraft(Transform root)
@@ -220,7 +220,7 @@ namespace BrainrotPlanet
         {
             Material reference=ReferencePalette(source);if(reference!=null)return reference;
             string n=(source!=null?source.name:"unknown").ToLowerInvariant();
-            if(GooseMaterials.TryGetValue(n,out Material old))return old;
+            if(GooseMaterials.TryGetValue(n,out Material old)&&old!=null)return old;
             Color c;
             if(n.Contains("pearl white")||n.Contains("feathers"))c=new Color(.88f,.89f,.84f);
             else if(n.Contains("grey wing"))c=new Color(.57f,.66f,.69f);
@@ -260,7 +260,7 @@ namespace BrainrotPlanet
         {
             Material reference=ReferencePalette(original);if(reference!=null)return reference;
             string n=(original!=null?original.name:"unknown").ToLowerInvariant();
-            if(BallerinaMaterials.TryGetValue(n,out Material cached))return cached;
+            if(BallerinaMaterials.TryGetValue(n,out Material cached)&&cached!=null)return cached;
             Color c;
             if(n.Contains("porcelain"))c=new Color(.91f,.83f,.72f);
             else if(n.Contains("gold"))c=new Color(.64f,.39f,.18f);
@@ -336,7 +336,7 @@ namespace BrainrotPlanet
         {
             Material reference=ReferencePalette(source);if(reference!=null)return reference;
             string n=(source!=null?source.name:"unknown").ToLowerInvariant();
-            if(NewHeroMaterials.TryGetValue(n,out Material old))return old;
+            if(NewHeroMaterials.TryGetValue(n,out Material old)&&old!=null)return old;
             Color c;
             if(n.Contains("cream ceramic"))c=new Color(.88f,.75f,.59f);
             else if(n.Contains("espresso dark"))c=new Color(.24f,.10f,.052f);
@@ -411,6 +411,7 @@ namespace BrainrotPlanet
             visual.transform.localPosition=new Vector3(0,-.32f,0);
             visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
             visual.transform.localScale=Vector3.one*(hero=="Patapim" ? .52f : .60f);
+            visual.AddComponent<SkinRestBindings>().Capture(character);
             RecolorNewHero(visual.transform);
             foreach(Collider collider in visual.GetComponentsInChildren<Collider>(true))
                 Object.Destroy(collider);
@@ -456,6 +457,7 @@ namespace BrainrotPlanet
                     visual.transform.localPosition=new Vector3(0,-.34f,0);
                     visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
                     visual.transform.localScale=Vector3.one*.60f;
+                    visual.AddComponent<SkinRestBindings>().Capture(character);
                     Recolor(visual.transform);
                     foreach(Collider collider in visual.GetComponentsInChildren<Collider>(true))
                         Object.Destroy(collider);
@@ -483,6 +485,7 @@ namespace BrainrotPlanet
                     visual.transform.localPosition=new Vector3(0,-.32f,0);
                     visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
                     visual.transform.localScale=Vector3.one*.45f;
+                    visual.AddComponent<SkinRestBindings>().Capture(character);
                     RecolorAircraft(visual.transform);
                     foreach(Collider collider in visual.GetComponentsInChildren<Collider>(true))
                         Object.Destroy(collider);
@@ -510,6 +513,7 @@ namespace BrainrotPlanet
                     visual.transform.localPosition=new Vector3(0,-.32f,0);
                     visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
                     visual.transform.localScale=Vector3.one*.52f;
+                    visual.AddComponent<SkinRestBindings>().Capture(character);
                     RecolorBallerina(visual.transform);
                     foreach(Collider c in visual.GetComponentsInChildren<Collider>(true))
                         Object.Destroy(c);
@@ -537,6 +541,7 @@ namespace BrainrotPlanet
                     visual.transform.localPosition=new Vector3(0,-.30f,0);
                     visual.transform.localRotation=Quaternion.Euler(0f,180f,0f);
                     visual.transform.localScale=Vector3.one*.48f;
+                    visual.AddComponent<SkinRestBindings>().Capture(character);
                     RecolorGoose(visual.transform);
                     foreach(Collider c in visual.GetComponentsInChildren<Collider>(true))
                         Object.Destroy(c);

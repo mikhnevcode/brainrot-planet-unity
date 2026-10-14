@@ -1,0 +1,11 @@
+{
+  "id": "trippi_lava_shrimp",
+  "hero": 11,
+  "title": "ЛАВОВЫЙ РАК",
+  "titleEn": "Lava Shrimp",
+  "description": "Огненный панцирь · обсидиановые накладки",
+  "file": "trippi_lava_shrimp-b1a24f46da39f7b7574a017d87b5fae048ead61dda648735a07b4b9e93e01b30.json",
+  "sha256": "b1a24f46da39f7b7574a017d87b5fae048ead61dda648735a07b4b9e93e01b30",
+  "bytes": 131005,
+  "swatch": "#E77E55"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "boneca_polar_rover",
+  "hero": 10,
+  "title": "ПОЛЯРНЫЙ ВЕЗДЕХОД",
+  "titleEn": "Polar Rover",
+  "description": "Снежный козырёк · зимние манжеты",
+  "file": "boneca_polar_rover-0ba0bc6e0fbdc993656a89877239d304429bddca42ea215162fbbb7024ce8920.json",
+  "sha256": "0ba0bc6e0fbdc993656a89877239d304429bddca42ea215162fbbb7024ce8920",
+  "bytes": 127709,
+  "swatch": "#ADDBE3"
+}
