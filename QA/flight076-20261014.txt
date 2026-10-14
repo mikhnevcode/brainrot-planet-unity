@@ -1,0 +1,24 @@
+Brainrot Planet 0.7.6 flight test - 2026-10-14
+
+Scope: shared 8.4-second solar-system fly-in, visible equipped hero gliding
+ahead of camera, upright landing, three planet variants, offline/network handoff.
+
+Build: Unity 6000.2.7f2, Android Development APK, protocol 4, version code 50.
+Editor smoke: DEPLOYMENT_FLIGHT_SMOKE_PASS maps=3 duration=8.4.
+Android build: MATCH_BUILD_PASS target=Android.
+
+Device QA, RMX3151 E6ZTMFVCEA895HAA:
+- Offline flight QA: all three planet/hero combinations passed. The flying
+  avatar stayed within the portrait viewport, landed upright and returned
+  control to the real actor. Screenshots saved in the local QA output folder.
+- Two-phone WSS match, result, replay and offline return passed on protocol 4.
+
+Device QA, RMX2020 NBTK5TZTVC8T9TRG:
+- Two-phone WSS match, result, replay and offline return passed on protocol 4.
+
+Server: Linux dedicated build, loopback port 27968, separate WSS gateway 27969.
+WSS two-peer smoke passed with matching start state and 114 equal snapshots.
+Existing protocol-2 and protocol-3 test rooms were not changed.
+
+This release retains the existing three-lives rules. An unlimited-respawn
+territory mode is a separate gameplay/protocol change and is not claimed here.

@@ -12,6 +12,8 @@ namespace BrainrotPlanet
         private IEnumerator Start()
         {
             if(DedicatedMatchServer)yield break;
+            if(File.Exists(Path.Combine(Application.persistentDataPath,".flight-qa")))
+            {yield return RunDeploymentFlightQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".planet-biome-qa")))
             {yield return RunPlanetBiomeQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".hero-menu-qa")))
@@ -79,10 +81,13 @@ namespace BrainrotPlanet
                 RequestReplay();deadline=Time.unscaledTime+35f;
                 while(networkEpoch==initialEpoch && Time.unscaledTime<deadline)yield return null;
                 if(networkEpoch<=initialEpoch){Debug.LogError("MATCH_QA_FAIL no_replay");yield break;}
-                yield return new WaitForSecondsRealtime(6);
+                deadline=Time.unscaledTime+OrbitCamera.DescentDuration+5f;
+                while(IsLanding&&Time.unscaledTime<deadline)yield return null;
+                if(IsLanding)throw new InvalidOperationException("Network replay deployment did not land");
                 ReturnToMenu();
                 StartGame();
-                yield return new WaitForSecondsRealtime(4);
+                deadline=Time.unscaledTime+OrbitCamera.DescentDuration+5f;
+                while(IsLanding&&Time.unscaledTime<deadline)yield return null;
                 Debug.Log(!IsNetworkMatch && State==MatchState.Playing && Player!=null
                     ?"MATCH_QA_PASS result_replay_offline":"MATCH_QA_FAIL offline");
                 ReturnToMenu();

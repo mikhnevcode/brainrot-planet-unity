@@ -26,6 +26,7 @@ namespace BrainrotPlanet
         private Vector3 lastDriveVelocity;
         private readonly PlanetZoneMotion biomeMotion=new PlanetZoneMotion();
         private bool isDropping;
+        public bool IsDropping => isDropping;
         private float dropElapsed;
         private float nextDropDiagnostic;
         private Vector3 dropStart;
@@ -82,9 +83,8 @@ namespace BrainrotPlanet
                 heroMotion.Configure(this,visualAnimator);
             }
         }
-        // Scripted insertion occurs only at the start of a match. Keep the
-        // actor above the planet while the existing 2.9-second camera approach
-        // occurs, then land with no leftover Rigidbody velocity.
+        // Authoritative insertion stays near the world origin; the flying
+        // artwork uses a non-physical copy on the client until touchdown.
         public void BeginDropFromOrbit()
         {
             if(body==null || isDropping)return;
@@ -108,9 +108,11 @@ namespace BrainrotPlanet
                       " character="+Character);
         }
 
-        private void UpdateDrop(float dt)
+        private void UpdateDrop()
         {
-            dropElapsed+=dt;
+            // FixedUpdate may skip catch-up steps after first-frame asset loading.
+            // Use the same clock as the camera so the visual hand-off is stable.
+            dropElapsed=Mathf.Max(dropElapsed,game.DeploymentSeconds);
             if(heroMotion!=null)heroMotion.SetDropTime(dropElapsed);
             // Delay visible fall until the approach has established the planet.
             // Then accelerate downward, leaving time to see the descent clearly.
@@ -128,6 +130,8 @@ namespace BrainrotPlanet
             body.position=dropLanding;
             isDropping=false;
             if(visualAnimator!=null)visualAnimator.SetBool("Dropping",false);
+            if(visualAnimator!=null&&visualAnimator.runtimeAnimatorController!=null)
+            {visualAnimator.Play("Idle",0,0);visualAnimator.Update(0);}
             body.isKinematic=false;
             if(bodyCollider!=null)bodyCollider.enabled=true;
             // Unity resets ignored-pair state if one collider was disabled in flight.
@@ -266,7 +270,7 @@ namespace BrainrotPlanet
             float dt=Time.fixedDeltaTime;
             if(isDropping)
             {
-                UpdateDrop(dt);
+                UpdateDrop();
                 return;
             }
             jumpCooldown=Mathf.Max(0,jumpCooldown-dt);

@@ -8,10 +8,11 @@ namespace BrainrotPlanet
     {
         public Transform Target { get; private set; }
         public bool IsDescending => Target != null && descentTime < DescentDuration;
+        public float DescentSeconds => descentTime;
 
-        public const float DescentDuration = 2.9f;
-        private const float CameraHeight = 13.2f;
-        private const float CameraBack = 4.1f;
+        public const float DescentDuration = DeploymentFlight.Duration;
+        private const float CameraHeight = 11f;
+        private const float CameraBack = 9f;
         private const float FollowNormalSharpness = 8.0f;
         private const float GameplayFov = 51f;
 
@@ -19,8 +20,11 @@ namespace BrainrotPlanet
         private Vector3 stableNormal = Vector3.up;
         private Vector3 lastNormal = Vector3.up;
         private Vector3 tangentUp = Vector3.forward;
-        private Vector3 startPosition;
-        private Vector3 startFocus;
+        private Vector3 landingPosition;
+        private Quaternion landingRotation;
+        private int landingPlanet;
+        private DeploymentAvatar flyingHero;
+        public Transform FlyingHero => flyingHero?.Root;
         private float descentTime = DescentDuration;
         private float nextDiagnostics;
         private float victoryTime = -1f;
@@ -37,8 +41,9 @@ namespace BrainrotPlanet
             view = GetComponent<Camera>();
         }
 
-        public void BeginDescent(Transform actor)
+        public void BeginDescent(Transform actor,int planet=0,bool headless=false)
         {
+            EndFlight();
             Target = actor;
             victoryTime=-1f;
             Vector3 normal = actor.position.normalized;
@@ -51,12 +56,16 @@ namespace BrainrotPlanet
                 tangentUp = Vector3.ProjectOnPlane(Vector3.forward, normal);
             tangentUp.Normalize();
 
-            startPosition = normal * (PlanetMath.Radius + 82f) - tangentUp * 9f;
-            startFocus = normal * (PlanetMath.Radius * .30f);
+            landingPosition=PlanetSurface.Point(normal,.75f);
+            landingRotation=actor.rotation;
+            landingPlanet=planet;
             descentTime = 0f;
-            transform.position = startPosition;
-            transform.rotation = Quaternion.LookRotation(startFocus - startPosition, tangentUp);
-            if (view != null) view.fieldOfView = 50f;
+            if(!headless)flyingHero=new DeploymentAvatar(actor,actor.parent,view!=null?view.aspect:.5625f);
+            DeploymentFlight.CameraPose(0,normal,tangentUp,planet,landingPosition,out Vector3 position,out Quaternion rotation);
+            transform.SetPositionAndRotation(position,rotation);
+            if(view!=null){view.fieldOfView=GameplayFov;view.farClipPlane=1000;}
+            flyingHero?.Pose(0,transform,landingPosition,landingRotation);
+            Debug.Log("DEPLOYMENT_BEGIN duration="+DescentDuration+" planet="+planet+" limbs="+(flyingHero?.LimbCount??0));
         }
 
         // Smoothly turn the camera from the player toward the actual winner,
@@ -64,6 +73,7 @@ namespace BrainrotPlanet
         public void BeginVictoryFocus(Transform winner,Vector3 stageCenter)
         {
             if(winner==null)return;
+            EndFlight();
             victoryStartPosition=transform.position;
             victoryStartRotation=transform.rotation;
             victoryTime=0f;
@@ -120,6 +130,19 @@ namespace BrainrotPlanet
                 return;
             }
 
+            if(IsDescending)
+            {
+                descentTime+=dt;
+                DeploymentFlight.CameraPose(descentTime,stableNormal,tangentUp,landingPlanet,landingPosition,out Vector3 position,out Quaternion rotation);
+                transform.SetPositionAndRotation(position,rotation);
+                flyingHero?.Pose(descentTime,transform,landingPosition,landingRotation);
+                if(!IsDescending)
+                {
+                    EndFlight();view.farClipPlane=300f;
+                    Debug.Log("DEPLOYMENT_TOUCHDOWN upright=true cameraHeroTogether=true");
+                }
+                LogDiagnostics();return;
+            }
             Vector3 normal = Target.position.normalized;
             if (normal.sqrMagnitude < 0.1f) return;
 
@@ -138,31 +161,15 @@ namespace BrainrotPlanet
             // so the hero stays at viewport centre (0.5, 0.5) without lag.
             // During deployment keep the landing spot in view, so the hero
             // visibly moves toward the surface instead of staying centred.
-            Vector3 anchor = IsDescending
-                ? PlanetSurface.Point(normal,.72f) + normal * .45f
-                : Target.position + normal * .45f;
+            Vector3 anchor = Target.position + normal * .45f;
             Vector3 gameplayPosition =
                 anchor + stableNormal * CameraHeight - tangentUp * CameraBack;
             Quaternion gameplayRotation =
                 Quaternion.LookRotation(anchor - gameplayPosition, tangentUp);
 
-            if (IsDescending)
-            {
-                descentTime += dt;
-                float t = Mathf.Clamp01(descentTime / DescentDuration);
-                float smooth = t * t * (3f - 2f * t);
-                transform.position = Vector3.Lerp(startPosition, gameplayPosition, smooth);
-                Vector3 focus = Vector3.Lerp(startFocus, anchor, smooth);
-                transform.rotation = Quaternion.LookRotation(
-                    focus - transform.position, tangentUp);
-                view.fieldOfView = Mathf.Lerp(50f, GameplayFov, smooth);
-            }
-            else
-            {
-                transform.position = gameplayPosition;
-                transform.rotation = gameplayRotation;
-                view.fieldOfView = GameplayFov;
-            }
+            transform.position = gameplayPosition;
+            transform.rotation = gameplayRotation;
+            view.fieldOfView = GameplayFov;
             LogDiagnostics();
         }
 
@@ -171,7 +178,7 @@ namespace BrainrotPlanet
             if (!Debug.isDebugBuild || Time.unscaledTime < nextDiagnostics || Target == null)
                 return;
             nextDiagnostics = Time.unscaledTime + 1.0f;
-            Vector3 viewport = view.WorldToViewportPoint(
+            Vector3 viewport = view.WorldToViewportPoint(flyingHero!=null?AvatarArt.PoseBounds(flyingHero.Root).center:
                 Target.position + Target.position.normalized * .45f);
             Vector3 direction=Target.position.normalized;
             Debug.Log(string.Format(
@@ -186,9 +193,16 @@ namespace BrainrotPlanet
 
         public void ClearTarget()
         {
+            EndFlight();
             Target = null;
             victoryTime = -1f;
             descentTime = DescentDuration;
         }
+        private void EndFlight()
+        {
+            flyingHero?.Dispose();flyingHero=null;
+            if(view!=null)view.farClipPlane=300f;
+        }
+        private void OnDestroy(){EndFlight();}
     }
 }

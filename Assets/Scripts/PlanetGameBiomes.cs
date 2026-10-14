@@ -22,7 +22,7 @@ namespace BrainrotPlanet
         }
         private void DrawPlanetIntro(float w,float safeTop)
         {
-            if(Arena==null||paused||Time.unscaledTime-planetIntroAt>5.5f)return;
+            if(Arena==null||paused||Time.unscaledTime-planetIntroAt>OrbitCamera.DescentDuration+1f)return;
             Rounded(new Rect(20,safeTop+117,w-40,72),new Color(.035f,.055f,.12f,.95f));
             Plate(new Rect(28,safeTop+125,4,56),Arena.Accent);
             GUI.Label(new Rect(38,safeTop+121,w-76,25),Arena.Title,heroNameStyle);

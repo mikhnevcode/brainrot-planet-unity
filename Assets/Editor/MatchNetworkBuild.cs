@@ -9,16 +9,16 @@ namespace BrainrotPlanet.Editor
 {
     public static class MatchNetworkBuild
     {
-        public static void Server() => Build(BuildTarget.StandaloneLinux64, "Builds/ServerPlanets075/BrainrotMatchServer.x86_64", true);
+        public static void Server() => Build(BuildTarget.StandaloneLinux64, "Builds/ServerFlight076/BrainrotMatchServer.x86_64", true);
         public static void Windows() => Build(BuildTarget.StandaloneWindows64, "Builds/NetworkWindows/BrainrotMatch.exe", false);
         public static void Android()
         {
             // Use the standard Java Activity: the native GameActivity entry froze
             // before scene Awake on repeated RMX3151 Android 13 cold starts.
             PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
-            PlayerSettings.bundleVersion="0.7.5-planets-test";
-            PlayerSettings.Android.bundleVersionCode=49;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.5-planets-test.apk",false);
+            PlayerSettings.bundleVersion="0.7.6-flight-test";
+            PlayerSettings.Android.bundleVersionCode=50;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.6-flight-test.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {
@@ -27,6 +27,7 @@ namespace BrainrotPlanet.Editor
             StoreSmoke.Run();
             HeroMenuSmoke.Run();
             PlanetBiomeSmoke.Run();
+            DeploymentFlightSmoke.Run();
             BiomeMovementSmoke.Run();
             CastSkinSmoke.Run();
             TerritoryJoinSmoke.Run(); MatchOutcomeSmoke.Run(); ActorCollisionSmoke.Run();

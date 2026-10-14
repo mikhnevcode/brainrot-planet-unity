@@ -116,6 +116,13 @@ namespace BrainrotPlanet
         {
             InitPolishStyles();
             float safeTop=Mathf.Max(8,(Screen.height-Screen.safeArea.yMax)/guiScale);
+            if(IsLanding)
+            {
+                Rounded(new Rect(20,safeTop+10,w-40,32),new Color(.035f,.055f,.12f,.86f));
+                GUI.Label(new Rect(30,safeTop+13,w-60,26),"СОЛНЕЧНАЯ СИСТЕМА  •  ПЕРЕЛЁТ К ПЛАНЕТЕ",captionStyle);
+                DrawPlanetIntro(w,safeTop);
+                return;
+            }
             int rank=1;for(int i=1;i<5;i++)if(i!=LocalTeam&&scores[i]>scores[LocalTeam])rank++;
             Rounded(new Rect(10,safeTop,w-20,60),new Color(.035f,.055f,.12f,.92f));
             GUI.Label(new Rect(15,safeTop+3,100,27),scores[LocalTeam].ToString("F1")+"%",numberStyle);

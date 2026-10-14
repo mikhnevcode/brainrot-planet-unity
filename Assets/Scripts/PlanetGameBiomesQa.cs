@@ -24,7 +24,7 @@ namespace BrainrotPlanet
                     if((int)Arena.Kind!=planet)throw new Exception("Automatic planet rotation");
                     yield return new WaitForSecondsRealtime(.65f);
                     yield return CaptureWardrobeQa(Path.Combine(folder,"planet"+planet+"-intro.png"));
-                    float deadline=Time.unscaledTime+7;
+                    float deadline=Time.unscaledTime+OrbitCamera.DescentDuration+4f;
                     while(IsLanding&&Time.unscaledTime<deadline)yield return null;
                     if(IsLanding||Player==null)throw new Exception("Planet descent failed");
                     var body=Player.GetComponent<Rigidbody>();

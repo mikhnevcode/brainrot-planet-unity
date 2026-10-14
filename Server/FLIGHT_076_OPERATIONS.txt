@@ -1,0 +1,19 @@
+Flight test 0.7.6 / protocol 4
+
+The dedicated Linux server and WSS gateway run alongside, not instead of,
+older test rooms. On homeserver:
+  /home/user/brainrot-match-test/server076-final/BrainrotMatchServer.x86_64
+  /home/user/brainrot-match-test/flight076/runtime/unity-final.log
+  server loopback TCP 27968; WSS gateway loopback TCP 27969
+
+Android endpoint is Assets/Resources/MatchEndpoint.txt. The current temporary
+trycloudflare hostname is only suitable for this test build; rotate the URL
+and rebuild the APK if the tunnel is restarted. Never publish gateway secrets.
+
+The Android APK is Builds/Android/BrainrotPlanet-v0.7.6-flight-test.apk.
+Protocol 4 is incompatible with earlier clients because the arrival cinematic
+and match-start timing changed. Do not point protocol-2/3 clients at this room.
+
+Server acceptance smoke: Server/wss_match_smoke.py against the current WSS
+endpoint, two peers, identical snapshots. Phone acceptance: network QA on two
+authorized phones verifies a full result, replay, and return to offline play.

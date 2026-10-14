@@ -10,6 +10,7 @@ namespace BrainrotPlanet
     {
         public MatchState State { get; private set; } = MatchState.Menu;
         public bool IsLanding => orbitCamera != null && orbitCamera.IsDescending;
+        public float DeploymentSeconds => orbitCamera!=null?orbitCamera.DescentSeconds:0f;
         public TerritorySystem Territory { get; private set; }
         public PlanetEffects Effects { get; private set; }
         public PlanetActor Player { get; private set; }
@@ -225,10 +226,11 @@ namespace BrainrotPlanet
             // and the independent logical trail-crossing game rules.
             ApplyActorPassThrough("spawn");
 
-            // The player now falls from above the planet during the camera approach.
+            // Keep authoritative actors close to the ground. A separate visual
+            // follows the full solar-system flight in front of each local camera.
             if(DedicatedMatchServer)foreach(var actor in players)actor.BeginDropFromOrbit();
             else if(!IsNetworkReplica)Player.BeginDropFromOrbit();
-            orbitCamera.BeginDescent(Player.transform);
+            orbitCamera.BeginDescent(Player.transform,(int)Arena.Kind,DedicatedMatchServer);
             // Crystal replication is a separate milestone; offline retains all pickups.
             if(!IsNetworkMatch)
             {
@@ -236,6 +238,15 @@ namespace BrainrotPlanet
                 gems.transform.SetParent(worldRoot); gems.Configure(this);
             }
             CreateStars();
+            if(!DedicatedMatchServer)
+            {
+                var solar=new GameObject("Sun, orbital paths and two other planets");
+                solar.transform.SetParent(worldRoot,false);
+                Vector3 opening=Player.SpawnDirection;
+                Vector3 up=Vector3.ProjectOnPlane(Vector3.up,opening);
+                if(up.sqrMagnitude<.05f)up=Vector3.ProjectOnPlane(Vector3.forward,opening);
+                solar.AddComponent<SolarSystemArt>().Build(opening,up.normalized,(int)Arena.Kind,orbitCamera);
+            }
             for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
             State=MatchState.Playing;
             sceneLoaded=true;
@@ -288,7 +299,7 @@ namespace BrainrotPlanet
             stars.AddComponent<MeshFilter>().sharedMesh=mesh;
             stars.AddComponent<MeshRenderer>().sharedMaterial=material;
             stars.AddComponent<PlanetGeneratedArt>().Own(mesh,material);
-            if(!DedicatedMatchServer)CreatePlanetCompanion();
+            // The other two planets are rendered by SolarSystemArt.
         }
         private void HandleCapture(int team,int changed,Vector3 direction)
         {
@@ -530,12 +541,12 @@ namespace BrainrotPlanet
             }
             if(State!=MatchState.Playing)return;
             float dt=Time.deltaTime;
-            playerLandingGrace=Mathf.Max(0f,playerLandingGrace-dt);
             if(orbitCamera!=null && orbitCamera.IsDescending)
             {
                 if(Player!=null)Player.Wish=Vector3.zero;
                 return;
             }
+            playerLandingGrace=Mathf.Max(0f,playerLandingGrace-dt);
             matchTime-=dt;
             float cooldownBefore=skillCooldown;
             skillCooldown=Mathf.Max(0,skillCooldown-dt);
@@ -944,7 +955,7 @@ namespace BrainrotPlanet
             if(shopOpen && State==MatchState.Menu){DrawShop(logicalW,logicalH);GUI.matrix=old;return;}
             if(wardrobeOpen && State==MatchState.Menu){DrawWardrobe(logicalW,logicalH);GUI.matrix=old;return;}
             if(networkPanel && State==MatchState.Menu){DrawNetworkPanel(logicalW,logicalH);GUI.matrix=old;return;}
-            if(State==MatchState.Playing){DrawPlayPolish(logicalW,logicalH);if(!paused)DrawShopEmote(logicalW,logicalH);GUI.matrix=old;return;}
+            if(State==MatchState.Playing){DrawPlayPolish(logicalW,logicalH);if(!paused&&!IsLanding)DrawShopEmote(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.End){DrawResultPolish(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.Menu)
             {
