@@ -1,0 +1,26 @@
+Brainrot Planet 0.7.8 paint-edge test - 2026-10-14
+
+Scope: visual territory-map rendering only. The 256x128 gameplay ownership
+grid, capture rules, room protocol 5, UI and existing server are unchanged.
+The 512x256 texture no longer applies its 3x3 color blur. One bilinear
+resampling pass rounds cell corners, and a thin light rim on the painted side
+marks ownership changes. Longitude wrapping does not create a false border.
+
+Build checks (Unity 6000.2.7f2):
+- PLANET_PAINT_EDGE_SMOKE_PASS rim=true seamContinuous=true gridUnchanged=true
+- Existing gameplay, network, biome, hero and store build smokes passed.
+- MATCH_BUILD_PASS target=Android, UnityExit=0.
+
+Device check (RMX3151 E6ZTMFVCEA895HAA):
+- Installed with -r, without clearing player data. The 0.7.8 offline QA
+  completed five trail cuts, protected home respawns, win by territory and
+  replay: RESPAWN_QA_PASS. Its QA mode reports progressUnchanged=true.
+- Inspected no-lives-hud.png against the 0.7.7 capture. Boundary is brighter
+  and narrower, with rounded rather than stark staircase corners.
+- PAINT_VISUAL_UPDATE on the phone was approximately 2.3-4.9 ms in the
+  observed final QA samples; no frame-rate claim is made from those samples.
+- Temporary .respawn-qa marker removed. Existing private test keys retained.
+
+Screenshot: calling task outputs/paint078/phone1/respawn-qa/no-lives-hud.png.
+This is a test APK, not a store release. The WSS server was not rebuilt for a
+visual-only client change; it remains protocol 5 from 0.7.7.
