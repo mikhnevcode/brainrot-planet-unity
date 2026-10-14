@@ -21,6 +21,7 @@ namespace BrainrotPlanet
         // Continuous world directions used only by LineRenderer. The logical
         // ownership/closure arrays stay on their original grid.
         private readonly List<Vector3>[] trailVisualDirections = new List<Vector3>[5];
+        private readonly bool[] pendingNetworkCapture = new bool[5];
         private readonly Vector3[] lastPosition = new Vector3[5];
         private readonly bool[] hasLast = new bool[5];
         private readonly Vector3[] core = new Vector3[5];
@@ -53,10 +54,21 @@ namespace BrainrotPlanet
         public void ApplyNetworkOwners(byte[] source)
         {
             if(source.Length!=owner.Length)throw new ArgumentException("Wrong territory size");
+            Array.Clear(pendingNetworkCapture,0,pendingNetworkCapture.Length);
+            for(int cell=0;cell<owner.Length;cell++)
+            {
+                int team=source[cell];
+                if(team>0&&team<5&&owner[cell]!=team&&trailVisualDirections[team].Count>=3)
+                    pendingNetworkCapture[team]=true;
+            }
             Array.Copy(source,owner,owner.Length); dirty=true;
         }
         public void ApplyNetworkTrail(int team,IReadOnlyList<Vector3> directions)
         {
+            if(pendingNetworkCapture[team]&&directions.Count==0&&
+               trailVisualDirections[team].Count>=3)
+                surface?.AddCapturedStroke(team,trailVisualDirections[team],Vector3.zero);
+            pendingNetworkCapture[team]=false;
             trailVisualDirections[team].Clear(); trailOrder[team].Clear(); Trails[team].Clear();
             foreach(Vector3 direction in directions)
             {
@@ -238,6 +250,7 @@ namespace BrainrotPlanet
             }
             int seamCells=RepairCaptureSeams(team,territoryBeforeCapture);
             changed+=seamCells;
+            surface?.AddCapturedStroke(team,trailVisualDirections[team],hit);
             ClearTrail(team);
             dirty=true;
             // Apply the full closed area in the same frame as the end of the trail.

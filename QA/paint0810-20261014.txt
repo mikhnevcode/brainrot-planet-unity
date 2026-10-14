@@ -1,0 +1,31 @@
+Brainrot Planet 0.7.10 captured-paint bridge test - 2026-10-14
+
+Reason: the sharp unfinished LineRenderer and the lower-resolution painted
+territory could appear disconnected when the trail closed. A terrain-following
+triangle-strip brush now bridges the path for four seconds. The same vector
+path is baked as a narrow anti-aliased paint mark in the territory texture;
+the mark persists while those cells belong to its team and is removed after
+an opponent takes them. Ownership, capture and protocol 5 are unchanged.
+
+Unity 6000.2.7f2 Android build:
+- CAPTURED_PAINT_STROKE_SMOKE_PASS relief=true feather=true closure=true
+- Existing gameplay, menu, store, planet and network-protocol smokes passed.
+- MATCH_BUILD_PASS; UnityExit=0.
+
+RMX3151 E6ZTMFVCEA895HAA:
+- Installed over 0.7.9 without clearing player data.
+- A local closed path captured 178 cells, including 25 repaired seams.
+- The QA verified the transient mesh, persistent ink after mesh fade and
+  the simulated network-replica transition from open path to new ownership.
+  PAINT_STROKE_QA_PASS local=true persistentInk=true replica=true.
+- A separate offline regression passed five consecutive trail cuts, protected
+  respawns, territory victory and replay: RESPAWN_QA_PASS.
+- Inspected open-trail, capture-bridge and settled-paint device screenshots.
+  The captured path remains visibly joined after the transient overlay fades.
+- Final observed PAINT_VISUAL_UPDATE samples were 4.46-10.48 ms. This is
+  neither a worst-case fragmented-map nor full-frame-rate measurement.
+- Temporary .paint-stroke-qa and .respawn-qa markers removed. Private test
+  keys retained.
+
+Screenshots: calling task outputs/paint0810/phone1/paint-stroke-qa/.
+This is a test APK, not a store release. The live WSS room was not retested.

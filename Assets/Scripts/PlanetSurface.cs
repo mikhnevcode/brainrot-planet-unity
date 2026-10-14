@@ -14,6 +14,9 @@ namespace BrainrotPlanet
         private Color32[] sourcePixels;
         private byte[] ownerWeights;
         private byte[] uniformOwner;
+        private byte[] strokeOwner;
+        private byte[] strokeCoverage;
+        private bool hasStrokes;
         private float[] reliefTone;
         private PlanetBiomeRules biome;
         private readonly Color32[] teamColors = {
@@ -99,6 +102,84 @@ namespace BrainrotPlanet
             Vector3 n = direction.normalized;
             return n * (PlanetMath.Radius + Elevation(n) + extra);
         }
+        public void AddCapturedStroke(int team,
+            System.Collections.Generic.IReadOnlyList<Vector3> path,Vector3 closure)
+        {
+            if(Application.isBatchMode||team<1||team>4||path==null||path.Count<2)return;
+            BakeCapturedStroke(team,path,closure);
+            CapturedPaintStroke.Create(transform,team,path,closure);
+        }
+        public int StrokePixelCount
+        {
+            get
+            {
+                if(strokeOwner==null)return 0;
+                int count=0;
+                for(int i=0;i<strokeOwner.Length;i++)if(strokeOwner[i]!=0)count++;
+                return count;
+            }
+        }
+        private void BakeCapturedStroke(int team,
+            System.Collections.Generic.IReadOnlyList<Vector3> path,Vector3 closure)
+        {
+            Vector3 first=path[0].normalized,second=path[1].normalized;
+            Vector3 start=ExtendStroke(first,first-second);
+            StampStrokeSegment(team,start,first);
+            Vector3 previous=first;
+            int stride=Mathf.Max(1,(path.Count-1)/350);
+            for(int i=stride;i<path.Count;i+=stride)
+            {
+                Vector3 current=path[i].normalized;
+                StampStrokeSegment(team,previous,current);previous=current;
+            }
+            Vector3 last=path[path.Count-1].normalized;
+            StampStrokeSegment(team,previous,last);
+            Vector3 end=closure.sqrMagnitude>.5f&&Vector3.Angle(last,closure)<8f?
+                closure.normalized:ExtendStroke(last,last-path[path.Count-2]);
+            StampStrokeSegment(team,last,end);
+            hasStrokes=true;
+        }
+        private static Vector3 ExtendStroke(Vector3 at,Vector3 tangent)
+        {
+            Vector3 along=Vector3.ProjectOnPlane(tangent,at);
+            return along.sqrMagnitude<.000001f?at:(at+along.normalized*.022f).normalized;
+        }
+        private void StampStrokeSegment(int team,Vector3 from,Vector3 to)
+        {
+            int steps=Mathf.Clamp(Mathf.CeilToInt(Vector3.Angle(from,to)*Mathf.Deg2Rad/.004f),1,36);
+            for(int step=0;step<=steps;step++)
+                StampStrokePoint(team,Vector3.Slerp(from,to,(float)step/steps).normalized);
+        }
+        private void StampStrokePoint(int team,Vector3 n)
+        {
+            Vector2 uv=PlanetMath.ToUV(n);
+            float cx=uv.x*VisualWidth,cy=uv.y*VisualHeight;
+            float metresX=2f*Mathf.PI*PlanetMath.Radius*
+                Mathf.Max(.08f,Mathf.Sqrt(Mathf.Max(0f,1f-n.y*n.y)))/VisualWidth;
+            float metresY=Mathf.PI*PlanetMath.Radius/VisualHeight;
+            const float outer=.72f,inner=.39f;
+            int rangeX=Mathf.Min(12,Mathf.CeilToInt(outer/metresX)+1);
+            int rangeY=Mathf.CeilToInt(outer/metresY)+1;
+            int centerX=Mathf.FloorToInt(cx),centerY=Mathf.FloorToInt(cy);
+            for(int dy=-rangeY;dy<=rangeY;dy++)
+            {
+                int y=centerY+dy;
+                if(y<0||y>=VisualHeight)continue;
+                float py=(y+.5f-cy)*metresY;
+                for(int dx=-rangeX;dx<=rangeX;dx++)
+                {
+                    int x=centerX+dx;
+                    float px=(x+.5f-cx)*metresX;
+                    float distance=Mathf.Sqrt(px*px+py*py);
+                    if(distance>=outer)continue;
+                    byte coverage=(byte)Mathf.RoundToInt(255f*Mathf.Clamp01((outer-distance)/(outer-inner)));
+                    int wrapped=(x+VisualWidth)%VisualWidth;
+                    int pixel=y*VisualWidth+wrapped;
+                    if(strokeOwner[pixel]!=team||coverage>strokeCoverage[pixel])
+                    {strokeOwner[pixel]=(byte)team;strokeCoverage[pixel]=coverage;}
+                }
+            }
+        }
         public void Build(PlanetBiomeRules rules=null)
         {
             biome=rules;
@@ -138,6 +219,9 @@ namespace BrainrotPlanet
             sourcePixels=new Color32[PlanetMath.CellCount];
             ownerWeights=new byte[PlanetMath.CellCount*5];
             uniformOwner=new byte[PlanetMath.CellCount];
+            strokeOwner=new byte[VisualWidth*VisualHeight];
+            strokeCoverage=new byte[VisualWidth*VisualHeight];
+            hasStrokes=false;
             reliefTone=new float[PlanetMath.CellCount];
             PrepareBaseColors();
             var shader=Resources.Load<Shader>("PlanetPaint");
@@ -339,6 +423,30 @@ namespace BrainrotPlanet
                         b2=(b2*(256-rim)+255*rim+128)/256;
                     }
                     pixels[outrow+x]=new Color32((byte)r,(byte)g,(byte)b2,255);
+                }
+            }
+            // Preserve the true vector trail as a smooth, lasting paint mark.
+            // It never changes ownership, and a later takeover erases stale ink.
+            if(hasStrokes&&owners!=null)
+            {
+                for(int y=0;y<VisualHeight;y++)
+                {
+                    int row=y*VisualWidth,cellRow=(y/2)*w;
+                    for(int x=0;x<VisualWidth;x++)
+                    {
+                        int pixel=row+x,team=strokeOwner[pixel];
+                        if(team==0)continue;
+                        int cell=cellRow+x/2;
+                        if(owners[cell]!=team)
+                        {strokeOwner[pixel]=0;strokeCoverage[pixel]=0;continue;}
+                        Color32 target=Tone(teamColors[team],reliefTone[cell]);
+                        int alpha=strokeCoverage[pixel]*225/255;
+                        Color32 c=pixels[pixel];
+                        pixels[pixel]=new Color32(
+                            (byte)((c.r*(255-alpha)+target.r*alpha+127)/255),
+                            (byte)((c.g*(255-alpha)+target.g*alpha+127)/255),
+                            (byte)((c.b*(255-alpha)+target.b*alpha+127)/255),255);
+                    }
                 }
             }
             MapTexture.SetPixels32(pixels);

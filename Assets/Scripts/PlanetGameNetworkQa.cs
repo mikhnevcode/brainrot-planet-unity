@@ -16,6 +16,8 @@ namespace BrainrotPlanet
             {yield return RunDeploymentFlightQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".respawn-qa")))
             {yield return RunRespawnQa();yield break;}
+            if(File.Exists(Path.Combine(Application.persistentDataPath,".paint-stroke-qa")))
+            {yield return RunPaintStrokeQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".planet-biome-qa")))
             {yield return RunPlanetBiomeQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".hero-menu-qa")))
