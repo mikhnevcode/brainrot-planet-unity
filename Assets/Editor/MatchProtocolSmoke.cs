@@ -31,6 +31,10 @@ namespace BrainrotPlanet.Editor
             Reject(()=>{using var r=MatchProtocol.Reader(new byte[16]);MatchProtocol.Rotation(r);});
             Reject(()=>{using var r=MatchProtocol.Reader(new byte[]{5});MatchProtocol.Team(r);});
             Reject(()=>{using var r=MatchProtocol.Reader(new byte[]{1});MatchProtocol.End(r);});
+            Check(MatchProtocol.ValidRoomCode("ABC234"));
+            Check(!MatchProtocol.ValidRoomCode("ABO123"));
+            Check(!MatchProtocol.ValidRoomCode("A/B234"));
+            Check(!MatchProtocol.ValidRoomCode("ABC23"));
             Debug.Log("MATCH_PROTOCOL_SMOKE_PASS cases="+cases);
         }
     }

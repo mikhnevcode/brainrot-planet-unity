@@ -7,7 +7,15 @@ namespace BrainrotPlanet
     public static class MatchProtocol
     {
         public const int Version = 5, Port = 27766, MaxTrail = 280;
-        public const byte Hello = 1, Lobby = 2, Start = 3, Input = 4, Snapshot = 5, Effect = 6;
+        public const byte Hello = 1, Lobby = 2, Start = 3, Input = 4, Snapshot = 5, Effect = 6,
+                          RoomInfo = 7;
+        public static bool ValidRoomCode(string code)
+        {
+            if(code==null||code.Length!=6)return false;
+            const string alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            foreach(char letter in code)if(alphabet.IndexOf(letter)<0)return false;
+            return true;
+        }
         public static byte[] Packet(byte kind, Action<BinaryWriter> write)
         {
             using (var memory = new MemoryStream())

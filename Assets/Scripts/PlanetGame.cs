@@ -213,17 +213,20 @@ namespace BrainrotPlanet
                 if(IsNetworkReplica)motor.SetNetworkReplica();
                 else if(DedicatedMatchServer?participants[team]?.joined!=true:team!=1)
                     actorObject.AddComponent<PlanetAI>().Configure(this,motor);
-                LineRenderer renderer=new GameObject("Team " +team+ " unfinished glowing trail").AddComponent<LineRenderer>();
-                renderer.transform.SetParent(worldRoot);
-                renderer.useWorldSpace=true;
-                renderer.positionCount=0;
-                renderer.startWidth=.34f;renderer.endWidth=.34f;
-                renderer.numCapVertices=10;
-                renderer.numCornerVertices=10;
-                renderer.sharedMaterial=Colors.TrailInkMaterial();
-                renderer.startColor=Colors.Team(team);
-                renderer.endColor=Colors.Team(team);
-                pathRenderers[team]=renderer;
+                if(!DedicatedMatchServer)
+                {
+                    LineRenderer renderer=new GameObject("Team " +team+ " unfinished glowing trail").AddComponent<LineRenderer>();
+                    renderer.transform.SetParent(worldRoot);
+                    renderer.useWorldSpace=true;
+                    renderer.positionCount=0;
+                    renderer.startWidth=.34f;renderer.endWidth=.34f;
+                    renderer.numCapVertices=10;
+                    renderer.numCornerVertices=10;
+                    renderer.sharedMaterial=Colors.TrailInkMaterial();
+                    renderer.startColor=Colors.Team(team);
+                    renderer.endColor=Colors.Team(team);
+                    pathRenderers[team]=renderer;
+                }
                 Effects.Burst(motor.transform.position,Colors.Team(team),45,4f);
             }
             // Stop rigidbody-to-rigidbody pushing, but keep terrain collisions
@@ -241,7 +244,7 @@ namespace BrainrotPlanet
                 var gems=new GameObject("Crystal pickups").AddComponent<CrystalSystem>();
                 gems.transform.SetParent(worldRoot); gems.Configure(this);
             }
-            CreateStars();
+            if(!DedicatedMatchServer)CreateStars();
             if(!DedicatedMatchServer)
             {
                 var solar=new GameObject("Sun, orbital paths and two other planets");

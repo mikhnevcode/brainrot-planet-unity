@@ -34,7 +34,8 @@ namespace BrainrotPlanet
             var uri = new Uri(endpoint);
             if (uri.Scheme != "wss" || !string.IsNullOrEmpty(uri.UserInfo))
                 throw new ArgumentException("A secure WSS endpoint is required");
-            socket.Options.SetRequestHeader("X-Brainrot-Test-Key", testKey);
+            if(!string.IsNullOrEmpty(testKey))
+                socket.Options.SetRequestHeader("X-Brainrot-Test-Key", testKey);
             socket.Options.KeepAliveInterval = TimeSpan.FromSeconds(5);
             _ = Run(uri);
         }

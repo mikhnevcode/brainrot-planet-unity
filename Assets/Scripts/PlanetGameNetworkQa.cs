@@ -7,8 +7,9 @@ namespace BrainrotPlanet
 {
     public sealed partial class PlanetGame
     {
-        // Explicit opt-in only. Never embeds a room key in an APK or source.
-        // Android QA: temporary app-private .network-qa-key file (remove after testing).
+        // Explicit opt-in only. Android QA: temporary app-private .network-qa
+        // marker (remove after testing). The old key marker is accepted for QA
+        // scripts already installed on test devices, but no longer authenticates.
         private IEnumerator Start()
         {
             if(DedicatedMatchServer)yield break;
@@ -31,10 +32,10 @@ namespace BrainrotPlanet
             string key=Environment.GetEnvironmentVariable("BRAINROT_QA_KEY");
             string path=Path.Combine(Application.persistentDataPath,".network-qa-key");
             if(string.IsNullOrEmpty(key) && File.Exists(path))key=File.ReadAllText(path).Trim();
-            if(string.IsNullOrEmpty(key))yield break;
-            yield return RunNetworkMatchQa(key);
+            if(string.IsNullOrEmpty(key) && !File.Exists(Path.Combine(Application.persistentDataPath,".network-qa")))yield break;
+            yield return RunNetworkMatchQa();
         }
-        private IEnumerator RunNetworkMatchQa(string key)
+        private IEnumerator RunNetworkMatchQa()
         {
             int originalHero=selectedHero,originalLast=lastBattlePlanet;
             bool originalQa=isWardrobeQa;
@@ -59,8 +60,8 @@ namespace BrainrotPlanet
                         while(!skinCatalog.Available(id)&&Time.unscaledTime<catalogDeadline)yield return null;
                     }
                 }
-                networkKey=key; networkPanel=true; ConnectMatch();
-                float deadline=Time.unscaledTime+35f;
+                networkPanel=true; ConnectMatch();
+                float deadline=Time.unscaledTime+45f;
                 while(State!=MatchState.Playing && Time.unscaledTime<deadline)yield return null;
                 if(State!=MatchState.Playing){Debug.LogError("MATCH_QA_FAIL no_start");yield break;}
                 uint initialEpoch=networkEpoch;

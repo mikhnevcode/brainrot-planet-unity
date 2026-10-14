@@ -9,16 +9,16 @@ namespace BrainrotPlanet.Editor
 {
     public static class MatchNetworkBuild
     {
-        public static void Server() => Build(BuildTarget.StandaloneLinux64, "Builds/ServerRespawn077/BrainrotMatchServer.x86_64", true);
+        public static void Server() => Build(BuildTarget.StandaloneLinux64, "Builds/ServerMatchmaker/BrainrotMatchServer.x86_64", true);
         public static void Windows() => Build(BuildTarget.StandaloneWindows64, "Builds/NetworkWindows/BrainrotMatch.exe", false);
         public static void Android()
         {
             // Use the standard Java Activity: the native GameActivity entry froze
             // before scene Awake on repeated RMX3151 Android 13 cold starts.
             PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
-            PlayerSettings.bundleVersion="0.7.13-trail-cut-test";
-            PlayerSettings.Android.bundleVersionCode=57;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.13-trail-cut-test.apk",false);
+            PlayerSettings.bundleVersion="0.7.14-matchmaking-test";
+            PlayerSettings.Android.bundleVersionCode=58;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.14-matchmaking-test.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {

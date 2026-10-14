@@ -34,6 +34,16 @@ namespace BrainrotPlanet
         {
             using var r=MatchProtocol.Reader(packet);
             byte kind=r.ReadByte();
+            if(kind==MatchProtocol.RoomInfo)
+            {
+                string code=r.ReadString();
+                if(code.Length>0 && !MatchProtocol.ValidRoomCode(code))
+                    throw new InvalidDataException("Invalid room code");
+                MatchProtocol.End(r);
+                networkRoomCode=code;
+                networkMessage=code.Length>0 ? "Передайте код друзьям. Ожидаем игроков…" : "Подбираем игроков…";
+                return;
+            }
             if(kind==MatchProtocol.Lobby)
             {
                 LocalTeam=MatchProtocol.Team(r); int count=r.ReadByte(); MatchProtocol.End(r);

@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace BrainrotPlanet
 {
+    public enum MatchJoinMode { Quick, Create, Join }
+
     public sealed partial class PlanetGame
     {
         public int LocalTeam { get; private set; } = 1;
@@ -30,6 +32,8 @@ namespace BrainrotPlanet
         private byte inputButtons;
         private bool networkPanel, helloSent;
         private string networkAddress = "", networkKey = "", networkMessage = "";
+        private string networkJoinCode = "", networkRoomCode = "";
+        private MatchJoinMode networkJoinMode = MatchJoinMode.Quick;
         private int networkWinner;
 
         private void SetupNetwork()
@@ -58,16 +62,27 @@ namespace BrainrotPlanet
             matchListener?.Stop(); matchListener = null;
             for (int i = 1; i <= 4; i++) { participants[i]?.peer.Dispose(); participants[i] = null; }
             LocalTeam = 1; helloSent = false; inputButtons = 0; networkEpoch = 0;
+            networkRoomCode = "";
         }
-        private void ConnectMatch()
+        private void ConnectMatch(MatchJoinMode mode = MatchJoinMode.Quick)
         {
+            string code=networkJoinCode.Trim().ToUpperInvariant();
+            if(mode==MatchJoinMode.Join && !MatchProtocol.ValidRoomCode(code))
+            {networkMessage="Введите код из 6 символов, который прислал друг.";return;}
             try
             {
                 CloseNetwork();
-                matchConnection = new MatchWebSocketPeer(networkAddress.Trim(), networkKey.Trim());
-                networkMessage = "ПОДКЛЮЧЕНИЕ…";
+                networkJoinMode=mode;
+                string endpoint=networkAddress.Trim().TrimEnd('/');
+                if(endpoint.Length==0)throw new InvalidOperationException("Match endpoint missing");
+                string route=mode==MatchJoinMode.Quick?"/quick":
+                    mode==MatchJoinMode.Create?"/create":"/join/"+code;
+                // Server selection and room secrets are never entered by players.
+                matchConnection = new MatchWebSocketPeer(endpoint+route, "");
+                networkMessage = mode==MatchJoinMode.Quick?"ИЩЕМ СОПЕРНИКОВ…":
+                    mode==MatchJoinMode.Create?"СОЗДАЁМ КОМНАТУ…":"ПОДКЛЮЧАЕМСЯ ПО КОДУ…";
                 networkLastPacket = Time.unscaledTime;
-                Debug.Log("MATCH_CONNECT_BEGIN protocol=" + MatchProtocol.Version);
+                Debug.Log("MATCH_CONNECT_BEGIN protocol=" + MatchProtocol.Version+" mode="+mode);
             }
             catch (Exception e) { networkMessage = "Не удалось подключиться: " + e.GetType().Name; }
         }
@@ -141,8 +156,15 @@ namespace BrainrotPlanet
                 return;
             }
             if (matchConnection == null) return;
-            if (matchConnection.Closed || now-networkLastPacket > 15f)
-            { NetworkDisconnected("Связь с комнатой потеряна. Можно подключиться снова."); return; }
+            if (matchConnection.Closed || now-networkLastPacket > (State==MatchState.Menu?35f:15f))
+            {
+                string message=State==MatchState.Menu?
+                    (networkJoinMode==MatchJoinMode.Join?
+                     "Комната не найдена, заполнена или матч уже начался.":
+                     "Не удалось подключиться. Повторите чуть позже."):
+                    "Связь с комнатой потеряна. Можно подключиться снова.";
+                NetworkDisconnected(message); return;
+            }
             if (matchConnection.Connected && !helloSent)
             {
                 helloSent = true;
@@ -154,7 +176,7 @@ namespace BrainrotPlanet
                 { ReceiveServerPacket(packet); networkLastPacket = now; }
             }
             catch (Exception e) { NetworkDisconnected("Ошибка сетевых данных: " + e.GetType().Name); }
-            if (matchConnection != null && helloSent && now >= nextInput)
+            if (matchConnection != null && helloSent && networkEpoch>0 && now >= nextInput)
             {
                 nextInput = now+.05f;
                 Vector3 wish = State == MatchState.Playing && !paused && Player != null ? Player.Wish : Vector3.zero;
@@ -224,15 +246,34 @@ namespace BrainrotPlanet
         private void DrawNetworkPanel(float w, float h)
         {
             Plate(new Rect(0,0,w,h), new Color(.025f,.035f,.095f,1));
-            GUI.Label(new Rect(20,30,w-40,50), "СЕТЕВОЙ МАТЧ · ТЕСТ", headerStyle);
-            GUI.Label(new Rect(25,92,w-50,68), "Одна планета · до 4 участников\nСвободные места занимают боты", smallStyle);
-            GUI.Label(new Rect(25,170,w-50,30), "АДРЕС КОМНАТЫ (WSS)", smallStyle);
-            networkAddress = GUI.TextField(new Rect(25,205,w-50,42), networkAddress, 240);
-            GUI.Label(new Rect(25,266,w-50,30), "КОД ДОСТУПА", smallStyle);
-            networkKey = GUI.PasswordField(new Rect(25,300,w-50,42), networkKey, '*', 80);
-            GUI.Label(new Rect(25,368,w-50,100), networkMessage, smallStyle);
-            if (matchConnection == null && FlatButton(new Rect(26,h-180,w-52,58), "ВОЙТИ В КОМНАТУ", new Color(.1f,.55f,.75f))) ConnectMatch();
-            if (FlatButton(new Rect(26,h-103,w-52,50), "НАЗАД / ОТКЛЮЧИТЬСЯ", new Color(.2f,.22f,.35f)))
+            float top=Mathf.Max(18f,(Screen.height-Screen.safeArea.yMax)/guiScale+16f);
+            GUI.Label(new Rect(20,top,w-40,50), "СЕТЕВОЙ МАТЧ", headerStyle);
+            GUI.Label(new Rect(25,top+55,w-50,64), "До 4 игроков на одной планете.\nСвободные места займут боты.", smallStyle);
+            if(matchConnection==null)
+            {
+                if(FlatButton(new Rect(25,top+140,w-50,58),"БЫСТРЫЙ МАТЧ",new Color(.08f,.52f,.70f)))
+                    ConnectMatch(MatchJoinMode.Quick);
+                if(FlatButton(new Rect(25,top+214,w-50,54),"СОЗДАТЬ КОМНАТУ",new Color(.40f,.27f,.67f)))
+                    ConnectMatch(MatchJoinMode.Create);
+                GUI.Label(new Rect(25,top+290,w-50,30),"КОД ПРИГЛАШЕНИЯ ОТ ДРУГА",smallStyle);
+                networkJoinCode=GUI.TextField(new Rect(25,top+326,w-50,44),networkJoinCode,6).ToUpperInvariant();
+                if(FlatButton(new Rect(25,top+384,w-50,52),"ВОЙТИ ПО КОДУ",new Color(.19f,.45f,.68f)))
+                    ConnectMatch(MatchJoinMode.Join);
+            }
+            else
+            {
+                GUI.Label(new Rect(25,top+156,w-50,35),
+                    networkJoinMode==MatchJoinMode.Quick?"ПОДБИРАЕМ МАТЧ…":"ПРИВАТНЫЙ МАТЧ",smallStyle);
+                if(networkRoomCode.Length>0)
+                {
+                    GUI.Label(new Rect(25,top+219,w-50,32),"ПРИГЛАСИТЕ ДРУЗЕЙ ПО КОДУ:",smallStyle);
+                    GUI.Label(new Rect(25,top+255,w-50,55),networkRoomCode,headerStyle);
+                    if(FlatButton(new Rect(25,top+330,w-50,48),"КОПИРОВАТЬ КОД",new Color(.34f,.30f,.61f)))
+                        GUIUtility.systemCopyBuffer=networkRoomCode;
+                }
+            }
+            GUI.Label(new Rect(25,top+478,w-50,92),networkMessage,smallStyle);
+            if (FlatButton(new Rect(26,h-100,w-52,50), "НАЗАД / ОТКЛЮЧИТЬСЯ", new Color(.2f,.22f,.35f)))
             { CloseNetwork(); networkPanel = false; }
         }
     }

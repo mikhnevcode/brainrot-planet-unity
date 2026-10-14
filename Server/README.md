@@ -1,79 +1,71 @@
-# Brainrot internet match — private alpha
+# Brainrot internet match — guest-play test
 
-Offline remains available. This is a single invited room, not public matchmaking.
+The menu offers **Quick match**, **Create room**, and **Join by six-character
+code**. No player has to enter a server URL or access key. Offline bot matches
+remain available. This is a test deployment, not a production matchmaking or
+account service.
 
 ## Architecture
 
-Android/Windows ClientWebSocket (WSS, binary) → isolated TLS tunnel → Python gateway
-on **127.0.0.1:27767** → authoritative Unity Linux dedicated server on
-**127.0.0.1:27766**. Do not expose either loopback listener directly.
+Android/Windows WSS client → isolated TLS tunnel → `room_gateway.py` on
+`127.0.0.1:28180` → one authoritative Unity Linux dedicated-server process per
+room, on a separate loopback port starting at `28100`. Never expose the Python
+or Unity listeners directly. The gateway caps each room at four peers, starts
+up to eight rooms by default, and reaps empty rooms after 20 seconds. Quick
+players fill an available public room; creating a private room yields a random
+code, which friends enter before that room's match starts. Free slots in a
+started match are filled by bots. A private room waits for its first friend
+before opening the ten-second lobby. Disconnects hand the character to a bot.
 
-The server runs movement, jumps, hero powers, terrain/trail collisions, ownership,
-three lives for every participant, match time and winner selection. Clients send
-input at 20 Hz and interpolate 10 Hz full ownership/pose snapshots. Free slots are
-bots. A disconnected player's living character becomes a bot. No account or
-monetization data is collected by this prototype.
+The authoritative server owns movement, jumps, hero powers, collision, capture,
+match result, and replay. Clients send input at 20 Hz and receive snapshots at
+10 Hz. No account, purchase, or advertising data goes through this gateway.
 
-## Build
+## Build and isolated hosting
 
-Unity 6000.2.7f2 with Linux Dedicated Server Mono and Android IL2CPP modules.
-Batch entrypoints (specify corresponding `-buildTarget` before executeMethod):
+Use Unity 6000.2.7f2 with Linux Dedicated Server Mono and Android IL2CPP.
+`BrainrotPlanet.Editor.MatchNetworkBuild.Server` builds the Linux worker in
+`Builds/ServerMatchmaker`; `.Android` builds the development APK. Both run
+in-editor smoke checks before packaging.
 
-- `BrainrotPlanet.Editor.MatchNetworkBuild.Server` — Linux64, server subtarget.
-- `BrainrotPlanet.Editor.MatchNetworkBuild.Windows` — Win64, player subtarget.
-- `BrainrotPlanet.Editor.MatchNetworkBuild.Android` — Android, development APK.
+Keep this test deployment separate from TechFounder, shared Caddy, and other
+game services. Install `requirements.txt` in a project virtual environment.
+Run `python -m unittest -v test_room_gateway` before deploying. Set:
 
-All entrypoints run protocol, territory, outcome and collision smoke checks.
-The temporary default WSS URL is `Assets/Resources/MatchEndpoint.txt`; it contains
-no key. Update it when the quick tunnel changes, or enter a new URL in the menu.
+- `BRAINROT_ROOM_SERVER_EXE` to the built Linux executable's absolute path;
+- `BRAINROT_ROOM_RUNTIME` to a writable private log directory;
+- optionally `BRAINROT_MAX_ROOMS` (1–32), `BRAINROT_ROOM_BASE_PORT`, and
+  `BRAINROT_GATEWAY_PORT`.
 
-## Isolated hosting
-
-Use a separate directory/user environment; do not edit TechFounder, shared Caddy,
-or production tunnel configurations. Install `requirements.txt` in a project venv.
-Run `python -m unittest -v test_gateway`, then:
-
-1. Start the Linux executable with `-batchmode -nographics -brainrot-server`.
-2. Start `gateway.py` from the isolated hosting directory. It creates
-   `runtime/test.key` with mode 0600 if absent. Never publish/commit that file.
-3. Start an independent `cloudflared tunnel --url http://127.0.0.1:27767`.
-4. Enter its `wss://.../match` URL and the private test key on each phone.
-
-First participant opens a ten-second join window. Join before the round starts.
-Late joins are currently rejected. After the result, every remaining human must
-press replay; leaving the room also removes their readiness requirement.
-Closing all clients frees the room for a fresh round. Quick tunnels are temporary
-and aren't a production availability solution. Processes must be supervised for
-a release; a tunnel restart changes the URL.
+Start `python room_gateway.py`, then an independent TLS tunnel to
+`http://127.0.0.1:28180`. Set `Assets/Resources/MatchEndpoint.txt` to the
+tunnel's `wss://.../match` URL before the client build. The tunnel URL is a
+temporary test endpoint; it changes when the quick tunnel restarts. The legacy
+single-room `gateway.py` and its test key are separate and must not be mixed
+with this client build.
 
 ## QA
 
-`MatchProtocolSmoke.Run`: bounded frames, RLE baseline, malformed owners, numbers,
-quaternions, teams and trailing data. Gateway unit tests exercise key/path checks,
-binary round trips, text/oversize rejection and capacity.
+`room_match_smoke.py <wss://host/match>` connects two Quick players plus a
+private-room creator and friend. It checks room codes, distinct team slots,
+match starts, and matching authoritative snapshots within each room. It
+creates real test rooms; run only against the isolated test gateway.
 
-`wss_match_smoke.py <wss-url>` uses `BRAINROT_QA_KEY` from its environment and
-compares whole snapshots from two independent external peers. It opens a real
-room; only run against the dedicated test instance.
+Development clients support opt-in automated QA: create a temporary
+`.network-qa` marker in the app's private persistent directory, then remove it
+after testing. For old device scripts, `.network-qa-key` and
+`BRAINROT_QA_KEY` still trigger the test but their value is not used to join.
+QA exercises input, jump, ability, result, replay, and offline return.
 
-Development clients alone support opt-in QA: `BRAINROT_QA_KEY` environment on PC,
-or app-persistent `.network-qa-key` on Android. A scripted hero exercises input,
-jump, powers, result, replay and offline return. Remove the file after testing!
-Optional PC `BRAINROT_QA_LEAVE=1` disconnects after 35 seconds to test bot takeover.
-For manual testing, `.network-test-key` pre-fills only the private development
-room field and never auto-joins. Neither file belongs in source control or APKs.
+## Remaining release gates
 
-## Known alpha limitations / next gates
-
-- One room/four participants; no room directory, matchmaking or account identity.
-- WSS/TCP is adequate for this test; not yet tested on loss-heavy cellular links.
-- No client prediction, latency compensation or reconnect-to-existing-slot.
-- Crystals remain offline-only; network projectile flight visuals are not yet
-  replicated (server explosions, paint and sound are replicated).
-- Eliminated players wait for the result; spectator camera is still pending.
-- UI is Russian-only. Room key entry and full/active-room errors need polish.
-- iOS build/TestFlight, background/resume, malicious-load and long soak tests
-  remain release gates. No claim of production readiness or store approval.
-- No ads, purchases, rewards economy or external payment integration is included.
-
-The original 0.6.6 release APK is not overwritten by these build entrypoints.
+- The quick tunnel, worker processes, and logs need durable service supervision
+  and a permanent domain for a public release. Capacity and abuse limits need
+  load testing, per-client throttling, monitoring, and incident handling.
+- A room admits friends only until its match starts. There is no invite link,
+  reconnect to an existing team, friend list, or account identity yet.
+- WSS/TCP and snapshots need tests on poor cellular connections. Client
+  prediction and latency compensation are not implemented.
+- iOS/TestFlight, background/resume, accessibility, localization, and long
+  two-device soak tests remain outstanding.
+- There are no real ads, purchases, or payment integrations in this gateway.
