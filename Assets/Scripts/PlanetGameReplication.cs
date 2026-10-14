@@ -17,7 +17,7 @@ namespace BrainrotPlanet
                     var actor=players[team-1];
                     MatchProtocol.Vector(w,actor.transform.position); MatchProtocol.Rotation(w,actor.transform.rotation);
                     MatchProtocol.Vector(w,actor.Wish); w.Write(actor.Active); w.Write(actor.Grounded);
-                    w.Write((byte)networkLives[team]); w.Write(networkCooldown[team]); w.Write(networkGrace[team]);
+                    w.Write(networkCooldown[team]); w.Write(networkGrace[team]);
                     w.Write(actor.SpeedSeconds); w.Write(actor.SlowSeconds); w.Write(scores[team]);
                 }
                 Territory.CopyOwners(ownerScratch); MatchProtocol.WriteOwners(w,ownerScratch);
@@ -68,8 +68,7 @@ namespace BrainrotPlanet
             {
                 Vector3 position=MatchProtocol.Vector(r,100f); Quaternion rotation=MatchProtocol.Rotation(r);
                 Vector3 wish=MatchProtocol.Vector(r,1.01f); bool active=r.ReadBoolean(), grounded=r.ReadBoolean();
-                int remaining=r.ReadByte(); if(remaining>3)throw new InvalidDataException("Invalid life count");
-                networkLives[team]=remaining; networkCooldown[team]=MatchProtocol.Number(r,12.01f);
+                networkCooldown[team]=MatchProtocol.Number(r,12.01f);
                 networkGrace[team]=MatchProtocol.Number(r,30f);
                 float speed=MatchProtocol.Number(r,30),slow=MatchProtocol.Number(r,30);
                 scores[team]=MatchProtocol.Number(r,100.01f);
@@ -85,7 +84,7 @@ namespace BrainrotPlanet
                 Territory.ApplyNetworkTrail(team,path);
             }
             MatchProtocol.End(r);
-            lives=networkLives[LocalTeam]; skillCooldown=networkCooldown[LocalTeam]; playerLandingGrace=networkGrace[LocalTeam];
+            skillCooldown=networkCooldown[LocalTeam]; playerLandingGrace=networkGrace[LocalTeam];
             if(ended && State!=MatchState.End) { networkWinner=winner; finishReason="СЕТЕВОЙ МАТЧ ЗАВЕРШЁН"; Finish(); }
             if(Time.unscaledTime>=nextNetworkDiagnostic)
             {
@@ -150,7 +149,7 @@ namespace BrainrotPlanet
             {
                 autoMoving=false; savedSteering=movement=Vector2.zero; inputButtons=0; Player.Wish=Vector3.zero;
                 damageFlash=1f; GameSound.Play(GameCue.Hit);
-                Announce(value>0?"ПОТЕРЯН СЛЕД! СДЕЛАЙ НОВЫЙ СВАЙП":"ТЫ ВЫБЫЛ. ДОЖДИСЬ ИТОГОВ МАТЧА");
+                Announce("ПОТЕРЯН СЛЕД! ВОЗВРАТ НА БАЗУ");
             }
         }
         private void RenderPaths()

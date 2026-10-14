@@ -1,0 +1,17 @@
+No-lives test 0.7.7 / protocol 5
+
+Dedicated server:
+  /home/user/brainrot-match-test/respawn077/server/BrainrotMatchServer.x86_64
+  /home/user/brainrot-match-test/respawn077/runtime/unity.log
+  server loopback TCP 27970; dedicated WSS gateway loopback TCP 27971
+
+This test room runs alongside the protocol-2, protocol-3 and protocol-4
+rooms. Do not redirect older clients to protocol 5. The WSS endpoint is in
+Assets/Resources/MatchEndpoint.txt and is a temporary trycloudflare URL.
+If its tunnel restarts, update this resource and rebuild the Android APK.
+Keep the gateway key in the existing private file; never include it in Git.
+
+Android test APK: Builds/Android/BrainrotPlanet-v0.7.7-no-lives-test.apk.
+Acceptance: run Server/wss_match_smoke.py with two peers, then exercise a
+full result and replay on two phones. The optional development-only
+.respawn-qa marker checks five offline respawns and must be removed afterward.

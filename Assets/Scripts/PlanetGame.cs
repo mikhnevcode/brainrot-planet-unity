@@ -43,8 +43,8 @@ namespace BrainrotPlanet
         private bool resolvingBombImpact;
         private float matchTime,skillCooldown,annTime,scoreTick;
         private float playerLandingGrace;
+        private readonly float[] offlineBotGrace=new float[5];
         private float[] scores = new float[5];
-        private int lives=3;
         private string announcement="";
         private OrbitCamera orbitCamera;
         private PlanetActor victoryActor;
@@ -151,8 +151,9 @@ namespace BrainrotPlanet
             if(worldRoot!=null)Destroy(worldRoot.gameObject);
             foreach(LineRenderer l in pathRenderers)if(l!=null)Destroy(l.gameObject);
             Array.Clear(pathRenderers,0,pathRenderers.Length);
-            players.Clear();lives=3;
+            players.Clear();
             Array.Clear(scores,0,scores.Length);
+            Array.Clear(offlineBotGrace,0,offlineBotGrace.Length);
             victoryActor=null;victoryReplayTimer=0f;
             balanceTelemetry=null;
             matchTime=145f;skillCooldown=0f;scoreTick=0f;
@@ -358,13 +359,12 @@ namespace BrainrotPlanet
             Debug.Log("PLAYER_RESPAWN_RECOVERY level="+chosenDifficulty+
                 " seconds="+playerLandingGrace.ToString("F1"));
         }
-
-        public void HurtPlayer()
+        public void OnBotRespawn(int team)
         {
-            lives--;
-            Announce(" ТВОЙ СЛЕД ПЕРЕСЕКЛИ!  "+lives);
-            if(lives<=0){finishReason="ЗАКОНЧИЛИСЬ ЖИЗНИ";Finish();}
+            if(!IsNetworkMatch)
+                offlineBotGrace[team]=AiBalanceTuning.RespawnGrace(chosenDifficulty);
         }
+
         public void ReduceSkillCooldown(float by)=>skillCooldown=Mathf.Max(0,skillCooldown-by);
         public void Announce(string text){announcement=text;annTime=2.4f;}
         public void UseSkill()
@@ -547,6 +547,7 @@ namespace BrainrotPlanet
                 return;
             }
             playerLandingGrace=Mathf.Max(0f,playerLandingGrace-dt);
+            for(int team=2;team<=4;team++)offlineBotGrace[team]=Mathf.Max(0f,offlineBotGrace[team]-dt);
             matchTime-=dt;
             float cooldownBefore=skillCooldown;
             skillCooldown=Mathf.Max(0,skillCooldown-dt);
@@ -689,7 +690,7 @@ namespace BrainrotPlanet
             if(State==MatchState.End)return;
             GameSound.StopGameplay();
             for(int team=1;team<=4;team++)scores[team]=Territory.Percentage(team);
-            int winningTeam=DedicatedMatchServer?NetworkWinningTeam():IsNetworkReplica?networkWinner:MatchOutcome.Winner(scores,lives);
+            int winningTeam=IsNetworkReplica?networkWinner:MatchOutcome.Winner(scores);
             if(DedicatedMatchServer)
             {
                 networkWinner=winningTeam;
@@ -698,7 +699,7 @@ namespace BrainrotPlanet
                 Debug.Log("MATCH_SERVER_RESULT epoch="+networkEpoch+" winner="+winningTeam);
                 return;
             }
-            Debug.Log("MATCH_OUTCOME winner="+winningTeam+" playerLives="+lives+" reason="+finishReason);
+            Debug.Log("MATCH_OUTCOME winner="+winningTeam+" reason="+finishReason);
             if(balanceTelemetry!=null)balanceTelemetry.Report(winningTeam,scores);
             foreach(var pawn in players)
             {

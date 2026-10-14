@@ -6,7 +6,7 @@ namespace BrainrotPlanet
 {
     public static class MatchProtocol
     {
-        public const int Version = 4, Port = 27766, MaxTrail = 280;
+        public const int Version = 5, Port = 27766, MaxTrail = 280;
         public const byte Hello = 1, Lobby = 2, Start = 3, Input = 4, Snapshot = 5, Effect = 6;
         public static byte[] Packet(byte kind, Action<BinaryWriter> write)
         {

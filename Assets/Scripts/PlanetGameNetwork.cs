@@ -23,7 +23,6 @@ namespace BrainrotPlanet
         }
         private readonly Participant[] participants = new Participant[5];
         private readonly int[] networkHeroes = { 0, 0, 1, 2, 3 };
-        private readonly int[] networkLives = { 0, 3, 3, 3, 3 };
         private readonly float[] networkCooldown = new float[5], networkGrace = new float[5];
         private readonly byte[] ownerScratch = new byte[PlanetMath.CellCount];
         private uint networkEpoch, inputSequence;
@@ -195,7 +194,7 @@ namespace BrainrotPlanet
             networkEpoch++; networkWinner = 0;
             for (int i = 1; i <= 4; i++)
             {
-                networkLives[i] = 3; networkCooldown[i] = 0; networkGrace[i] = OrbitCamera.DescentDuration+2f;
+                networkCooldown[i] = 0; networkGrace[i] = OrbitCamera.DescentDuration+2f;
                 if (participants[i] != null) participants[i].replay = false;
             }
             StartGame();
@@ -207,23 +206,13 @@ namespace BrainrotPlanet
         }
         private void Broadcast(byte[] packet)
         { for (int i = 1; i <= 4; i++) if (participants[i]?.joined == true) participants[i].peer.Send(packet); }
-        public bool NetworkActorLostLife(PlanetActor actor)
+        public void NetworkActorTrailBroken(PlanetActor actor)
         {
             int team = actor.Team;
-            if (!DedicatedMatchServer) return false;
-            networkLives[team] = Mathf.Max(0, networkLives[team]-1);
-            networkGrace[team] = 2f;
-            if (networkLives[team] == 0) actor.EliminateNetworkActor();
-            EmitNetworkEffect(3, team, actor.transform.position.normalized, networkLives[team]);
-            int alive = 0; for (int i=1;i<=4;i++) if (networkLives[i]>0) alive++;
-            if (alive <= 1) { finishReason = "ОСТАЛСЯ ОДИН ГЕРОЙ"; Finish(); }
-            return networkLives[team] == 0 || State != MatchState.Playing;
-        }
-        private int NetworkWinningTeam()
-        {
-            int winner = 0;
-            for (int i = 1; i <= 4; i++) if (networkLives[i] > 0 && (winner == 0 || scores[i] > scores[winner])) winner = i;
-            return winner == 0 ? 1 : winner;
+            if (!DedicatedMatchServer || State!=MatchState.Playing) return;
+            networkGrace[team] = AiBalanceTuning.RespawnGrace(chosenDifficulty);
+            EmitNetworkEffect(3, team, actor.transform.position.normalized);
+            Debug.Log("MATCH_TRAIL_BROKEN team="+team+" shield="+networkGrace[team]);
         }
         private void RequestJump()
         { if (IsNetworkReplica) inputButtons |= 1; else Player?.Jump(); }

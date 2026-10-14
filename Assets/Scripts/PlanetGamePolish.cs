@@ -40,7 +40,8 @@ namespace BrainrotPlanet
             light.cullingMask=~(1<<30);
             portraitAtlas=Resources.Load<Texture2D>("HeroPortraits064");
         }
-        private bool IsTrailProtected(int team)=>DedicatedMatchServer?networkGrace[team]>0f:team==LocalTeam&&playerLandingGrace>0f;
+        private bool IsTrailProtected(int team)=>DedicatedMatchServer?networkGrace[team]>0f:
+            team==LocalTeam?playerLandingGrace>0f:offlineBotGrace[team]>0f;
         private void SetPaused(bool value)
         {
             if(DedicatedMatchServer)return;
@@ -49,7 +50,7 @@ namespace BrainrotPlanet
             if(IsNetworkReplica && value){inputButtons=0;if(Player!=null)Player.Wish=Vector3.zero;}
             GameSound.PauseGameplay(value);
             steerFinger=-1;
-            if(changed)Debug.Log((value?"MATCH_PAUSED":"MATCH_RESUMED")+" remaining="+matchTime.ToString("F2")+" lives="+lives);
+            if(changed)Debug.Log((value?"MATCH_PAUSED":"MATCH_RESUMED")+" remaining="+matchTime.ToString("F2"));
         }
         private void OnApplicationPause(bool value){if(value&&State==MatchState.Playing)SetPaused(true);}
         private void OnApplicationFocus(bool value){if(!value&&State==MatchState.Playing)SetPaused(true);}
@@ -83,13 +84,6 @@ namespace BrainrotPlanet
             GUI.color=Color.Lerp(c,new Color(.7f,.87f,1f,c.a),.20f);GUI.Box(r,GUIContent.none,roundedPanelStyle);
             GUI.color=c;GUI.Box(new Rect(r.x+1,r.y+1,r.width-2,r.height-2),GUIContent.none,roundedPanelStyle);
             GUI.color=old;
-        }
-        private void Heart(float x,float y,bool alive)
-        {
-            Color c=alive?new Color(1f,.25f,.48f):new Color(.25f,.28f,.38f);
-            DrawGlow(new Rect(x-2,y-2,25,25),alive?new Color(1,.15f,.3f,.35f):Color.clear);
-            Plate(new Rect(x+2,y+3,7,9),c);Plate(new Rect(x+11,y+3,7,9),c);
-            Plate(new Rect(x+4,y+10,12,5),c);Plate(new Rect(x+7,y+15,6,4),c);
         }
         private void Portrait(Rect r,int hero)
         {
@@ -129,14 +123,12 @@ namespace BrainrotPlanet
             GUI.Label(new Rect(18,safeTop+31,94,22),"МЕСТО "+rank+" / 4",captionStyle);
             int seconds=Mathf.CeilToInt(matchTime);
             GUI.Label(new Rect(w*.5f-42,safeTop+3,84,29),(seconds/60)+":"+(seconds%60).ToString("00"),numberStyle);
-            for(int i=0;i<3;i++)Heart(w*.5f-32+i*23,safeTop+34,i<lives);
+            GUI.Label(new Rect(w*.5f-65,safeTop+34,130,19),"ПОБЕДА ПО ПЛОЩАДИ",captionStyle);
             if(FlatButton(new Rect(w-66,safeTop+12,42,36),"II",new Color(.13f,.21f,.32f)))SetPaused(true);
             Plate(new Rect(12,safeTop+62,(w-24)*Mathf.Clamp01(matchTime/145f),2),new Color(.2f,.85f,.95f));
 
             string hint="";Color hintColor=new Color(.07f,.13f,.21f,.88f);
-            if(IsNetworkReplica && lives<=0)hint="ТЫ ВЫБЫЛ. ДОЖДИСЬ ИТОГОВ МАТЧА";
-            else if(IsLanding)hint="ДЕСАНТ НА ПЛАНЕТУ";
-            else if(playerLandingGrace>0){hint="ЩИТ: ЖИЗНЬ И СЛЕД  "+Mathf.CeilToInt(playerLandingGrace)+" с";hintColor=new Color(.08f,.32f,.40f,.90f);}
+            if(playerLandingGrace>0){hint="ЩИТ СЛЕДА  "+Mathf.CeilToInt(playerLandingGrace)+" с";hintColor=new Color(.08f,.32f,.40f,.90f);}
             else if(Territory!=null&&Territory.HasTrail(LocalTeam))
             {
                 hint=nearestEnemyDegrees<15?"ОПАСНО! ВЕРНИСЬ НА СВОЮ КРАСКУ":"ЗАМКНИ ПЕТЛЮ НА СВОЕЙ КРАСКЕ";

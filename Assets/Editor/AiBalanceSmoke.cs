@@ -20,7 +20,8 @@ namespace BrainrotPlanet.Editor
             if(!(AiBalanceTuning.RespawnGrace(AiDifficulty.Easy)>
                  AiBalanceTuning.RespawnGrace(AiDifficulty.Medium) &&
                  AiBalanceTuning.RespawnGrace(AiDifficulty.Medium)>
-                 AiBalanceTuning.RespawnGrace(AiDifficulty.Hard)))
+                 AiBalanceTuning.RespawnGrace(AiDifficulty.Hard) &&
+                 AiBalanceTuning.RespawnGrace(AiDifficulty.Easy)<=3f))
                 throw new Exception("Recovery grace must be monotonic");
             if(!(easy>medium && medium>hard))
                 throw new Exception("Encounter distances not monotonic");
@@ -49,6 +50,13 @@ namespace BrainrotPlanet.Editor
                     " playerToBot="+Vector3.Angle(points[0],points[1]).ToString("F2")+
                     " minSeparation="+shortest.ToString("F2"));
             }
+            var territory=new TerritorySystem(null);
+            territory.Seed(1,centre);
+            territory.Seed(2,-centre);
+            territory.ClaimDisk(2,centre,.4f,false);
+            if(!territory.InOwn(1,centre))
+                throw new Exception("A captured home core has no safe respawn point");
+            Debug.Log("HOME_CORE_SMOKE_PASS protectedFromEnemyPaint=true");
             Debug.Log("AI_BALANCE_SMOKE_PASS encounterSpawns=3 equalSpeed=6.5");
         }
     }

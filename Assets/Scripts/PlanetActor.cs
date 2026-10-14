@@ -49,12 +49,6 @@ namespace BrainrotPlanet
             Active=active; Grounded=grounded; SpeedSeconds=speed; SlowSeconds=slow;
             if((transform.position-position).sqrMagnitude>16f)transform.SetPositionAndRotation(position,rotation);
         }
-        public void EliminateNetworkActor()
-        {
-            Active=false; Wish=Vector3.zero; body.linearVelocity=Vector3.zero;
-            body.isKinematic=true; body.detectCollisions=false;
-        }
-
         public static bool ShouldBounceOnHill(float incline,float uphillApproach)
         {
             return incline>8f&&incline<38f&&uphillApproach>.14f;
@@ -238,30 +232,31 @@ namespace BrainrotPlanet
             damageCooldown=1.6f;
             game.Effects.Burst(transform.position,Colors.Team(Team),36,3f);
             if(game.DedicatedMatchServer)
-            {
-                if(game.NetworkActorLostLife(this))return;
-            }
-            else if(Team==game.LocalTeam)
-            {
-                game.HurtPlayer();
-                if(game.State!=MatchState.Playing)return;
-            }
+                game.NetworkActorTrailBroken(this);
             Respawn();
         }
         public void Respawn()
         {
             game.Territory.ResetTrail(Team);
             springLandingArmed=false;
+            Wish=Vector3.zero;
             body.linearVelocity=Vector3.zero;body.angularVelocity=Vector3.zero;
             lastDriveVelocity=Vector3.zero;
             biomeMotion.Reset();
-            transform.position=PlanetSurface.Point(SpawnDirection,1.8f);
-            transform.rotation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
+            Vector3 home=PlanetSurface.Point(SpawnDirection,1.8f);
+            Quaternion orientation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
+            body.position=home;body.rotation=orientation;
+            transform.SetPositionAndRotation(home,orientation);
             lastDirection=SpawnDirection;
+            Grounded=false;
+            jumpCooldown=.35f;
             Active=true;
             if(Team==1)game.OnPlayerRespawn();
+            else game.OnBotRespawn(Team);
             var ai=GetComponent<PlanetAI>();
             if(ai!=null)ai.OnRespawn();
+            Debug.Log("HERO_RESPAWN team="+Team+" homeOwned="+
+                game.Territory.InOwn(Team,SpawnDirection));
         }
         private void FixedUpdate()
         {

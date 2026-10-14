@@ -9,18 +9,18 @@ namespace BrainrotPlanet.Editor
         public static void Run()
         {
             var scores = new[] { 0f, 50f, 12f, 20f, 8f };
-            Check(scores, 0, 3); Check(scores, -1, 3);
-            Check(scores, 1, 1); Check(scores, 3, 1);
+            Check(scores, 1);
+            scores = new[] { 0f, 5f, 12f, 20f, 8f };
+            Check(scores, 3);
             scores = new[] { 0f, 5f, 12f, 12f, 8f };
-            Check(scores, 3, 2); Check(scores, 0, 2);
-            Check(new[] { 0f, 0f, 0f, 0f, 0f }, 0, 2);
-            Check(new[] { 0f, 0f, 0f, 0f, 0f }, 1, 1);
-            Debug.Log("MATCH_OUTCOME_SMOKE_PASS cases=8 zeroLivesCannotWin=true ties=lowestEligibleTeam");
+            Check(scores, 2);
+            Check(new[] { 0f, 0f, 0f, 0f, 0f }, 1);
+            Debug.Log("MATCH_OUTCOME_SMOKE_PASS cases=4 ties=lowestTeam noElimination=true");
         }
-        private static void Check(float[] scores, int lives, int expected)
+        private static void Check(float[] scores, int expected)
         {
-            int actual = MatchOutcome.Winner(scores, lives);
-            if (actual != expected) throw new Exception("Incorrect match winner: lives=" + lives + " actual=" + actual + " expected=" + expected);
+            int actual = MatchOutcome.Winner(scores);
+            if (actual != expected) throw new Exception("Incorrect territory winner: actual=" + actual + " expected=" + expected);
         }
     }
 }

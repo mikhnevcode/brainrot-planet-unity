@@ -222,13 +222,13 @@ namespace BrainrotPlanet
             int changed=0, enclosed=0;
             Vector3 effectCenter=Vector3.zero;
             foreach(int i in Trails[team])
-                if(owner[i]!=team)
+                if(owner[i]!=team && !ProtectedByOtherCore(team,i))
                 {owner[i]=(byte)team;changed++;}
             if(enclosedCells!=null)
             {
                 foreach(int i in enclosedCells)
                 {
-                    if(owner[i]!=team)
+                    if(owner[i]!=team && !ProtectedByOtherCore(team,i))
                     {
                         owner[i]=(byte)team;
                         effectCenter+=PlanetMath.CellDirection(i)*PlanetMath.CellAreaWeight(i);

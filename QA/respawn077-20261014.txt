@@ -1,0 +1,31 @@
+Brainrot Planet 0.7.7 no-lives test - 2026-10-14
+
+Rules: no lives or elimination. A cut unfinished trail disappears; the actor
+returns to the protected center of its home territory and remains active. The
+trail has 2-3 seconds of protection after respawn. The match always runs to
+time-up, and the largest territory wins (lowest team number breaks a tie).
+
+Protocol 5 removes the obsolete life byte from authoritative snapshots.
+Earlier test clients must stay on their matching older rooms.
+
+Build checks, Unity 6000.2.7f2:
+- HOME_CORE_SMOKE_PASS protectedFromEnemyPaint=true
+- MATCH_OUTCOME_SMOKE_PASS cases=4 ties=lowestTeam noElimination=true
+- AI_BALANCE_SMOKE_PASS encounterSpawns=3
+- MATCH_BUILD_PASS for Linux dedicated server and Android Development APK
+
+Device checks:
+- RMX3151 E6ZTMFVCEA895HAA: five consecutive forced trail cuts in an
+  offline match, each clearing the trail and returning the active player to
+  owned home territory with protection. A victory by territory still worked
+  after the fifth cut, as did replay. RESPAWN_QA_PASS.
+- RMX3151 and RMX2020 NBTK5TZTVC8T9TRG: real WSS match, result, replay,
+  then offline return. MATCH_QA_PASS on both. The server recorded real cuts
+  and home respawns for human and bot teams, with no early elimination.
+- Two-peer WSS smoke: 107 identical authoritative snapshots.
+- PlayerPrefs best area, selected hero and wins were unchanged by QA.
+
+Screenshots are in the calling task's outputs/respawn077/phone1/respawn-qa.
+Temporary .respawn-qa and .network-qa-key markers were removed from phones.
+The older .network-test-key was left intact. This is a test APK, not a store
+release; the temporary trycloudflare endpoint may need rotation later.

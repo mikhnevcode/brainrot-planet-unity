@@ -14,6 +14,8 @@ namespace BrainrotPlanet
             if(DedicatedMatchServer)yield break;
             if(File.Exists(Path.Combine(Application.persistentDataPath,".flight-qa")))
             {yield return RunDeploymentFlightQa();yield break;}
+            if(File.Exists(Path.Combine(Application.persistentDataPath,".respawn-qa")))
+            {yield return RunRespawnQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".planet-biome-qa")))
             {yield return RunPlanetBiomeQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".hero-menu-qa")))
