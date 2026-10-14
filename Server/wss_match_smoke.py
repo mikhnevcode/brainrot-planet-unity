@@ -8,17 +8,22 @@ import os
 import struct
 import sys
 import time
+from pathlib import Path
 from websockets.asyncio.client import connect
 
 
 async def main():
+    auth_key = os.environ.get("BRAINROT_QA_KEY")
+    if not auth_key:
+        auth_key = Path(os.environ["BRAINROT_QA_KEY_FILE"]).read_text().strip()
     histories = [{}, {}]
     teams = [0, 0]
+    planets = [None, None]
 
     async def peer(index):
-        async with connect(sys.argv[1], additional_headers={"X-Brainrot-Test-Key": os.environ["BRAINROT_QA_KEY"]},
+        async with connect(sys.argv[1], additional_headers={"X-Brainrot-Test-Key": auth_key},
                            max_size=196608, compression=None, proxy=None) as ws:
-            await ws.send(struct.pack("<BiB", 1, 2, index) + b"\0")
+            await ws.send(struct.pack("<BiB", 1, 3, index) + b"\0")
             epoch, sequence = 0, 0
             began = time.monotonic()
 
@@ -36,6 +41,8 @@ async def main():
                     packet = await asyncio.wait_for(ws.recv(), 15)
                     if packet[0] == 3:
                         epoch, teams[index] = struct.unpack_from("<IB", packet, 1)
+                        planets[index] = struct.unpack_from("<Bi", packet, 7)
+                        assert 0 <= planets[index][0] <= 2 and planets[index][1] > 0
                     elif packet[0] == 5:
                         received_epoch, = struct.unpack_from("<I", packet, 1)
                         assert received_epoch == epoch and epoch > 0
@@ -51,7 +58,8 @@ async def main():
     assert len(common) >= 100, f"Too few shared snapshots: {len(common)}"
     assert all(histories[0][key] == histories[1][key] for key in common)
     assert teams[0] != teams[1] and min(teams) >= 1
-    print(f"WSS_TWO_PEERS_PASS teams={teams} identicalSnapshots={len(common)}")
+    assert planets[0] == planets[1] and planets[0] is not None
+    print(f"WSS_TWO_PEERS_PASS teams={teams} planet={planets[0][0]} seed={planets[0][1]} identicalSnapshots={len(common)}")
 
 
 if __name__ == "__main__":

@@ -45,9 +45,13 @@ namespace BrainrotPlanet
 #endif
             if (!DedicatedMatchServer) return;
             Application.runInBackground = true;
-            matchListener = new TcpListener(IPAddress.Loopback, MatchProtocol.Port);
+            int listenPort=MatchProtocol.Port;
+            string configuredPort=Environment.GetEnvironmentVariable("BRAINROT_MATCH_PORT");
+            if(!string.IsNullOrEmpty(configuredPort)&&(!int.TryParse(configuredPort,out listenPort)||listenPort<1024||listenPort>65535))
+                throw new InvalidOperationException("Invalid private match port");
+            matchListener = new TcpListener(IPAddress.Loopback, listenPort);
             matchListener.Start(4);
-            Debug.Log("MATCH_SERVER_READY loopbackPort=" + MatchProtocol.Port + " protocol=" + MatchProtocol.Version);
+            Debug.Log("MATCH_SERVER_READY loopbackPort=" + listenPort + " protocol=" + MatchProtocol.Version);
         }
         private void CloseNetwork()
         {
@@ -197,7 +201,7 @@ namespace BrainrotPlanet
             StartGame();
             for (int team = 1; team <= 4; team++) if (participants[team]?.joined == true)
                 participants[team].peer.Send(MatchProtocol.Packet(MatchProtocol.Start, w =>
-                { w.Write(networkEpoch); w.Write((byte)team); w.Write((byte)chosenDifficulty); for (int i=1;i<=4;i++) w.Write((byte)networkHeroes[i]); for(int i=1;i<=4;i++)w.Write(networkSkins[i]); }));
+                { w.Write(networkEpoch); w.Write((byte)team); w.Write((byte)chosenDifficulty); MatchProtocol.WritePlanet(w,battlePlanet,planetSeed); for (int i=1;i<=4;i++) w.Write((byte)networkHeroes[i]); for(int i=1;i<=4;i++)w.Write(networkSkins[i]); }));
             nextSnapshot = Time.unscaledTime;
             Debug.Log("MATCH_SERVER_STARTED epoch=" + networkEpoch);
         }

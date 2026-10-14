@@ -6,7 +6,7 @@ namespace BrainrotPlanet
 {
     public static class MatchProtocol
     {
-        public const int Version = 2, Port = 27766, MaxTrail = 280;
+        public const int Version = 3, Port = 27766, MaxTrail = 280;
         public const byte Hello = 1, Lobby = 2, Start = 3, Input = 4, Snapshot = 5, Effect = 6;
         public static byte[] Packet(byte kind, Action<BinaryWriter> write)
         {
@@ -17,6 +17,10 @@ namespace BrainrotPlanet
             }
         }
         public static BinaryReader Reader(byte[] bytes) => new BinaryReader(new MemoryStream(bytes, false));
+        public static void WritePlanet(BinaryWriter writer,BattlePlanet kind,int seed)
+        {PlanetBiomeRules.Validate(kind,seed);writer.Write((byte)kind);writer.Write(seed);}
+        public static void ReadPlanet(BinaryReader reader,out BattlePlanet kind,out int seed)
+        {kind=(BattlePlanet)reader.ReadByte();seed=reader.ReadInt32();PlanetBiomeRules.Validate(kind,seed);}
         public static void End(BinaryReader reader)
         {
             if (reader.BaseStream.Position != reader.BaseStream.Length)

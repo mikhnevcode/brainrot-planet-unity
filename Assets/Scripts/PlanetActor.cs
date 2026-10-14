@@ -24,6 +24,7 @@ namespace BrainrotPlanet
         private PlanetGame game;
         private Vector3 lastDirection;
         private Vector3 lastDriveVelocity;
+        private readonly PlanetZoneMotion biomeMotion=new PlanetZoneMotion();
         private bool isDropping;
         private float dropElapsed;
         private float nextDropDiagnostic;
@@ -216,7 +217,7 @@ namespace BrainrotPlanet
         {
             if(!Active||!Grounded||jumpCooldown>0)return;
             Vector3 normal=transform.position.normalized;
-            body.AddForce(normal*6.2f,ForceMode.VelocityChange);
+            body.AddForce(normal*(game.Arena?.JumpImpulse??6.2f),ForceMode.VelocityChange);
             jumpCooldown=.55f;
             if(Team==1)GameSound.Play(GameCue.Jump);
             if(Team==1)Debug.Log("PLAYER_JUMP_BEGIN character="+Character);
@@ -249,6 +250,7 @@ namespace BrainrotPlanet
             springLandingArmed=false;
             body.linearVelocity=Vector3.zero;body.angularVelocity=Vector3.zero;
             lastDriveVelocity=Vector3.zero;
+            biomeMotion.Reset();
             transform.position=PlanetSurface.Point(SpawnDirection,1.8f);
             transform.rotation=Quaternion.FromToRotation(Vector3.up,SpawnDirection);
             lastDirection=SpawnDirection;
@@ -290,7 +292,7 @@ namespace BrainrotPlanet
                 float towardCenter=Vector3.Dot(velocity,n);
                 if(towardCenter<0f)body.linearVelocity=velocity-n*towardCenter;
             }
-            body.AddForce(-n*23f,ForceMode.Acceleration);
+            body.AddForce(-n*(game!=null&&game.Arena!=null?game.Arena.Gravity:23f),ForceMode.Acceleration);
             RaycastHit ground;
             bool colliderContact=Physics.Raycast(body.position+n*.15f,-n,out ground,1.15f,1<<8,QueryTriggerInteraction.Ignore);
             Grounded=radialContact||colliderContact;
@@ -305,6 +307,7 @@ namespace BrainrotPlanet
             }
             Vector3 walk=Vector3.ProjectOnPlane(Wish,n).normalized;
             float speed=6.5f*(SlowSeconds>0?.46f:1f)*(SpeedSeconds>0?1.85f:1f);
+            speed*=biomeMotion.Tick(game!=null?game.Arena:null,n,walk,Grounded,dt);
             if(Grounded)
             {
                 float incline=colliderContact?Vector3.Angle(ground.normal,n):0f;

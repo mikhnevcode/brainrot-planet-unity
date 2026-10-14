@@ -1,0 +1,33 @@
+Brainrot Planet 0.7.5 planets test — 2026-10-14
+APK versionCode 49, Development IL2CPP, standard Unity Activity.
+Bytes: 73487535
+SHA256: 1abc3debea5777950fe49af17366d50a6dc2c80f1270c4ae028b9b7b24a8bb37
+Download: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/BrainrotPlanet-v0.7.5-planets-test.apk
+
+Implemented:
+- Uniform light blue-grey hero tile backgrounds; colour accents and selected border retained.
+- Automatic cycle Tropical -> Desert -> Moon -> Tropical. Offline starts with Tropical; server owns network rotation and seed.
+- Tropical: 18 seeded non-colliding grass/flower patches, up to 20% ground slowdown for under .9 seconds per continuous visit. Jump/outside zone resets it.
+- Desert: 18 seeded chevron zones, up to 16% tailwind boost; no headwind movement lock.
+- Moon: gravity 17 rather than 23, ordinary jump impulse 7.4 rather than 6.2.
+- Distinct terrain palettes, sky colours, star counts, distant companion planets; landing card names planet and rule.
+- Isolated grass patches, no ridges/new blocking props. Existing terrain mesh and territory rules reused.
+- Biome decorations hidden with the planet on result stage. Generated meshes/materials released on replay.
+- Protocol 3 Start includes validated planet ID and positive seed. Protocol 2 room kept intact.
+
+PASS — Android build: Logs/planets075-final-stage.log.
+PASS — Linux dedicated build: Logs/planets075-server-final.log.
+PASS — PlanetBiomeSmoke 1776 cases: deterministic zones, all difficulty spawn safety, transient slow, wind direction, moon arc constants, malformed metadata rejection, bounded no-collider decoration.
+PASS — BiomeMovementSmoke: 18 simulated routes through patches/craters, 3 planets, worstStationary=0.
+PASS — existing gates: protocol 24, catalog 216, store 110, hero framing 2344, cast 65 skins/975 poses/65 late bindings, territory, outcome, actor collision.
+PASS — two Android phones RMX3151 / RMX2020: final APK installed preserving app data.
+PASS — actual offline cycle 0_1_2_0 on both; screenshots and jumps checked.
+Jump peaks final: RMX3151 .74/.73/1.54m; RMX2020 .77/.77/1.54m.
+PASS — WSS two internet peers: same map 0, seed 295835739, 169 byte-identical shared snapshots.
+PASS — two-phone full network round: epoch3 map2 seed1304467507, both result winner4, 12 scripted skill/jump actions each; shared replay epoch4 map0 seed1555966514; both MATCH_QA_PASS result_replay_offline.
+PASS — selected hero / best area / wins preference values before and after tests identical (5 existing fields across both phones); no profile reset or payment.
+PASS — test markers removed, both phones relaunched into normal menus.
+PASS — public APK HTTP200, size and homeserver SHA256 match local.
+
+Not release approval. No iOS build, long soak, complete 13-hero map balance matrix, human usability study, real purchase/ad SDK or stable production hosting verified.
+The WSS address is a temporary quick tunnel. Map selection UI, Ice and Volcano are deferred.

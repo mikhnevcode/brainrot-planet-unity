@@ -139,6 +139,7 @@ namespace BrainrotPlanet
             else if(tutorialStep==1)hint="ВЫЙДИ ИЗ СВОЕЙ ЗОНЫ И ВЕРНИСЬ";
             else if(annTime>0)hint=announcement.Trim();
             if(hint.Length>0){Rounded(new Rect(22,safeTop+76,w-44,32),hintColor);GUI.Label(new Rect(27,safeTop+77,w-54,29),hint,captionStyle);}
+            DrawPlanetIntro(w,safeTop);
             if(captureRewardTime>0)
             {
                 Color old=GUI.color;GUI.color=new Color(1,1,1,Mathf.Clamp01(captureRewardTime*2));
@@ -180,6 +181,7 @@ namespace BrainrotPlanet
             CloseNetwork();networkPanel=false;
             GameSound.StopGameplay();
             State=MatchState.Menu;orbitCamera.ClearTarget();
+            if(worldCamera!=null)worldCamera.backgroundColor=new Color(.055f,.065f,.15f);
         }
         public void ResolveBombImpact(int team,Vector3 direction,float radius)
         {

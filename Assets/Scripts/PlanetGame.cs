@@ -141,6 +141,7 @@ namespace BrainrotPlanet
         }
         public void StartGame()
         {
+            PrepareBattlePlanet();
             SetPaused(false);
             capturesThisMatch=0;captureStreak=0;bestCapture=0f;finishReason="ВРЕМЯ ВЫШЛО";
             tutorialStep=0;
@@ -162,7 +163,12 @@ namespace BrainrotPlanet
             var gameObjectRoot=new GameObject("ONE PLANET / ONE MATCH");
             worldRoot=gameObjectRoot.transform;
             var globe=new GameObject("Spherical walkable planet");globe.transform.SetParent(worldRoot);
-            var surface=globe.AddComponent<PlanetSurface>();surface.Build();
+            var surface=globe.AddComponent<PlanetSurface>();surface.Build(Arena);
+            if(!DedicatedMatchServer&&Arena.Zones.Length>0)
+            {
+                var decor=new GameObject("Walk-through biome vegetation / wind");decor.transform.SetParent(globe.transform,false);
+                decor.AddComponent<PlanetBiomeDecor>().Build(Arena);
+            }
             Territory=new TerritorySystem(surface);
             Territory.OnCapture+=HandleCapture;
             Territory.OnTrailDestroyed+=HandleTrailLost;
@@ -255,9 +261,9 @@ namespace BrainrotPlanet
         {
             // Decorative low-cost point cloud, not a second physics scene.
             var stars=new GameObject("Distant stars");stars.transform.SetParent(worldRoot);
-            Material material=Colors.New(new Color(.72f,.85f,1f),true);
+            Material material=Colors.New(Color.Lerp(Arena.Accent,Color.white,.65f),true);
             var mesh=new Mesh{name="Star dots"};
-            const int count=145;
+            int count=Arena.Kind==BattlePlanet.Moon?210:Arena.Kind==BattlePlanet.Desert?90:145;
             var vertices=new Vector3[count*4];
             var uv=new Vector2[count*4];
             var tr=new int[count*6];
@@ -281,6 +287,8 @@ namespace BrainrotPlanet
             mesh.vertices=vertices;mesh.uv=uv;mesh.triangles=tr;mesh.RecalculateNormals();
             stars.AddComponent<MeshFilter>().sharedMesh=mesh;
             stars.AddComponent<MeshRenderer>().sharedMaterial=material;
+            stars.AddComponent<PlanetGeneratedArt>().Own(mesh,material);
+            if(!DedicatedMatchServer)CreatePlanetCompanion();
         }
         private void HandleCapture(int team,int changed,Vector3 direction)
         {
@@ -690,7 +698,7 @@ namespace BrainrotPlanet
             }
             foreach(var trail in pathRenderers)if(trail!=null)trail.enabled=false;
             var planet=worldRoot.GetComponentInChildren<PlanetSurface>();
-            if(planet!=null)planet.GetComponent<Renderer>().enabled=false;
+            if(planet!=null)foreach(var renderer in planet.GetComponentsInChildren<Renderer>())renderer.enabled=false;
             GameSound.Play(winningTeam==LocalTeam?GameCue.Win:GameCue.Lose);
             if(!DedicatedMatchServer&&!isWardrobeQa)
             {

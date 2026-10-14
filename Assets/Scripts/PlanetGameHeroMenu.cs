@@ -125,7 +125,9 @@ namespace BrainrotPlanet
                 Rect card=new Rect(20+(i%columns)*(width+gap),gridY+(i/columns)*(height+gap),width,height);
                 bool picked=i==selectedHero;
                 if(picked)Rounded(new Rect(card.x-3,card.y-3,card.width+6,card.height+6),accent);
-                Rounded(card,Color.Lerp(new Color(.055f,.075f,.16f),HeroColors[i],picked?.42f:.22f));
+                Rounded(card,new Color(.57f,.66f,.76f));
+                DrawGlow(new Rect(card.x+3,card.y+3,card.width-6,card.height-6),new Color(.82f,.9f,1f,.20f));
+                Plate(new Rect(card.x+12,card.y+card.height-5,card.width-24,2),HeroColors[i]);
                 float size=Mathf.Min(card.width-6,card.height-4);
                 Portrait(new Rect(card.center.x-size*.5f,card.center.y-size*.5f,size,size),i);
                 // No name or ability here: the whole tile belongs to the portrait.

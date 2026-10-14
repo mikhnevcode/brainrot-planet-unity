@@ -1,0 +1,20 @@
+Private planet room 0.7.5 operations — 2026-10-14
+Protocol 3, maximum four players, server-authoritative map selection.
+Client endpoint: wss://cant-compounds-longitude-biodiversity.trycloudflare.com/match
+Server binary: /home/user/brainrot-match-test/server075/BrainrotMatchServer.x86_64
+Server startup: BRAINROT_MATCH_PORT=27966 (validated 1024..65535; default remains 27766), -batchmode -nographics -brainrot-server
+Observed server PID: 2096697. Verify process identity and listening port before any future stop.
+Room working files/logs: /home/user/brainrot-match-test/planets075/runtime/
+Gateway PID observed: 2088225. BRAINROT_TCP_PORT=27966, BRAINROT_GATEWAY_PORT=27967, BRAINROT_STORE_TEST=0.
+Python interpreter reused read-only: /home/user/brainrot-match-test/.venv/bin/python
+Existing invitation key is read from its existing private file via BRAINROT_KEY_FILE. No value committed or embedded in APK.
+Gateway and raw Unity ports listen ONLY on 127.0.0.1; dedicated quick tunnel terminates public TLS.
+Old protocol-2 server65 PID1110820 / TCP27766 and gateway27767 remain untouched.
+Separate store-test gateway27867 and ledger remain untouched. Corporate tunnels/Caddy unchanged.
+No paid provider, production account or advertising configuration changed.
+
+Quick tunnel URL may change after tunnel restart; use a stable DNS/route before production.
+Peers in this room must run protocol3 APK0.7.5 or newer compatible build. 0.7.4 uses its original protocol2 room.
+Rollback for testers is the previous APK0.7.4 (Android downgrade requires separate handling; do not clear user data automatically).
+Source routing: Git branch feature/network-foundation-v070 at mikhnevcode/brainrot-planet-unity.
+No production deployment approval implied.

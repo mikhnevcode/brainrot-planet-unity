@@ -45,11 +45,13 @@ namespace BrainrotPlanet
                 uint epoch=r.ReadUInt32(); if(epoch<=networkEpoch)throw new InvalidDataException("Stale match start");
                 int team=MatchProtocol.Team(r), difficulty=r.ReadByte();
                 if(difficulty>2)throw new InvalidDataException("Invalid difficulty");
+                MatchProtocol.ReadPlanet(r,out BattlePlanet incomingPlanet,out int incomingSeed);
                 for(int i=1;i<=4;i++)
                 { networkHeroes[i]=r.ReadByte(); if(networkHeroes[i]>=characters.Length)throw new InvalidDataException("Invalid hero"); }
                 for(int i=1;i<=4;i++){networkSkins[i]=r.ReadString();if(!SkinCatalog.ValidReference(networkSkins[i]))throw new InvalidDataException("Invalid cosmetic reference");}
                 MatchProtocol.End(r); networkEpoch=epoch; LocalTeam=team;
                 chosenDifficulty=(AiDifficulty)difficulty; selectedHero=networkHeroes[team];
+                battlePlanet=incomingPlanet;planetSeed=incomingSeed;
                 networkWinner=0; networkMessage=""; inputButtons=0;
                 StartGame(); networkPanel=false;
                 Debug.Log("MATCH_CLIENT_STARTED epoch="+networkEpoch+" team="+LocalTeam);

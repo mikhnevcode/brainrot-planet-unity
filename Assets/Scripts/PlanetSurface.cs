@@ -14,6 +14,7 @@ namespace BrainrotPlanet
         private Color32[] sourcePixels;
         private Color32[] softenedPixels;
         private float[] reliefTone;
+        private PlanetBiomeRules biome;
         private readonly Color32[] teamColors = {
             new Color32(0,0,0,0),new Color32(255,78,169,255),
             new Color32(48,174,255,255),new Color32(255,174,57,255),
@@ -97,8 +98,9 @@ namespace BrainrotPlanet
             Vector3 n = direction.normalized;
             return n * (PlanetMath.Radius + Elevation(n) + extra);
         }
-        public void Build()
+        public void Build(PlanetBiomeRules rules=null)
         {
+            biome=rules;
             gameObject.layer = 8;
             const int lon = 224, lat = 112;
             var v = new Vector3[(lon + 1) * (lat + 1)];
@@ -192,6 +194,7 @@ namespace BrainrotPlanet
                     noise<.34f ? new Color(.73f,.76f,.58f) :
                     new Color(.64f,.80f,.69f);
                 if(alt>2.75f)baseColor=new Color(.78f,.80f,.85f);
+                if(biome!=null)baseColor=biome.Ground(n,alt,noise);
                 float grain=(Mathf.PerlinNoise(n.x*31f+8.1f,n.z*29f+n.y*13f)-.5f)*.10f;
                 baseColor+=new Color(grain,grain,grain,0f);
                 reliefTone[cell]=ReliefTone(n,noise);
