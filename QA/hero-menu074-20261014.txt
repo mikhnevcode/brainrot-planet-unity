@@ -1,0 +1,24 @@
+Brainrot Planet 0.7.4 hero menu verification — 2026-10-14
+Scope: hero menu grid, separate settings, stable portrait framing and pointer direction.
+Android versionCode: 48. Development build; no production payment change.
+APK: BrainrotPlanet-v0.7.4-hero-menu-test.apk
+Bytes: 73430028
+SHA256: ba47fce498014e4a013286a4705ecd961494019910dc930c78fe47fb17c56ead
+
+PASS — Unity Android build (Logs/hero-menu074-no-hint-build.log).
+PASS — HeroMenuSmoke: 13 classic heroes + 65 skins, 2340 complete-bounds camera views and 4 screen layouts.
+PASS — drag direction assertions: right/down positive, left/up negative; yaw limited to +/-80, pitch 2..18 degrees.
+PASS — inherited gates: protocol 24, catalog 216, store 110, cast 65 skins/975 poses/65 late bindings, territory seam, outcome 8, collision pairs.
+PASS — RMX3151 (1080x2412) and RMX2020 (720x1600): final APK installed over existing app; 13 portraits, 78 camera views per device, sole at platform floor.
+PASS — final device screenshot inspection: all thirteen tiles visible, no tile labels/abilities; selected name/ability/help remain beside portrait; no swipe hint; settings caption on one line.
+PASS — real touch swipes on both phones: right increases yaw, left decreases yaw. Vertical gestures stop at 2/18 degrees. Hero stays upright.
+PASS — all 13 icon buttons select their matching hero; selection survives relaunch.
+PASS — difficulty Hard/Easy/Medium changed through settings; restored Medium. Sound and haptics toggled twice back to original values. Android Back closes settings.
+PASS — bots button starts normal gameplay; pause/return to menu works. Network button opens existing private match panel and Back returns.
+PASS — store menu opens; no purchase performed. Existing profile/cosmetics not cleared.
+PASS — cold starts leave original hero 9 on RMX3151 and hero 0 on RMX2020.
+PASS — temporary .hero-menu-qa markers removed on both phones.
+PASS — HTTPS APK HTTP 200, Content-Length and homeserver SHA256 match local.
+
+Not re-tested here: a complete two-phone network match, real payments, iOS, mouse wheel/pinch on hardware, long gameplay soak.
+No match rules, progression, production store or multiplayer server changes.

@@ -61,7 +61,6 @@ namespace BrainrotPlanet
         private bool playerSlowWasActive;
         private int steerFinger=-1;
         private Vector2 steerOrigin;
-        private int heroPage;
         private Rect skillArea,jumpArea;
         private Texture2D whitePixel,softCircle;
         private RenderTexture heroPreviewTexture;
@@ -89,7 +88,6 @@ namespace BrainrotPlanet
             chosenDifficulty=(AiDifficulty)Mathf.Clamp(
                 PlayerPrefs.GetInt("BrainrotAiDifficulty",1),0,2);
             selectedHero=Mathf.Clamp(PlayerPrefs.GetInt("BrainrotSelectedHero",0),0,characters.Length-1);
-            heroPage=selectedHero/4;
             Debug.Log("AI_DIFFICULTY_LOADED level="+chosenDifficulty);
             // Small five-second aggregate, also available when checking the exact
             // non-development APK. No profiler connection or per-frame logging.
@@ -494,6 +492,7 @@ namespace BrainrotPlanet
         {
             PollNetwork();
             if(Input.GetKeyDown(KeyCode.Escape) && State==MatchState.Playing)SetPaused(!paused);
+            if(Input.GetKeyDown(KeyCode.Escape) && State==MatchState.Menu && settingsOpen)settingsOpen=false;
             if(IsNetworkReplica && State==MatchState.Playing){UpdateNetworkReplica();return;}
             if(paused)return;
             damageFlash=Mathf.Max(0,damageFlash-Time.deltaTime*1.7f);
@@ -504,13 +503,7 @@ namespace BrainrotPlanet
                 UpdateStoreUi();
                 RefreshWardrobePreview();
                 EnsureHeroPreview();
-                if(heroPreviewRig!=null)
-                {
-                    Quaternion portrait=selectedHero==1?Quaternion.Euler(0f,148f,0f):
-                        Quaternion.AngleAxis(18f,Vector3.up)*AvatarArt.AlignFacing(previewFacing,Vector3.back);
-                    heroPreviewRig.transform.localRotation=Quaternion.AngleAxis(
-                        Mathf.Sin(Time.unscaledTime*.72f)*7f,Vector3.up)*portrait;
-                }
+                UpdateHeroPreviewInput();
                 return;
             }
             if(State==MatchState.End)
@@ -814,11 +807,12 @@ namespace BrainrotPlanet
             }
             heroPreviewCamera.enabled=true;
             if(previewHero==selectedHero&&heroPreviewRoot!=null)return;
-            if(heroPreviewRoot!=null)Destroy(heroPreviewRoot);
+            if(heroPreviewRoot!=null){heroPreviewRoot.SetActive(false);Destroy(heroPreviewRoot);}
             heroPreviewRoot=new GameObject("Selected hero menu preview");
             heroPreviewRig=new GameObject("Portrait turntable");
             heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
             AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
+            HeroPreviewFraming.SampleIdle(heroPreviewRig.transform);
             string shownSkin=wardrobeOpen||shopOpen?previewSkin:OwnsSkin(equippedSkin)?equippedSkin:"";
             var previewPack=skinCatalog?.Pack(shownSkin);
             if(previewPack!=null&&previewPack.hero==selectedHero)SkinVisual.Apply(heroPreviewRig.transform,previewPack);
@@ -835,6 +829,8 @@ namespace BrainrotPlanet
                     if(renderer.name=="Paint aura"){renderer.enabled=false;continue;}
                 }
                 Bounds bounds=AvatarArt.PoseBounds(heroPreviewRig.transform);
+                heroPreviewRig.transform.position-=new Vector3(bounds.center.x,bounds.min.y,bounds.center.z);
+                bounds=AvatarArt.PoseBounds(heroPreviewRig.transform);
                 float footprint=Mathf.Max(bounds.size.x,bounds.size.z)*.72f;
                 var platform=GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 platform.name="Hero portrait colour podium";
@@ -845,13 +841,11 @@ namespace BrainrotPlanet
                 Collider collider=platform.GetComponent<Collider>();if(collider!=null)Destroy(collider);
                 SetLayerRecursively(platform,previewLayer);
 
-                float largest=Mathf.Max(bounds.size.y,Mathf.Max(bounds.size.x,bounds.size.z));
-                float portraitDistanceScale=selectedHero==1?1.65f:1.85f;
-                float distance=Mathf.Max(1.75f,largest*portraitDistanceScale);
-                Vector3 target=bounds.center+Vector3.up*(bounds.size.y*.035f);
-                heroPreviewCamera.transform.position=target+new Vector3(0f,bounds.size.y*.04f,-distance);
-                heroPreviewCamera.transform.LookAt(target);
                 PreviewShopCosmetics(bounds,previewLayer);
+                previewBounds=bounds;
+                previewBounds.Encapsulate(platform.GetComponent<Renderer>().bounds);
+                previewYaw=0f;previewPitch=10f;previewZoom=1f;previewFinger=-1;
+                PositionHeroPreviewCamera();
             }
             previewHero=selectedHero;
             Debug.Log("HERO_MENU_PREVIEW_READY index="+selectedHero+
@@ -861,7 +855,7 @@ namespace BrainrotPlanet
         {
             if(heroPreviewCamera!=null)heroPreviewCamera.enabled=false;
             if(heroPreviewRoot!=null)Destroy(heroPreviewRoot);
-            heroPreviewRoot=null;heroPreviewRig=null;previewHero=-1;
+            heroPreviewRoot=null;heroPreviewRig=null;previewHero=-1;previewFinger=-1;
         }
         private void OnDestroy()
         {
@@ -946,100 +940,8 @@ namespace BrainrotPlanet
             if(State==MatchState.End){DrawResultPolish(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.Menu)
             {
-                Color heroColor=HeroColors[selectedHero];
-                Color heroAccent=HeroAccents[selectedHero];
-                Plate(new Rect(0,0,logicalW,logicalH),new Color(.025f,.035f,.095f,1f));
-                DrawGlow(new Rect(-105,-95,330,330),new Color(heroColor.r,heroColor.g,heroColor.b,.43f));
-                DrawGlow(new Rect(logicalW-205,145,330,330),new Color(heroAccent.r,heroAccent.g,heroAccent.b,.20f));
-                DrawGlow(new Rect(65,logicalH-300,300,300),new Color(.75f,.12f,.95f,.13f));
-                Plate(new Rect(0,0,logicalW,58f),new Color(.04f,.055f,.14f,.82f));
-                GUI.Label(new Rect(14,8,logicalW-28,32),"BRAINROT PLANET.IO",headerStyle);
-                GUI.Label(new Rect(14,36,logicalW-28,19),"СОБЕРИ СВОЕГО ЧЕМПИОНА",smallStyle);
-
-                Rect spotlight=new Rect(18,68,logicalW-36,188);
-                Rounded(new Rect(spotlight.x-3,spotlight.y-3,spotlight.width+6,spotlight.height+6),
-                    new Color(heroColor.r,heroColor.g,heroColor.b,.90f));
-                Rounded(spotlight,new Color(.045f,.065f,.15f,.88f));
-                DrawShopProfileBadge(logicalW);
-                DrawGlow(new Rect(18,64,195,195),new Color(heroColor.r,heroColor.g,heroColor.b,.44f));
-                if(heroPreviewTexture!=null)
-                    GUI.DrawTexture(new Rect(21,71,176,180),heroPreviewTexture,ScaleMode.ScaleToFit,true);
-                Rounded(new Rect(201,82,79,24),new Color(heroColor.r,heroColor.g,heroColor.b,.82f));
-                GUI.Label(new Rect(201,82,79,24),"ГЕРОЙ "+(selectedHero+1).ToString("00"),heroBadgeStyle);
-                GUI.Label(new Rect(200,109,spotlight.width-193,61),characters[selectedHero].Trim(),heroNameStyle);
-                GUI.Label(new Rect(200,172,spotlight.width-193,20),"СУПЕРСИЛА",heroSkillStyle);
-                GUI.Label(new Rect(200,191,spotlight.width-193,43),skillNames[selectedHero],heroNameStyle);
-
-                // Four large colour cards per page remain reliable touch targets on Android.
-                const int pageSize=4;
-                int pageCount=(characters.Length+pageSize-1)/pageSize;
-                heroPage=Mathf.Clamp(heroPage,0,pageCount-1);
-                GUI.Label(new Rect(83,270,logicalW-166,38),
-                    "ВЫБОР ГЕРОЯ  "+(heroPage+1)+"/"+pageCount,headerStyle);
-                if(heroPage>0 && FlatButton(new Rect(20,271,53,36),"<",new Color(heroColor.r,heroColor.g,heroColor.b,.84f)))
-                {
-                    heroPage--;
-                    Debug.Log("HERO_MENU_PAGE page="+(heroPage+1)+"/"+pageCount);
-                }
-                if(heroPage<pageCount-1 &&
-                   FlatButton(new Rect(logicalW-73,271,53,36),">",new Color(heroColor.r,heroColor.g,heroColor.b,.84f)))
-                {
-                    heroPage++;
-                    Debug.Log("HERO_MENU_PAGE page="+(heroPage+1)+"/"+pageCount);
-                }
-                float cardWidth=(logicalW-52f)/2f;
-                for(int slot=0;slot<pageSize;slot++)
-                {
-                    int i=heroPage*pageSize+slot;
-                    if(i>=characters.Length)break;
-                    int column=slot%2,row=slot/2;
-                    Rect card=new Rect(21f+column*(cardWidth+10f),316f+row*88f,cardWidth,80f);
-                    Color cardColor=HeroColors[i],cardAccent=HeroAccents[i];
-                    if(i==selectedHero)
-                        Rounded(new Rect(card.x-3f,card.y-3f,card.width+6f,card.height+6f),cardAccent);
-                    Rounded(card,Color.Lerp(new Color(.045f,.06f,.14f,.88f),cardColor,.38f));
-                    Portrait(new Rect(card.x+7,card.y+5,48,48),i);
-                    GUI.Label(new Rect(card.x+57f,card.y+5f,card.width-64f,39f),characters[i].Trim(),heroSkillStyle);
-                    GUI.Label(new Rect(card.x+13f,card.y+44f,card.width-21f,29f),skillNames[i],heroSkillStyle);
-                    if(GUI.Button(card,"",clearButtonStyle))
-                    {
-                        selectedHero=i;
-                        PlayerPrefs.SetInt("BrainrotSelectedHero",i);PlayerPrefs.Save();GameSound.Play(GameCue.Click);
-                        previewHero=-1;
-                        Debug.Log("HERO_MENU_SELECTED index="+i+" name="+characters[i].Trim());
-                    }
-                }
-                if(!heroMenuLogged)
-                {
-                    heroMenuLogged=true;
-                    Debug.Log("HERO_MENU_PRESENTED colorfulCards="+characters.Length+" pages="+pageCount+" preview=3D");
-                }
-
-                DrawMenuPolish(logicalW,logicalH);
-                if(FlatButton(new Rect(26,492,store!=null?(logicalW-60)/2:logicalW-52,34),"ГАРДЕРОБ",new Color(.36f,.22f,.60f)))
-                {previewSkin=equippedSkin;previewHero=-1;wardrobeScroll=Vector2.zero;wardrobeOpen=true;}
-                if(store!=null&&FlatButton(new Rect(logicalW/2+4,492,(logicalW-60)/2,34),"МАГАЗИН · ТЕСТ",new Color(.64f,.35f,.14f)))OpenShop();
-                float diffY=logicalH-226f;
-                float diffWidth=(logicalW-68f)/3f;
-                GUI.Label(new Rect(22,diffY-30f,logicalW-44f,25f),"СЛОЖНОСТЬ СОПЕРНИКОВ",smallStyle);
-                for(int i=0;i<3;i++)
-                {
-                    float x=26f+i*(diffWidth+8f);
-                    bool picked=(int)chosenDifficulty==i;
-                    if(picked)Rounded(new Rect(x-3f,diffY-3f,diffWidth+6f,48f),HeroAccents[selectedHero]);
-                    Color difficultyColor=picked?DifficultyColors[i]:Color.Lerp(new Color(.08f,.10f,.20f),DifficultyColors[i],.27f);
-                    if(FlatButton(new Rect(x,diffY,diffWidth,42f),DifficultyLabels[i],difficultyColor))
-                    {
-                        chosenDifficulty=(AiDifficulty)i;
-                        PlayerPrefs.SetInt("BrainrotAiDifficulty",i);
-                        PlayerPrefs.Save();
-                        Debug.Log("AI_DIFFICULTY_SELECTED level="+chosenDifficulty);
-                    }
-                }
-                if(FlatButton(new Rect(26,logicalH-166,logicalW-52,60),
-                    "ИГРАТЬ С БОТАМИ  >",Color.Lerp(heroColor,heroAccent,.30f)))StartGame();
-                if(FlatButton(new Rect(26,logicalH-92,logicalW-52,48),
-                    "СЕТЕВОЙ МАТЧ · ТЕСТ",new Color(.08f,.42f,.62f)))networkPanel=true;
+                if(settingsOpen)DrawMenuSettings(logicalW,logicalH);
+                else DrawHeroMenu(logicalW,logicalH);
             }
             GUI.matrix=old;
         }

@@ -118,7 +118,7 @@ namespace BrainrotPlanet
             {if(owned&&ready)EquipShopProduct(chosen);else if(!owned&&store.Ready&&!store.Busy)shopDialog=true;else if(!store.Ready)ConnectStore();}
             if(FlatButton(new Rect(w/2+4,h-185,(w-56)/2,49),"ВОССТАНОВИТЬ",new Color(.12f,.40f,.47f))){if(store.Ready)store.Restore();else ConnectStore();}
             if(FlatButton(new Rect(24,h-120,w-48,42),"ГЕРОЙ "+(selectedHero+1)+" / 13   >",new Color(.16f,.24f,.36f)))
-            {selectedHero=(selectedHero+1)%13;heroPage=selectedHero/4;shopSelection="";previewHero=-1;shopScroll=Vector2.zero;}
+            {selectedHero=(selectedHero+1)%13;shopSelection="";previewHero=-1;shopScroll=Vector2.zero;}
             if(FlatButton(new Rect(24,h-66,w-48,42),"НАЗАД",new Color(.18f,.20f,.33f)))
             {shopOpen=false;previewSkin=equippedSkin;previewHero=-1;PlayerPrefs.SetInt("BrainrotSelectedHero",selectedHero);PlayerPrefs.Save();}
         }
