@@ -128,7 +128,9 @@ namespace BrainrotPlanet
             Plate(new Rect(12,safeTop+62,(w-24)*Mathf.Clamp01(matchTime/145f),2),new Color(.2f,.85f,.95f));
 
             string hint="";Color hintColor=new Color(.07f,.13f,.21f,.88f);
-            if(playerLandingGrace>0){hint="ЩИТ СЛЕДА  "+Mathf.CeilToInt(playerLandingGrace)+" с";hintColor=new Color(.08f,.32f,.40f,.90f);}
+            if(Time.unscaledTime<trailCutNoticeUntil)
+            {hint=trailCutNotice;hintColor=new Color(.58f,.09f,.20f,.95f);}
+            else if(playerLandingGrace>0){hint="ЩИТ СЛЕДА  "+Mathf.CeilToInt(playerLandingGrace)+" с";hintColor=new Color(.08f,.32f,.40f,.90f);}
             else if(Territory!=null&&Territory.HasTrail(LocalTeam))
             {
                 hint=nearestEnemyDegrees<15?"ОПАСНО! ВЕРНИСЬ НА СВОЮ КРАСКУ":"ЗАМКНИ ПЕТЛЮ НА СВОЕЙ КРАСКЕ";

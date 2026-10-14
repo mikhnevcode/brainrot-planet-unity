@@ -16,9 +16,9 @@ namespace BrainrotPlanet.Editor
             // Use the standard Java Activity: the native GameActivity entry froze
             // before scene Awake on repeated RMX3151 Android 13 cold starts.
             PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
-            PlayerSettings.bundleVersion="0.7.10-paint-bridge-test";
-            PlayerSettings.Android.bundleVersionCode=54;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.10-paint-bridge-test.apk",false);
+            PlayerSettings.bundleVersion="0.7.13-trail-cut-test";
+            PlayerSettings.Android.bundleVersionCode=57;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.13-trail-cut-test.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {

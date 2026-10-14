@@ -36,6 +36,9 @@ namespace BrainrotPlanet
         private bool networkReplica;
         private Vector3 networkPosition;
         private Quaternion networkRotation;
+        private float trailCutUntil;
+        private bool pendingTrailRespawn;
+        public bool TrailCutVisible => Time.unscaledTime<trailCutUntil;
         public void SetNetworkReplica()
         {
             networkReplica=true; isDropping=false;
@@ -47,7 +50,16 @@ namespace BrainrotPlanet
             networkPosition=position; networkRotation=rotation;
             if(game.LocalTeam!=Team)Wish=wish;
             Active=active; Grounded=grounded; SpeedSeconds=speed; SlowSeconds=slow;
-            if((transform.position-position).sqrMagnitude>16f)transform.SetPositionAndRotation(position,rotation);
+            if(Time.unscaledTime>=trailCutUntil &&
+               (transform.position-position).sqrMagnitude>16f)
+                transform.SetPositionAndRotation(position,rotation);
+        }
+        public void ShowNetworkTrailCut()
+        {
+            // The server already respawned this actor. Hold its visual at the
+            // cut for the same short beat, then reveal the authoritative pose.
+            trailCutUntil=Time.unscaledTime+.65f;
+            Wish=Vector3.zero;
         }
         public static bool ShouldBounceOnHill(float incline,float uphillApproach)
         {
@@ -226,17 +238,29 @@ namespace BrainrotPlanet
             }
             game.Effects.Burst(transform.position,Colors.Team(Team),12,1.3f);
         }
-        public void HitTrail()
+        public void HitTrail(bool showBreak=false,Vector3 cutDirection=default(Vector3))
         {
             if(damageCooldown>0)return;
             damageCooldown=1.6f;
             game.Effects.Burst(transform.position,Colors.Team(Team),36,3f);
             if(game.DedicatedMatchServer)
-                game.NetworkActorTrailBroken(this);
-            Respawn();
+                game.NetworkActorTrailBroken(this,cutDirection.sqrMagnitude>.01f?
+                    cutDirection:transform.position.normalized);
+            if(showBreak)
+            {
+                // Freeze only the victim, keeping the rest of the match live.
+                pendingTrailRespawn=true;trailCutUntil=Time.unscaledTime+.65f;
+                Active=false;Wish=Vector3.zero;
+                body.linearVelocity=Vector3.zero;body.angularVelocity=Vector3.zero;
+                body.isKinematic=true;body.detectCollisions=false;
+                Debug.Log("TRAIL_CUT_WAIT team="+Team);
+            }
+            else Respawn();
         }
         public void Respawn()
         {
+            pendingTrailRespawn=false;trailCutUntil=0f;
+            if(!networkReplica){body.isKinematic=false;body.detectCollisions=true;}
             game.Territory.ResetTrail(Team);
             springLandingArmed=false;
             Wish=Vector3.zero;
@@ -345,8 +369,18 @@ namespace BrainrotPlanet
         }
         private void Update()
         {
+            if(pendingTrailRespawn && Time.unscaledTime>=trailCutUntil &&
+               game!=null && game.State==MatchState.Playing)
+                Respawn();
             if(networkReplica && game!=null && game.State==MatchState.Playing)
             {
+                if(Time.unscaledTime<trailCutUntil)return;
+                if(trailCutUntil>0f)
+                {
+                    transform.SetPositionAndRotation(networkPosition,networkRotation);
+                    trailCutUntil=0f;
+                    Debug.Log("NETWORK_TRAIL_CUT_REVEAL team="+Team);
+                }
                 float blend=1f-Mathf.Exp(-18f*Time.unscaledDeltaTime);
                 transform.SetPositionAndRotation(Vector3.Lerp(transform.position,networkPosition,blend),
                     Quaternion.Slerp(transform.rotation,networkRotation,blend));

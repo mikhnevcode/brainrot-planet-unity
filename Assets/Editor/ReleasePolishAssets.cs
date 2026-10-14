@@ -73,7 +73,7 @@ namespace BrainrotPlanet.Editor
             Vector3 point=PlanetMath.FromLonLat(.3f,.5f);
             territory.TraceStep(1,point);
             int before=territory.Trails[1].Count,events=0;
-            territory.OnTrailDestroyed+=(team,at)=>{if(team==1)events++;};
+            territory.OnTrailDestroyed+=(team,at,path)=>{if(team==1)events++;};
             territory.IsTrailProtected=team=>team==1;
             territory.TraceStep(2,point);
             if(before==0||territory.Trails[1].Count!=before||events!=0)throw new Exception("Protected trail was mutated");

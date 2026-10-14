@@ -113,7 +113,8 @@ namespace BrainrotPlanet
                         nearestEnemyDegrees=Mathf.Min(nearestEnemyDegrees,
                             Vector3.Angle(Player.transform.position.normalized,actor.transform.position.normalized));
             }
-            if(!paused && !IsLanding && Player!=null && Player.Active)HandleInput();
+            if(!paused && !IsLanding && Player!=null && Player.Active &&
+               !Player.TrailCutVisible)HandleInput();
             Territory.Update(Time.unscaledDeltaTime);
             pathUpdate-=Time.unscaledDeltaTime;
             if(pathUpdate<=0){pathUpdate=.08f;RenderPaths();}
@@ -145,11 +146,21 @@ namespace BrainrotPlanet
                 Effects.CaptureFlash(direction,Colors.Team(team),Mathf.Clamp(value,0,PlanetMath.CellCount));
                 if(team==LocalTeam) { capturesThisMatch++; tutorialStep=2; GameSound.Play(GameCue.Capture); }
             }
-            else if(kind==3 && team==LocalTeam)
+            else if(kind==3)
             {
-                autoMoving=false; savedSteering=movement=Vector2.zero; inputButtons=0; Player.Wish=Vector3.zero;
-                damageFlash=1f; GameSound.Play(GameCue.Hit);
-                Announce("ПОТЕРЯН СЛЕД! ВОЗВРАТ НА БАЗУ");
+                var actor=players[team-1];
+                actor.ShowNetworkTrailCut();
+                TrailCutVisual.Show(worldRoot,Territory.VisualPath(team),direction,Colors.Team(team));
+                Effects.Burst(PlanetSurface.Point(direction,.8f),Color.white,42,4f);
+                if(team==LocalTeam)
+                {
+                    autoMoving=false; savedSteering=movement=Vector2.zero;
+                    inputButtons=0; Player.Wish=Vector3.zero;
+                    damageFlash=1f; GameSound.Play(GameCue.Hit);
+                    trailCutNotice="СЛЕД ПЕРЕРЕЗАН! ВОЗВРАТ НА БАЗУ";
+                    trailCutNoticeUntil=Time.unscaledTime+2.4f;
+                    Announce(trailCutNotice);
+                }
             }
         }
         private void RenderPaths()

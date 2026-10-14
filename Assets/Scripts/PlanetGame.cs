@@ -46,6 +46,8 @@ namespace BrainrotPlanet
         private readonly float[] offlineBotGrace=new float[5];
         private float[] scores = new float[5];
         private string announcement="";
+        private string trailCutNotice="";
+        private float trailCutNoticeUntil;
         private OrbitCamera orbitCamera;
         private PlanetActor victoryActor;
         private AiBalanceTelemetry balanceTelemetry;
@@ -146,6 +148,7 @@ namespace BrainrotPlanet
             SetPaused(false);
             capturesThisMatch=0;captureStreak=0;bestCapture=0f;finishReason="ВРЕМЯ ВЫШЛО";
             tutorialStep=0;
+            trailCutNoticeUntil=0f;trailCutNotice="";
             HideHeroPreview();
             Debug.Log("AI_DIFFICULTY_MATCH level="+chosenDifficulty);
             if(worldRoot!=null)Destroy(worldRoot.gameObject);
@@ -217,9 +220,9 @@ namespace BrainrotPlanet
                 renderer.startWidth=.34f;renderer.endWidth=.34f;
                 renderer.numCapVertices=10;
                 renderer.numCornerVertices=10;
-                renderer.material=Colors.FromResource("PlanetSprite");
+                renderer.sharedMaterial=Colors.TrailInkMaterial();
                 renderer.startColor=Colors.Team(team);
-                renderer.endColor=Color.Lerp(Colors.Team(team),Color.white,.35f);
+                renderer.endColor=Colors.Team(team);
                 pathRenderers[team]=renderer;
                 Effects.Burst(motor.transform.position,Colors.Team(team),45,4f);
             }
@@ -333,7 +336,7 @@ namespace BrainrotPlanet
                 skillCooldown=Mathf.Max(0f,skillCooldown-Mathf.Min(1.5f,changed/450f));
             }
         }
-        private void HandleTrailLost(int team,Vector3 direction)
+        private void HandleTrailLost(int team,Vector3 direction,Vector3[] brokenPath)
         {
             if(balanceTelemetry!=null)balanceTelemetry.RecordTrailLost(team);
             if(!IsNetworkMatch && team==LocalTeam && playerLandingGrace>0f)
@@ -342,9 +345,19 @@ namespace BrainrotPlanet
                 return;
             }
             PlanetActor actor=players.Find(p=>p.Team==team);
-            if(team==LocalTeam && !DedicatedMatchServer) { captureStreak=0; damageFlash=1f; GameSound.Play(GameCue.Hit); }
-            if(Effects!=null)Effects.CaptureFlash(direction,Color.red,80);
-            if(actor!=null)actor.HitTrail();
+            if(team==LocalTeam && !DedicatedMatchServer)
+            {
+                captureStreak=0; damageFlash=1f; GameSound.Play(GameCue.Hit);
+                trailCutNotice="СЛЕД ПЕРЕРЕЗАН! ВОЗВРАТ НА БАЗУ";
+                trailCutNoticeUntil=Time.unscaledTime+2.4f;
+                Announce(trailCutNotice);
+            }
+            if(!DedicatedMatchServer)
+            {
+                Effects.Burst(PlanetSurface.Point(direction,.8f),Color.white,42,4f);
+                TrailCutVisual.Show(worldRoot,brokenPath,direction,Colors.Team(team));
+            }
+            if(actor!=null)actor.HitTrail(true,direction);
         }
         public void OnPlayerRespawn()
         {
@@ -355,7 +368,9 @@ namespace BrainrotPlanet
             if(Player!=null)Player.Wish=Vector3.zero;
             playerLandingGrace=Mathf.Max(playerLandingGrace,
                 AiBalanceTuning.RespawnGrace(chosenDifficulty));
-            Announce(" ПОТЕРЯН СЛЕД! СДЕЛАЙ НОВЫЙ СВАЙП");
+            trailCutNotice="ПОТЕРЯН СЛЕД! СДЕЛАЙ НОВЫЙ СВАЙП";
+            trailCutNoticeUntil=Time.unscaledTime+1.8f;
+            Announce(trailCutNotice);
             Debug.Log("PLAYER_RESPAWN_RECOVERY level="+chosenDifficulty+
                 " seconds="+playerLandingGrace.ToString("F1"));
         }

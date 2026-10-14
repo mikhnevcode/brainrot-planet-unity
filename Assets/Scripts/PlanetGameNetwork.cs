@@ -206,12 +206,12 @@ namespace BrainrotPlanet
         }
         private void Broadcast(byte[] packet)
         { for (int i = 1; i <= 4; i++) if (participants[i]?.joined == true) participants[i].peer.Send(packet); }
-        public void NetworkActorTrailBroken(PlanetActor actor)
+        public void NetworkActorTrailBroken(PlanetActor actor,Vector3 cutDirection)
         {
             int team = actor.Team;
             if (!DedicatedMatchServer || State!=MatchState.Playing) return;
             networkGrace[team] = AiBalanceTuning.RespawnGrace(chosenDifficulty);
-            EmitNetworkEffect(3, team, actor.transform.position.normalized);
+            EmitNetworkEffect(3, team, cutDirection);
             Debug.Log("MATCH_TRAIL_BROKEN team="+team+" shield="+networkGrace[team]);
         }
         private void RequestJump()

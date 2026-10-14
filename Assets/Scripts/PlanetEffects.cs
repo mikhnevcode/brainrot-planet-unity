@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BrainrotPlanet
@@ -82,6 +83,86 @@ namespace BrainrotPlanet
             var go=new GameObject("Circular paint wave on globe");
             var wave=go.AddComponent<PaintWave>();
             wave.Configure(direction,Mathf.Clamp(1.2f+count/260f,2f,7f),.65f,color);
+        }
+    }
+    /// <summary>Short-lived copy of a cut trail: the gap opens at the hit and
+    /// erases toward both ends before the victim reappears at home.</summary>
+    public sealed class TrailCutVisual : MonoBehaviour
+    {
+        private const float Duration=.58f;
+        private Vector3[] points;
+        private int split;
+        private LineRenderer left,right;
+        private Color color;
+        private float elapsed;
+        public int VisibleSegmentCount => (left!=null?left.positionCount:0)+
+                                          (right!=null?right.positionCount:0);
+
+        public static void Show(Transform parent,IReadOnlyList<Vector3> path,
+            Vector3 hit,Color teamColor)
+        {
+            if(parent==null)return;
+            var root=new GameObject("Trail cut / spreading gap");
+            root.transform.SetParent(parent,false);
+            var wave=new GameObject("White cut pulse");
+            wave.transform.SetParent(root.transform,false);
+            wave.AddComponent<PaintWave>().Configure(hit,2.0f,.54f,Color.white);
+            var visual=root.AddComponent<TrailCutVisual>();
+            visual.Configure(path,hit,teamColor);
+        }
+        private void Configure(IReadOnlyList<Vector3> path,Vector3 hit,Color teamColor)
+        {
+            color=teamColor;
+            int count=path==null?0:path.Count;
+            if(count<2)return;
+            int step=Mathf.Max(1,Mathf.CeilToInt(count/280f));
+            var positions=new List<Vector3>((count+step-1)/step+1);
+            for(int i=0;i<count;i+=step)
+                positions.Add(PlanetSurface.Point(path[i],.62f));
+            if((count-1)%step!=0)
+                positions.Add(PlanetSurface.Point(path[count-1],.62f));
+            points=positions.ToArray();
+            float closest=float.NegativeInfinity;
+            for(int i=0;i<points.Length;i++)
+            {
+                float dot=Vector3.Dot(points[i].normalized,hit);
+                if(dot>closest){closest=dot;split=i;}
+            }
+            left=MakeLine("Trail cut left half");
+            right=MakeLine("Trail cut right half");
+            Draw(0f);
+            Debug.Log("TRAIL_CUT_VISUAL points="+points.Length+" split="+split);
+        }
+        private LineRenderer MakeLine(string title)
+        {
+            var line=new GameObject(title).AddComponent<LineRenderer>();
+            line.transform.SetParent(transform,false);
+            line.useWorldSpace=true;
+            line.sharedMaterial=Colors.TrailInkMaterial();
+            line.numCapVertices=6;line.numCornerVertices=4;
+            return line;
+        }
+        private void Draw(float progress)
+        {
+            if(points==null)return;
+            int lastLeft=Mathf.FloorToInt((split+1)*(1f-progress))-1;
+            int firstRight=split+Mathf.CeilToInt((points.Length-split)*progress);
+            Color fading=new Color(color.r,color.g,color.b,1f-progress);
+            float width=Mathf.Lerp(.42f,.10f,progress);
+            left.startColor=left.endColor=fading;
+            right.startColor=right.endColor=fading;
+            left.startWidth=left.endWidth=width;
+            right.startWidth=right.endWidth=width;
+            left.positionCount=Mathf.Max(0,lastLeft+1);
+            for(int i=0;i<left.positionCount;i++)left.SetPosition(i,points[i]);
+            right.positionCount=Mathf.Max(0,points.Length-firstRight);
+            for(int i=0;i<right.positionCount;i++)right.SetPosition(i,points[firstRight+i]);
+        }
+        private void Update()
+        {
+            elapsed+=Time.unscaledDeltaTime;
+            Draw(Mathf.Clamp01(elapsed/Duration));
+            if(elapsed>=Duration)Destroy(gameObject);
         }
     }
     public sealed class PaintWave : MonoBehaviour

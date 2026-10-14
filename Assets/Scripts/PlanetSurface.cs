@@ -458,6 +458,17 @@ namespace BrainrotPlanet
     }
     public static class Colors
     {
+        private static Material trailInk;
+        public static Material TrailInkMaterial()
+        {
+            if(trailInk==null)
+            {
+                Shader shader=Resources.Load<Shader>("PlanetPaintStroke");
+                if(shader==null)throw new System.InvalidOperationException("PlanetPaintStroke shader missing");
+                trailInk=new Material(shader){name="Shared planet paint ink"};
+            }
+            return trailInk;
+        }
         public static Material FromResource(string assetName)
         {
             Material template = Resources.Load<Material>(assetName);
@@ -476,8 +487,11 @@ namespace BrainrotPlanet
         }
         public static Color Team(int index)
         {
-            switch(index){case 1:return new Color(1f,.25f,.60f);case 2:return new Color(.1f,.65f,1f);
-              case 3:return new Color(1f,.64f,.16f);default:return new Color(.43f,.92f,.48f);}
+            // Match the exact texture palette used by PlanetSurface.teamColors.
+            switch(index){case 1:return new Color(1f,78f/255f,169f/255f);
+              case 2:return new Color(48f/255f,174f/255f,1f);
+              case 3:return new Color(1f,174f/255f,57f/255f);
+              default:return new Color(109f/255f,241f/255f,130f/255f);}
         }
     }
 }

@@ -28,7 +28,8 @@ namespace BrainrotPlanet
         private bool dirty = true;
         private float renderTimer;
         public event Action<int,int,Vector3> OnCapture;
-        public event Action<int,Vector3> OnTrailDestroyed;
+        // The path is copied before clearing so presentation can visibly break it.
+        public event Action<int,Vector3,Vector3[]> OnTrailDestroyed;
         // Evaluated BEFORE mutating a trail. Grace must protect the whole loop.
         public Func<int,bool> IsTrailProtected;
 
@@ -157,8 +158,9 @@ namespace BrainrotPlanet
                 if(Trails[other].Contains(id))
                 {
                     if(IsTrailProtected!=null && IsTrailProtected(other))continue;
+                    Vector3[] brokenPath=trailVisualDirections[other].ToArray();
                     ClearTrail(other);
-                    OnTrailDestroyed?.Invoke(other,direction);
+                    OnTrailDestroyed?.Invoke(other,direction,brokenPath);
                 }
             }
             if(owner[id]==team)
