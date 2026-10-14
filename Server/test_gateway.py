@@ -46,6 +46,11 @@ class GatewayTests(unittest.IsolatedAsyncioTestCase):
                     pass
             self.assertEqual(error.exception.response.status_code, status)
 
+    async def test_store_disabled_by_default(self):
+        with self.assertRaises(InvalidStatus) as error:
+            await self.client(url=self.url.replace('/match','/store-test'))
+        self.assertEqual(error.exception.response.status_code,404)
+
     async def test_binary_roundtrip_and_close(self):
         async with self.client() as ws:
             for data in [b"hello", bytes(range(256))*8]:

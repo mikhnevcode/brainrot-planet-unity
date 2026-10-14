@@ -12,6 +12,8 @@ namespace BrainrotPlanet
         private IEnumerator Start()
         {
             if(DedicatedMatchServer)yield break;
+            if(File.Exists(Path.Combine(Application.persistentDataPath,".store-qa")))
+            {yield return RunStoreQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".wardrobe-cast-qa")))
             {yield return RunWardrobeCastQa();yield break;}
             string key=Environment.GetEnvironmentVariable("BRAINROT_QA_KEY");

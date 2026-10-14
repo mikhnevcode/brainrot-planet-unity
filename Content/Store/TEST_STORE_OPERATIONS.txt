@@ -1,0 +1,79 @@
+Brainrot Planet — private TEST store 0.7.3-store-test — 2026-10-14
+
+This is a zero-money purchase simulator, NOT Google Play Billing, StoreKit sandbox
+or a Robokassa test merchant integration. Do not advertise it as real payment QA.
+Production builds hide the test shop. The server route is absent by default and
+requires BRAINROT_STORE_TEST=1 plus the private test invitation. No payment keys,
+card details, email, phone number or real receipts are accepted or stored.
+Anonymous test profiles use random bearer recovery codes; codes must stay private.
+SQLite stores a hash of that credential and test transactions/entitlements.
+
+Assortment: 99 products. 65 skins, 18 cosmetics across six types, 13 full-hero
+wardrobes, 3 themed effect bundles. Classic and 13 first skins are free. The price
+display is explicitly a test reference price; every simulation charges 0 RUB.
+Catalog authority: Content/Store/catalog-test-v1.json. Regeneration:
+python Server/build_store_catalog.py. Match skin packets remain immutable.
+Code-supported cosmetic IDs are allowlisted in ShopCosmetics; a new effect/bone/
+shader or dance implementation needs a client update. Catalog title/offer/bundle
+updates do not, within the existing validated schema and content ID set.
+
+Architecture
+Client -> WSS /store-test -> isolated gateway -> SQLite test ledger.
+Reuse the existing binary WSS transport and X-Brainrot-Test-Key invitation header.
+StoreTestEndpoint.txt points to a separate temporary store tunnel. The existing
+match server, gateway and tunnel are not restarted/reconfigured for store hosting.
+Both gateway listeners remain on loopback. Test store profile/data belongs only
+to the isolated store runtime; never mix with TechFounder or corporate services.
+
+Server settings: BRAINROT_STORE_TEST=1, BRAINROT_GATEWAY_PORT=27867,
+BRAINROT_KEY_FILE=<private local path>, BRAINROT_STORE_CATALOG=<catalog local path>.
+Secret files and runtime SQLite are ignored; never publish them with static assets.
+4 store connections maximum, 2 requests/second plus burst 8; 2048-byte commands.
+Up to 500 test accounts, 500 transactions/account; reject more instead of dropping
+older entitlements from history. Schema response bounded to 128 KiB in clients.
+
+Purchase semantics
+success -> grant all bundle members; cancel/error/pending -> no grant.
+approve -> only pending can become success; refund -> success becomes refunded.
+approve/refund are explicit SANDBOX controls, not trusted production callbacks.
+Same account+transaction ID is idempotent; reusing it for another product fails.
+Entitlements derive from all successful rows plus free items. Refunding one offer
+must not remove an item also granted by another owned bundle.
+Unknown product IDs and arbitrary client-supplied production receipts fail.
+
+Client lifecycle
+Purchase intent is journaled with its original transaction ID before sending.
+After a lost response, restore/reconnect repeats the same transaction, not a new
+purchase. Catalog and last verified TEST inventory cache supports offline use.
+This editable local cache is NOT production proof of ownership.
+Invalid recovery leaves the prior test account intact. Valid bearer recovery
+restores the same test ledger; protect the code like a credential.
+Only wardrobe/store preview may show an unowned costume; game equip is gated.
+Refund is reflected on the next normal menu/game creation after server sync.
+
+Cosmetics
+Three shape-distinct trails (bubble, petal, star), three appearance bursts,
+three modest additive victory motions, three stage decorations, three local
+emotes and three profile accent themes. Original physics, territory ownership,
+skill values, team danger-trail colours, camera and stage orientation stay intact.
+Trails max 32 particles; appearance burst max 48. Stage ornaments have no collider.
+At this stage skins are replicated using match protocol 2. Additional cosmetics,
+emotes and profile accents are LOCAL ONLY; cross-client cosmetic replication and
+match-server ownership enforcement are still release work. Do not sell an effect
+with a promise that other players see it until that gate is implemented/tested.
+Victory motions layer on existing clips; they are not three new Blender clips.
+
+Tests
+python -m unittest -v test_store (from Server): catalog99, non-grant outcomes,
+idempotency, approve/refund, overlapping bundles, isolation, restart, malformed
+input, transaction cap. test_gateway preserves match tests and default-store-off.
+store_wss_smoke.py tests the actual external private WSS route including 401.
+StoreSmoke.Run validates client catalog/ownership and collider-free stage art.
+Development-only .store-qa selects a skin product and opts into fixture; remove
+afterwards. It uses a temporary random TEST account and restores user preferences,
+test profile and gameplay reward state. Screenshots go to app files/store-qa/.
+
+Android build resource budget
+Assets/Plugins/Android/gradleTemplate.properties sets a project-local budget:
+1536 MiB Java heap, SerialGC, 2 workers, no parallel Gradle. Added after an observed
+4 GiB Gradle daemon native-memory crash. No Windows/pagefile/global JVM changes.

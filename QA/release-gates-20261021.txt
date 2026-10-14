@@ -1,0 +1,57 @@
+Brainrot Planet — target test release 2026-10-21 (not a store approval promise)
+Planning date: 2026-10-14
+
+User setup: personal developer account, Russia, existing Robokassa as self-employed.
+Keep identity truthful; do not substitute a false country/company to bypass rules.
+
+Platform constraints verified on 2026-10-14
+New personal Google Play accounts need at least 12 closed-test participants opted
+in continuously for 14 days before applying for production access. If that test
+starts 2026-10-14, the first eligible application date is no earlier than
+2026-10-28; access/review still must be approved. 2026-10-21 can be an APK/internal
+test milestone, not a guaranteed public Play launch for this account.
+https://support.google.com/googleplay/android-developer/answer/14151465?hl=en
+
+Google suspends Play seller services for developers with payout bank accounts
+located in Russia. Free apps/updates remain possible. Robokassa alone does not
+make international Play in-app sales eligible.
+https://support.google.com/googleplay/android-developer/answer/15685001?hl=en
+For store-distributed digital goods use applicable store billing rules; regional
+exceptions/programs need explicit eligibility, not an assumed universal web link.
+https://support.google.com/googleplay/android-developer/answer/9858738?hl=en
+https://developer.apple.com/app-store/review/guidelines/#in-app-purchase
+
+Work tracks
+1. Private APK TEST shop: simulator and recovery/refund QA, no real money.
+2. Google Play: truthful personal registration/device verification, start closed
+   test early, recruit 12 testers, store listing and required declarations.
+3. iPhone: personal Apple Developer team/signing distinct from KEA corporate team;
+   validate Unity iOS toolchain, TestFlight install and background/resume on device.
+   Never change the company's certificates/profiles to configure this game.
+4. Standalone APK/Web + Robokassa: separate permitted distribution/payment design;
+   obtain merchant test configuration locally, verify signed server callback,
+   refunds/fiscal obligations with the merchant's applicable setup. No secrets in
+   chat/source/APK. Do not mark this private simulator as Robokassa sandbox QA.
+
+Mandatory gates BEFORE accepting money/public paid launch
+- Real provider adapter and server-side receipt/callback verification.
+- Stable player identity, purchase restoration, duplicate/replayed notifications,
+  refunds and account deletion/support. Test bearer codes are not production login.
+- Tie match identity/loadout to server-verified ownership; replicate effects,
+  emotes/profile cosmetics and validate on both phones, not just local decoration.
+- Stable HTTPS/WSS hostname, process supervision, backups and health monitoring;
+  temporary cloudflare quick tunnels are test infrastructure only.
+- Privacy policy, support/deletion URL, Google Data Safety/Apple privacy fields,
+  target audience and content rating. Decide mixed-age handling explicitly.
+- Child-appropriate purchases/ads and consent design before enabling ad SDKs.
+  Ads remain OFF until this is reviewed and device-tested.
+- Rights audit of characters, art, fonts, music and third-party logos; original
+  commissioned/procedural assets do not automatically clear character/brand rights.
+- English localization/store metadata, clear prices and purchase restore UI.
+- Device matrix: both Android phones, iPhone, loss/latency, disconnect/reconnect,
+  pause/background, cancelled/pending purchases, offline startup, thermal long soak.
+- Release signing, backups of keys, AAB/iOS production build, no QA invite/sandbox
+  controls in release, and actual store preflight/review.
+
+Do not start real payment transactions, register accounts, accept agreements,
+install advertising or change bank/Apple credentials without the user's setup.

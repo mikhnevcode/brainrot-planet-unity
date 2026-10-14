@@ -81,6 +81,7 @@ namespace BrainrotPlanet
             Debug.Log("BRAINROT_BOOT_GAME_AWAKE");
             SetupNetwork();
             SetupWardrobe();
+            SetupStore();
             Application.SetStackTraceLogType(LogType.Log,StackTraceLogType.None);
             Application.targetFrameRate=60;
             Screen.sleepTimeout=SleepTimeout.NeverSleep;
@@ -195,6 +196,7 @@ namespace BrainrotPlanet
                 var motor=actorObject.AddComponent<PlanetActor>();
                 motor.Configure(this,team,hero,spawnDirections[team-1]);
                 ApplyActorSkin(motor,hero,team);
+                ApplyActorShopCosmetics(motor,team);
                 motor.Active=true;
                 players.Add(motor);
                 Territory.Seed(team,spawnDirections[team-1]);
@@ -499,6 +501,7 @@ namespace BrainrotPlanet
             if(State==MatchState.Menu)
             {
                 if(DedicatedMatchServer)return;
+                UpdateStoreUi();
                 RefreshWardrobePreview();
                 EnsureHeroPreview();
                 if(heroPreviewRig!=null)
@@ -632,6 +635,7 @@ namespace BrainrotPlanet
                         if(p.y<96f)continue;
                         if(skillArea.Contains(p)){UseSkill();continue;}
                         if(jumpArea.Contains(p)){RequestJump();continue;}
+                        if(Cosmetic("emote")!=""&&new Rect(Screen.width/unit-104,virtualH-308,80,36).Contains(p))continue;
                         if(steerFinger<0){steerFinger=touch.fingerId;steerOrigin=p;}
                     }
                     if(touch.fingerId==steerFinger)
@@ -713,6 +717,7 @@ namespace BrainrotPlanet
                 victoryActor.EnterVictoryStage(winnerPosition,cameraSide,stageCenter.y+.205f);
                 orbitCamera.BeginVictoryFocus(victoryActor.transform,stageCenter);
                 victoryActor.Celebrate();
+                ApplyVictoryShopCosmetics(stageCenter,winningTeam);
                 Effects.Burst(victoryActor.transform.position,
                               Colors.Team(winningTeam),55,3.8f);
             }
@@ -814,7 +819,8 @@ namespace BrainrotPlanet
             heroPreviewRig=new GameObject("Portrait turntable");
             heroPreviewRig.transform.SetParent(heroPreviewRoot.transform,false);
             AvatarArt.Make(heroPreviewRig.transform,selectedHero,HeroColors[selectedHero]);
-            var previewPack=skinCatalog?.Pack(wardrobeOpen?previewSkin:equippedSkin);
+            string shownSkin=wardrobeOpen||shopOpen?previewSkin:OwnsSkin(equippedSkin)?equippedSkin:"";
+            var previewPack=skinCatalog?.Pack(shownSkin);
             if(previewPack!=null&&previewPack.hero==selectedHero)SkinVisual.Apply(heroPreviewRig.transform,previewPack);
             previewFacing=AvatarArt.LocalFacing(heroPreviewRig.transform);
             heroPreviewRig.transform.localRotation=selectedHero==1?Quaternion.Euler(0f,148f,0f):
@@ -845,6 +851,7 @@ namespace BrainrotPlanet
                 Vector3 target=bounds.center+Vector3.up*(bounds.size.y*.035f);
                 heroPreviewCamera.transform.position=target+new Vector3(0f,bounds.size.y*.04f,-distance);
                 heroPreviewCamera.transform.LookAt(target);
+                PreviewShopCosmetics(bounds,previewLayer);
             }
             previewHero=selectedHero;
             Debug.Log("HERO_MENU_PREVIEW_READY index="+selectedHero+
@@ -932,9 +939,10 @@ namespace BrainrotPlanet
             float logicalW=Screen.width/guiScale,logicalH=Screen.height/guiScale;
             var old=GUI.matrix;
             GUI.matrix=Matrix4x4.Scale(new Vector3(guiScale,guiScale,1f));
+            if(shopOpen && State==MatchState.Menu){DrawShop(logicalW,logicalH);GUI.matrix=old;return;}
             if(wardrobeOpen && State==MatchState.Menu){DrawWardrobe(logicalW,logicalH);GUI.matrix=old;return;}
             if(networkPanel && State==MatchState.Menu){DrawNetworkPanel(logicalW,logicalH);GUI.matrix=old;return;}
-            if(State==MatchState.Playing){DrawPlayPolish(logicalW,logicalH);GUI.matrix=old;return;}
+            if(State==MatchState.Playing){DrawPlayPolish(logicalW,logicalH);if(!paused)DrawShopEmote(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.End){DrawResultPolish(logicalW,logicalH);GUI.matrix=old;return;}
             if(State==MatchState.Menu)
             {
@@ -952,6 +960,7 @@ namespace BrainrotPlanet
                 Rounded(new Rect(spotlight.x-3,spotlight.y-3,spotlight.width+6,spotlight.height+6),
                     new Color(heroColor.r,heroColor.g,heroColor.b,.90f));
                 Rounded(spotlight,new Color(.045f,.065f,.15f,.88f));
+                DrawShopProfileBadge(logicalW);
                 DrawGlow(new Rect(18,64,195,195),new Color(heroColor.r,heroColor.g,heroColor.b,.44f));
                 if(heroPreviewTexture!=null)
                     GUI.DrawTexture(new Rect(21,71,176,180),heroPreviewTexture,ScaleMode.ScaleToFit,true);
@@ -1007,8 +1016,9 @@ namespace BrainrotPlanet
                 }
 
                 DrawMenuPolish(logicalW,logicalH);
-                if(FlatButton(new Rect(26,492,logicalW-52,34),"ГАРДЕРОБ ГЕРОЯ",new Color(.36f,.22f,.60f)))
+                if(FlatButton(new Rect(26,492,store!=null?(logicalW-60)/2:logicalW-52,34),"ГАРДЕРОБ",new Color(.36f,.22f,.60f)))
                 {previewSkin=equippedSkin;previewHero=-1;wardrobeScroll=Vector2.zero;wardrobeOpen=true;}
+                if(store!=null&&FlatButton(new Rect(logicalW/2+4,492,(logicalW-60)/2,34),"МАГАЗИН · ТЕСТ",new Color(.64f,.35f,.14f)))OpenShop();
                 float diffY=logicalH-226f;
                 float diffWidth=(logicalW-68f)/3f;
                 GUI.Label(new Rect(22,diffY-30f,logicalW-44f,25f),"СЛОЖНОСТЬ СОПЕРНИКОВ",smallStyle);

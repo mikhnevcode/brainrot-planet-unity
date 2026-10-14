@@ -1,0 +1,69 @@
+Brainrot Planet — TEST store 0.7.3-store-test — 2026-10-14
+
+Scope: 99 cosmetic offers in 8 categories. 65 skins, 18 other cosmetics, 13 hero
+wardrobes, 3 themed bundles. Classic + 13 first appearances free. Only simulated
+purchases; real money=0. No Robokassa/Google/Apple sandbox SDK was exercised.
+Development-only UI + private opt-in server. Do not use this ledger/cache for
+production entitlements or claim real receipts/payment compliance.
+
+Build PASS
+Unity 6000.2.7f2 Android IL2CPP development, standard Activity, versionCode 47.
+APK Builds/Android/BrainrotPlanet-v0.7.3-store-test.apk, bytes 73416072.
+SHA256 72aa147452393dece14ca54e0d05381e96fd71a8372b641958654eaf26ba98a3
+Log Logs/store-android-verified-build.log: exit 0; StoreSmoke 110 cases/products99;
+existing protocol/catalog216/cast65/975poses/65lateBind/territory/outcome/collision
+build gates retained. First builds failed under host memory pressure (Gradle
+4 GiB native allocation and IL2CPP exit3). Project Gradle template now 1536 MiB,
+SerialGC, workers2; final invocation DOTNET_PROCESSOR_COUNT=2/job-worker-count2.
+No Windows memory/pagefile/global Gradle changes or unrelated process shutdowns.
+
+Server PASS
+9 unittest test_store cases including purchase of all 99 offers, non-grant states,
+idempotency/wrong SKU, pending approval/refund, overlapping-bundle grant retention,
+account isolation, DB restart restoration, malformed input, 500-transaction cap.
+6 gateway regressions including store disabled by default; existing match binary
+roundtrip/size/type/auth/capacity unchanged.
+Actual external WSS: catalog99, pending/approve/duplicate/refund/restore, bad key401.
+Isolated store service on loopback27867; own quick tunnel; existing match server,
+gateway, corporate services and shared Caddy untouched. Private keys not embedded.
+
+Android device fixtures PASS on the FINAL APK
+RMX3151 / E6ZTMFVCEA895HAA and RMX2020 / NBTK5TZTVC8T9TRG.
+Both log STORE_QA_PASS catalog99 cancel_error_pending_approve_duplicate_refund_
+restore_game_victory=true realMoney=0. Temporary random test accounts; user's test
+profile/gameplay preferences restored, forced-victory rewards suppressed.
+13 payment/ownership gates, downloaded skin, six category previews, confirmation,
+pending history, game trail, jump/skill and victory stage/dance. 10 screenshots
+per phone under Logs/store-final-phone1 and store-final-phone2. Images inspected:
+readable front-facing victory and complete tab names after font-size correction.
+Motion offsets are bounded from captured rest, not accumulated frame-to-frame.
+
+Normal UI PASS
+Phone1: selected Ice Sprinter, opened simulator, chose Success, pressed Equip.
+Phone2: selected Reef Pirate, same ordinary button path. Both owned counts13->14.
+Phone1 full force-stop/cold launch applied Ice Sprinter from cached test ownership.
+No app data/cache reset. Test profile secret is masked; recovery-code copying was
+NOT clicked and no credentials were printed or included in screenshots.
+
+Two-Android-phone match PASS
+Both ordinary test purchases used in the real shared match (protocol2).
+Each replica received both skin references; phone2 downloaded remote Ice Sprinter
+late and logged MATCH_SKIN_LATE. Both: epoch5 winner3 actions12, then
+MATCH_QA_PASS result_replay_offline. Late-round samples ~59 FPS on both; not a
+long-soak/thermal/device-matrix claim. Logs/store-network-phone1.log and phone2.log.
+QA marker/key-selection files removed. Normal private invitation retained. Both
+phones restarted into normal menus with their demonstration outfits equipped.
+
+Publication: existing cast HTTPS APK directory, HTTP200/73416072 bytes; remote
+SHA256 identical. No older APK/catalog replaced. Report and screenshots copied
+to this chat's outputs/store073. Source changes committed separately from private
+runtime, build outputs, raw logs, cached profiles, keys and SQLite.
+
+Release boundaries
+Additional effects/emotes/profile themes are LOCAL ONLY, unlike replicated skins.
+The match server still trusts client cosmetic references; production ownership
+binding, stable accounts, verified provider receipts and refunds remain gates.
+Editable TEST cache and sandbox approve/refund controls are never production proof.
+No iOS/TestFlight, real provider sandbox, advertisements, secure purchase login,
+English localization, public matchmaking or complete release-readiness claim.
+See QA/release-gates-20261021.txt for account/platform constraints and remaining work.

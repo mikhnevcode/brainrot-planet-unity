@@ -1,0 +1,1178 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "mode": "test",
+  "products": [
+    {
+      "id": "skin.tralalero_reef_racer",
+      "title": "РИФОВЫЙ ГОНЩИК",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:tralalero_reef_racer"
+      ],
+      "skin": "tralalero_reef_racer"
+    },
+    {
+      "id": "skin.tralalero_ice_sprinter",
+      "title": "ЛЕДЯНОЙ СПРИНТЕР",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:tralalero_ice_sprinter"
+      ],
+      "skin": "tralalero_ice_sprinter"
+    },
+    {
+      "id": "skin.tralalero_reef_pirate",
+      "title": "ПИРАТ РИФОВ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:tralalero_reef_pirate"
+      ],
+      "skin": "tralalero_reef_pirate"
+    },
+    {
+      "id": "skin.tralalero_neon_surfer",
+      "title": "НЕОНОВЫЙ СЁРФЕР",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:tralalero_neon_surfer"
+      ],
+      "skin": "tralalero_neon_surfer"
+    },
+    {
+      "id": "skin.tralalero_space_swimmer",
+      "title": "КОСМИЧЕСКИЙ ПЛОВЕЦ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:tralalero_space_swimmer"
+      ],
+      "skin": "tralalero_space_swimmer"
+    },
+    {
+      "id": "skin.bombardiro_orbital",
+      "title": "ОРБИТАЛЬНЫЙ СПАСАТЕЛЬ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombardiro_orbital"
+      ],
+      "skin": "bombardiro_orbital"
+    },
+    {
+      "id": "skin.bombardiro_lava",
+      "title": "ЛАВОВЫЙ ПЕРЕХВАТЧИК",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombardiro_lava"
+      ],
+      "skin": "bombardiro_lava"
+    },
+    {
+      "id": "skin.bombardiro_storm_pilot",
+      "title": "ШТОРМОВОЙ ПИЛОТ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombardiro_storm_pilot"
+      ],
+      "skin": "bombardiro_storm_pilot"
+    },
+    {
+      "id": "skin.bombardiro_clockwork_aviator",
+      "title": "ЗАВОДНОЙ АВИАТОР",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombardiro_clockwork_aviator"
+      ],
+      "skin": "bombardiro_clockwork_aviator"
+    },
+    {
+      "id": "skin.bombardiro_tropical_rescuer",
+      "title": "ТРОПИЧЕСКИЙ СПАСАТЕЛЬ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombardiro_tropical_rescuer"
+      ],
+      "skin": "bombardiro_tropical_rescuer"
+    },
+    {
+      "id": "skin.frigo_polar_express",
+      "title": "ПОЛЯРНЫЙ ЭКСПРЕСС",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:frigo_polar_express"
+      ],
+      "skin": "frigo_polar_express"
+    },
+    {
+      "id": "skin.frigo_retro_soda",
+      "title": "РЕТРО-ЛИМОНАД",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:frigo_retro_soda"
+      ],
+      "skin": "frigo_retro_soda"
+    },
+    {
+      "id": "skin.frigo_desert_caravan",
+      "title": "ПУСТЫННЫЙ КАРАВАН",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:frigo_desert_caravan"
+      ],
+      "skin": "frigo_desert_caravan"
+    },
+    {
+      "id": "skin.frigo_galactic_chill",
+      "title": "ГАЛАКТИЧЕСКИЙ ХОЛОД",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:frigo_galactic_chill"
+      ],
+      "skin": "frigo_galactic_chill"
+    },
+    {
+      "id": "skin.frigo_gingerbread",
+      "title": "ПРЯНИЧНЫЙ ФРИГО",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:frigo_gingerbread"
+      ],
+      "skin": "frigo_gingerbread"
+    },
+    {
+      "id": "skin.bombombini_sky_courier",
+      "title": "НЕБЕСНЫЙ КУРЬЕР",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombombini_sky_courier"
+      ],
+      "skin": "bombombini_sky_courier"
+    },
+    {
+      "id": "skin.bombombini_polar_post",
+      "title": "ПОЛЯРНЫЙ ПОЧТАЛЬОН",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombombini_polar_post"
+      ],
+      "skin": "bombombini_polar_post"
+    },
+    {
+      "id": "skin.bombombini_steam_goose",
+      "title": "СТИМПАНК ГУСЬ",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombombini_steam_goose"
+      ],
+      "skin": "bombombini_steam_goose"
+    },
+    {
+      "id": "skin.bombombini_thunder_courier",
+      "title": "ГРОЗОВОЙ КУРЬЕР",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombombini_thunder_courier"
+      ],
+      "skin": "bombombini_thunder_courier"
+    },
+    {
+      "id": "skin.bombombini_tropical_aviator",
+      "title": "ТРОПИЧЕСКИЙ АВИАТОР",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:bombombini_tropical_aviator"
+      ],
+      "skin": "bombombini_tropical_aviator"
+    },
+    {
+      "id": "skin.ballerina_pearl_prima",
+      "title": "ЖЕМЧУЖНАЯ ПРИМА",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:ballerina_pearl_prima"
+      ],
+      "skin": "ballerina_pearl_prima"
+    },
+    {
+      "id": "skin.ballerina_cherry_ballet",
+      "title": "ВИШНЁВЫЙ БАЛЕТ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:ballerina_cherry_ballet"
+      ],
+      "skin": "ballerina_cherry_ballet"
+    },
+    {
+      "id": "skin.ballerina_moon_prima",
+      "title": "ЛУННАЯ ПРИМА",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:ballerina_moon_prima"
+      ],
+      "skin": "ballerina_moon_prima"
+    },
+    {
+      "id": "skin.ballerina_matcha_fairy",
+      "title": "МАТЧА-ФЕЯ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:ballerina_matcha_fairy"
+      ],
+      "skin": "ballerina_matcha_fairy"
+    },
+    {
+      "id": "skin.ballerina_caramel_prima",
+      "title": "КАРАМЕЛЬНАЯ ПРИМА",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:ballerina_caramel_prima"
+      ],
+      "skin": "ballerina_caramel_prima"
+    },
+    {
+      "id": "skin.assassino_jade_ronin",
+      "title": "НЕФРИТОВЫЙ РОНИН",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:assassino_jade_ronin"
+      ],
+      "skin": "assassino_jade_ronin"
+    },
+    {
+      "id": "skin.assassino_ice_ninja",
+      "title": "ЛЕДЯНОЙ НИНДЗЯ",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:assassino_ice_ninja"
+      ],
+      "skin": "assassino_ice_ninja"
+    },
+    {
+      "id": "skin.assassino_scarlet_shogun",
+      "title": "АЛЫЙ СЁГУН",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:assassino_scarlet_shogun"
+      ],
+      "skin": "assassino_scarlet_shogun"
+    },
+    {
+      "id": "skin.assassino_night_courier",
+      "title": "НОЧНОЙ КУРЬЕР",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:assassino_night_courier"
+      ],
+      "skin": "assassino_night_courier"
+    },
+    {
+      "id": "skin.assassino_copper_ronin",
+      "title": "МЕДНЫЙ РОНИН",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:assassino_copper_ronin"
+      ],
+      "skin": "assassino_copper_ronin"
+    },
+    {
+      "id": "skin.patapim_bloom_guardian",
+      "title": "ХРАНИТЕЛЬ ЦВЕТЕНИЯ",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:patapim_bloom_guardian"
+      ],
+      "skin": "patapim_bloom_guardian"
+    },
+    {
+      "id": "skin.patapim_autumn_woods",
+      "title": "ОСЕННИЙ ЛЕС",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:patapim_autumn_woods"
+      ],
+      "skin": "patapim_autumn_woods"
+    },
+    {
+      "id": "skin.patapim_northern_guardian",
+      "title": "ХРАНИТЕЛЬ СЕВЕРА",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:patapim_northern_guardian"
+      ],
+      "skin": "patapim_northern_guardian"
+    },
+    {
+      "id": "skin.patapim_jungle_shaman",
+      "title": "ДЖУНГЛЕВЫЙ ШАМАН",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:patapim_jungle_shaman"
+      ],
+      "skin": "patapim_jungle_shaman"
+    },
+    {
+      "id": "skin.patapim_moon_forest",
+      "title": "ЛУННЫЙ ЛЕС",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:patapim_moon_forest"
+      ],
+      "skin": "patapim_moon_forest"
+    },
+    {
+      "id": "skin.tungsahur_copper_drummer",
+      "title": "МЕДНЫЙ БАРАБАНЩИК",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:tungsahur_copper_drummer"
+      ],
+      "skin": "tungsahur_copper_drummer"
+    },
+    {
+      "id": "skin.tungsahur_rock_sahur",
+      "title": "РОК-САХУР",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:tungsahur_rock_sahur"
+      ],
+      "skin": "tungsahur_rock_sahur"
+    },
+    {
+      "id": "skin.tungsahur_festival_sahur",
+      "title": "ПРАЗДНИЧНЫЙ САХУР",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:tungsahur_festival_sahur"
+      ],
+      "skin": "tungsahur_festival_sahur"
+    },
+    {
+      "id": "skin.tungsahur_root_keeper",
+      "title": "ХРАНИТЕЛЬ КОРНЕЙ",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:tungsahur_root_keeper"
+      ],
+      "skin": "tungsahur_root_keeper"
+    },
+    {
+      "id": "skin.tungsahur_clockwork_sahur",
+      "title": "ЧАСОВОЙ САХУР",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:tungsahur_clockwork_sahur"
+      ],
+      "skin": "tungsahur_clockwork_sahur"
+    },
+    {
+      "id": "skin.lirili_oasis_caravan",
+      "title": "ОАЗИСНЫЙ КАРАВАН",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:lirili_oasis_caravan"
+      ],
+      "skin": "lirili_oasis_caravan"
+    },
+    {
+      "id": "skin.lirili_flowering_cactus",
+      "title": "ЦВЕТУЩИЙ КАКТУС",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:lirili_flowering_cactus"
+      ],
+      "skin": "lirili_flowering_cactus"
+    },
+    {
+      "id": "skin.lirili_sand_wanderer",
+      "title": "ПЕСЧАНЫЙ ПУТНИК",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:lirili_sand_wanderer"
+      ],
+      "skin": "lirili_sand_wanderer"
+    },
+    {
+      "id": "skin.lirili_star_oasis",
+      "title": "ЗВЁЗДНЫЙ ОАЗИС",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:lirili_star_oasis"
+      ],
+      "skin": "lirili_star_oasis"
+    },
+    {
+      "id": "skin.lirili_copper_caravan",
+      "title": "МЕДНЫЙ КАРАВАН",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:lirili_copper_caravan"
+      ],
+      "skin": "lirili_copper_caravan"
+    },
+    {
+      "id": "skin.frulli_tropical_dj",
+      "title": "ТРОПИЧЕСКИЙ ДИДЖЕЙ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:frulli_tropical_dj"
+      ],
+      "skin": "frulli_tropical_dj"
+    },
+    {
+      "id": "skin.frulli_sky_postbird",
+      "title": "НЕБЕСНЫЙ ПОЧТАЛЬОН",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:frulli_sky_postbird"
+      ],
+      "skin": "frulli_sky_postbird"
+    },
+    {
+      "id": "skin.frulli_rock_beak",
+      "title": "РОК-КЛЮВ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:frulli_rock_beak"
+      ],
+      "skin": "frulli_rock_beak"
+    },
+    {
+      "id": "skin.frulli_sun_surfer",
+      "title": "СОЛНЕЧНЫЙ СЁРФЕР",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:frulli_sun_surfer"
+      ],
+      "skin": "frulli_sun_surfer"
+    },
+    {
+      "id": "skin.frulli_polar_messenger",
+      "title": "ПОЛЯРНЫЙ ВЕСТНИК",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:frulli_polar_messenger"
+      ],
+      "skin": "frulli_polar_messenger"
+    },
+    {
+      "id": "skin.boneca_rally_amphibian",
+      "title": "РАЛЛИ-АМФИБИЯ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:boneca_rally_amphibian"
+      ],
+      "skin": "boneca_rally_amphibian"
+    },
+    {
+      "id": "skin.boneca_swamp_tracker",
+      "title": "БОЛОТНЫЙ СЛЕДОПЫТ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:boneca_swamp_tracker"
+      ],
+      "skin": "boneca_swamp_tracker"
+    },
+    {
+      "id": "skin.boneca_neon_rally",
+      "title": "НЕОНОВОЕ РАЛЛИ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:boneca_neon_rally"
+      ],
+      "skin": "boneca_neon_rally"
+    },
+    {
+      "id": "skin.boneca_polar_rover",
+      "title": "ПОЛЯРНЫЙ ВЕЗДЕХОД",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:boneca_polar_rover"
+      ],
+      "skin": "boneca_polar_rover"
+    },
+    {
+      "id": "skin.boneca_sand_rover",
+      "title": "ПЕСКОХОД",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:boneca_sand_rover"
+      ],
+      "skin": "boneca_sand_rover"
+    },
+    {
+      "id": "skin.trippi_pearl_reef",
+      "title": "ПЕРЛАМУТРОВЫЙ РИФ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:trippi_pearl_reef"
+      ],
+      "skin": "trippi_pearl_reef"
+    },
+    {
+      "id": "skin.trippi_lava_shrimp",
+      "title": "ЛАВОВЫЙ РАК",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:trippi_lava_shrimp"
+      ],
+      "skin": "trippi_lava_shrimp"
+    },
+    {
+      "id": "skin.trippi_northern_shrimp",
+      "title": "СЕВЕРНАЯ КРЕВЕТКА",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:trippi_northern_shrimp"
+      ],
+      "skin": "trippi_northern_shrimp"
+    },
+    {
+      "id": "skin.trippi_royal_reef",
+      "title": "КОРОЛЕВСКИЙ РИФ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:trippi_royal_reef"
+      ],
+      "skin": "trippi_royal_reef"
+    },
+    {
+      "id": "skin.trippi_space_cat",
+      "title": "КОСМИЧЕСКИЙ КОТ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:trippi_space_cat"
+      ],
+      "skin": "trippi_space_cat"
+    },
+    {
+      "id": "skin.troppa_coral_admiral",
+      "title": "КОРАЛЛОВЫЙ АДМИРАЛ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:troppa_coral_admiral"
+      ],
+      "skin": "troppa_coral_admiral"
+    },
+    {
+      "id": "skin.troppa_sun_captain",
+      "title": "СОЛНЕЧНЫЙ КАПИТАН",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:troppa_sun_captain"
+      ],
+      "skin": "troppa_sun_captain"
+    },
+    {
+      "id": "skin.troppa_polar_fisher",
+      "title": "ПОЛЯРНЫЙ РЫБОЛОВ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:troppa_polar_fisher"
+      ],
+      "skin": "troppa_polar_fisher"
+    },
+    {
+      "id": "skin.troppa_jade_guard",
+      "title": "НЕФРИТОВЫЙ СТРАЖ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:troppa_jade_guard"
+      ],
+      "skin": "troppa_jade_guard"
+    },
+    {
+      "id": "skin.troppa_festival_gourmet",
+      "title": "ПРАЗДНИЧНЫЙ ГУРМАН",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:troppa_festival_gourmet"
+      ],
+      "skin": "troppa_festival_gourmet"
+    },
+    {
+      "id": "trail.bubbles",
+      "title": "Пузырьковый след",
+      "kind": "trail",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "trail:bubbles"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "trail.petals",
+      "title": "Лепестковый след",
+      "kind": "trail",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "trail:petals"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "trail.stars",
+      "title": "Звёздный след",
+      "kind": "trail",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "trail:stars"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "spawn.ocean",
+      "title": "Океанское появление",
+      "kind": "spawn",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "spawn:ocean"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "spawn.bloom",
+      "title": "Цветочное появление",
+      "kind": "spawn",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "spawn:bloom"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "spawn.space",
+      "title": "Космическое появление",
+      "kind": "spawn",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "spawn:space"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "dance.disco",
+      "title": "Победное диско",
+      "kind": "dance",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "dance:disco"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "dance.robot",
+      "title": "Танец робота",
+      "kind": "dance",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "dance:robot"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "dance.sway",
+      "title": "Праздничный кач",
+      "kind": "dance",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "dance:sway"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "stage.coral",
+      "title": "Коралловый подиум",
+      "kind": "stage",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "stage:coral"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "stage.garden",
+      "title": "Цветочная сцена",
+      "kind": "stage",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "stage:garden"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "stage.orbital",
+      "title": "Орбитальная сцена",
+      "kind": "stage",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "stage:orbital"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "emote.hello",
+      "title": "Привет!",
+      "kind": "emote",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "emote:hello"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "emote.great",
+      "title": "Отлично!",
+      "kind": "emote",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "emote:great"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "emote.again",
+      "title": "Ещё матч!",
+      "kind": "emote",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "emote:again"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "profile.coral",
+      "title": "Коралловая карточка",
+      "kind": "profile",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "profile:coral"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "profile.bloom",
+      "title": "Цветочная карточка",
+      "kind": "profile",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "profile:bloom"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "profile.space",
+      "title": "Космическая карточка",
+      "kind": "profile",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "profile:space"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "bundle.hero0",
+      "title": "Полный гардероб героя 1",
+      "kind": "bundle",
+      "hero": 0,
+      "priceTest": 399,
+      "grants": [
+        "skin:tralalero_reef_racer",
+        "skin:tralalero_ice_sprinter",
+        "skin:tralalero_reef_pirate",
+        "skin:tralalero_neon_surfer",
+        "skin:tralalero_space_swimmer"
+      ],
+      "skin": "tralalero_space_swimmer"
+    },
+    {
+      "id": "bundle.hero1",
+      "title": "Полный гардероб героя 2",
+      "kind": "bundle",
+      "hero": 1,
+      "priceTest": 399,
+      "grants": [
+        "skin:bombardiro_orbital",
+        "skin:bombardiro_lava",
+        "skin:bombardiro_storm_pilot",
+        "skin:bombardiro_clockwork_aviator",
+        "skin:bombardiro_tropical_rescuer"
+      ],
+      "skin": "bombardiro_tropical_rescuer"
+    },
+    {
+      "id": "bundle.hero2",
+      "title": "Полный гардероб героя 3",
+      "kind": "bundle",
+      "hero": 2,
+      "priceTest": 399,
+      "grants": [
+        "skin:frigo_polar_express",
+        "skin:frigo_retro_soda",
+        "skin:frigo_desert_caravan",
+        "skin:frigo_galactic_chill",
+        "skin:frigo_gingerbread"
+      ],
+      "skin": "frigo_gingerbread"
+    },
+    {
+      "id": "bundle.hero3",
+      "title": "Полный гардероб героя 4",
+      "kind": "bundle",
+      "hero": 3,
+      "priceTest": 399,
+      "grants": [
+        "skin:bombombini_sky_courier",
+        "skin:bombombini_polar_post",
+        "skin:bombombini_steam_goose",
+        "skin:bombombini_thunder_courier",
+        "skin:bombombini_tropical_aviator"
+      ],
+      "skin": "bombombini_tropical_aviator"
+    },
+    {
+      "id": "bundle.hero4",
+      "title": "Полный гардероб героя 5",
+      "kind": "bundle",
+      "hero": 4,
+      "priceTest": 399,
+      "grants": [
+        "skin:ballerina_pearl_prima",
+        "skin:ballerina_cherry_ballet",
+        "skin:ballerina_moon_prima",
+        "skin:ballerina_matcha_fairy",
+        "skin:ballerina_caramel_prima"
+      ],
+      "skin": "ballerina_caramel_prima"
+    },
+    {
+      "id": "bundle.hero5",
+      "title": "Полный гардероб героя 6",
+      "kind": "bundle",
+      "hero": 5,
+      "priceTest": 399,
+      "grants": [
+        "skin:assassino_jade_ronin",
+        "skin:assassino_ice_ninja",
+        "skin:assassino_scarlet_shogun",
+        "skin:assassino_night_courier",
+        "skin:assassino_copper_ronin"
+      ],
+      "skin": "assassino_copper_ronin"
+    },
+    {
+      "id": "bundle.hero6",
+      "title": "Полный гардероб героя 7",
+      "kind": "bundle",
+      "hero": 6,
+      "priceTest": 399,
+      "grants": [
+        "skin:patapim_bloom_guardian",
+        "skin:patapim_autumn_woods",
+        "skin:patapim_northern_guardian",
+        "skin:patapim_jungle_shaman",
+        "skin:patapim_moon_forest"
+      ],
+      "skin": "patapim_moon_forest"
+    },
+    {
+      "id": "bundle.hero7",
+      "title": "Полный гардероб героя 8",
+      "kind": "bundle",
+      "hero": 7,
+      "priceTest": 399,
+      "grants": [
+        "skin:tungsahur_copper_drummer",
+        "skin:tungsahur_rock_sahur",
+        "skin:tungsahur_festival_sahur",
+        "skin:tungsahur_root_keeper",
+        "skin:tungsahur_clockwork_sahur"
+      ],
+      "skin": "tungsahur_clockwork_sahur"
+    },
+    {
+      "id": "bundle.hero8",
+      "title": "Полный гардероб героя 9",
+      "kind": "bundle",
+      "hero": 8,
+      "priceTest": 399,
+      "grants": [
+        "skin:lirili_oasis_caravan",
+        "skin:lirili_flowering_cactus",
+        "skin:lirili_sand_wanderer",
+        "skin:lirili_star_oasis",
+        "skin:lirili_copper_caravan"
+      ],
+      "skin": "lirili_copper_caravan"
+    },
+    {
+      "id": "bundle.hero9",
+      "title": "Полный гардероб героя 10",
+      "kind": "bundle",
+      "hero": 9,
+      "priceTest": 399,
+      "grants": [
+        "skin:frulli_tropical_dj",
+        "skin:frulli_sky_postbird",
+        "skin:frulli_rock_beak",
+        "skin:frulli_sun_surfer",
+        "skin:frulli_polar_messenger"
+      ],
+      "skin": "frulli_polar_messenger"
+    },
+    {
+      "id": "bundle.hero10",
+      "title": "Полный гардероб героя 11",
+      "kind": "bundle",
+      "hero": 10,
+      "priceTest": 399,
+      "grants": [
+        "skin:boneca_rally_amphibian",
+        "skin:boneca_swamp_tracker",
+        "skin:boneca_neon_rally",
+        "skin:boneca_polar_rover",
+        "skin:boneca_sand_rover"
+      ],
+      "skin": "boneca_sand_rover"
+    },
+    {
+      "id": "bundle.hero11",
+      "title": "Полный гардероб героя 12",
+      "kind": "bundle",
+      "hero": 11,
+      "priceTest": 399,
+      "grants": [
+        "skin:trippi_pearl_reef",
+        "skin:trippi_lava_shrimp",
+        "skin:trippi_northern_shrimp",
+        "skin:trippi_royal_reef",
+        "skin:trippi_space_cat"
+      ],
+      "skin": "trippi_space_cat"
+    },
+    {
+      "id": "bundle.hero12",
+      "title": "Полный гардероб героя 13",
+      "kind": "bundle",
+      "hero": 12,
+      "priceTest": 399,
+      "grants": [
+        "skin:troppa_coral_admiral",
+        "skin:troppa_sun_captain",
+        "skin:troppa_polar_fisher",
+        "skin:troppa_jade_guard",
+        "skin:troppa_festival_gourmet"
+      ],
+      "skin": "troppa_festival_gourmet"
+    },
+    {
+      "id": "bundle.ocean",
+      "title": "Океанский комплект",
+      "kind": "bundle",
+      "hero": -1,
+      "priceTest": 299,
+      "skin": "",
+      "grants": [
+        "trail:bubbles",
+        "spawn:ocean",
+        "stage:coral",
+        "dance:disco",
+        "emote:hello",
+        "profile:coral"
+      ]
+    },
+    {
+      "id": "bundle.bloom",
+      "title": "Цветочный комплект",
+      "kind": "bundle",
+      "hero": -1,
+      "priceTest": 299,
+      "skin": "",
+      "grants": [
+        "trail:petals",
+        "spawn:bloom",
+        "stage:garden",
+        "dance:sway",
+        "emote:great",
+        "profile:bloom"
+      ]
+    },
+    {
+      "id": "bundle.space",
+      "title": "Космический комплект",
+      "kind": "bundle",
+      "hero": -1,
+      "priceTest": 299,
+      "skin": "",
+      "grants": [
+        "trail:stars",
+        "spawn:space",
+        "stage:orbital",
+        "dance:robot",
+        "emote:again",
+        "profile:space"
+      ]
+    }
+  ],
+  "free": [
+    "skin:tralalero_reef_racer",
+    "skin:bombardiro_orbital",
+    "skin:frigo_polar_express",
+    "skin:bombombini_sky_courier",
+    "skin:ballerina_pearl_prima",
+    "skin:assassino_jade_ronin",
+    "skin:patapim_bloom_guardian",
+    "skin:tungsahur_copper_drummer",
+    "skin:lirili_oasis_caravan",
+    "skin:frulli_tropical_dj",
+    "skin:boneca_rally_amphibian",
+    "skin:trippi_pearl_reef",
+    "skin:troppa_coral_admiral"
+  ]
+}

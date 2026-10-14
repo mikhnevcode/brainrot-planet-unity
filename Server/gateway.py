@@ -1,6 +1,7 @@
 """Private single-room WSS bridge. TLS is terminated by a dedicated tunnel.
 Both listeners MUST stay on loopback; never expose the raw Unity TCP port.
-No accounts, payments, names, device identifiers or persistent game data.
+Default match mode has no accounts/payments/persistent game data. Optional
+private /store-test adds a separate zero-money anonymous test ledger only.
 """
 import asyncio
 import contextlib
@@ -19,23 +20,28 @@ MAX_PACKET = 196608
 
 
 class Gateway:
-    def __init__(self, key, tcp_port=27766):
+    def __init__(self, key, tcp_port=27766, store=None):
         if len(key) < 24:
             raise ValueError("Test key must have at least 24 characters")
         self.key = key
         self.tcp_port = tcp_port
         self.active = 0
+        self.store = store
+        self.store_active = 0
 
     def authorize(self, connection, request):
-        if request.path != "/match":
+        if request.path != "/match" and not (request.path == "/store-test" and self.store is not None):
             return connection.respond(HTTPStatus.NOT_FOUND, "Not found\n")
         keys = request.headers.get_all("X-Brainrot-Test-Key")
         if len(keys) != 1 or not hmac.compare_digest(keys[0].encode(), self.key.encode()):
             return connection.respond(HTTPStatus.UNAUTHORIZED, "Private test room\n")
-        if self.active >= 4:
+        if (self.store_active if request.path == "/store-test" else self.active) >= 4:
             return connection.respond(HTTPStatus.SERVICE_UNAVAILABLE, "Room full\n")
 
     async def handle(self, websocket):
+        if websocket.request.path == "/store-test" and self.store is not None:
+            await self.handle_store(websocket)
+            return
         # Re-check after handshake: several handshakes may finish in one event loop turn.
         if self.active >= 4:
             await websocket.close(1013, "Room full")
@@ -85,6 +91,22 @@ class Gateway:
             self.active -= 1
             await websocket.close()
 
+    async def handle_store(self, websocket):
+        if self.store_active>=4:
+            await websocket.close(1013,'Test store full');return
+        self.store_active+=1
+        tokens,previous=8.0,time.monotonic()
+        try:
+            async for data in websocket:
+                now=time.monotonic();tokens=min(8.0,tokens+(now-previous)*2)-1;previous=now
+                if tokens<0 or not isinstance(data,bytes) or not 1<=len(data)<=2048:
+                    await websocket.close(1008,'Invalid test store traffic');return
+                await websocket.send(self.store.handle(data))
+        except Exception as error:
+            logging.info('Test store peer ended: %s',type(error).__name__)
+        finally:
+            self.store_active-=1
+
 
 async def main():
     key_path = Path(os.environ.get("BRAINROT_KEY_FILE", "runtime/test.key"))
@@ -92,12 +114,18 @@ async def main():
         key_path.parent.mkdir(parents=True, exist_ok=True)
         with open(key_path, "x", opener=lambda path, flags: os.open(path, flags, 0o600)) as stream:
             stream.write(secrets.token_urlsafe(24))
-    gateway = Gateway(key_path.read_text().strip())
-    async with serve(gateway.handle, "127.0.0.1", 27767, process_request=gateway.authorize,
+    store=None
+    if os.environ.get('BRAINROT_STORE_TEST')=='1':
+        from store_service import StoreService
+        catalog=Path(os.environ.get('BRAINROT_STORE_CATALOG','catalog-test-v1.json'))
+        store=StoreService(key_path.parent/'store-test.sqlite3',catalog)
+    gateway = Gateway(key_path.read_text().strip(),tcp_port=int(os.environ.get('BRAINROT_TCP_PORT','27766')),store=store)
+    port=int(os.environ.get('BRAINROT_GATEWAY_PORT','27767'))
+    async with serve(gateway.handle, "127.0.0.1", port, process_request=gateway.authorize,
                      origins=[None], compression=None, max_size=2048, max_queue=8,
                      open_timeout=5, ping_interval=5, ping_timeout=10, close_timeout=2,
                      server_header=None) as server:
-        logging.info("MATCH_GATEWAY_READY loopbackPort=27767")
+        logging.info("MATCH_GATEWAY_READY loopbackPort=%d storeTest=%s",port,store is not None)
         await server.serve_forever()
 
 

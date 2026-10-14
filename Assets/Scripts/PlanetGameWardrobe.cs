@@ -26,7 +26,7 @@ namespace BrainrotPlanet
         private void RefreshWardrobePreview()
         {
             if(wardrobeOpen)UpdateWardrobeScroll();
-            if(skinCatalog!=null)skinCatalog.EnsureLoaded(wardrobeOpen?previewSkin:equippedSkin);
+            if(skinCatalog!=null)skinCatalog.EnsureLoaded(wardrobeOpen||shopOpen?previewSkin:OwnsSkin(equippedSkin)?equippedSkin:"");
             if(skinCatalog!=null&&skinGeneration!=skinCatalog.Generation)
             {skinGeneration=skinCatalog.Generation;previewHero=-1;}
         }
@@ -48,11 +48,11 @@ namespace BrainrotPlanet
             }
         }
         private string ChosenSkinReference()
-        {var entry=skinCatalog?.Entry(equippedSkin);return entry!=null&&entry.hero==selectedHero?skinCatalog.Reference(equippedSkin):"";}
+        {var entry=skinCatalog?.Entry(equippedSkin);return entry!=null&&entry.hero==selectedHero&&OwnsSkin(equippedSkin)?skinCatalog.Reference(equippedSkin):"";}
         private void ApplyActorSkin(PlanetActor actor,int hero,int team)
         {
             if(skinCatalog==null)return;
-            string reference=IsNetworkReplica?networkSkins[team]:team==LocalTeam?skinCatalog.Reference(equippedSkins[hero]):"";
+            string reference=IsNetworkReplica?networkSkins[team]:team==LocalTeam&&OwnsSkin(equippedSkins[hero])?skinCatalog.Reference(equippedSkins[hero]):"";
             var pack=skinCatalog.ReferencedPack(reference);
             if(pack!=null&&pack.hero!=hero)pack=null;
             SkinVisual.Apply(actor.transform,pack);
@@ -100,10 +100,11 @@ namespace BrainrotPlanet
             GUI.Label(new Rect(18,h-201,w-36,42),skinCatalog.Status,captionStyle);
             if(FlatButton(new Rect(24,h-150,(w-56)/2,48),"ОБНОВИТЬ",new Color(.16f,.27f,.42f)))skinCatalog.Refresh();
             bool ready=skinCatalog.Available(previewSkin);
-            if(FlatButton(new Rect(w/2+4,h-150,(w-56)/2,48),ready?"НАДЕТЬ":"ЗАГРУЗКА…",new Color(.1f,.52f,.42f))&&ready)
+            bool owned=OwnsSkin(previewSkin);
+            if(FlatButton(new Rect(w/2+4,h-150,(w-56)/2,48),!owned?"В МАГАЗИН":ready?"НАДЕТЬ":"ЗАГРУЗКА…",new Color(.1f,.52f,.42f)))
             {
-                equippedSkin=previewSkin;PlayerPrefs.SetString("BrainrotSkin"+selectedHero,equippedSkin);PlayerPrefs.Save();
-                Debug.Log("SKIN_EQUIPPED id="+equippedSkin);
+                if(!owned)OpenShop("skin."+previewSkin);
+                else if(ready){equippedSkin=previewSkin;PlayerPrefs.SetString("BrainrotSkin"+selectedHero,equippedSkin);PlayerPrefs.Save();Debug.Log("SKIN_EQUIPPED id="+equippedSkin);}
             }
             if(FlatButton(new Rect(24,h-88,w-48,48),"НАЗАД К ГЕРОЯМ",new Color(.18f,.20f,.33f)))
             {wardrobeOpen=false;previewSkin=equippedSkin;previewHero=-1;}
@@ -112,7 +113,7 @@ namespace BrainrotPlanet
         {
             bool selected=previewSkin==id;
             if(selected)Rounded(new Rect(rect.x-3,rect.y-3,rect.width+6,rect.height+6),new Color(1f,.78f,.22f));
-            string label=title+(equippedSkin==id?"  ✓":"")+"\n"+subtitle;
+            string label=title+(equippedSkin==id&&OwnsSkin(id)?"  ✓":OwnsSkin(id)?"":" · МАГАЗИН")+"\n"+subtitle;
             if(FlatButton(rect,label,color)){previewSkin=id;previewHero=-1;}
         }
     }
