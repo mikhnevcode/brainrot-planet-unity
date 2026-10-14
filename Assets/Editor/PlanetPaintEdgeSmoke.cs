@@ -21,9 +21,10 @@ namespace BrainrotPlanet.Editor
                 Color32[] image=surface.MapTexture.GetPixels32();
                 int row=(PlanetMath.Height)*PlanetMath.Width*2;
                 Color32 interior=image[row+254],rim=image[row+255];
-                if(rim.g<interior.g+20 || rim.b<interior.b+15 ||
+                if(rim.g<interior.g+10 ||
                    surface.MapTexture.filterMode!=FilterMode.Bilinear)
-                    throw new Exception("Painted boundary is not sharply outlined");
+                    throw new Exception("Painted boundary is not visibly outlined: "+
+                        interior+" / "+rim);
                 // The longitude seam is not an artificial border if both
                 // ownership cells on either side of it belong to one team.
                 for(int y=0;y<PlanetMath.Height;y++)owners[y*PlanetMath.Width+PlanetMath.Width-1]=1;
@@ -34,7 +35,7 @@ namespace BrainrotPlanet.Editor
                    Math.Abs(seamA.b-seamB.b)>24)
                     throw new Exception("False painted border at longitude seam: "+
                         seamA+" / "+seamB);
-                Debug.Log("PLANET_PAINT_EDGE_SMOKE_PASS rim=true seamContinuous=true gridUnchanged=true");
+                Debug.Log("PLANET_PAINT_EDGE_SMOKE_PASS contour=true seamContinuous=true gridUnchanged=true");
             }
             finally{UnityEngine.Object.DestroyImmediate(holder);}
         }

@@ -12,6 +12,8 @@ namespace BrainrotPlanet
         private Color32[] pixels;
         private Color32[] unpainted;
         private Color32[] sourcePixels;
+        private byte[] ownerWeights;
+        private byte[] uniformOwner;
         private float[] reliefTone;
         private PlanetBiomeRules biome;
         private readonly Color32[] teamColors = {
@@ -134,6 +136,8 @@ namespace BrainrotPlanet
             pixels=new Color32[VisualWidth*VisualHeight];
             unpainted=new Color32[PlanetMath.CellCount];
             sourcePixels=new Color32[PlanetMath.CellCount];
+            ownerWeights=new byte[PlanetMath.CellCount*5];
+            uniformOwner=new byte[PlanetMath.CellCount];
             reliefTone=new float[PlanetMath.CellCount];
             PrepareBaseColors();
             var shader=Resources.Load<Shader>("PlanetPaint");
@@ -236,55 +240,105 @@ namespace BrainrotPlanet
         }
         /// <summary>
         /// Gameplay remains on a 256x128 ownership grid. Only the visual map is
-        /// 2x larger. Bilinear resampling rounds single-cell corners while a
-        /// thin lit rim marks ownership changes; capture logic is untouched.
+        /// 2x larger. A smoothed ownership field shapes the visual contour;
+        /// capture continues to use the original, unsmoothed ownership grid.
         /// </summary>
         public void PaintTexture(byte[] owners, System.Collections.Generic.HashSet<int>[] trails)
         {
             float started=Time.realtimeSinceStartup;
             int w=PlanetMath.Width,h=PlanetMath.Height;
-            for(int cell=0;cell<sourcePixels.Length;cell++)
+            // The center keeps a single captured cell visible, while the
+            // surrounding votes round convex and concave grid corners.
+            System.Array.Clear(ownerWeights,0,ownerWeights.Length);
+            for(int y=0;y<h;y++)
             {
-                byte owner=owners==null ? (byte)0 : owners[cell];
-                sourcePixels[cell]=owner>0 && owner<teamColors.Length
-                    ? Tone(teamColors[owner],reliefTone[cell]) : unpainted[cell];
+                int row=y*w;
+                for(int x=0;x<w;x++)
+                {
+                    int weightOffset=(row+x)*5;
+                    for(int dy=-1;dy<=1;dy++)
+                    {
+                        int neighborRow=Mathf.Clamp(y+dy,0,h-1)*w;
+                        for(int dx=-1;dx<=1;dx++)
+                        {
+                            int neighbor=neighborRow+(x+dx+w)%w;
+                            byte neighborOwner=owners==null?(byte)0:owners[neighbor];
+                            if(neighborOwner>=5)neighborOwner=0;
+                            int vote=dx==0&&dy==0?10:dx==0||dy==0?2:1;
+                            ownerWeights[weightOffset+neighborOwner]+=(byte)vote;
+                        }
+                    }
+                    int best=0,bestScore=-1;
+                    for(int team=0;team<5;team++)
+                    {
+                        int score=ownerWeights[weightOffset+team];
+                        if(score>bestScore)
+                        {bestScore=score;best=team;}
+                    }
+                    int cell=row+x;
+                    byte owner=owners==null?(byte)0:owners[cell];
+                    sourcePixels[cell]=owner>0&&owner<5?
+                        Tone(teamColors[owner],reliefTone[cell]):unpainted[cell];
+                    uniformOwner[cell]=bestScore==22?(byte)best:(byte)255;
+                }
             }
 
-            // Resample the untouched source once, without the old 3x3 blur.
-            // The narrow color transition rounds single-cell stair steps;
-            // the rim follows ownership, not the interpolated color.
-            // Longitude wraps; latitude clamps at the poles.
+            // Interiors take the fast color path. Only pixels whose four
+            // source cells touch a boundary reconstruct a smooth contour.
             for(int y=0;y<VisualHeight;y++)
             {
                 int iy=y/2;
                 int y0=(y&1)==0 ? Mathf.Max(iy-1,0) : iy;
                 int y1=(y&1)==0 ? iy : Mathf.Min(iy+1,h-1);
                 int wy0=(y&1)==0 ? 1 : 3,wy1=4-wy0;
-                int row=iy*w,row0=y0*w,row1=y1*w,outrow=y*VisualWidth;
+                int row0=y0*w,row1=y1*w,outrow=y*VisualWidth;
                 for(int x=0;x<VisualWidth;x++)
                 {
                     int ix=x/2;
-                    int cell=row+ix;
                     int x0=(x&1)==0 ? (ix+w-1)%w : ix;
                     int x1=(x&1)==0 ? ix : (ix+1)%w;
                     int wx0=(x&1)==0 ? 1 : 3,wx1=4-wx0;
                     int aa=wx0*wy0,bb=wx1*wy0,cc=wx0*wy1,dd=wx1*wy1;
-                    Color32 a=sourcePixels[row0+x0],b=sourcePixels[row0+x1],
-                            c=sourcePixels[row1+x0],d=sourcePixels[row1+x1];
-                    c=new Color32((byte)((aa*a.r+bb*b.r+cc*c.r+dd*d.r+8)/16),
-                        (byte)((aa*a.g+bb*b.g+cc*c.g+dd*d.g+8)/16),
-                        (byte)((aa*a.b+bb*b.b+cc*c.b+dd*d.b+8)/16),255);
-                    byte team=owners==null?(byte)0:owners[cell];
-                    if(team>0 && team<teamColors.Length)
+                    int i00=row0+x0,i10=row0+x1,i01=row1+x0,i11=row1+x1;
+                    byte uniform=uniformOwner[i00];
+                    if(uniform!=255 && uniformOwner[i10]==uniform &&
+                       uniformOwner[i01]==uniform && uniformOwner[i11]==uniform)
                     {
-                        bool edge=(x&1)==0?owners[row+(ix+w-1)%w]!=team:
-                            owners[row+(ix+1)%w]!=team;
-                        if((y&1)==0)edge|=iy>0&&owners[cell-w]!=team;
-                        else edge|=iy<h-1&&owners[cell+w]!=team;
-                        if(edge)c=new Color32((byte)((3*c.r+255+2)/4),
-                            (byte)((3*c.g+255+2)/4),(byte)((3*c.b+255+2)/4),255);
+                        Color32 a=sourcePixels[i00],b=sourcePixels[i10],
+                                c=sourcePixels[i01],d=sourcePixels[i11];
+                        pixels[outrow+x]=new Color32(
+                            (byte)((aa*a.r+bb*b.r+cc*c.r+dd*d.r+8)/16),
+                            (byte)((aa*a.g+bb*b.g+cc*c.g+dd*d.g+8)/16),
+                            (byte)((aa*a.b+bb*b.b+cc*c.b+dd*d.b+8)/16),255);
+                        continue;
                     }
-                    pixels[outrow+x]=c;
+                    int p00=i00*5,p10=i10*5,p01=i01*5,p11=i11*5;
+                    int best=-1,second=-1,bestScore=-1,secondScore=-1;
+                    for(int team=0;team<5;team++)
+                    {
+                        int score=aa*ownerWeights[p00+team]+bb*ownerWeights[p10+team]+
+                            cc*ownerWeights[p01+team]+dd*ownerWeights[p11+team];
+                        if(score>bestScore)
+                        {secondScore=bestScore;second=best;bestScore=score;best=team;}
+                        else if(score>secondScore)
+                        {secondScore=score;second=team;}
+                    }
+                    int gap=bestScore-secondScore;
+                    int mix=secondScore>0?Mathf.Clamp((160-gap)*128/160,0,128):0;
+                    int cell=iy*w+ix;
+                    Color32 first=best==0?unpainted[cell]:Tone(teamColors[best],reliefTone[cell]);
+                    Color32 other=second==0?unpainted[cell]:Tone(teamColors[second],reliefTone[cell]);
+                    int r=(first.r*(256-mix)+other.r*mix+128)/256;
+                    int g=(first.g*(256-mix)+other.g*mix+128)/256;
+                    int b2=(first.b*(256-mix)+other.b*mix+128)/256;
+                    if(gap<176 && (best>0||second>0))
+                    {
+                        int rim=(176-gap)*96/176;
+                        r=(r*(256-rim)+255*rim+128)/256;
+                        g=(g*(256-rim)+255*rim+128)/256;
+                        b2=(b2*(256-rim)+255*rim+128)/256;
+                    }
+                    pixels[outrow+x]=new Color32((byte)r,(byte)g,(byte)b2,255);
                 }
             }
             MapTexture.SetPixels32(pixels);

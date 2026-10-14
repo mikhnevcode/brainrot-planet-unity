@@ -1,0 +1,24 @@
+Brainrot Planet 0.7.9 rounded-paint test - 2026-10-14
+
+Reason: 0.7.8 made the territory edge clearer but revealed square ownership
+cells at corners on the phone. This revision removes that cell-edge rim. The
+rendering uses weighted neighboring ownership to round the visual contour;
+interior pixels retain the fast color path. Capture still uses the original
+256x128 ownership grid. Network protocol 5 and the server are unchanged.
+
+Unity 6000.2.7f2 Android build:
+- PLANET_PAINT_EDGE_SMOKE_PASS contour=true seamContinuous=true gridUnchanged=true
+- Other build smoke checks passed; MATCH_BUILD_PASS; UnityExit=0.
+
+RMX3151 E6ZTMFVCEA895HAA:
+- Installed over 0.7.8 without clearing player data.
+- Visual comparison of the same offline QA capture: rectangular steps in
+  the painted region are rounded; the field and edge remain distinguishable.
+- Five consecutive trail cuts, home respawns, territory win, replay and
+  progress preservation passed: RESPAWN_QA_PASS.
+- Final observed PAINT_VISUAL_UPDATE samples: 4.31-9.85 ms. A full-frame
+  rate or worst-case fragmented-map performance claim is not made.
+- Temporary .respawn-qa marker removed; private keys untouched.
+
+Device screenshot: calling task outputs/paint079/phone1/respawn-qa/after-fifth-hit.png.
+Visual-only test APK, not a store release. WSS match was not repeated here.
