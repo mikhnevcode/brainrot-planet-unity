@@ -12,6 +12,12 @@ from pathlib import Path
 from websockets.asyncio.client import connect
 
 
+def dotnet_string(value):
+    encoded = value.encode("utf-8")
+    assert len(encoded) < 128
+    return bytes((len(encoded),)) + encoded
+
+
 async def main():
     auth_key = os.environ.get("BRAINROT_QA_KEY")
     if not auth_key:
@@ -23,7 +29,8 @@ async def main():
     async def peer(index):
         async with connect(sys.argv[1], additional_headers={"X-Brainrot-Test-Key": auth_key},
                            max_size=196608, compression=None, proxy=None) as ws:
-            await ws.send(struct.pack("<BiB", 1, 8, index) + b"\0")
+            await ws.send(struct.pack("<BiB", 1, 9, index) + b"\0" +
+                          dotnet_string("QA-%d" % index))
             epoch, sequence = 0, 0
             began = time.monotonic()
 
@@ -42,7 +49,7 @@ async def main():
                     if packet[0] == 3:
                         epoch, teams[index] = struct.unpack_from("<IB", packet, 1)
                         planets[index] = struct.unpack_from("<Bi", packet, 7)
-                        assert 0 <= planets[index][0] <= 2 and planets[index][1] > 0
+                        assert 0 <= planets[index][0] < 10 and planets[index][1] > 0
                     elif packet[0] == 5:
                         received_epoch, = struct.unpack_from("<I", packet, 1)
                         assert received_epoch == epoch and epoch > 0

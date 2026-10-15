@@ -21,11 +21,12 @@ The authoritative server owns movement, jumps, hero powers, collision, capture,
 match result, and replay. Clients send input at 20 Hz and receive snapshots at
 10 Hz. No account, purchase, or advertising data goes through this gateway.
 
-The v0.7.18 polar-paint test uses match protocol 8 and the same 6.2-second
-deployment flight. Each map derives its collision relief from the shared planet
-ID and seed, and both latitude-grid poles are single logical caps. Do not mix
-protocol-7 workers/clients with this topology build. Earlier test rooms stay on
-their separate gateways.
+The v0.7.24 player-records test uses match protocol 9. The guest nickname is
+validated by the authoritative worker and sent to every participant with the
+four-player starting roster. Each map derives its collision relief from the
+shared planet ID and seed, and both latitude-grid poles are single logical caps.
+Do not mix protocol-8 workers/clients with this build. Earlier test rooms stay
+on their separate gateways.
 
 ## Build and isolated hosting
 

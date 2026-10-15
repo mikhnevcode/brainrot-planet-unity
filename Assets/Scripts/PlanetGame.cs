@@ -83,6 +83,7 @@ namespace BrainrotPlanet
         private void Awake()
         {
             Debug.Log("BRAINROT_BOOT_GAME_AWAKE");
+            SetupRecords();
             SetupNetwork();
             SetupWardrobe();
             SetupStore();
@@ -147,6 +148,7 @@ namespace BrainrotPlanet
         public void StartGame()
         {
             PrepareBattlePlanet();
+            PrepareMatchNames();
             SetPaused(false);
             capturesThisMatch=0;captureStreak=0;bestCapture=0f;finishReason="ВРЕМЯ ВЫШЛО";
             tutorialStep=0;
@@ -755,13 +757,7 @@ namespace BrainrotPlanet
             if(planet!=null)foreach(var renderer in planet.GetComponentsInChildren<Renderer>())renderer.enabled=false;
             GameSound.Play(winningTeam==LocalTeam?GameCue.Win:GameCue.Lose);
             if(!DedicatedMatchServer&&!isWardrobeQa)
-            {
-            float record=PlayerPrefs.GetFloat("BrainrotBestArea",0f);
-            newRecord=scores[LocalTeam]>record+.01f;
-            if(newRecord)PlayerPrefs.SetFloat("BrainrotBestArea",scores[LocalTeam]);
-            if(winningTeam==LocalTeam)PlayerPrefs.SetInt("BrainrotWins",PlayerPrefs.GetInt("BrainrotWins",0)+1);
-            PlayerPrefs.Save();
-            }
+                RecordLocalResult(winningTeam);
             State=MatchState.End;
             victoryReplayTimer=2.90f;
             if(victoryActor!=null)
@@ -991,6 +987,7 @@ namespace BrainrotPlanet
             float logicalW=Screen.width/guiScale,logicalH=Screen.height/guiScale;
             var old=GUI.matrix;
             GUI.matrix=Matrix4x4.Scale(new Vector3(guiScale,guiScale,1f));
+            if(statisticsOpen){DrawStatistics(logicalW,logicalH);GUI.matrix=old;return;}
             if(shopOpen && State==MatchState.Menu){DrawShop(logicalW,logicalH);GUI.matrix=old;return;}
             if(wardrobeOpen && State==MatchState.Menu){DrawWardrobe(logicalW,logicalH);GUI.matrix=old;return;}
             if(networkPanel && State==MatchState.Menu){DrawNetworkPanel(logicalW,logicalH);GUI.matrix=old;return;}

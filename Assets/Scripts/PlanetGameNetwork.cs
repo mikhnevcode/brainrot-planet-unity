@@ -40,6 +40,8 @@ namespace BrainrotPlanet
         {
             foreach (string arg in Environment.GetCommandLineArgs())
                 if (arg == "-brainrot-server") DedicatedMatchServer = true;
+            if(DedicatedMatchServer)
+                for(int team=1;team<=4;team++)networkNames[team]=PlayerRecords.BotName(team);
             var config = Resources.Load<TextAsset>("MatchEndpoint");
             if (config != null) networkAddress = config.text.Trim();
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
@@ -63,6 +65,7 @@ namespace BrainrotPlanet
             for (int i = 1; i <= 4; i++) { participants[i]?.peer.Dispose(); participants[i] = null; }
             LocalTeam = 1; helloSent = false; inputButtons = 0; networkEpoch = 0;
             networkRoomCode = "";
+            for(int team=1;team<=4;team++)networkNames[team]=team==1?playerNickname:PlayerRecords.BotName(team);
         }
         private void ConnectMatch(MatchJoinMode mode = MatchJoinMode.Quick)
         {
@@ -168,7 +171,7 @@ namespace BrainrotPlanet
             if (matchConnection.Connected && !helloSent)
             {
                 helloSent = true;
-                matchConnection.Send(MatchProtocol.Packet(MatchProtocol.Hello, w => { w.Write(MatchProtocol.Version); w.Write((byte)selectedHero); w.Write(ChosenSkinReference()); }));
+                matchConnection.Send(MatchProtocol.Packet(MatchProtocol.Hello, w => { w.Write(MatchProtocol.Version); w.Write((byte)selectedHero); w.Write(ChosenSkinReference()); w.Write(playerNickname); }));
             }
             byte receivedKind=0;
             int receivedLength=0;
@@ -205,8 +208,9 @@ namespace BrainrotPlanet
                 if (r.ReadInt32() != MatchProtocol.Version) throw new InvalidDataException("Protocol mismatch");
                 int hero = r.ReadByte(); if (hero >= characters.Length) throw new InvalidDataException("Invalid hero");
                 string skin=r.ReadString();if(!SkinCatalog.ValidReference(skin))throw new InvalidDataException("Invalid cosmetic reference");
-                MatchProtocol.End(r); networkHeroes[team] = hero; networkSkins[team]=skin; p.joined = true;
-                Debug.Log("MATCH_PEER_JOINED team=" + team + " hero=" + hero); return;
+                string nickname=r.ReadString();if(!PlayerRecords.ValidNickname(nickname))throw new InvalidDataException("Invalid nickname");
+                MatchProtocol.End(r); networkHeroes[team] = hero; networkSkins[team]=skin; networkNames[team]=nickname;p.joined = true;
+                Debug.Log("MATCH_PEER_JOINED team=" + team + " hero=" + hero+" nicknameLength="+nickname.Length); return;
             }
             if (kind != MatchProtocol.Input || !p.joined) throw new InvalidDataException("Unexpected command");
             uint epoch = r.ReadUInt32(), sequence = r.ReadUInt32();
@@ -233,7 +237,7 @@ namespace BrainrotPlanet
             StartGame();
             for (int team = 1; team <= 4; team++) if (participants[team]?.joined == true)
                 participants[team].peer.Send(MatchProtocol.Packet(MatchProtocol.Start, w =>
-                { w.Write(networkEpoch); w.Write((byte)team); w.Write((byte)chosenDifficulty); MatchProtocol.WritePlanet(w,battlePlanet,planetSeed); for (int i=1;i<=4;i++) w.Write((byte)networkHeroes[i]); for(int i=1;i<=4;i++)w.Write(networkSkins[i]); }));
+                { w.Write(networkEpoch); w.Write((byte)team); w.Write((byte)chosenDifficulty); MatchProtocol.WritePlanet(w,battlePlanet,planetSeed); for (int i=1;i<=4;i++) w.Write((byte)networkHeroes[i]); for(int i=1;i<=4;i++)w.Write(networkSkins[i]); for(int i=1;i<=4;i++)w.Write(networkNames[i]); }));
             nextSnapshot = Time.unscaledTime;
             Debug.Log("MATCH_SERVER_STARTED epoch=" + networkEpoch);
         }

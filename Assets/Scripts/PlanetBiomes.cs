@@ -50,6 +50,12 @@ namespace BrainrotPlanet
         public string Hint=>Hints[(int)Kind];
         public Color Sky=>Skies[(int)Kind];
         public Color Accent=>Accents[(int)Kind];
+        public static string TitleOf(BattlePlanet kind)
+        {
+            int index=(int)kind;
+            if(index<0||index>=Count)throw new ArgumentOutOfRangeException(nameof(kind));
+            return Titles[index];
+        }
         public static Color OrbitAccent(int planet)=>Accents[planet];
         public bool HasFoliage=>Kind==BattlePlanet.Tropical||Kind==BattlePlanet.Oceanic||Kind==BattlePlanet.Candy;
         public bool HasWind=>Kind==BattlePlanet.Desert||Kind==BattlePlanet.Storm||Kind==BattlePlanet.Amber;

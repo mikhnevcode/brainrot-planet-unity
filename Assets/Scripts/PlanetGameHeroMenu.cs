@@ -100,7 +100,10 @@ namespace BrainrotPlanet
             Plate(new Rect(0,0,w,h),new Color(.025f,.035f,.095f));
             DrawGlow(new Rect(-100,top-95,330,330),new Color(color.r,color.g,color.b,.35f));
             DrawGlow(new Rect(w-170,h-310,330,330),new Color(accent.r,accent.g,accent.b,.18f));
-            GUI.Label(new Rect(16,top,w-144,36),"BRAINROT PLANET.IO",compactHeroTitle);
+            GUI.Label(new Rect(16,top,w-144,28),"BRAINROT PLANET.IO",compactHeroTitle);
+            GUIStyle profileName=new GUIStyle(captionStyle){alignment=TextAnchor.MiddleLeft,fontStyle=FontStyle.Bold};
+            profileName.normal.textColor=accent;
+            GUI.Label(new Rect(18,top+27,w-150,18),playerNickname,profileName);
             int originalFont=clearButtonStyle.fontSize;clearButtonStyle.fontSize=12;
             bool openSettings=FlatButton(new Rect(w-122,top+1,104,34),"НАСТРОЙКИ",new Color(.18f,.22f,.36f));
             clearButtonStyle.fontSize=originalFont;
@@ -147,19 +150,23 @@ namespace BrainrotPlanet
             Plate(new Rect(0,0,w,h),new Color(.025f,.035f,.095f));
             DrawGlow(new Rect(-70,top+15,330,330),new Color(.25f,.4f,1f,.22f));
             GUI.Label(new Rect(20,top+10,w-40,40),"НАСТРОЙКИ",headerStyle);
-            GUI.Label(new Rect(28,top+77,w-56,28),"СЛОЖНОСТЬ БОТОВ",smallStyle);
+            GUI.Label(new Rect(28,top+66,w-56,24),"ИГРОВОЙ НИК · ВИДЕН В СЕТЕВОМ МАТЧЕ",smallStyle);
+            nicknameDraft=GUI.TextField(new Rect(27,top+96,w-168,43),nicknameDraft,PlayerRecords.MaxNicknameLength);
+            if(FlatButton(new Rect(w-132,top+96,105,43),"ГОТОВО",new Color(.16f,.42f,.48f)))SaveNicknameDraft();
+            GUI.Label(new Rect(28,top+169,w-56,28),"СЛОЖНОСТЬ БОТОВ",smallStyle);
             float width=(w-68)/3;
             for(int i=0;i<3;i++)
             {
-                Rect r=new Rect(26+i*(width+8),top+118,width,48);
+                Rect r=new Rect(26+i*(width+8),top+207,width,48);
                 bool picked=(int)chosenDifficulty==i;
                 if(picked)Rounded(new Rect(r.x-3,r.y-3,r.width+6,r.height+6),HeroAccents[selectedHero]);
                 if(FlatButton(r,DifficultyLabels[i],picked?DifficultyColors[i]:Color.Lerp(new Color(.08f,.10f,.20f),DifficultyColors[i],.27f)))
                 {chosenDifficulty=(AiDifficulty)i;PlayerPrefs.SetInt("BrainrotAiDifficulty",i);PlayerPrefs.Save();GameSound.Play(GameCue.Click);Debug.Log("AI_DIFFICULTY_SELECTED level="+chosenDifficulty);}
             }
-            GUI.Label(new Rect(28,top+180,w-56,44),"Влияет только на игру с ботами. Сетевой матч запускается с главного экрана.",captionStyle);
-            if(FlatButton(new Rect(26,top+254,w-52,52),"ЗВУК: "+(GameSound.Enabled?"ВКЛ":"ВЫКЛ"),new Color(.16f,.27f,.42f)))GameSound.SetEnabled(!GameSound.Enabled);
-            if(FlatButton(new Rect(26,top+320,w-52,52),"ВИБРАЦИЯ: "+(GameSound.Haptics?"ВКЛ":"ВЫКЛ"),new Color(.16f,.27f,.42f)))GameSound.SetHaptics(!GameSound.Haptics);
+            GUI.Label(new Rect(28,top+264,w-56,37),"Влияет только на игру с ботами. Сетевой матч запускается с главного экрана.",captionStyle);
+            if(FlatButton(new Rect(26,top+314,w-52,46),"ЗВУК: "+(GameSound.Enabled?"ВКЛ":"ВЫКЛ"),new Color(.16f,.27f,.42f)))GameSound.SetEnabled(!GameSound.Enabled);
+            if(FlatButton(new Rect(26,top+371,w-52,46),"ВИБРАЦИЯ: "+(GameSound.Haptics?"ВКЛ":"ВЫКЛ"),new Color(.16f,.27f,.42f)))GameSound.SetHaptics(!GameSound.Haptics);
+            if(FlatButton(new Rect(26,top+428,w-52,49),"РЕКОРДЫ И ИСТОРИЯ",new Color(.30f,.20f,.50f))){statisticsScroll=Vector2.zero;statisticsOpen=true;}
             if(FlatButton(new Rect(26,h-Mathf.Max(20,Screen.safeArea.yMin/guiScale+8)-58,w-52,52),"НАЗАД К ГЕРОЯМ",new Color(.18f,.20f,.33f)))settingsOpen=false;
         }
     }

@@ -1,0 +1,17 @@
+Player records and nicknames test 0.7.24 / protocol 9
+
+Dedicated room deployment:
+  /home/user/brainrot-match-test/player-records0724/server/BrainrotMatchServer.x86_64
+  /home/user/brainrot-match-test/player-records0724/runtime/gateway.log
+  /home/user/brainrot-match-test/player-records0724/runtime/tunnel.log
+  worker loopback ports start at 28500; room gateway loopback port 28580
+
+Temporary Android test endpoint:
+  wss://summaries-rouge-cowboy-receivers.trycloudflare.com/match
+
+Protocol 9 adds one validated nickname to Hello and four roster nicknames to
+Start. Do not redirect protocol-8 clients to this deployment. The v0.7.24
+client stores match history locally and does not upload records to the server.
+
+Verified with Server/room_match_smoke.py: two quick peers and two private-room
+peers received matching authoritative snapshots in isolated rooms.

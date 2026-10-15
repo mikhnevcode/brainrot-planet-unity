@@ -142,7 +142,7 @@ namespace BrainrotPlanet
             }
             GUI.Label(new Rect(32,top+8,w-64,22),"КАК ИГРАТЬ ЭТИМ ГЕРОЕМ",heroSkillStyle);
             GUI.Label(new Rect(32,top+32,w-64,52),SkillHelp[selectedHero],smallStyle);
-            GUI.Label(new Rect(32,top+91,w-64,24),"РЕКОРД  "+PlayerPrefs.GetFloat("BrainrotBestArea",0).ToString("F1")+"%   •   ПОБЕДЫ  "+PlayerPrefs.GetInt("BrainrotWins",0),captionStyle);
+            GUI.Label(new Rect(32,top+91,w-64,24),"МАТЧИ  "+PlayerRecords.Matches+"   •   РЕКОРД  "+PlayerRecords.BestArea.ToString("F1")+"%   •   ПОБЕДЫ  "+PlayerRecords.Wins,captionStyle);
         }
         private void DrawPlayPolish(float w,float h)
         {
@@ -246,10 +246,14 @@ namespace BrainrotPlanet
             GUI.Label(new Rect(20,62,w-40,23),finishReason,captionStyle);
             GUI.Label(new Rect(20,94,w-40,27),"ТВОЯ ПЛАНЕТА  "+scores[LocalTeam].ToString("F1")+"%",headerStyle);
             GUI.Label(new Rect(20,123,w-40,23),"ЗАХВАТЫ "+capturesThisMatch+"   •   ЛУЧШИЙ +"+bestCapture.ToString("F2")+"%",captionStyle);
+            DrawResultRanking(w);
             Plate(new Rect(0,h-224,w,224),new Color(.035f,.05f,.12f,.93f));
-            GUI.Label(new Rect(20,h-215,w-40,27),newRecord?"НОВЫЙ ЛИЧНЫЙ РЕКОРД!":"РЕКОРД: "+PlayerPrefs.GetFloat("BrainrotBestArea",0).ToString("F1")+"%",smallStyle);
+            string recordLabel=newPlanetRecord?"НОВЫЙ РЕКОРД ЭТОЙ ПЛАНЕТЫ!":newRecord?"НОВЫЙ ОБЩИЙ РЕКОРД!":"РЕКОРД ПЛАНЕТЫ: "+PlayerRecords.PlanetBest(battlePlanet).ToString("F1")+"%";
+            GUI.Label(new Rect(20,h-215,w-40,27),recordLabel,smallStyle);
             if(FlatButton(new Rect(26,h-178,w-52,57),IsNetworkReplica&&networkMessage.Length>0?networkMessage:"ИГРАТЬ ЕЩЁ",new Color(.83f,.17f,.45f)))RequestReplay();
-            if(FlatButton(new Rect(26,h-107,w-52,52),"ВЫБРАТЬ ГЕРОЯ",new Color(.11f,.24f,.36f)))ReturnToMenu();
+            float half=(w-60)/2f;
+            if(FlatButton(new Rect(26,h-107,half,52),"ГЕРОИ",new Color(.11f,.24f,.36f)))ReturnToMenu();
+            if(FlatButton(new Rect(34+half,h-107,half,52),"РЕКОРДЫ",new Color(.30f,.20f,.50f))){statisticsScroll=Vector2.zero;statisticsOpen=true;}
         }
     }
 }

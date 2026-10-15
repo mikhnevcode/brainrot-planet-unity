@@ -12,13 +12,20 @@ import time
 from websockets.asyncio.client import connect
 
 
+def dotnet_string(value):
+    encoded = value.encode("utf-8")
+    assert len(encoded) < 128
+    return bytes((len(encoded),)) + encoded
+
+
 async def join(base, route):
     ws = await connect(base.rstrip("/") + route, max_size=196608,
                        compression=None, proxy=None)
     packet = await asyncio.wait_for(ws.recv(), 10)
     assert packet[0] == 7 and packet[1] == len(packet)-2, "missing RoomInfo"
     code = packet[2:].decode("ascii")
-    await ws.send(struct.pack("<BiB", 1, 8, 0) + b"\0")
+    await ws.send(struct.pack("<BiB", 1, 9, 0) + b"\0" +
+                  dotnet_string("QA-PLAYER"))
     return ws, code
 
 
