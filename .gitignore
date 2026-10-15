@@ -20,3 +20,4 @@ __pycache__/
 *.key
 *.blend1
 *.blend2
+.remotecommand-*.part
