@@ -43,6 +43,7 @@ def main():
           'storeUnitTests':18,'storeProducts':177,'freeTestSkinGrants':26,
           'remaining':['Art polish and bespoke outfits','Long-run FPS/thermal profiling','iOS build and device QA','Production billing, advertisements and release review are not part of this test build'],
           'sourceLogs':['original26-android-handoff-build.log','original26-device-cast.log','original26-device-store.log','original26-device-network.log']}
+    data['apkFile']='BrainrotPlanet-v0.8.0-original26-test-'+data['apkSha256'][:8]+'.apk'
     output=ROOT/'QA/v080/original26-report.json';output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('ORIGINAL26_QA_REPORT_READY sha256='+data['apkSha256'])
