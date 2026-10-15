@@ -11,7 +11,7 @@ namespace BrainrotPlanet
         {
             int originalHero=selectedHero,originalLast=lastBattlePlanet;
             bool originalQa=isWardrobeQa;
-            string folder=Path.Combine(Application.persistentDataPath,"planet-biome-qa");Directory.CreateDirectory(folder);
+            string folder=Path.Combine(Application.persistentDataPath,"planet-biome-qa-v0717");Directory.CreateDirectory(folder);
             float classicJump=0;
             try
             {
@@ -27,12 +27,13 @@ namespace BrainrotPlanet
                     float deadline=Time.unscaledTime+OrbitCamera.DescentDuration+4f;
                     while(IsLanding&&Time.unscaledTime<deadline)yield return null;
                     if(IsLanding||Player==null)throw new Exception("Planet descent failed");
+                    yield return CaptureBiomeView(Path.Combine(folder,"planet"+planet+"-overview.png"),true);
                     var body=Player.GetComponent<Rigidbody>();
-                    Vector3 area=Arena.Zones.Length>0?Arena.Zones[0]:new Vector3(.91f,.20f,.33f).normalized;
+                    Vector3 area=Arena.Zones.Length>0?Arena.Zones[0]:Arena.Terrain.Bowls[0].Direction;
                     body.position=PlanetSurface.Point(area,.73f);body.linearVelocity=Vector3.zero;
                     autoMoving=false;Player.Wish=Vector3.zero;
                     yield return new WaitForSecondsRealtime(.7f);
-                    yield return CaptureWardrobeQa(Path.Combine(folder,"planet"+planet+"-zone.png"));
+                    yield return CaptureBiomeView(Path.Combine(folder,"planet"+planet+"-zone.png"),false);
                     RequestJump();float peak=0;
                     float until=Time.unscaledTime+1.25f;
                     while(Time.unscaledTime<until)
@@ -52,6 +53,30 @@ namespace BrainrotPlanet
             finally
             {
                 ReturnToMenu();selectedHero=originalHero;lastBattlePlanet=originalLast;isWardrobeQa=originalQa;previewHero=-1;
+            }
+        }
+        private IEnumerator CaptureBiomeView(string path,bool overview)
+        {
+            var surface=worldRoot.GetComponentInChildren<PlanetSurface>();
+            Vector3 position=worldCamera.transform.position;Quaternion rotation=worldCamera.transform.rotation;
+            float fov=worldCamera.fieldOfView;bool follow=orbitCamera.enabled;
+            orbitCamera.enabled=false;surface.PaintTexture(null,null);
+            try
+            {
+                if(overview)
+                {
+                    Vector3 direction=(Player.SpawnDirection+Arena.Terrain.Mounds[0].Direction*.30f).normalized;
+                    PlanetBiomeRules.Basis(direction,out _,out Vector3 up);
+                    worldCamera.fieldOfView=43f;
+                    float distance=(PlanetMath.Radius+4)/(Mathf.Tan(21.5f*Mathf.Deg2Rad)*worldCamera.aspect*.88f);
+                    worldCamera.transform.SetPositionAndRotation(direction*distance,Quaternion.LookRotation(-direction,up));
+                }
+                yield return CaptureWardrobeQa(path);
+            }
+            finally
+            {
+                var owners=new byte[PlanetMath.CellCount];Territory.CopyOwners(owners);surface.PaintTexture(owners,null);
+                worldCamera.transform.SetPositionAndRotation(position,rotation);worldCamera.fieldOfView=fov;orbitCamera.enabled=follow;
             }
         }
     }

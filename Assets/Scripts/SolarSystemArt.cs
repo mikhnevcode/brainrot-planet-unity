@@ -27,7 +27,7 @@ namespace BrainrotPlanet
                 if(i==selected)continue; // The walkable world at origin is this orbit's destination.
                 var rules=new PlanetBiomeRules((BattlePlanet)i,13007+i*19);
                 Color a=rules.Ground(Vector3.up,.5f,.15f),b=rules.Ground(Vector3.up,.5f,.88f);
-                planets[i]=Sphere("Orbiting "+(BattlePlanet)i,Orbit(i,0),i==2?7:9+(i%4)*1.2f,a,b,i);
+                planets[i]=Sphere("Orbiting "+(BattlePlanet)i,Orbit(i,0),i==2?7:9+(i%4)*1.2f,a,b,i,rules);
                 if(i==6||i==8)
                 {
                     var belt=Ring("Planetary belt "+i,planets[i].position,16,accent,.6f);
@@ -98,18 +98,19 @@ namespace BrainrotPlanet
             go.AddComponent<PlanetGeneratedArt>().Own(null,material);
             return line;
         }
-        private Transform Sphere(string name,Vector3 position,float radius,Color a,Color b,int planet=-1)
+        private Transform Sphere(string name,Vector3 position,float radius,Color a,Color b,int planet=-1,PlanetBiomeRules rules=null)
         {
             const int lon=32,lat=18;
             var vertices=new Vector3[(lon+1)*(lat+1)];var normals=new Vector3[vertices.Length];var colors=new Color[vertices.Length];var triangles=new int[lon*lat*6];
             for(int y=0;y<=lat;y++)for(int x=0;x<=lon;x++)
             {
                 int k=y*(lon+1)+x;Vector3 n=PlanetMath.FromLonLat(x/(float)lon,y/(float)lat);
-                vertices[k]=n*radius;normals[k]=n;
+                float altitude=rules!=null?rules.Terrain.Elevation(n):0;
+                vertices[k]=n*radius*(1+altitude/PlanetMath.Radius);normals[k]=n;
                 float detail=Mathf.PerlinNoise(n.x*5+9,n.z*5+n.y*2+4);
                 if(planet==7||planet==8)detail=.5f+.5f*Mathf.Sin(n.y*27+n.x*3);
                 if(planet==3)detail=Mathf.Lerp(detail,1,Mathf.Abs(n.y)*Mathf.Abs(n.y));
-                colors[k]=Color.Lerp(a,b,Mathf.SmoothStep(0,1,(detail-.30f)*2.5f));
+                colors[k]=rules!=null?rules.Ground(n,altitude,detail):Color.Lerp(a,b,Mathf.SmoothStep(0,1,(detail-.30f)*2.5f));
             }
             int index=0;for(int y=0;y<lat;y++)for(int x=0;x<lon;x++)
             {int k=y*(lon+1)+x,c=k+lon+1;triangles[index++]=k;triangles[index++]=c;triangles[index++]=k+1;triangles[index++]=k+1;triangles[index++]=c;triangles[index++]=c+1;}

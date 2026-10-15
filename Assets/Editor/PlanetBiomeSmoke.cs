@@ -54,7 +54,6 @@ namespace BrainrotPlanet.Editor
             }
             foreach(BattlePlanet kind in Enum.GetValues(typeof(BattlePlanet)))
             {
-                if(kind==BattlePlanet.Moon)continue;
                 var go=new GameObject("Biome visual regression");
                 try
                 {

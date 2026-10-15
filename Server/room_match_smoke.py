@@ -18,7 +18,7 @@ async def join(base, route):
     packet = await asyncio.wait_for(ws.recv(), 10)
     assert packet[0] == 7 and packet[1] == len(packet)-2, "missing RoomInfo"
     code = packet[2:].decode("ascii")
-    await ws.send(struct.pack("<BiB", 1, 6, 0) + b"\0")
+    await ws.send(struct.pack("<BiB", 1, 7, 0) + b"\0")
     return ws, code
 
 

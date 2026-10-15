@@ -19,6 +19,9 @@ namespace BrainrotPlanet
         private bool hasStrokes;
         private float[] reliefTone;
         private PlanetBiomeRules biome;
+        private static PlanetSurface activeSurface;
+        public PlanetTerrainProfile Terrain {get;private set;}
+        private static PlanetTerrainProfile ActiveTerrain=>activeSurface!=null?activeSurface.Terrain:null;
         private readonly Color32[] teamColors = {
             new Color32(0,0,0,0),new Color32(255,78,169,255),
             new Color32(48,174,255,255),new Color32(255,174,57,255),
@@ -49,15 +52,16 @@ namespace BrainrotPlanet
         private static readonly float[] craterDepths={.72f,.65f,.82f,.58f,.52f,.76f};
         private static readonly float[] craterRims={.46f,.42f,.51f,.39f,.36f,.48f};
 
-        public static int HillCount=>hills.Length;
-        public static int CraterCount=>craters.Length;
-        public static Vector3 HillDirection(int index)=>hills[index];
-        public static float HillRadius(int index)=>hillRadii[index];
-        public static Vector3 CraterDirection(int index)=>craters[index];
-        public static float CraterRadius(int index)=>craterRadii[index];
+        public static int HillCount=>ActiveTerrain?.Mounds.Length??hills.Length;
+        public static int CraterCount=>ActiveTerrain?.Bowls.Length??craters.Length;
+        public static Vector3 HillDirection(int index)=>ActiveTerrain!=null?ActiveTerrain.Mounds[index].Direction:hills[index];
+        public static float HillRadius(int index)=>ActiveTerrain!=null?ActiveTerrain.Mounds[index].Radius:hillRadii[index];
+        public static Vector3 CraterDirection(int index)=>ActiveTerrain!=null?ActiveTerrain.Bowls[index].Direction:craters[index];
+        public static float CraterRadius(int index)=>ActiveTerrain!=null?ActiveTerrain.Bowls[index].Radius:craterRadii[index];
         public static bool IsHillArea(Vector3 direction)
         {
             Vector3 n=direction.normalized;
+            if(ActiveTerrain!=null)return ActiveTerrain.IsHill(n);
             for(int i=0;i<hills.Length;i++)
                 if(Vector3.Dot(n,hills[i])>=Mathf.Cos(hillRadii[i]*1.05f))
                     return true;
@@ -74,6 +78,7 @@ namespace BrainrotPlanet
         public static float Elevation(Vector3 direction)
         {
             Vector3 n = direction.normalized;
+            if(ActiveTerrain!=null)return ActiveTerrain.Elevation(n);
             float a=Mathf.PerlinNoise(n.x*5.2f+14.8f,n.z*5.2f+n.y*1.7f+3.1f);
             float b=Mathf.PerlinNoise(n.y*11f+9.2f,n.x*11f+n.z*4.3f+7.3f);
             float c=Mathf.PerlinNoise(n.z*23f+5.4f,n.y*19f+n.x*7f+11.7f);
@@ -102,6 +107,8 @@ namespace BrainrotPlanet
             Vector3 n = direction.normalized;
             return n * (PlanetMath.Radius + Elevation(n) + extra);
         }
+        public static Vector3 Point(Vector3 direction,float extra,PlanetTerrainProfile terrain)
+        {Vector3 n=direction.normalized;return n*(PlanetMath.Radius+terrain.Elevation(n)+extra);}
         public void AddCapturedStroke(int team,
             System.Collections.Generic.IReadOnlyList<Vector3> path,Vector3 closure)
         {
@@ -183,6 +190,10 @@ namespace BrainrotPlanet
         public void Build(PlanetBiomeRules rules=null)
         {
             biome=rules;
+            Terrain=rules?.Terrain;
+            // One arena per process. Destruction of an older replay surface must
+            // never unbind the newer one from terrain-following actors and paint.
+            activeSurface=this;
             gameObject.layer = 8;
             const int lon = 224, lat = 112;
             var v = new Vector3[(lon + 1) * (lat + 1)];
@@ -228,11 +239,11 @@ namespace BrainrotPlanet
             var mat=shader!=null?new Material(shader):Colors.New(Color.white);
             mat.name="Planet paint / fine continuous grain";
             mat.SetTexture("_MainTex",MapTexture);
-            if(shader!=null)mat.SetTexture("_DetailTex",Resources.Load<Texture2D>("PlanetGrain064"));
+            if(shader!=null)mat.SetTexture("_DetailTex",rules!=null?PlanetBiomeGrain.Get(rules.Kind):Resources.Load<Texture2D>("PlanetGrain064"));
             gameObject.AddComponent<MeshRenderer>().sharedMaterial=mat;
             PaintTexture(null,null);
             Debug.Log("PLANET_RELIEF_READY vertices="+v.Length+
-                " hills="+hills.Length+" craters="+craters.Length+
+                " hills="+HillCount+" craters="+CraterCount+
                 " primitiveProps=0");
         }
         private static void WeldVisualNormals(Mesh mesh,int lon,int lat)
@@ -261,6 +272,7 @@ namespace BrainrotPlanet
         }
         private void OnDestroy()
         {
+            if(activeSurface==this)activeSurface=null;
             // Runtime-generated resources are not assets owned by the scene.
             // Release them explicitly when replay destroys the old planet.
             if(MapTexture!=null)Destroy(MapTexture);
@@ -289,6 +301,7 @@ namespace BrainrotPlanet
         }
         private static float ReliefTone(Vector3 n,float noise)
         {
+            if(ActiveTerrain!=null)return ActiveTerrain.ReliefTone(n,noise);
             float tone=.96f+(noise-.5f)*.14f;
             for(int i=0;i<hills.Length;i++)
             {

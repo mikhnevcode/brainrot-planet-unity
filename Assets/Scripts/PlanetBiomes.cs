@@ -11,6 +11,7 @@ namespace BrainrotPlanet
         public readonly BattlePlanet Kind;
         public readonly int Seed;
         public readonly Vector3[] Zones;
+        public readonly PlanetTerrainProfile Terrain;
         public const float ZoneRadius=.135f;
         public const float GrassDuration=.9f;
         public const int Count=10;
@@ -20,16 +21,16 @@ namespace BrainrotPlanet
             "КРИСТАЛЬНАЯ ПЛАНЕТА","ГРОЗОВАЯ ПЛАНЕТА","ЯНТАРНАЯ ПЛАНЕТА",
             "КАРАМЕЛЬНАЯ ПЛАНЕТА"};
         private static readonly string[] Hints={
-            "Трава ненадолго замедляет. Перепрыгивай островки!",
-            "Попутный ветер ускоряет. Следуй светлым стрелкам!",
-            "Низкая гравитация: прыжки выше, полёт дольше.",
-            "Ледяные пятна слегка ускоряют движение.",
-            "Тёплые потоки ускоряют движение и делают прыжки выше.",
-            "Мелководье замедляет лишь на короткое время.",
-            "Кристальные дорожки ускоряют; прыжки выше обычного.",
-            "Попутные грозовые потоки ускоряют движение.",
-            "Следуй янтарным потокам для ускорения.",
-            "Пружинные поля ускоряют; прыгай выше!"};
+            "Пальмы и луговые холмы. Трава ненадолго замедляет.",
+            "Песчаные холмы. Попутный ветер ускоряет движение.",
+            "Ударные кратеры. Прыжки выше, полёт дольше.",
+            "Снежные купола. Ледяные пятна слегка ускоряют.",
+            "Пологие кальдеры. Тёплые потоки ускоряют и усиливают прыжки.",
+            "Песчаные островки. Мелководье замедляет ненадолго.",
+            "Кристальные склоны. Разгоняйся и прыгай выше.",
+            "Грозовые прожилки. Попутные потоки ускоряют.",
+            "Янтарные холмы и золотистые камни. Следуй ветру.",
+            "Глазурные купола. Пружинные поля ускоряют и усиливают прыжки."};
         private static readonly Color[] Skies={
             new Color(.045f,.16f,.22f),new Color(.27f,.12f,.14f),new Color(.055f,.06f,.18f),
             new Color(.07f,.18f,.28f),new Color(.24f,.075f,.09f),new Color(.035f,.14f,.24f),
@@ -57,7 +58,7 @@ namespace BrainrotPlanet
         {if((int)kind>=Count||seed<=0)throw new InvalidDataException("Invalid battle planet");}
         public PlanetBiomeRules(BattlePlanet kind,int seed)
         {
-            Validate(kind,seed);Kind=kind;Seed=seed;
+            Validate(kind,seed);Kind=kind;Seed=seed;Terrain=new PlanetTerrainProfile(kind,seed);
             if(kind==BattlePlanet.Moon){Zones=Array.Empty<Vector3>();return;}
             var candidates=new System.Collections.Generic.List<Vector3>();
             uint random=(uint)seed;
@@ -132,7 +133,7 @@ namespace BrainrotPlanet
             Color ground=Color.Lerp(dark,light,noise);
             if(ZoneAt(direction,out float weight)>=0)ground=Color.Lerp(ground,zone,weight*.50f);
             if(altitude>1.95f)ground=Color.Lerp(ground,light,.48f);
-            return ground;
+            return Terrain.ColorDetail(direction,altitude,ground);
         }
     }
     public sealed class PlanetZoneMotion

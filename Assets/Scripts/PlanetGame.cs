@@ -169,7 +169,7 @@ namespace BrainrotPlanet
             worldRoot=gameObjectRoot.transform;
             var globe=new GameObject("Spherical walkable planet");globe.transform.SetParent(worldRoot);
             var surface=globe.AddComponent<PlanetSurface>();surface.Build(Arena);
-            if(!DedicatedMatchServer&&Arena.Zones.Length>0)
+            if(!DedicatedMatchServer)
             {
                 var decor=new GameObject("Walk-through biome vegetation / wind");decor.transform.SetParent(globe.transform,false);
                 decor.AddComponent<PlanetBiomeDecor>().Build(Arena);

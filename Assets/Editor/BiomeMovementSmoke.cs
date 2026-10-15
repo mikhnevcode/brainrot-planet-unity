@@ -27,13 +27,23 @@ namespace BrainrotPlanet.Editor
                     typeof(PlanetActor).GetField("game",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(actor,director);actor.Active=true;
                     try
                     {
-                        for(int sample=0;sample<6;sample++)
+                        int zoneRoutes=rules.Zones.Length>0?6:0;
+                        int formRoutes=(rules.Terrain.Mounds.Length+rules.Terrain.Bowls.Length)*2;
+                        for(int sample=0;sample<zoneRoutes+formRoutes;sample++)
                         {
-                            Vector3 centre=kind==BattlePlanet.Moon?PlanetSurface.CraterDirection(sample):rules.Zones[sample];
+                            Vector3 centre;float radius=.17f;
+                            int bearing=0;
+                            if(sample<zoneRoutes)centre=rules.Zones[sample];
+                            else
+                            {
+                                int index=(sample-zoneRoutes)/2;bearing=(sample-zoneRoutes)%2;
+                                var form=index<rules.Terrain.Mounds.Length?rules.Terrain.Mounds[index]:rules.Terrain.Bowls[index-rules.Terrain.Mounds.Length];
+                                centre=form.Direction;radius=form.Radius*1.3f;
+                            }
                             PlanetBiomeRules.Basis(centre,out Vector3 east,out _);
-                            Vector3 axis=Vector3.Cross(centre,east).normalized;
-                            Vector3 start=Quaternion.AngleAxis(-.17f*Mathf.Rad2Deg,axis)*centre;
-                            Vector3 goal=Quaternion.AngleAxis(.17f*Mathf.Rad2Deg,axis)*centre;
+                            Vector3 axis=Quaternion.AngleAxis(bearing*90f,centre)*Vector3.Cross(centre,east).normalized;
+                            Vector3 start=Quaternion.AngleAxis(-radius*Mathf.Rad2Deg,axis)*centre;
+                            Vector3 goal=Quaternion.AngleAxis(radius*Mathf.Rad2Deg,axis)*centre;
                             body.position=PlanetSurface.Point(start,.73f);body.rotation=Quaternion.FromToRotation(Vector3.up,start);body.linearVelocity=Vector3.zero;
                             typeof(PlanetActor).GetField("lastDriveVelocity",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(actor,Vector3.zero);
                             Physics.SyncTransforms();float idle=0,maxIdle=0;Vector3 previous=start;

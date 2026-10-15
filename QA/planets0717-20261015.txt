@@ -1,0 +1,35 @@
+Brainrot Planet v0.7.17 detailed-biome verification
+Date: 2026-10-15
+
+Build
+- Android version: 0.7.17-biome-detail-test (versionCode 61, minSdk 26, targetSdk 36)
+- APK: Builds/Android/BrainrotPlanet-v0.7.17-biome-detail-test.apk
+- Bytes: 73689448
+- SHA-256: c0a32ccc38eb411ef12bf7ea75979c9daac7506111d173508d928faeefec1264
+- MATCH_BUILD_PASS (Unity 6000.2.7f2)
+
+Editor/build gates
+- PLANET_BIOME_SMOKE_PASS cases=7764 planets=10
+- PLANET_TERRAIN_SMOKE_PASS maps=10 probes=3909 worstCollider=0.00879097
+- BIOME_MOVEMENT_SMOKE_PASS routes=348 worstStationary=0
+- DEPLOYMENT_FLIGHT_SMOKE_PASS maps=10 immediate=true duration=6.2
+- HERO_MENU_SMOKE_PASS heroes=13 skins=65 views=2344
+- CAST_SKIN_SMOKE_PASS heroes=13 skins=65 sampledPoses=975
+- Store, paint edge/stroke, territory, outcome and actor collision gates passed.
+
+RMX2020 hardware validation (serial NBTK5TZTVC8T9TRG)
+- All 10 maps loaded, landed and jumped successfully.
+- Jump peaks by planet ID 0..9: 0.77, 0.77, 1.54, 0.75, 0.88, 0.72, 0.96, 0.90, 0.74, 1.00.
+- 41 screenshots captured; each map was visually reviewed at globe and close range.
+- FLIGHT_QA_PASS planets=10 heroes=13 immediate=true gliding=true upright=true.
+- MATCH_QA_PASS result_replay_offline.
+- Network gameplay sample ended at avgTotalFps=52.72; normal windows were about 54 FPS with p95=34 ms.
+- No Unity exception, missing-reference, index, or out-of-memory errors in the tested runs.
+- PlayerPrefs: 16 entries before and after; only four Unity session-metadata entries changed, no game setting/progress entries changed.
+- QA markers removed and the normal hero-selection menu restored.
+
+Network validation
+- Match protocol: 7 (seeded planet collision geometry must match client and worker).
+- ROOM_WSS_PASS for quick and private matchmaking.
+- ROOM_RESULT_SOAK_PASS endFrames=(229,229) maps=(0,1) holdSeconds=25.
+- Isolated v0.7.17 gateway/worker deployment; older test rooms were not changed.
