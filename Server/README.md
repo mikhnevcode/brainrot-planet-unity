@@ -21,12 +21,18 @@ The authoritative server owns movement, jumps, hero powers, collision, capture,
 match result, and replay. Clients send input at 20 Hz and receive snapshots at
 10 Hz. No account, purchase, or advertising data goes through this gateway.
 
-The v0.7.24 player-records test uses match protocol 9. The guest nickname is
+The v0.7.24 player-records test and v0.7.25 player-profile client use match
+protocol 9. The guest nickname is
 validated by the authoritative worker and sent to every participant with the
 four-player starting roster. Each map derives its collision relief from the
 shared planet ID and seed, and both latitude-grid poles are single logical caps.
 Do not mix protocol-8 workers/clients with this build. Earlier test rooms stay
 on their separate gateways.
+
+The v0.7.25 client adds one-time guest nickname onboarding, validation feedback
+and a visible nickname summary before matchmaking. It does not change packets,
+upload local records, or require a Google account, so the protocol-9 worker does
+not need to be redeployed.
 
 ## Build and isolated hosting
 

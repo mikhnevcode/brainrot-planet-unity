@@ -4,14 +4,15 @@ namespace BrainrotPlanet
 {
     public sealed partial class PlanetGame
     {
-        private string playerNickname="",nicknameDraft="";
+        private string playerNickname="",nicknameDraft="",nicknameStatus="";
         private readonly string[] networkNames={"","","","",""};
-        private bool statisticsOpen,newPlanetRecord;
+        private bool statisticsOpen,newPlanetRecord,nicknameSetupOpen;
         private Vector2 statisticsScroll;
 
         private void SetupRecords()
         {
             playerNickname=PlayerRecords.LoadNickname();nicknameDraft=playerNickname;
+            nicknameSetupOpen=!PlayerRecords.NicknameSetupComplete;
             for(int team=1;team<=4;team++)networkNames[team]=PlayerRecords.BotName(team);
             networkNames[1]=playerNickname;
         }
@@ -27,13 +28,47 @@ namespace BrainrotPlanet
             string value=networkNames[team];
             return string.IsNullOrEmpty(value)?PlayerRecords.BotName(team):value;
         }
-        private void SaveNicknameDraft()
+        private bool SaveNicknameDraft()
         {
-            playerNickname=PlayerRecords.SaveNickname(nicknameDraft);
-            nicknameDraft=playerNickname;
+            if(!PlayerRecords.TrySaveNickname(nicknameDraft,out string saved,out NicknameIssue issue))
+            {
+                nicknameStatus=PlayerRecords.NicknameIssueMessage(issue);
+                GameSound.Play(GameCue.Hit);
+                return false;
+            }
+            playerNickname=saved;nicknameDraft=playerNickname;
             if(!IsNetworkMatch)networkNames[1]=playerNickname;
+            nicknameStatus=PlayerRecords.NicknameIssueMessage(NicknameIssue.None);
             GameSound.Play(GameCue.Click);
             Debug.Log("PLAYER_NICKNAME_SAVED length="+playerNickname.Length);
+            return true;
+        }
+        private void AcceptGeneratedNickname()
+        {
+            PlayerRecords.AcceptGeneratedNickname();nicknameSetupOpen=false;nicknameStatus="";
+            GameSound.Play(GameCue.Click);
+            Debug.Log("PLAYER_NICKNAME_ACCEPTED generated=true");
+        }
+        private void DrawNicknameSetup(float w,float h)
+        {
+            InitPolishStyles();
+            float safeTop=Mathf.Max(8,(Screen.height-Screen.safeArea.yMax)/guiScale);
+            Color accent=HeroAccents[selectedHero];
+            Plate(new Rect(0,0,w,h),new Color(.025f,.035f,.095f));
+            DrawGlow(new Rect(-100,safeTop-50,350,350),new Color(accent.r,accent.g,accent.b,.24f));
+            float cardY=Mathf.Max(safeTop+58,h*.5f-210),cardH=360;
+            Rounded(new Rect(17,cardY,w-34,cardH),new Color(.055f,.075f,.16f,.98f));
+            GUI.Label(new Rect(35,cardY+24,w-70,42),"КАК ТЕБЯ НАЗЫВАТЬ?",headerStyle);
+            GUI.Label(new Rect(38,cardY+74,w-76,48),"Этот игровой ник увидят соперники. Настоящее имя и почта не нужны.",smallStyle);
+            GUI.SetNextControlName("NicknameSetupInput");
+            nicknameDraft=GUI.TextField(new Rect(36,cardY+137,w-72,49),nicknameDraft,PlayerRecords.MaxNicknameLength);
+            GUIStyle hint=new GUIStyle(captionStyle){alignment=TextAnchor.MiddleCenter};
+            hint.normal.textColor=nicknameStatus=="НИК СОХРАНЁН"?new Color(.45f,1f,.68f):new Color(1f,.66f,.48f);
+            GUI.Label(new Rect(32,cardY+190,w-64,24),nicknameStatus,hint);
+            if(FlatButton(new Rect(36,cardY+224,w-72,52),"СОХРАНИТЬ НИК",new Color(.13f,.51f,.58f))&&SaveNicknameDraft())
+                nicknameSetupOpen=false;
+            if(FlatButton(new Rect(36,cardY+291,w-72,43),"ПОКА ОСТАВИТЬ  "+playerNickname,new Color(.20f,.23f,.37f)))
+                AcceptGeneratedNickname();
         }
         private void RecordLocalResult(int winningTeam)
         {

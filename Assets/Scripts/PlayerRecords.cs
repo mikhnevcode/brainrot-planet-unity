@@ -1,8 +1,11 @@
 using System;
+using System.Text;
 using UnityEngine;
 
 namespace BrainrotPlanet
 {
+    public enum NicknameIssue { None, Empty, TooShort, TooLong, Reserved, Inappropriate }
+
     public readonly struct PlayerMatchRecord
     {
         public readonly BattlePlanet Planet;
@@ -22,14 +25,30 @@ namespace BrainrotPlanet
 
     public static class PlayerRecords
     {
-        public const int MaxNicknameLength=14,HistoryLimit=8;
+        public const int MinNicknameLength=2,MaxNicknameLength=14,HistoryLimit=8;
         private const string NicknameKey="BrainrotNickname";
+        private const string NicknameSetupKey="BrainrotNicknameSetup";
         private static readonly string[] BotNames={"","БОТ ИСКРА","БОТ ВИХРЬ","БОТ КОМЕТА","БОТ РАКЕТА"};
+        private static readonly string[] BlockedRoots={
+            "хуй","хуе","хуя","пизд","ебан","ебат","ебло","бляд","мудак","говно",
+            "fuck","fuk","fack","bitch","nigger","nigga"
+        };
+        private static readonly string[] BlockedWords={"сука","shit","cunt","whore"};
+
+        public static bool NicknameSetupComplete
+        {
+            get
+            {
+                if(PlayerPrefs.GetInt(NicknameSetupKey,0)!=0)return true;
+                string saved=PlayerPrefs.GetString(NicknameKey,"");
+                return saved.Length>0&&!LooksGeneratedNickname(saved);
+            }
+        }
 
         public static string LoadNickname()
         {
             string saved=PlayerPrefs.GetString(NicknameKey,"");
-            if(!string.IsNullOrEmpty(saved))return SanitizeNickname(saved);
+            if(ValidNickname(saved))return saved;
             uint hash=unchecked((uint)SystemInfo.deviceUniqueIdentifier.GetHashCode());
             string generated="ИГРОК "+(1000+hash%9000);
             PlayerPrefs.SetString(NicknameKey,generated);PlayerPrefs.Save();
@@ -37,10 +56,28 @@ namespace BrainrotPlanet
         }
         public static string SaveNickname(string value)
         {
-            string clean=SanitizeNickname(value);
-            PlayerPrefs.SetString(NicknameKey,clean);PlayerPrefs.Save();return clean;
+            return TrySaveNickname(value,out string clean,out _)?clean:LoadNickname();
+        }
+        public static bool TrySaveNickname(string value,out string clean,out NicknameIssue issue)
+        {
+            issue=ValidateNicknameInput(value,out clean);
+            if(issue!=NicknameIssue.None)return false;
+            PlayerPrefs.SetString(NicknameKey,clean);
+            PlayerPrefs.SetInt(NicknameSetupKey,1);
+            PlayerPrefs.Save();
+            return true;
+        }
+        public static void AcceptGeneratedNickname()
+        {
+            LoadNickname();
+            PlayerPrefs.SetInt(NicknameSetupKey,1);PlayerPrefs.Save();
         }
         public static string SanitizeNickname(string value)
+        {
+            string clean=FilterNickname(value);
+            return clean.Length>0?clean:"ИГРОК";
+        }
+        private static string FilterNickname(string value)
         {
             if(value==null)value="";
             char[] buffer=new char[Math.Min(value.Length,MaxNicknameLength)];
@@ -53,11 +90,73 @@ namespace BrainrotPlanet
                 if(char.IsWhiteSpace(c)&&count>0&&!space)
                 {buffer[count++]=' ';space=true;}
             }
-            string clean=new string(buffer,0,count).Trim();
-            return clean.Length>0?clean:"ИГРОК";
+            return new string(buffer,0,count).Trim();
+        }
+        public static NicknameIssue ValidateNicknameInput(string value,out string clean)
+        {
+            clean=FilterNickname(value);
+            if(string.IsNullOrWhiteSpace(value)||clean.Length==0)return NicknameIssue.Empty;
+            if(value.Length>MaxNicknameLength)return NicknameIssue.TooLong;
+            if(clean.Length<MinNicknameLength)return NicknameIssue.TooShort;
+            if(IsReservedNickname(clean))return NicknameIssue.Reserved;
+            if(ContainsBlockedLanguage(clean))return NicknameIssue.Inappropriate;
+            return NicknameIssue.None;
         }
         public static bool ValidNickname(string value)
-        {return !string.IsNullOrEmpty(value)&&value.Length<=MaxNicknameLength&&SanitizeNickname(value)==value;}
+        {
+            NicknameIssue issue=ValidateNicknameInput(value,out string clean);
+            return issue==NicknameIssue.None&&clean==value;
+        }
+        public static bool ValidPlayerLabel(string value)
+        {return IsOfficialBotName(value)||ValidNickname(value);}
+        public static string NicknameIssueMessage(NicknameIssue issue)
+        {
+            switch(issue)
+            {
+                case NicknameIssue.Empty:return "ВВЕДИТЕ ИГРОВОЙ НИК";
+                case NicknameIssue.TooShort:return "НИК ДОЛЖЕН БЫТЬ НЕ КОРОЧЕ 2 СИМВОЛОВ";
+                case NicknameIssue.TooLong:return "НИК ДОЛЖЕН БЫТЬ НЕ ДЛИННЕЕ 14 СИМВОЛОВ";
+                case NicknameIssue.Reserved:return "ЭТО ИМЯ ЗАРЕЗЕРВИРОВАНО ИГРОЙ";
+                case NicknameIssue.Inappropriate:return "ВЫБЕРИТЕ ДРУГОЙ ИГРОВОЙ НИК";
+                default:return "НИК СОХРАНЁН";
+            }
+        }
+        private static bool LooksGeneratedNickname(string value)
+        {
+            if(value==null||value.Length!=10||!value.StartsWith("ИГРОК ",StringComparison.Ordinal))return false;
+            for(int i=6;i<10;i++)if(!char.IsDigit(value[i]))return false;
+            return true;
+        }
+        private static bool IsOfficialBotName(string value)
+        {
+            for(int i=1;i<BotNames.Length;i++)if(value==BotNames[i])return true;
+            return false;
+        }
+        private static bool IsReservedNickname(string value)
+        {
+            string lower=value.Trim().ToLowerInvariant();
+            if(lower=="бот"||lower.StartsWith("бот ",StringComparison.Ordinal)||
+               lower=="bot"||lower.StartsWith("bot ",StringComparison.Ordinal))return true;
+            return lower=="server"||lower=="сервер"||lower=="admin"||lower=="админ"||
+                   lower=="moderator"||lower=="модератор";
+        }
+        private static bool ContainsBlockedLanguage(string value)
+        {
+            string lower=value.ToLowerInvariant().Replace('ё','е');
+            var compact=new StringBuilder(lower.Length);
+            foreach(char raw in lower)
+            {
+                char c=raw;
+                if(c=='0')c='o';else if(c=='1')c='i';else if(c=='3')c='e';
+                else if(c=='4')c='a';else if(c=='5')c='s';else if(c=='7')c='t';
+                if(char.IsLetterOrDigit(c))compact.Append(c);
+            }
+            string joined=compact.ToString();
+            foreach(string root in BlockedRoots)if(joined.Contains(root))return true;
+            string[] words=lower.Split(new[]{' ','_','-'},StringSplitOptions.RemoveEmptyEntries);
+            foreach(string word in words)foreach(string blocked in BlockedWords)if(word==blocked)return true;
+            return false;
+        }
         public static string BotName(int team)=>team>=1&&team<=4?BotNames[team]:"БОТ";
 
         public static int[] Ranking(float[] scores)

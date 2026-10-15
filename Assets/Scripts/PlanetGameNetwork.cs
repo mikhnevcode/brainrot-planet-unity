@@ -264,6 +264,9 @@ namespace BrainrotPlanet
             float top=Mathf.Max(18f,(Screen.height-Screen.safeArea.yMax)/guiScale+16f);
             GUI.Label(new Rect(20,top,w-40,50), "СЕТЕВОЙ МАТЧ", headerStyle);
             GUI.Label(new Rect(25,top+55,w-50,64), "До 4 игроков на одной планете.\nСвободные места займут боты.", smallStyle);
+            GUIStyle playerNameStyle=new GUIStyle(captionStyle){alignment=TextAnchor.MiddleLeft,fontStyle=FontStyle.Bold};
+            playerNameStyle.normal.textColor=HeroAccents[selectedHero];
+            GUI.Label(new Rect(25,top+113,w-50,24),"ВАШ НИК: "+playerNickname,playerNameStyle);
             if(matchConnection==null)
             {
                 if(FlatButton(new Rect(25,top+140,w-50,58),"БЫСТРЫЙ МАТЧ",new Color(.08f,.52f,.70f)))

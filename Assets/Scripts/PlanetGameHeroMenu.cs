@@ -107,7 +107,7 @@ namespace BrainrotPlanet
             int originalFont=clearButtonStyle.fontSize;clearButtonStyle.fontSize=12;
             bool openSettings=FlatButton(new Rect(w-122,top+1,104,34),"НАСТРОЙКИ",new Color(.18f,.22f,.36f));
             clearButtonStyle.fontSize=originalFont;
-            if(openSettings)settingsOpen=true;
+            if(openSettings){nicknameDraft=playerNickname;nicknameStatus="";settingsOpen=true;}
             Rect spotlight=new Rect(18,top+48,w-36,190);
             Rounded(new Rect(15,spotlight.y-3,w-30,196),color);
             Rounded(spotlight,new Color(.045f,.065f,.15f));
@@ -153,6 +153,9 @@ namespace BrainrotPlanet
             GUI.Label(new Rect(28,top+66,w-56,24),"ИГРОВОЙ НИК · ВИДЕН В СЕТЕВОМ МАТЧЕ",smallStyle);
             nicknameDraft=GUI.TextField(new Rect(27,top+96,w-168,43),nicknameDraft,PlayerRecords.MaxNicknameLength);
             if(FlatButton(new Rect(w-132,top+96,105,43),"ГОТОВО",new Color(.16f,.42f,.48f)))SaveNicknameDraft();
+            GUIStyle nicknameHint=new GUIStyle(captionStyle){alignment=TextAnchor.MiddleLeft};
+            nicknameHint.normal.textColor=nicknameStatus=="НИК СОХРАНЁН"?new Color(.45f,1f,.68f):new Color(1f,.66f,.48f);
+            GUI.Label(new Rect(29,top+142,w-58,22),nicknameStatus,nicknameHint);
             GUI.Label(new Rect(28,top+169,w-56,28),"СЛОЖНОСТЬ БОТОВ",smallStyle);
             float width=(w-68)/3;
             for(int i=0;i<3;i++)

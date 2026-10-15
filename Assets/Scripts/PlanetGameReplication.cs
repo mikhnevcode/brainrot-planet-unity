@@ -59,7 +59,7 @@ namespace BrainrotPlanet
                 for(int i=1;i<=4;i++)
                 { networkHeroes[i]=r.ReadByte(); if(networkHeroes[i]>=characters.Length)throw new InvalidDataException("Invalid hero"); }
                 for(int i=1;i<=4;i++){networkSkins[i]=r.ReadString();if(!SkinCatalog.ValidReference(networkSkins[i]))throw new InvalidDataException("Invalid cosmetic reference");}
-                for(int i=1;i<=4;i++){networkNames[i]=r.ReadString();if(!PlayerRecords.ValidNickname(networkNames[i]))throw new InvalidDataException("Invalid nickname");}
+                for(int i=1;i<=4;i++){networkNames[i]=r.ReadString();if(!PlayerRecords.ValidPlayerLabel(networkNames[i]))throw new InvalidDataException("Invalid nickname");}
                 MatchProtocol.End(r); networkEpoch=epoch; LocalTeam=team;
                 chosenDifficulty=(AiDifficulty)difficulty; selectedHero=networkHeroes[team];
                 battlePlanet=incomingPlanet;planetSeed=incomingSeed;

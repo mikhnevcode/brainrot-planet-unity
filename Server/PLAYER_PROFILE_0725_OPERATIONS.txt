@@ -1,0 +1,13 @@
+Player profile test 0.7.25 / match protocol 9
+
+This client-only iteration keeps the v0.7.24 protocol-9 room deployment.
+No dedicated worker or gateway redeploy is required.
+
+The client adds one-time guest nickname onboarding, validation feedback,
+reserved bot-name protection, a basic profanity filter and a visible nickname
+summary before matchmaking. Nickname and onboarding state remain local
+PlayerPrefs data. No Google profile, email or account data is requested.
+
+Android artifact:
+  Builds/Android/BrainrotPlanet-v0.7.25-player-profile-test.apk
+  SHA-256 7FEC4AFA559C553FB6C1DAFEE822B58FF840E7A15A2EF612790D38FBF658042F

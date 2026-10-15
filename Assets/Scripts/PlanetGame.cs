@@ -987,6 +987,7 @@ namespace BrainrotPlanet
             float logicalW=Screen.width/guiScale,logicalH=Screen.height/guiScale;
             var old=GUI.matrix;
             GUI.matrix=Matrix4x4.Scale(new Vector3(guiScale,guiScale,1f));
+            if(nicknameSetupOpen&&State==MatchState.Menu){DrawNicknameSetup(logicalW,logicalH);GUI.matrix=old;return;}
             if(statisticsOpen){DrawStatistics(logicalW,logicalH);GUI.matrix=old;return;}
             if(shopOpen && State==MatchState.Menu){DrawShop(logicalW,logicalH);GUI.matrix=old;return;}
             if(wardrobeOpen && State==MatchState.Menu){DrawWardrobe(logicalW,logicalH);GUI.matrix=old;return;}

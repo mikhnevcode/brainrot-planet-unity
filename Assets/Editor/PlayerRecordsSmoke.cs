@@ -16,6 +16,11 @@ namespace BrainrotPlanet.Editor
             Check(PlayerRecords.SanitizeNickname("abcdefghijklmnop").Length==PlayerRecords.MaxNicknameLength,"nickname length");
             Check(PlayerRecords.ValidNickname("Игрок-77"),"valid nickname");
             Check(!PlayerRecords.ValidNickname("Игрок/77"),"invalid nickname");
+            Check(PlayerRecords.ValidateNicknameInput("Я",out _)==NicknameIssue.TooShort,"short nickname");
+            Check(PlayerRecords.ValidateNicknameInput("БОТ ИСКРА",out _)==NicknameIssue.Reserved,"reserved bot nickname");
+            Check(PlayerRecords.ValidateNicknameInput("сука",out _)==NicknameIssue.Inappropriate,"ru profanity");
+            Check(PlayerRecords.ValidateNicknameInput("f4ck",out _)==NicknameIssue.Inappropriate,"leetspeak profanity");
+            Check(PlayerRecords.ValidPlayerLabel(PlayerRecords.BotName(2)),"official bot label");
             float[] scores={0,12,25,25,4};int[] order=PlayerRecords.Ranking(scores);
             Check(order[0]==2&&order[1]==3&&order[2]==1&&order[3]==4,"stable score ranking");
             Check(PlayerRecords.Rank(scores,1)==3,"local rank");
