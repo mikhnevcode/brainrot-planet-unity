@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-15",
+  "count": 13,
+  "generator": "built-in image_gen",
+  "status": "Concept exploration only; not approved production models or IP clearance.",
+  "visualReview": "All 13 outputs inspected. Full character silhouettes, faces and intended defining features are readable. Bublikopotam belly hole is visible; Chernilo Chudilo has four brush limbs. No rendered names or recognizable logos. Designs may be refined after user selection.",
+  "characters": [
+    {
+      "filename": "01-rollo-bulk.png",
+      "bytes": 2049578,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "3cb4dc7c588fbe989a7fefa3fb8c52019e611f829ef4df02406b7d2d0290b5bf",
+      "id": "01-rollo-bulk",
+      "name": "Ролло Бульк"
+    },
+    {
+      "filename": "02-pelmolyot.png",
+      "bytes": 1898320,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "ffa2d530c610b63f6b9378f2ca9fe581860e81dd1719c262b35a1780ff7ba499",
+      "id": "02-pelmolyot",
+      "name": "Пельмолёт"
+    },
+    {
+      "filename": "03-morzho-morozho.png",
+      "bytes": 2275647,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "e0d6d22db5c6c28c68843da6cf195e37ef6801a1080e6e88fa1916931eaaa8a7",
+      "id": "03-morzho-morozho",
+      "name": "Моржо-Морожо"
+    },
+    {
+      "filename": "04-utyugonos.png",
+      "bytes": 2142581,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "0351afd11bd9a24168fa927d32a250bb975bb9cced7debc2686d40f34031b223",
+      "id": "04-utyugonos",
+      "name": "Утюгонос"
+    },
+    {
+      "filename": "05-makaronika.png",
+      "bytes": 2022540,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "fbde4cb2d6374901df5caff01f4fad5af39d2f596b3511dd03e09f215c87d790",
+      "id": "05-makaronika",
+      "name": "Макароника"
+    },
+    {
+      "filename": "06-shurshun-paketych.png",
+      "bytes": 2212616,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "47e9adc563bcdcf0a5ffca80a5c60905f93f8284132c38d3277f946696b27c4d",
+      "id": "06-shurshun-paketych",
+      "name": "Шуршун Пакетыч"
+    },
+    {
+      "filename": "07-brokko-boks.png",
+      "bytes": 2275406,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "1b12ba66a00c6e05a48740f64fc23c4ac656f368a0e52308e00b4a01d6c0b934",
+      "id": "07-brokko-boks",
+      "name": "Брокко-Бокс"
+    },
+    {
+      "filename": "08-budilo-begemot.png",
+      "bytes": 1987165,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "9470e3c4dd52847f0b3b45fe4a87bf7bc60d2e290162127f90c3581965ec6ed2",
+      "id": "08-budilo-begemot",
+      "name": "Будило-Бегемот"
+    },
+    {
+      "filename": "09-arbuzub.png",
+      "bytes": 2227906,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "489ec52e06e20eb125971120a96ee0108ac53943b3ae69fb0795c9a6388fe1ff",
+      "id": "09-arbuzub",
+      "name": "Арбузуб"
+    },
+    {
+      "filename": "10-fenik-fu-fu.png",
+      "bytes": 2015968,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "17fc297b655dd1a3fac082039684d111274fd09a9d0fb8baaeb2386ea4883702",
+      "id": "10-fenik-fu-fu",
+      "name": "Феник Фу-Фу"
+    },
+    {
+      "filename": "11-zhele-zhmyak.png",
+      "bytes": 1923633,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "c185f405f4df7286c3b5e540d8aacfc6daa75c939fda1baa549dd4c14dc97379",
+      "id": "11-zhele-zhmyak",
+      "name": "Желе-Жмяк"
+    },
+    {
+      "filename": "12-chernilo-chudilo.png",
+      "bytes": 2169939,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "22788ebe4b5e105996dee0c1ec1c1c78520aa1732c0fea787b3e3de6c84caaf3",
+      "id": "12-chernilo-chudilo",
+      "name": "Чернило Чудило"
+    },
+    {
+      "filename": "13-bublikopotam.png",
+      "bytes": 1972366,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "44e1d2283bdda75c2ba8d3013a2a3ae08c336540db9769587df82c21825628d9",
+      "id": "13-bublikopotam",
+      "name": "Бубликопотам"
+    }
+  ]
+}

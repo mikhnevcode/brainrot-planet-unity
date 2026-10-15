@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13 новых героев — Brainrot Planet</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#193c55;background:#edf7fb}
+*{box-sizing:border-box}body{margin:0}main{max-width:1400px;margin:auto;padding:32px 24px 48px}
+.eyebrow{color:#167885;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+h1{font-size:clamp(26px,4vw,46px);line-height:1.08;letter-spacing:-.035em;margin:12px 0}
+.intro{max-width:850px;font-size:17px;line-height:1.55;color:#4c6578}.note{font-size:13px;line-height:1.5;color:#587082;max-width:900px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:26px}
+.card{padding:0;border:1px solid #d2e5ed;border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 6px 24px #194e6310;cursor:pointer;text-align:left;color:inherit;font:inherit;transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 32px #194e6322}.card:focus-visible{outline:4px solid #ff8c45;outline-offset:3px}
+.card img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#dff6fa}
+.card-copy{display:block;padding:18px 20px 22px}.number{display:block;font-weight:800;color:#23818e;font-size:12px;letter-spacing:.08em;margin-bottom:7px}
+.card strong{display:block;font-size:23px;line-height:1.15}.description{display:block;margin-top:10px;line-height:1.5;font-size:14px;color:#547083}
+footer{margin-top:26px;color:#587082;font-size:13px}a{color:#176f90}
+dialog{padding:0;border:0;border-radius:22px;width:min(960px,96vw);max-height:96vh;overflow:auto;background:#f6fcff;color:#193c55;box-shadow:0 20px 100px #102f5c44}
+dialog::backdrop{background:#0d233fe8}.viewer-image{display:block;width:100%;max-height:76vh;object-fit:contain;background:#dff6fa}
+.viewer-bar{display:flex;gap:12px;align-items:center;padding:14px 18px}.viewer-title{font-weight:800;font-size:20px;flex:1}
+.viewer-bar button{border:1px solid #b9d5e0;border-radius:14px;background:white;padding:10px 14px;font:inherit;cursor:pointer;color:inherit;min-width:42px}
+.viewer-desc{margin:0;padding:0 18px 18px;line-height:1.5;color:#547083}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){main{padding:24px 14px}.grid{grid-template-columns:1fr;gap:18px}.card strong{font-size:22px}.viewer-bar{gap:6px;padding:12px 10px}.viewer-title{font-size:17px}.viewer-bar button{padding:8px}.intro{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow">Brainrot Planet · Концепты v1 · 15.10.2026</div>
+<h1>13 новых героев</h1>
+<p class="intro">Яркие нелепые существа для игры в захват планет. Нажми на карточку, чтобы рассмотреть персонажа крупнее. Имена и способности пока рабочие.</p>
+<p class="note">Это изображения для обсуждения, а не готовые 3D-модели. Герои в текущей сборке не заменены. Создание нового изображения не является юридической проверкой имени или дизайна.</p>
+</header>
+<section class="grid" aria-label="Галерея персонажей">
+    <button class="card" type="button" data-index="0" aria-label="Открыть: Ролло Бульк">
+      <img src="01-rollo-bulk.png" alt="Ролло Бульк — концепт героя" width="1254" height="1254" loading="eager">
+      <span class="card-copy"><span class="number">01</span><strong>Ролло Бульк</strong><span class="description">Тюлень с валиком вместо нижней части живота. Разгоняется и оставляет широкую полосу краски.</span></span>
+    </button>
+    <button class="card" type="button" data-index="1" aria-label="Открыть: Пельмолёт">
+      <img src="02-pelmolyot.png" alt="Пельмолёт — концепт героя" width="1254" height="1254" loading="eager">
+      <span class="card-copy"><span class="number">02</span><strong>Пельмолёт</strong><span class="description">Летающий пельмень с крыльями-вилками и кабиной-крышкой. Сбрасывает три разноцветных пельмешка.</span></span>
+    </button>
+    <button class="card" type="button" data-index="2" aria-label="Открыть: Моржо-Морожо">
+      <img src="03-morzho-morozho.png" alt="Моржо-Морожо — концепт героя" width="1254" height="1254" loading="eager">
+      <span class="card-copy"><span class="number">03</span><strong>Моржо-Морожо</strong><span class="description">Морж-тележка с вафельным пузом и мороженым. Ледяной чих выпускает волну.</span></span>
+    </button>
+    <button class="card" type="button" data-index="3" aria-label="Открыть: Утюгонос">
+      <img src="04-utyugonos.png" alt="Утюгонос — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">04</span><strong>Утюгонос</strong><span class="description">Утконос с клювом-утюгом и хвостом-шнуром. Паровой рывок вперёд.</span></span>
+    </button>
+    <button class="card" type="button" data-index="4" aria-label="Открыть: Макароника">
+      <img src="05-makaronika.png" alt="Макароника — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">05</span><strong>Макароника</strong><span class="description">Осьминог из толстых макарон со шляпой-дуршлагом. Танец превращается в красочный вихрь.</span></span>
+    </button>
+    <button class="card" type="button" data-index="5" aria-label="Открыть: Шуршун Пакетыч">
+      <img src="06-shurshun-paketych.png" alt="Шуршун Пакетыч — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">06</span><strong>Шуршун Пакетыч</strong><span class="description">Надутый бумажный пакет с ушами-ручками. Складывается и проскальзывает мимо соперников.</span></span>
+    </button>
+    <button class="card" type="button" data-index="6" aria-label="Открыть: Брокко-Бокс">
+      <img src="07-brokko-boks.png" alt="Брокко-Бокс — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">07</span><strong>Брокко-Бокс</strong><span class="description">Брокколи с кулаками из цветной капусты. Топает и пускает цепкие корешки.</span></span>
+    </button>
+    <button class="card" type="button" data-index="7" aria-label="Открыть: Будило-Бегемот">
+      <img src="08-budilo-begemot.png" alt="Будило-Бегемот — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">08</span><strong>Будило-Бегемот</strong><span class="description">Сонный бегемот с будильником в животе. Пугается собственного звонка и создаёт ударную волну.</span></span>
+    </button>
+    <button class="card" type="button" data-index="8" aria-label="Открыть: Арбузуб">
+      <img src="09-arbuzub.png" alt="Арбузуб — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">09</span><strong>Арбузуб</strong><span class="description">Арбузный кабан с клыками-семечками. Устраивает семечковый красочный залп.</span></span>
+    </button>
+    <button class="card" type="button" data-index="9" aria-label="Открыть: Феник Фу-Фу">
+      <img src="10-fenik-fu-fu.png" alt="Феник Фу-Фу — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">10</span><strong>Феник Фу-Фу</strong><span class="description">Живой фен со взъерошенным шарфом. Дует, ускоряется и танцует против собственного ветра.</span></span>
+    </button>
+    <button class="card" type="button" data-index="10" aria-label="Открыть: Желе-Жмяк">
+      <img src="11-zhele-zhmyak.png" alt="Желе-Жмяк — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">11</span><strong>Желе-Жмяк</strong><span class="description">Пружинящий кубик желе с разными глазами. Сплющивается и выпускает волну краски при приземлении.</span></span>
+    </button>
+    <button class="card" type="button" data-index="11" aria-label="Открыть: Чернило Чудило">
+      <img src="12-chernilo-chudilo.png" alt="Чернило Чудило — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">12</span><strong>Чернило Чудило</strong><span class="description">Чернильница на четырёх кистях. Пытается вытереть след, но размазывает ещё больше краски.</span></span>
+    </button>
+    <button class="card" type="button" data-index="12" aria-label="Открыть: Бубликопотам">
+      <img src="13-bublikopotam.png" alt="Бубликопотам — концепт героя" width="1254" height="1254" loading="lazy">
+      <span class="card-copy"><span class="number">13</span><strong>Бубликопотам</strong><span class="description">Бегемот с туловищем-бубликом и сквозным отверстием. Приземляется пузом с мощным хлопком.</span></span>
+    </button>
+</section>
+<footer>Создано встроенным генератором изображений по отдельному описанию каждого героя. <a href="prompts.json">Все исходные описания</a> · <a href="manifest.json">Файлы и проверка</a></footer>
+</main>
+<dialog aria-labelledby="viewer-title">
+<img class="viewer-image" alt="">
+<div class="viewer-bar"><button type="button" id="previous" aria-label="Предыдущий герой">←</button><span class="viewer-title" id="viewer-title"></span><button type="button" id="next" aria-label="Следующий герой">→</button><button type="button" id="close" aria-label="Закрыть просмотр">✕</button></div>
+<p class="viewer-desc"></p>
+</dialog>
+<script>
+const cards=[...document.querySelectorAll(".card")],viewer=document.querySelector("dialog");
+let index=0;
+function show(value){
+ index=(value+cards.length)%cards.length;
+ const card=cards[index],source=card.querySelector("img"),target=viewer.querySelector("img");
+ target.src=source.getAttribute("src");target.alt=source.alt;
+ document.getElementById("viewer-title").textContent=card.querySelector("strong").textContent;
+ viewer.querySelector(".viewer-desc").textContent=card.querySelector(".description").textContent;
+ if(!viewer.open)viewer.showModal();
+}
+cards.forEach((card,i)=>card.addEventListener("click",()=>show(i)));
+document.getElementById("previous").addEventListener("click",()=>show(index-1));
+document.getElementById("next").addEventListener("click",()=>show(index+1));
+document.getElementById("close").addEventListener("click",()=>viewer.close());
+document.addEventListener("keydown",event=>{
+ if(!viewer.open)return;
+ if(event.key==="ArrowRight"){event.preventDefault();show(index+1)}
+ if(event.key==="ArrowLeft"){event.preventDefault();show(index-1)}
+});
+viewer.addEventListener("click",event=>{if(event.target===viewer)viewer.close()});
+</script>
+</body>
+</html>
