@@ -16,9 +16,9 @@ namespace BrainrotPlanet.Editor
             // Use the standard Java Activity: the native GameActivity entry froze
             // before scene Awake on repeated RMX3151 Android 13 cold starts.
             PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
-            PlayerSettings.bundleVersion="0.7.19-shoe-rig-test";
-            PlayerSettings.Android.bundleVersionCode=63;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.19-shoe-rig-test.apk",false);
+            PlayerSettings.bundleVersion="0.7.20-tap-jump-test";
+            PlayerSettings.Android.bundleVersionCode=64;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.20-tap-jump-test.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {
@@ -27,6 +27,7 @@ namespace BrainrotPlanet.Editor
             SkinCatalogSmoke.Run();
             StoreSmoke.Run();
             HeroMenuSmoke.Run();
+            GameplayFeedbackSmoke.Run();
             TralaleroShoeSmoke.Run();
             PlanetBiomeSmoke.Run();
             PlanetTerrainSmoke.Run();

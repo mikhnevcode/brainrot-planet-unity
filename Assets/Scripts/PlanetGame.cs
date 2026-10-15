@@ -64,7 +64,9 @@ namespace BrainrotPlanet
         private bool playerSlowWasActive;
         private int steerFinger=-1;
         private Vector2 steerOrigin;
-        private Rect skillArea,jumpArea;
+        private bool steerDragged;
+        private float steerStartedAt;
+        private Rect skillArea;
         private Texture2D whitePixel,softCircle;
         private RenderTexture heroPreviewTexture;
         private Camera heroPreviewCamera;
@@ -653,8 +655,7 @@ namespace BrainrotPlanet
             if(Input.GetKeyDown(KeyCode.E))UseSkill();
             float unit=GameScale();
             float virtualH=Screen.height/unit;
-            skillArea=new Rect(314,virtualH-179,92,75);
-            jumpArea=new Rect(314,virtualH-91,92,70);
+            skillArea=new Rect(314,virtualH-96,92,75);
             if(Input.touchCount>0)
             {
                 for(int i=0;i<Input.touchCount;i++)
@@ -665,19 +666,33 @@ namespace BrainrotPlanet
                     {
                         if(p.y<96f)continue;
                         if(skillArea.Contains(p)){UseSkill();continue;}
-                        if(jumpArea.Contains(p)){RequestJump();continue;}
                         if(Cosmetic("emote")!=""&&new Rect(Screen.width/unit-104,virtualH-308,80,36).Contains(p))continue;
-                        if(steerFinger<0){steerFinger=touch.fingerId;steerOrigin=p;}
+                        if(steerFinger<0)
+                        {
+                            steerFinger=touch.fingerId;steerOrigin=p;
+                            steerDragged=false;steerStartedAt=Time.unscaledTime;
+                        }
                     }
                     if(touch.fingerId==steerFinger)
                     {
-                        if(touch.phase==TouchPhase.Canceled||touch.phase==TouchPhase.Ended)
-                          {steerFinger=-1; /* Keep heading after release. */}
+                        if(touch.phase==TouchPhase.Canceled)
+                        {
+                            steerFinger=-1;steerDragged=false;
+                        }
+                        else if(touch.phase==TouchPhase.Ended)
+                        {
+                            bool tap=GameplayFeedback.IsTap(steerOrigin,p,steerDragged,
+                                Time.unscaledTime-steerStartedAt);
+                            steerFinger=-1;steerDragged=false;
+                            if(tap)RequestJump();
+                            /* Keep heading after release. */
+                        }
                         else
                         {
                             Vector2 swipe=p-steerOrigin;
                             if(swipe.sqrMagnitude>=64f)
                             {
+                                steerDragged=true;
                                 savedSteering=new Vector2(swipe.x,-swipe.y).normalized;
                                 if(!autoMoving)Debug.Log("AUTO_MOVE_STARTED");
                                 autoMoving=true;
@@ -687,7 +702,8 @@ namespace BrainrotPlanet
                     }
                 }
             }
-            else if(steerFinger!=-1){steerFinger=-1; /* Motion continues without a finger. */}
+            else if(steerFinger!=-1)
+            {steerFinger=-1;steerDragged=false; /* Motion continues without a finger. */}
             if(Player!=null&&worldCamera!=null)
             {
                 Vector3 radial=Player.transform.position.normalized;
@@ -942,20 +958,16 @@ namespace BrainrotPlanet
                 if(screen.z<0f)arrowDirection=-arrowDirection;
                 if(arrowDirection.sqrMagnitude<.001f)arrowDirection=Vector2.up;
                 arrowDirection.Normalize();
-                bool onScreen=screen.z>0f&&screen.x>.08f&&screen.x<.92f&&
-                              screen.y>.19f&&screen.y<.86f;
-                Vector2 center=new Vector2(logicalW*.5f,logicalH*.53f);
-                Vector2 point=onScreen?
-                    new Vector2(screen.x*logicalW,(1f-screen.y)*logicalH):
-                    center+new Vector2(arrowDirection.x*logicalW*.41f,
-                                       arrowDirection.y*logicalH*.30f);
-                point.x=Mathf.Clamp(point.x,24f,logicalW-24f);
-                float top=Mathf.Max(8,(Screen.height-Screen.safeArea.yMax)/guiScale)+138f;
-                point.y=Mathf.Clamp(point.y,top,logicalH-225f);
+                float safeTop=Mathf.Max(8,(Screen.height-Screen.safeArea.yMax)/guiScale);
+                float playTop=safeTop+145f;
+                float playBottom=logicalH-130f;
+                Rect perimeter=new Rect(27f,playTop,
+                    Mathf.Max(1f,logicalW-54f),Mathf.Max(1f,playBottom-playTop));
+                Vector2 point=GameplayFeedback.PerimeterPoint(arrowDirection,perimeter);
                 float angle=Mathf.Atan2(arrowDirection.y,arrowDirection.x)*
                             Mathf.Rad2Deg+90f;
                 Matrix4x4 oldMatrix=GUI.matrix;
-                GUIUtility.RotateAroundPivot(angle,point);
+                GUI.matrix=GameplayFeedback.RotateAroundLogicalPivot(oldMatrix,angle,point);
                 Color oldColor=GUI.color;
                 GUI.color=new Color(0f,0f,0f,.72f);
                 GUI.Label(new Rect(point.x-17f,point.y-15f,38f,38f),"^",enemyArrowStyle);

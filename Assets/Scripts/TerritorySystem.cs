@@ -144,7 +144,11 @@ namespace BrainrotPlanet
             {
                 Vector3 from=lastPosition[team];
                 float angle=Vector3.Angle(from,direction);
-                int steps=Mathf.Clamp(Mathf.CeilToInt(angle/.42f),1,20);
+                // Update can observe several completed physics steps after a mobile
+                // frame hitch, especially while the jump animation/effects start.
+                // Never cap this interpolation: the LineRenderer would hide a gap,
+                // but the logical flood-fill wall would remain open and lose the fill.
+                int steps=Mathf.Max(1,Mathf.CeilToInt(angle/.42f));
                 for(int j=1;j<=steps;j++) TraceCell(team,Vector3.Slerp(from,direction,(float)j/steps));
             }
             else TraceCell(team,direction);

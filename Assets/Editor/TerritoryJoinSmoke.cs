@@ -84,10 +84,45 @@ namespace BrainrotPlanet.Editor
                 throw new Exception("Capture changed unexpected area: "+
                     before.ToString("F2")+" -> "+after.ToString("F2")+
                     " events="+events);
+
+            // A jump can coincide with a slow mobile frame, so Update may submit
+            // two directions many degrees apart. The logical trail must be as
+            // continuous as the LineRenderer that joins those same directions.
+            var airborne=new TerritorySystem(null);
+            airborne.TraceStep(1,PlanetMath.FromLonLat(.18f,.47f));
+            airborne.TraceStep(1,PlanetMath.FromLonLat(.31f,.58f));
+            var airbornePath=airborne.VisualPath(1);
+            var airborneCells=airborne.Path(1);
+            int worstCellStep=0;
+            for(int i=1;i<airborneCells.Count;i++)
+            {
+                int a=airborneCells[i-1],b=airborneCells[i];
+                int dx=Mathf.Abs(a%PlanetMath.Width-b%PlanetMath.Width);
+                dx=Mathf.Min(dx,PlanetMath.Width-dx);
+                int dy=Mathf.Abs(a/PlanetMath.Width-b/PlanetMath.Width);
+                worstCellStep=Mathf.Max(worstCellStep,Mathf.Max(dx,dy));
+            }
+            if(airbornePath.Count<40||worstCellStep>1)
+                throw new Exception("Airborne trail contains a hidden logical gap: count="+
+                    airbornePath.Count+" worstCellStep="+worstCellStep);
+
+            var jumpCapture=new TerritorySystem(null);
+            jumpCapture.Seed(1,start);
+            float jumpBefore=jumpCapture.Percentage(1);
+            int jumpEvents=0;
+            jumpCapture.OnCapture+=(team,count,at)=>{if(team==1)jumpEvents++;};
+            for(int i=0;i<path.Length;i++)jumpCapture.TraceStep(1,path[i]);
+            float jumpAfter=jumpCapture.Percentage(1);
+            if(jumpEvents<1||jumpAfter<=jumpBefore+.10f||jumpAfter>jumpBefore+30f)
+                throw new Exception("Sparse airborne loop did not fill: "+
+                    jumpBefore.ToString("F2")+" -> "+jumpAfter.ToString("F2")+
+                    " events="+jumpEvents);
             Debug.Log("TERRITORY_JOIN_SMOKE_PASS seam="+added+
                 " oldPercent="+before.ToString("F2")+
                 " capturedPercent="+after.ToString("F2")+
-                " events="+events);
+                " events="+events+" airbornePoints="+airbornePath.Count+
+                " airborneWorstCellStep="+worstCellStep+
+                " sparseCapture="+jumpAfter.ToString("F2"));
         }
     }
 }

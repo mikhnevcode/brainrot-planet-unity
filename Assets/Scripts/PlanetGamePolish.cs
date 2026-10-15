@@ -152,16 +152,14 @@ namespace BrainrotPlanet
                 Color flash=new Color(1,.08f,.18f,damageFlash*.6f);
                 Plate(new Rect(0,0,5,h),flash);Plate(new Rect(w-5,0,5,h),flash);
             }
-            string motion=autoMoving?"КУРС: "+GameplayFeedback.DirectionLabel(savedSteering):"СВАЙП ДЛЯ ДВИЖЕНИЯ";
+            string motion=(autoMoving?"КУРС: "+GameplayFeedback.DirectionLabel(savedSteering):"СВАЙП ДЛЯ ДВИЖЕНИЯ")+
+                "  •  ТАП — ПРЫЖОК";
             GUI.Label(new Rect(12,h-46,w-125,30),motion,captionStyle);
             DrawGlow(new Rect(skillArea.x-5,skillArea.y-5,skillArea.width+10,skillArea.height+10),skillCooldown<=0?new Color(1,.18f,.6f,.4f):Color.clear);
             Rounded(skillArea,skillCooldown<=0?new Color(.84f,.15f,.47f,.94f):new Color(.12f,.17f,.29f,.95f));
             GUI.Label(new Rect(skillArea.x+3,skillArea.y+5,skillArea.width-6,43),skillNames[selectedHero],captionStyle);
             GUI.Label(new Rect(skillArea.x,skillArea.y+47,skillArea.width,23),skillCooldown<=0?"ГОТОВО":Mathf.CeilToInt(skillCooldown)+" с",smallStyle);
             Plate(new Rect(skillArea.x+14,skillArea.yMax-7,(skillArea.width-28)*(1-Mathf.Clamp01(skillCooldown/12f)),2),new Color(1,.65f,.83f));
-            Rounded(jumpArea,new Color(.045f,.42f,.63f,.94f));
-            GUI.Label(new Rect(jumpArea.x,jumpArea.y+6,jumpArea.width,24),"^",headerStyle);
-            GUI.Label(new Rect(jumpArea.x,jumpArea.y+31,jumpArea.width,28),"ПРЫЖОК",captionStyle);
             if(Player!=null&&(Player.SpeedSeconds>0||Player.SlowSeconds>0))
                 GUI.Label(new Rect(w*.5f-90,h*.59f,180,25),Player.SlowSeconds>0?"ЗАМЕДЛЕНИЕ":"УСКОРЕНИЕ",captionStyle);
             DrawEnemySignals(w,h);

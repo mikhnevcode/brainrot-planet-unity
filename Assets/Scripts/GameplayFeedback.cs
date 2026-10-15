@@ -33,5 +33,32 @@ namespace BrainrotPlanet
             if(degrees<292.5f)return "ВНИЗ";
             return "ВНИЗ-ВПРАВО";
         }
+
+        public static bool IsTap(Vector2 origin,Vector2 current,bool dragged,float heldSeconds)
+        {
+            return !dragged && heldSeconds<=.42f && (current-origin).sqrMagnitude<=100f;
+        }
+
+        public static Vector2 PerimeterPoint(Vector2 direction,Rect bounds)
+        {
+            if(direction.sqrMagnitude<.001f)direction=Vector2.up;
+            direction.Normalize();
+            Vector2 center=bounds.center;
+            float horizontal=Mathf.Abs(direction.x)>.0001f?
+                (direction.x>0f?bounds.xMax-center.x:center.x-bounds.xMin)/Mathf.Abs(direction.x):
+                float.PositiveInfinity;
+            float vertical=Mathf.Abs(direction.y)>.0001f?
+                (direction.y>0f?bounds.yMax-center.y:center.y-bounds.yMin)/Mathf.Abs(direction.y):
+                float.PositiveInfinity;
+            return center+direction*Mathf.Min(horizontal,vertical);
+        }
+
+        public static Matrix4x4 RotateAroundLogicalPivot(Matrix4x4 baseMatrix,float degrees,Vector2 pivot)
+        {
+            Vector3 at=new Vector3(pivot.x,pivot.y,0f);
+            return baseMatrix*Matrix4x4.Translate(at)*
+                   Matrix4x4.Rotate(Quaternion.Euler(0f,0f,degrees))*
+                   Matrix4x4.Translate(-at);
+        }
     }
 }
