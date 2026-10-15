@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "checked_on": "2026-10-15",
+  "project": "Brainrot Planet.io",
+  "baseline_commit": "944aeb8d4813708cb413db38af624d1f3e8e221b",
+  "scope": "Предварительная проверка 13 героев, происхождения игровых файлов и публичных условий. Планируемое использование: Android/iOS, международное распространение, реклама, покупки и продажа скинов.",
+  "conclusion": "Ни для одного из 13 известных героев пока не подтверждено основание для международного коммерческого использования. У пяти найдены прямые заявления о лицензировании или сотрудничестве с автором; у восьми статус неясен. Это не вывод о том, что все 13 юридически охраняются или нарушают чьи-то права.",
+  "policy": "Сохранять известного героя в релизе только при документированном основании: разрешение подтверждённого правообладателя, применимая открытая лицензия от уполномоченного лица либо подтверждённый свободный статус для выбранного использования и территорий. Отсутствие найденной регистрации, автора или претензии не означает отсутствия прав.",
+  "limitations": [
+    "Полный поиск по WIPO/TMview/EUIPO/USPTO/Роспатенту с проверкой статуса, классов, сходства и территорий не выполнен. Поисковая выдача и карточки агрегаторов не являются проверкой реестра.",
+    "Не проверены договоры представительства, перехода прав и действительность всех заявлений агентства. Ни с кем не связывались, письма и запросы не отправлялись.",
+    "Пометка PD-algorithm на Wikimedia относится к конкретному файлу и позиции загрузивших его участников; она не подтверждает глобальную свободу персонажа, товарных знаков, звука или наших референсов.",
+    "Собственные скрипты генерации подтверждают техническое происхождение файлов, но сами по себе не подтверждают права на узнаваемый заимствованный образ и исключительные права на ИИ-результаты.",
+    "Предлагаемые новые имена — рабочие обозначения. Их самостоятельная проверка по товарным знакам ещё нужна. Новые дизайны также подлежат проверке на сходство.",
+    "Проверка файлов ограничена указанными исходниками, активными FBX, основными текстурами, звуками и каталогами. Это не аудит всех лицензий Unity/SDK/шрифтов и всех бинарных ресурсов.",
+    "Изображения в отчёте — сохранённые превью исходников. Например, у Tralalero показан рендер v06, тогда как активный FBX уже v07. Реальный состав и версии определяются полем model и AvatarArt.cs."
+  ],
+  "sources": [
+    {"id":"S01","kind":"claimant_statement","title":"Mementum Lab — Brands","url":"https://www.mementumlab.com/brands","finding":"В портфолио перечислены Tung Tung Sahur, Cappuccino Assassino, Brr Brr Patapim и Boneca (на странице написано BONEcA AMBALBU). Компания заявляет об исключительном лицензировании. Документы полномочий не получены."},
+    {"id":"S02","kind":"claimant_statement","title":"Mementum Lab — главная","url":"https://www.mementumlab.com/","finding":"Заявляет работу с Noxa и ofuscabreno, предлагает лицензирование. Публичного разрешения всем разработчикам игр не обнаружено."},
+    {"id":"S03","kind":"publisher_statement","title":"Ballerina Cappuccina — App Store","url":"https://apps.apple.com/us/app/ballerina-cappuccina/id6745763350","finding":"Разработчик приложения заявляет сотрудничество с создателем персонажа Sava Susanu. Это заявление разработчика, а не независимое подтверждение Apple и не разрешение для нашей игры."},
+    {"id":"S04","kind":"official_guidance","title":"ВОИС — авторское право, вопросы и ответы","url":"https://www.wipo.int/en/web/copyright/faq-copyright","finding":"Охрана обычно возникает автоматически; общего международного реестра авторских прав нет. Авторское право охраняет выражение, а не общую идею. Публикация в интернете сама по себе не разрешает использование."},
+    {"id":"S05","kind":"official_guidance","title":"ВОИС — Global Brand Database","url":"https://www.wipo.int/en/web/global-brand-database","finding":"База покрывает участвующие коллекции; ВОИС рекомендует также национальные/региональные реестры. Чистый результат общего веб-поиска не равен проверке товарных знаков."},
+    {"id":"S06","kind":"platform_policy","title":"Google Play — Intellectual Property","url":"https://support.google.com/googleplay/android-developer/answer/9888072?hl=en","finding":"Магазин может требовать доказательства прав. Модификация охраняемого материала сама по себе не устраняет возможное нарушение."},
+    {"id":"S07","kind":"platform_policy","title":"Apple App Review Guidelines, 5.2","url":"https://developer.apple.com/app-store/review/guidelines/#intellectual-property","finding":"Необходимо иметь собственный контент или основание для использования чужого. Допуск чужого приложения в магазин не выдаёт лицензию нашей игре."},
+    {"id":"S08","kind":"repository_file_label","title":"Wikimedia — Tralalero Tralala.webp","url":"https://commons.wikimedia.org/wiki/File:Tralalero_Tralala.webp","finding":"Файл имеет пометку PD-algorithm; на странице также упомянуты ограничения по юрисдикциям. Не является лицензией автора на персонажа и не разрешает чужие бренды обуви."},
+    {"id":"S09","kind":"conflicting_repository_metadata","title":"Wikimedia — Boneca Ambalabu.jpg","url":"https://commons.wikimedia.org/wiki/File:Boneca_Ambalabu.jpg","finding":"Видимая пометка PD-algorithm расходится со структурированными данными CC BY-SA/авторством; одновременно персонаж находится в портфолио агентства. Свободный статус не принят."},
+    {"id":"S10","kind":"repository_file_label","title":"Wikimedia — Frulli Frulla.jpg","url":"https://commons.wikimedia.org/wiki/File:Frulli_Frulla.jpg","finding":"Пометка PD-algorithm при неизвестном авторе. Подтверждения прав на весь образ, имя и наш конкретный референс нет."},
+    {"id":"S11","kind":"repository_moderation_record","title":"Wikimedia — обсуждение удаления Frulli Frulla HD.webp","url":"https://commons.wikimedia.org/wiki/User_talk:Mcjumi1","finding":"Есть уведомление об удалении другого файла с предполагаемым нарушением. Это история модерации конкретного файла, а не судебный вывод об охране всего персонажа."},
+    {"id":"S12","kind":"official_guidance","title":"US Copyright Office — AI Report Part 2","url":"https://www.copyright.gov/newsnet/2025/1060.html","finding":"Позиция США связывает охрану ИИ-результатов с достаточным человеческим вкладом; не даёт международного разрешения на любой мем."},
+    {"id":"S13","kind":"license_terms","title":"Creative Commons BY 4.0","url":"https://creativecommons.org/licenses/by/4.0/","finding":"Разрешает коммерческие адаптации при соблюдении условий; не охватывает автоматически товарные знаки и все иные права. Лицензию на стороннюю модель нельзя считать доказательством полномочий на исходного персонажа."}
+  ],
+  "search_batches": [
+    {"names":["Tralalero Tralala","Bombardiro Crocodilo","Frigo Camelo","Bombombini Gusini"],"terms":["license creator official","creator public domain","copyright permission"],"result":"Публичное разрешение от подтверждённого автора на наши образы не найдено. Найденные моды, STL и модельные лицензии не приняты за разрешения на персонажа."},
+    {"names":["Ballerina Cappuccina","Cappuccino Assassino","Brr Brr Patapim","Tung Tung Tung Sahur","Boneca Ambalabu"],"terms":["license creator","Mementum portfolio"],"result":"Прямые заявления S01–S03. Лицензии для нашей игры не получены."},
+    {"names":["Lirili Larila","Frulli Frulla","Trippi Troppi shrimp cat","Troppa Trippa fish bear"],"terms":["license creator","copyright trademark","permission"],"result":"Открытое разрешение от уполномоченного лица не найдено. Не путать два последних разных визуальных образа, которые в сети часто смешивают под одним именем."}
+  ],
+  "asset_findings": [
+    {"area":"Геометрия и анимация","status":"local_sources_found","detail":"Есть Blender-скрипты и исходники, runtime загружается через AvatarArt. Это референсные версии известных героев; техническое создание с нуля не освобождает заимствованный образ.","paths":["Assets/Scripts/AvatarArt.cs","Characters/refine_references_063.py","Characters/remaining_characters_v01.py","Characters/Tralalero/make_tralalero.py","Characters/Bombardiro/sculpt_bombardiro_v06.py","Characters/Bombombini/make_bombombini.py","Characters/Ballerina/make_ballerina.py"]},
+    {"area":"Текстуры кожи и материалов","status":"procedural_sources_found","detail":"Процедурные карты десяти материалов генерируются в reference_detail_063.py; карты крокодила — в sculpt_bombardiro_v06.py. В этих генераторах внешние загрузки не найдены.","paths":["Characters/reference_detail_063.py","Assets/Resources/Characters/ReferenceDetail","Assets/Resources/Characters/Bombardiro_v06_Skin_Albedo.png","Assets/Resources/Characters/Bombardiro_v06_Skin_Normal.png"]},
+    {"area":"Иконки героев","status":"derived_from_models","detail":"ReleasePolishAssets.Portraits рендерит игровой состав в атлас. Портреты должны заменяться вместе с моделями.","paths":["Assets/Editor/ReleasePolishAssets.cs","Assets/Resources/HeroPortraits064.png"]},
+    {"area":"Звук и музыка","status":"synthesis_sources_found","detail":"GameSound создаёт тоны и музыку; три WAV взрыва синтезируются скриптом без внешних сэмплов. Эти конкретные звуковые ресурсы не требуют копирования мемных голосов.","paths":["Assets/Scripts/GameSound.cs","Audio/make_bomb_explosions_066.py","Assets/Resources/Audio/BombExplosion1.wav","Assets/Resources/Audio/BombExplosion2.wav","Assets/Resources/Audio/BombExplosion3.wav"]},
+    {"area":"Знаки на обуви и повязках","status":"visual_check_pending","detail":"В присланных пользователем референсах были чужие логотипы. В текущем генераторе Assassino описана собственная спираль; утверждать наличие Naruto-знака в APK оснований нет. Для релиза проверить визуально все модели и 65 костюмов, включая похожесть отдельных эмблем и форм.","paths":["Characters/refine_references_063.py","Characters/Tralalero/make_tralalero.py"]},
+    {"area":"Магазин и загрузочные скины","status":"inherits_base_character_issue","detail":"65 скинов привязаны к 13 базовым героям; смена одежды не подтверждает прав на основу. При замене моделей пересоздать зависимые костюмы/портреты и проверить каталог из 99 товаров. Текущие тестовые покупки денег не списывают.","paths":["Content/Skins/catalog-cast-v1.json","Content/Store/catalog-test-v1.json","Characters/build_cast_skins_v072.py","Content/Store/TEST_STORE_OPERATIONS.txt"]}
+  ],
+  "characters": [
+    {
+      "slot":0,"key":"Tralalero","name":"Тралалеро Тралала","aliases":["Tralalero Tralala","Tralalelo Tralala"],
+      "model":"Assets/Resources/Characters/Tralalero_v07.fbx","preview":"Characters/Tralalero/V06/Tralalero_v06_threequarter.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S04","S08"],"grant_document":null,
+      "finding":"Найдена пометка PD-algorithm у отдельной картинки. Разрешение автора на коммерческое использование персонажа не подтверждено; обувь референса связана с чужим брендом.",
+      "next_action":"Сохранить как кандидата на проверку; не объявлять свободным. При отсутствии основания подготовить замену.",
+      "replacement":{"working_name":"Парусик","role":"скоростной рывок","design":"Бирюзовый скат-воздушный змей: плоский ромб, две короткие опоры-плавника, ленты на хвосте и широкая улыбка. Без акульей морды, третьей ноги и кроссовок.","skins":"рифовый, ледяной, парусный, неоновый, закатный"}
+    },
+    {
+      "slot":1,"key":"Bombardiro","name":"Бомбардиро Крокодило","aliases":["Bombardiro Crocodilo","Bombardino Crocodilo"],
+      "model":"Assets/Resources/Characters/Bombardiro_v06.fbx","preview":"Characters/Bombardiro/V06/Bombardiro_v06_front_3q.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S04","S06"],"grant_document":null,
+      "finding":"Выполнен поиск по вариантам имени; разрешение автора на образ не найдено. Самостоятельная модель крокодила-самолёта не является таким разрешением.",
+      "next_action":"Продолжить проверку происхождения; при отсутствии основания заменить.",
+      "replacement":{"working_name":"Кляксожук","role":"три бомбы краски","design":"Круглый жук-робот с полупрозрачными надкрыльями, тремя капсулами краски в брюшке и шестью короткими лапками. Без рептилии, военного самолёта и винтов.","skins":"медный, лавовый, космический, конфетный, заводной"}
+    },
+    {
+      "slot":2,"key":"Frigo","name":"Фриго Камело","aliases":["Frigo Camelo","Frigo Camello"],
+      "model":"Assets/Resources/Characters/Frigo_v04.fbx","preview":"Characters/Frigo/V04/Frigo_v04_front.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S02","S04"],"grant_document":null,
+      "finding":"Свободная лицензия на исходный образ не найдена. Атрибуцию ofuscabreno из вторичных источников нужно подтвердить у автора; наличие автора в списке агентства не доказывает права на этого конкретного героя.",
+      "next_action":"Не считать отсутствие в опубликованном портфолио свободой использования; подготовить резерв.",
+      "replacement":{"working_name":"Холодок","role":"ледяная волна","design":"Приземистая кристальная улитка с раковиной-снежинкой и рюкзаком-термосом. Скользит на широкой подошве, выпускает облако инея. Без верблюда и холодильника.","skins":"полярный, ягодный, стеклянный, ночной, альпийский"}
+    },
+    {
+      "slot":3,"key":"Bombombini","name":"Бомбомбини Гусини","aliases":["Bombombini Gusini"],
+      "model":"Assets/Resources/Characters/Bombombini_v04.fbx","preview":"Characters/Bombombini/V04/Bombombini_v04_front.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S04","S06"],"grant_document":null,
+      "finding":"Найдены сторонние модели и лицензии их продавцов; полномочия на первоначального гуся-самолёт они не подтверждают. Документа для нашей игры нет.",
+      "next_action":"Сохранить как кандидата на проверку; при отсутствии основания заменить.",
+      "replacement":{"working_name":"Кометыш","role":"турбо","design":"Кометный мотылёк с четырьмя прозрачными крыльями и коротким круглым телом. Пружинит на двух лапках; при турбо крылья вытягиваются в светящийся след. Без гуся и турбин.","skins":"почтовый, полярный, лунный, карнавальный, грозовой"}
+    },
+    {
+      "slot":4,"key":"Ballerina","name":"Балерина Капучино","aliases":["Ballerina Cappuccina"],
+      "model":"Assets/Resources/Characters/Ballerina_v04.fbx","preview":"Characters/Ballerina/V04/Ballerina_v04_front.png",
+      "status":"claim_found","release_allowed":false,"evidence":["S03"],"grant_document":null,
+      "finding":"Разработчик Ballerina Cappuccina заявляет официальное сотрудничество с создателем Sava Susanu. Правообладание не проверено независимо; общего разрешения нашей игре нет.",
+      "next_action":"Первая очередь замены собственным дизайном либо получение подтверждённого разрешения.",
+      "replacement":{"working_name":"Люмика","role":"красочный вихрь","design":"Розово-коралловая медуза-зонтик с пятью светящимися каплями на ободе и мягкими ленточными щупальцами. Вращает купол и парит. Без чашки, человеческой головы и балетной пачки.","skins":"перламутровый, закатный, звёздный, акварельный, северное сияние"}
+    },
+    {
+      "slot":5,"key":"Assassino","name":"Капучино Ассасино","aliases":["Cappuccino Assassino","Capuccino assassino"],
+      "model":"Assets/Resources/Characters/Assassino_v04.fbx","preview":"Characters/Assassino/V04/Assassino_v04_front.png",
+      "status":"claim_found","release_allowed":false,"evidence":["S01","S02"],"grant_document":null,
+      "finding":"Прямо назван в портфолио Mementum. Это заявление о лицензировании, не судебное подтверждение исключительного права.",
+      "next_action":"Первая очередь замены собственным дизайном либо подтверждённое разрешение.",
+      "replacement":{"working_name":"Шелест","role":"теневой рывок","design":"Низкий фиолетовый лис из складок бумаги: треугольная голова, четыре короткие лапы и широкий веерный хвост. Во время рывка складывается гармошкой. Без чашки, повязки, мечей и металлической лобной пластины.","skins":"бумажный, ледяной, медный, звёздный, тушевый"}
+    },
+    {
+      "slot":6,"key":"Patapim","name":"Брр Брр Патапим","aliases":["Brr Brr Patapim"],
+      "model":"Assets/Resources/Characters/Patapim_v04.fbx","preview":"Characters/Patapim/V04/Patapim_v04_front.png",
+      "status":"claim_found","release_allowed":false,"evidence":["S01","S02"],"grant_document":null,
+      "finding":"Прямо назван в портфолио Mementum; документов лицензии для нашей игры нет.",
+      "next_action":"Первая очередь замены собственным дизайном либо подтверждённое разрешение.",
+      "replacement":{"working_name":"Мохокраб","role":"лесная хватка","design":"Широкий мятный краб-садовник на четырёх корневых лапах, с грибной шляпкой-панцирем и двумя клешнями-ростками. Выпускает корни из земли. Без примата, длинного носа и огромных человеческих ступней.","skins":"осенний, кристальный, болотный, цветущий, лунный"}
+    },
+    {
+      "slot":7,"key":"TungSahur","name":"Тунг Тунг Тунг Сахур","aliases":["Tung Tung Tung Sahur","Tung Tung Sahur"],
+      "model":"Assets/Resources/Characters/TungSahur_v04.fbx","preview":"Characters/TungSahur/V04/TungSahur_v04_front.png",
+      "status":"claim_found","release_allowed":false,"evidence":["S01","S02"],"grant_document":null,
+      "finding":"Прямо назван в портфолио Mementum, которое также заявляет работу с Noxa. Полномочия и объём прав не проверены; лицензии нет.",
+      "next_action":"Первая очередь замены собственным дизайном либо подтверждённое разрешение.",
+      "replacement":{"working_name":"Битобот","role":"барабанный удар","design":"Оранжево-бирюзовый заводной робот-колонка: широкое трапециевидное тело, два небольших колеса, короткие молоточки вместо кистей, светящийся эквалайзер вместо лица. Без деревянного цилиндра, биты и человеческих ног.","skins":"ретро, диско, медный, космический, уличный"}
+    },
+    {
+      "slot":8,"key":"Lirili","name":"Лирили Ларила","aliases":["Lirili Larila","Lirilì Larilà"],
+      "model":"Assets/Resources/Characters/Lirili_v04.fbx","preview":"Characters/Lirili/V04/Lirili_v04_front.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S04","S05"],"grant_document":null,
+      "finding":"Разрешение на коммерческую адаптацию исходного слона-кактуса не найдено. Вторичные карточки товарных знаков по этому имени не приняты за проверку реестра или доказательство запрета игр.",
+      "next_action":"Уточнить автора/территории; при отсутствии основания заменить.",
+      "replacement":{"working_name":"Колюмба","role":"кактусная буря","design":"Песочный броненосец с мозаичным панцирем, небольшими суккулентами на хвосте и короткими лапами. Выпускает кольцо лёгких семян. Без головы слона, хобота, двух кактусных ног и сандалий.","skins":"пустынный, оазисный, цветущий, обсидиановый, медовый"}
+    },
+    {
+      "slot":9,"key":"Frulli","name":"Фрулли Фрулла","aliases":["Frulli Frulla","Fruli Frula"],
+      "model":"Assets/Resources/Characters/Frulli_v04.fbx","preview":"Characters/Frulli/V04/Frulli_v04_front.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S10","S11"],"grant_document":null,
+      "finding":"Один файл Wikimedia помечен PD-algorithm, другой HD-файл удаляли с подозрением на нарушение. Свободное использование персонажа с нашим обликом не подтверждено.",
+      "next_action":"Продолжить проверку конкретного визуального источника; при отсутствии основания заменить.",
+      "replacement":{"working_name":"Ветрушка","role":"воздушный танец","design":"Полосатый живой ветроуказатель с плавниками-лентами, большими глазами на тканевой голове и маленьким хвостовым пропеллером. Без птицы, длинного клюва и солнечных очков.","skins":"карнавальный, облачный, ночной, морской, грозовой"}
+    },
+    {
+      "slot":10,"key":"Boneca","name":"Бонека Амбалабу","aliases":["Boneca Ambalabu","Boneca Ambalbu"],
+      "model":"Assets/Resources/Characters/Boneca_v04.fbx","preview":"Characters/Boneca/V04/Boneca_v04_front.png",
+      "status":"claim_found","release_allowed":false,"evidence":["S01","S09"],"grant_document":null,
+      "finding":"Прямо назван в портфолио Mementum. Противоречащие пометки на Wikimedia не приняты за достаточное основание использования.",
+      "next_action":"Первая очередь замены собственным дизайном либо подтверждённое разрешение.",
+      "replacement":{"working_name":"Пружик","role":"прыжок и круг краски","design":"Лимонный круглый ёжик на одной большой фиолетовой пружине с упругой овальной подошвой; короткие резиновые иглы и две маленькие лапки. Без лягушачьей головы, автомобильной шины и человеческих ступней.","skins":"неоновый, песочный, ледяной, конфетный, механический"}
+    },
+    {
+      "slot":11,"key":"Trippi","name":"Триппи Троппи","aliases":["Trippi Troppi shrimp cat","Trippi Troppi cat shrimp"],
+      "model":"Assets/Resources/Characters/Trippi_v04.fbx","preview":"Characters/Trippi/V04/Trippi_v04_front.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S04","S06"],"grant_document":null,
+      "finding":"Проверялся именно кот-креветка по пользовательскому соответствию. Поиск смешивает его с рыбой-медведем; лицензии на первый конкретный образ не подтверждены.",
+      "next_action":"Не подменять источник другим образом с тем же именем; подготовить резерв.",
+      "replacement":{"working_name":"Акварик","role":"всплеск краски","design":"Бирюзовый аксолотль с шестью жабрами-кисточками, четырьмя лапками и прозрачным пузиком-палитрой. Без кошачьей головы, креветочных сегментов и множества тонких ножек.","skins":"акварельный, коралловый, жемчужный, неоновый, звёздный"}
+    },
+    {
+      "slot":12,"key":"Troppa","name":"Троппа Триппа","aliases":["Troppa Trippa fish bear","Trippi Troppi fish bear","Trippi Troppi Troppa Trippa"],
+      "model":"Assets/Resources/Characters/Troppa_v01.fbx","preview":"Characters/Troppa/V01/Troppa_v01_front.png",
+      "status":"unresolved","release_allowed":false,"evidence":["S04","S06"],"grant_document":null,
+      "finding":"Проверялся именно толстый медведь с рыбьей головой. Отдельного подтверждённого разрешения или свободного статуса не найдено. Не смешивать с котом-креветкой.",
+      "next_action":"Уточнить первоначальный источник; при отсутствии основания заменить.",
+      "replacement":{"working_name":"Пуфолёт","role":"брюшной плеск","design":"Пузатый маленький дирижабль-рыба-фугу с цельной мордой, надувными плавниками, двумя короткими опорами и сеткой цветных заплат. Без меха, медвежьего туловища и отдельной рыбьей головы.","skins":"полосатый, небесный, лунный, конфетный, штормовой"}
+    }
+  ],
+  "implementation_order": [
+    "Первой проработать пятёрку slot 4,5,6,7,10: эскизы, самостоятельные силуэты и новые рабочие имена.",
+    "Для восьми unresolved продолжить поиск доказательств; сохранять известные версии только после подтверждения основания. Резервные концепции подготовлены, автоматически свободными герои не объявляются.",
+    "На этапе утверждения замены изготовить новые версии Blender и игровые FBX. Старые исходники сохранить как архив разработки; не оставлять заменённые FBX в Resources релизного клиента.",
+    "Сохранить механику способностей, управление, коллайдеры, статистику планет. Проверить новые скелеты и анимации до смены привязок.",
+    "Создать новую ревизию каталога и отдельные идентификаторы новых костюмов; старые hash-пакеты и тестовые права не перезаписывать и не выдавать за покупки другого героя. Проверить согласованность состава и скинов в сети.",
+    "Перерисовать портреты, магазин, тексты, иконку и рекламные скриншоты. Отдельно проверить название Brainrot Planet.io, новые имена, шрифты и сторонние SDK.",
+    "Проверить APK/AAB/IPA, сетевой матч и все 5 костюмов каждого заменённого героя. Только затем менять состав публичной сборки."
+  ]
+}

@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: one landscape game-character lineup concept sheet, draft for five new characters in a colorful planet territory-painting game.
+Primary request: create one cohesive studio lineup showing exactly five independently designed characters in the order below. Full bodies, readable silhouettes, slight front three-quarter angle, equal visual prominence, enough space between figures. Plain pale blue backdrop, soft studio floor shadows, bright appealing color, tactile sculpted stylized 3D materials with organic curves and useful surface detail. These are design proposals for new Blender models; not screenshots and not existing meme characters.
+
+1. LUMIKA: a coral-pink jellyfish umbrella creature; shallow broad luminous cap, five glowing little droplets along its rim, large expressive eyes on the cap, soft ribbon tentacles, floating just above the ground. No cup, no coffee, no human body or ballet costume.
+2. SHELEST: a low quadruped violet folded-paper fox with angular triangular head and a broad accordion fan tail, tiny square paper paws, expressive mint eyes, handmade folded-paper texture. No ninja costume, no headband, no weapons or emblems.
+3. MOSSCRAB: a wide mint-green gardener crab with a mushroom-cap shell, four root-shaped articulated legs and two sprout claws; curious eye stalks, earthy ceramic and moss materials. No primate face, no long nose and no human feet.
+4. BEATBOT: a chunky orange and turquoise wind-up speaker robot with trapezoid torso, two small wheels, short hammer hands, and a simple glowing equalizer face; matte painted metal, little circular joints. No wooden cylinder body, no baseball bat, no human legs.
+5. SPRIG: a lemon-yellow round rubber hedgehog on one large purple spring attached to an oval bouncy foot; two tiny paws, short rounded rubber spikes, mischievous expressive eyes. No frog, no tire, no human legs.
+
+Text: exactly these short labels below the respective figures: "LUMIKA", "SHELEST", "MOSSCRAB", "BEATBOT", "SPRIG". No other text.
+Constraints: exactly five figures; full bodies and spring base visible; no cropped extremities; no franchise references, brands, trademark logos or watermarks; each silhouette must remain legible at small mobile gameplay size. Do not derive the designs from attached images or recognizable existing meme characters. This is an exploratory concept sheet, not proof of copyright or trademark clearance.

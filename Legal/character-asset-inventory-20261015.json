@@ -1,0 +1,429 @@
+{
+  "checked_on": "2026-10-15",
+  "scope": "Listed evidence files only, not complete project clearance",
+  "roster_count": 13,
+  "skin_count": 65,
+  "store_product_count": 99,
+  "skins_per_slot": {
+    "0": 5,
+    "1": 5,
+    "2": 5,
+    "3": 5,
+    "4": 5,
+    "5": 5,
+    "6": 5,
+    "7": 5,
+    "8": 5,
+    "9": 5,
+    "10": 5,
+    "11": 5,
+    "12": 5
+  },
+  "files": [
+    {
+      "path": "Assets/Editor/ReleasePolishAssets.cs",
+      "bytes": 14026,
+      "sha256": "025dda65f2fbf785a4cdb0e3072a86d07e3c5ff08349953e8ff8907d5880c429"
+    },
+    {
+      "path": "Assets/Resources/Audio/BombExplosion1.wav",
+      "bytes": 86444,
+      "sha256": "03daa74fcf674535fcdbb228aed4463936c7169d44f6ebf3faf49a5c8e05986b"
+    },
+    {
+      "path": "Assets/Resources/Audio/BombExplosion2.wav",
+      "bytes": 86444,
+      "sha256": "492b6190a129a058e2fb0ce8d8007392cfa95d2a1c071d76e3af076fa67ad455"
+    },
+    {
+      "path": "Assets/Resources/Audio/BombExplosion3.wav",
+      "bytes": 86444,
+      "sha256": "249c900034221b2e10b165a4cebbb6dd8b72e08247dd7b6d763e7d461f1a0703"
+    },
+    {
+      "path": "Assets/Resources/Characters/Assassino_v04.fbx",
+      "bytes": 1707772,
+      "sha256": "0b6f503503d7608c9e166a433e6f16d5194a2d16c84ee03859fc1a2fc6d0753e"
+    },
+    {
+      "path": "Assets/Resources/Characters/Ballerina_v04.fbx",
+      "bytes": 2028268,
+      "sha256": "b7132a07a10b75cd31187a856c08cd8011ea39e048d38080c14b2780957f238b"
+    },
+    {
+      "path": "Assets/Resources/Characters/Bombardiro_v06.fbx",
+      "bytes": 2024108,
+      "sha256": "22f4c855762ae05458c742be738fd2414c2487f257b0699efa9f5b2614b448bd"
+    },
+    {
+      "path": "Assets/Resources/Characters/Bombardiro_v06_Skin_Albedo.png",
+      "bytes": 757708,
+      "sha256": "75721f3a9f23602f7493fdfd1c0adc7764c833974999447334ea00f7fb813844"
+    },
+    {
+      "path": "Assets/Resources/Characters/Bombardiro_v06_Skin_Normal.png",
+      "bytes": 1224458,
+      "sha256": "cd64780569fd8b10c5f0cbd5d41dc0ef6c752aa1184818ad786e1bef03bfdc99"
+    },
+    {
+      "path": "Assets/Resources/Characters/Bombombini_v04.fbx",
+      "bytes": 2429500,
+      "sha256": "779f098c73127d969f3a8b9a14bbf493f6f4bb2fe8fea2d10cd765d0ad872f23"
+    },
+    {
+      "path": "Assets/Resources/Characters/Boneca_v04.fbx",
+      "bytes": 1914588,
+      "sha256": "eeaef32635fa1adfdba31049e4d37c6c40540031ad3474d478391e8fdd1729bd"
+    },
+    {
+      "path": "Assets/Resources/Characters/Frigo_v04.fbx",
+      "bytes": 1413628,
+      "sha256": "1790bc03c8c8cc5c435302d0fce9d606f26e5b888f3cd9af9399deeda0127a8c"
+    },
+    {
+      "path": "Assets/Resources/Characters/Frulli_v04.fbx",
+      "bytes": 938556,
+      "sha256": "8214c64f487a0feb5d4f8fb6da4530f3b712944752a2c040349506db4f5b2972"
+    },
+    {
+      "path": "Assets/Resources/Characters/Lirili_v04.fbx",
+      "bytes": 1530860,
+      "sha256": "a1105c693e2e6578e0a7b047a782832cca86f7a3eaf62dccb664546115ef6606"
+    },
+    {
+      "path": "Assets/Resources/Characters/Patapim_v04.fbx",
+      "bytes": 1876524,
+      "sha256": "082b1ed2877a87855351967c8e540fb485c4554ffe85d6d6684917b169813121"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_cloth.mat",
+      "bytes": 2384,
+      "sha256": "d55197eed97f8fd407a9f112d54977bfa738186af8e89258744077406a4cd67b"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_cloth_Albedo.png",
+      "bytes": 261386,
+      "sha256": "ab20fc9a5b0ef76fa7e88f3ef0a470f20fd682feaca54ede9d0bfb5bcab05d59"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_cloth_Normal.png",
+      "bytes": 536992,
+      "sha256": "bb11cf788b7218cce2680443da2714bcc75ee146cc47f9cc6ab1634afc114ddd"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_elephant.mat",
+      "bytes": 2387,
+      "sha256": "c214d756b43fb5488c7b2483f38595472e2ac53cd889049bdf7da64af2dd4a9c"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_elephant_Albedo.png",
+      "bytes": 254700,
+      "sha256": "6473f91b6d9409936a8c04c2ac252c9d436c9bab312d44af4905a1316cede836"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_elephant_Normal.png",
+      "bytes": 569615,
+      "sha256": "ec926960825fb369d56fe2d0502cd5231b4fa287b42ec6f85eb640b8c3c5c63b"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_feather.mat",
+      "bytes": 2386,
+      "sha256": "1dca9545d830479d7326eae2aac99d901b2dbc60545e14660c4cd19fa43004a4"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_feather_Albedo.png",
+      "bytes": 247456,
+      "sha256": "80a6c4e1fa90d0e61afa39539eabb873735c69878a7743deeb9f0a070a3d1ac0"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_feather_Normal.png",
+      "bytes": 536637,
+      "sha256": "fe4e421ae43e898d4b06c41ca5a1cdb2d011be68e78d7e08188c341987ccdccc"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_fish.mat",
+      "bytes": 2383,
+      "sha256": "ebe691d480efa735d6d77b9eb14b652cf8ad4155c682d65f584cf58380331ec1"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_fish_Albedo.png",
+      "bytes": 253818,
+      "sha256": "51751e38c0237e82572354383959213173f29d623849f8d3dae78a2ab62746f5"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_fish_Normal.png",
+      "bytes": 548294,
+      "sha256": "47bac464bdf8696e0bd35a182385b889a2b668e6ee5b1bea99c390a3de4c6b7d"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_fur.mat",
+      "bytes": 2382,
+      "sha256": "9444c4a12d785917f8928664f17405d8426e5a2b68b20acdb57268a0385cb259"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_fur_Albedo.png",
+      "bytes": 247456,
+      "sha256": "80a6c4e1fa90d0e61afa39539eabb873735c69878a7743deeb9f0a070a3d1ac0"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_fur_Normal.png",
+      "bytes": 536637,
+      "sha256": "fe4e421ae43e898d4b06c41ca5a1cdb2d011be68e78d7e08188c341987ccdccc"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_hide.mat",
+      "bytes": 2383,
+      "sha256": "be0380d885b477a390a7f47e71ba6ba198bd5043ef4e50328bd0367da82144a6"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_hide_Albedo.png",
+      "bytes": 254916,
+      "sha256": "0b4f3428b080b0ccd4fca9dd85550d62c9f7c102c889b581ee34bf16c2c530b6"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_hide_Normal.png",
+      "bytes": 572417,
+      "sha256": "6cc02e4057c5124b2e47b735708c92ae02ec1912b34177ecd3a214ce490edc07"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_leaf.mat",
+      "bytes": 2383,
+      "sha256": "d7b80195ee8266b8108f11031e25e81b988ccc8ef59b05835fde1c76037ed5f2"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_leaf_Albedo.png",
+      "bytes": 254700,
+      "sha256": "6473f91b6d9409936a8c04c2ac252c9d436c9bab312d44af4905a1316cede836"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_leaf_Normal.png",
+      "bytes": 569615,
+      "sha256": "ec926960825fb369d56fe2d0502cd5231b4fa287b42ec6f85eb640b8c3c5c63b"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_leather.mat",
+      "bytes": 2386,
+      "sha256": "3caa17be8934f7c70460f0a397fc7b8d894153f16d230d6627ab529edee460ea"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_leather_Albedo.png",
+      "bytes": 260728,
+      "sha256": "3b04599b94001f6ca47509fae60a8b8354c9c44ce0badca4083640bddf2d113b"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_leather_Normal.png",
+      "bytes": 594558,
+      "sha256": "7935356a854d54088d59b4803af63a4a1f15ceda5f05c56f0c73c1b1bcb4504a"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_rubber.mat",
+      "bytes": 2385,
+      "sha256": "54b239abc26666e07db5d494fd8dea657d61e72476e5e55cc1e2f10375150735"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_rubber_Albedo.png",
+      "bytes": 244239,
+      "sha256": "59d259e924290fcdb7bdc5f767baf0b0a8bfb253adaffbb917a34d2837fc912a"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_rubber_Normal.png",
+      "bytes": 71375,
+      "sha256": "19a5f05386bbf48c518aa78f5c60616f41578a8f6b4977be37ea4928d4ebabd4"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_wood.mat",
+      "bytes": 2383,
+      "sha256": "dd3937a3d0050270c03ce639f2fee6736c78a976ba3f89a32ce934cdbbd7c043"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_wood_Albedo.png",
+      "bytes": 257736,
+      "sha256": "42f319efa1661dafbd1a259116db16a0ec8c558cf9c995f3fbb6a014bb660096"
+    },
+    {
+      "path": "Assets/Resources/Characters/ReferenceDetail/Ref63_wood_Normal.png",
+      "bytes": 589066,
+      "sha256": "08157c926a1f1c909eb43d946e9d55eed3ef405ee88f3cdb7c1ccd2669e6cffc"
+    },
+    {
+      "path": "Assets/Resources/Characters/Tralalero_v07.fbx",
+      "bytes": 1467340,
+      "sha256": "624fed2b1c4e50666ae67fef593b8c052d3981f33b040807b953b9b50f3e37e1"
+    },
+    {
+      "path": "Assets/Resources/Characters/Trippi_v04.fbx",
+      "bytes": 1165164,
+      "sha256": "d84fb3c68ae94620ff019d0f0330ca4e881b1010ad721d6481209237497f7e31"
+    },
+    {
+      "path": "Assets/Resources/Characters/Troppa_v01.fbx",
+      "bytes": 1599452,
+      "sha256": "6d8748ce17d2fed5ca76e84c7f471d6b3ac9ff94fccdfec5b0f2b06e3a50cd91"
+    },
+    {
+      "path": "Assets/Resources/Characters/TungSahur_v04.fbx",
+      "bytes": 1123676,
+      "sha256": "10221afeffe5f9d353c57f5de2e522f2ea1192c2430fb286fe6f607dbc11b1ad"
+    },
+    {
+      "path": "Assets/Resources/HeroPortraits064.png",
+      "bytes": 238014,
+      "sha256": "f55327accc7372946de8050cf73a8bb39cb106d822de6199505d9f2b678c70bd"
+    },
+    {
+      "path": "Assets/Scripts/AvatarArt.cs",
+      "bytes": 37596,
+      "sha256": "d32fb168694717638a6d58340a33ab76d2445ee04eeea159b1bde756640cefe3"
+    },
+    {
+      "path": "Assets/Scripts/GameSound.cs",
+      "bytes": 5202,
+      "sha256": "fbb0c16a7fbeb3269daa0528355bf81cb4c721e9d3fa368073dd919cf2fc79b4"
+    },
+    {
+      "path": "Audio/make_bomb_explosions_066.py",
+      "bytes": 3071,
+      "sha256": "ce8a49523f8b149aba27939e3737b01d5ba8d054edc7be8a3ed2812a83f941da"
+    },
+    {
+      "path": "Characters/Assassino/V04/Assassino_v04_front.png",
+      "bytes": 1233743,
+      "sha256": "946806642df772b8021563a651ee7e0b984d04d1b4b5730b6484b775816e1f0d"
+    },
+    {
+      "path": "Characters/Ballerina/V04/Ballerina_v04_front.png",
+      "bytes": 1158315,
+      "sha256": "2cbd90ae0f9d49fc0a1b37baf3bedc5fc0fd3be13ec5df75934bf25201b946a7"
+    },
+    {
+      "path": "Characters/Ballerina/make_ballerina.py",
+      "bytes": 13326,
+      "sha256": "3728eca50c1b1919d0ecffd588ea5b541fbfa3e88082dd2546c684648dd18920"
+    },
+    {
+      "path": "Characters/Bombardiro/V06/Bombardiro_v06_front_3q.png",
+      "bytes": 1285426,
+      "sha256": "c35f85776ac0e6eb10aa12f2d34d672015ddd94e519e6669121874c2f979fe5e"
+    },
+    {
+      "path": "Characters/Bombardiro/sculpt_bombardiro_v06.py",
+      "bytes": 19379,
+      "sha256": "9a75c14ce70602e41a8cb7f781d942420af6efc83e02ed6ec9d182e204dd96d1"
+    },
+    {
+      "path": "Characters/Bombombini/V04/Bombombini_v04_front.png",
+      "bytes": 1119226,
+      "sha256": "98f3d99f8e8c8c5df1ed958005ba969c2047764d795305aaf5f3f721f1bd6f0c"
+    },
+    {
+      "path": "Characters/Bombombini/make_bombombini.py",
+      "bytes": 14435,
+      "sha256": "8580e94c813ab1958fa2f95dc3ec5997ff9d376de8b269fcdba5bbb1d0cd5473"
+    },
+    {
+      "path": "Characters/Boneca/V04/Boneca_v04_front.png",
+      "bytes": 1213004,
+      "sha256": "28a1e8de6412114be43b2bf62e3956b045679ec41c5ca48ad5d53bcf94f5055a"
+    },
+    {
+      "path": "Characters/Frigo/V04/Frigo_v04_front.png",
+      "bytes": 1156144,
+      "sha256": "b5c1a830dfc5edbd62f2b3bf1f49aace3d44cc3a90b5f4e80ef1ce8aa12a349e"
+    },
+    {
+      "path": "Characters/Frulli/V04/Frulli_v04_front.png",
+      "bytes": 1201762,
+      "sha256": "2679418d8de3842eef91cb8f8eada1bc2cd8a6c965089d27b4cdcc99751dc6c3"
+    },
+    {
+      "path": "Characters/Lirili/V04/Lirili_v04_front.png",
+      "bytes": 1235370,
+      "sha256": "1873202453da6f3861e2542e938ff4de01fe04b0865378be4fc679a0df895241"
+    },
+    {
+      "path": "Characters/Patapim/V04/Patapim_v04_front.png",
+      "bytes": 1271636,
+      "sha256": "155d847048d7373bea182c224c17d773b08552dfebb469df670ee16c59d110a0"
+    },
+    {
+      "path": "Characters/Tralalero/V06/Tralalero_v06_threequarter.png",
+      "bytes": 1113340,
+      "sha256": "188dda8da15e8cf379189d149a06b4517a7644c29ecca56e506b717d6e08b7ef"
+    },
+    {
+      "path": "Characters/Tralalero/make_tralalero.py",
+      "bytes": 17622,
+      "sha256": "d1e6f261d26240e975b0c5f2bf509d120c0ff583c31d352283d3b032c36d9324"
+    },
+    {
+      "path": "Characters/Trippi/V04/Trippi_v04_front.png",
+      "bytes": 1203215,
+      "sha256": "dc389b2ab5e0db8b2b1f613c79f87423d419b9b1d215cc0a90ca4815ca2822f0"
+    },
+    {
+      "path": "Characters/Troppa/V01/Troppa_v01_front.png",
+      "bytes": 1260938,
+      "sha256": "2fc84c28e29ee289dff7978247f23e1610e3267107fd0f69983cd45fe385b4fb"
+    },
+    {
+      "path": "Characters/TungSahur/V04/TungSahur_v04_front.png",
+      "bytes": 1256886,
+      "sha256": "13e76807470f64af5375b403f4bd3dc91942e24cd29d33db1ac3a5562ad5c0b8"
+    },
+    {
+      "path": "Characters/build_cast_skins_v072.py",
+      "bytes": 29288,
+      "sha256": "67908cd1c3b71be1009de102cfcef8412dc2016170e3bc1a91a6ef4095b6ab61"
+    },
+    {
+      "path": "Characters/reference_detail_063.py",
+      "bytes": 19518,
+      "sha256": "6f91adea5f3bba0e053b41f94861983b7c05540197df672f4e5216d7a7c6d313"
+    },
+    {
+      "path": "Characters/refine_references_063.py",
+      "bytes": 33988,
+      "sha256": "e5e16e0da7e30a7c1f72cac96f233f2ee62f15d968c77ee50fffd94c25c90235"
+    },
+    {
+      "path": "Characters/remaining_characters_v01.py",
+      "bytes": 22530,
+      "sha256": "117d2409de99c7be17cc86d91aaad4c561be558a903964c96357f9492313a73c"
+    },
+    {
+      "path": "Content/Skins/catalog-cast-v1.json",
+      "bytes": 31149,
+      "sha256": "46030078262189c0ddcdd34278b639a57aaae6d55fe8f509822293016b4e04c1"
+    },
+    {
+      "path": "Content/Store/TEST_STORE_OPERATIONS.txt",
+      "bytes": 5130,
+      "sha256": "e8f94ba535353a659a799afbc681bbc9862dcb3f6c2c0f309c51d4b18efc07d1"
+    },
+    {
+      "path": "Content/Store/catalog-test-v1.json",
+      "bytes": 28359,
+      "sha256": "8e3dcefe8028b41c317eb26555f9ac2f2968068d60ee7a9ac9c9dc8844f0a535"
+    },
+    {
+      "path": "Legal/character-rights-20261015.json",
+      "bytes": 34468,
+      "sha256": "434d92660fcf7c679823b5af7ded7baae4219ae54f8c43ff60e4fc93dd35c9b5"
+    },
+    {
+      "path": "Legal/replacement-concept-prompt-20261015.txt",
+      "bytes": 2432,
+      "sha256": "af5c33eb6d0f839bacafea3e9715f81c9576499e0c9d46f41879c1d75dbaa1dc"
+    },
+    {
+      "path": "Legal/replacement-five-concepts-20261015.png",
+      "bytes": 1961656,
+      "sha256": "7c038e45880a642dbe688004497d2dc0282d85ac01198e0611faa5efda93a635"
+    },
+    {
+      "path": "Tools/character_rights_audit.py",
+      "bytes": 13971,
+      "sha256": "20c7fd352cf976812610fe0a10424d2ed4e68526eb97a8d780e263315712954c"
+    }
+  ]
+}
