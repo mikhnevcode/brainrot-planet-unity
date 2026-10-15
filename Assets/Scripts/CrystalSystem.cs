@@ -80,13 +80,17 @@ namespace BrainrotPlanet
         }
         private void Collect(Crystal c,int team)
         {
-            game.Effects.CaptureFlash(c.n,c.rare?Color.yellow:Color.cyan,c.rare?130:55);
+            game.Effects.CrystalPickup(c.n,c.rare,Colors.Team(team));
             game.Territory.ClaimDisk(team,c.n,c.rare?.17f:.09f);
             if(team==1)
             {
                 game.ReduceSkillCooldown(c.rare?9f:4f);
-                game.Announce(c.rare?" ЛЕГЕНДАРНЫЙ КРИСТАЛЛ!":" КРИСТАЛЛ: КРАСКА + ЭНЕРГИЯ");
+                game.Announce(c.rare
+                    ?" ЗОЛОТОЙ КРИСТАЛЛ: САЛЮТ + КРАСКА • −9 С"
+                    :" ГОЛУБОЙ КРИСТАЛЛ: ВОЛНА КРАСКИ • −4 С");
             }
+            Debug.Log("CRYSTAL_COLLECTED team="+team+" rare="+c.rare+
+                " paintRadius="+(c.rare?.17f:.09f).ToString("F2"));
             Destroy(c.obj);
         }
         private static Mesh cached;

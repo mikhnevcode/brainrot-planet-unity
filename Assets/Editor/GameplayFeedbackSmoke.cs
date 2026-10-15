@@ -32,7 +32,14 @@ namespace BrainrotPlanet.Editor
             Vector3 before=scale.MultiplyPoint3x4(pivot);
             Vector3 after=rotated.MultiplyPoint3x4(pivot);
             Require(Vector3.Distance(before,after)<.01f,"scaled rotation keeps perimeter pivot");
-            Debug.Log("GAMEPLAY_FEEDBACK_SMOKE_PASS risks=6 directions=3 tap=3 perimeter=3 scaledPivot=true");
+            PlanetEffects.CrystalFxProfile common=PlanetEffects.CrystalProfile(false);
+            PlanetEffects.CrystalFxProfile rare=PlanetEffects.CrystalProfile(true);
+            Require(common.Waves>=2&&common.FireworkBursts==0,"common crystal paint wave");
+            Require(rare.Waves>=2&&rare.FireworkBursts>=5&&rare.OuterRadius>common.OuterRadius,
+                "rare crystal fireworks");
+            Require(Resources.Load<Shader>("SoftSpark")!=null,"crystal particle shader");
+            Require(Resources.Load<Material>("PlanetSprite")!=null,"crystal wave material");
+            Debug.Log("GAMEPLAY_FEEDBACK_SMOKE_PASS risks=6 directions=3 tap=3 perimeter=3 scaledPivot=true crystalFx=profiled");
         }
 
         private static bool OnEdge(Vector2 point,Rect rect)

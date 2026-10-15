@@ -84,6 +84,82 @@ namespace BrainrotPlanet
             var wave=go.AddComponent<PaintWave>();
             wave.Configure(direction,Mathf.Clamp(1.2f+count/260f,2f,7f),.65f,color);
         }
+
+        public struct CrystalFxProfile
+        {
+            public int Waves,FireworkBursts;
+            public float OuterRadius;
+            public CrystalFxProfile(int waves,int fireworks,float radius)
+            {Waves=waves;FireworkBursts=fireworks;OuterRadius=radius;}
+        }
+        public static CrystalFxProfile CrystalProfile(bool rare)=>rare
+            ? new CrystalFxProfile(2,5,6.4f)
+            : new CrystalFxProfile(2,0,4.5f);
+
+        /// <summary>A cyan surface ripple for a normal pickup; a larger gold
+        /// ripple followed by a short multicolour firework for a rare pickup.</summary>
+        public void CrystalPickup(Vector3 direction,bool rare,Color teamColor)
+        {
+            if(softMaterial==null)return;
+            Vector3 n=direction.normalized;
+            CrystalFxProfile profile=CrystalProfile(rare);
+            Color primary=rare?new Color(1f,.72f,.08f):new Color(.18f,1f,1f);
+            Color secondary=rare?new Color(1f,.33f,.66f):Color.Lerp(primary,teamColor,.42f);
+            Burst(PlanetSurface.Point(n,1.08f),primary,rare?42:28,rare?4.8f:3.2f);
+            MakeCrystalWave(rare?"Rare crystal gold paint wave":"Common crystal cyan paint wave",
+                n,profile.OuterRadius,rare?.92f:.78f,primary);
+            MakeCrystalWave(rare?"Rare crystal colour paint wave":"Common crystal team paint wave",
+                n,profile.OuterRadius*.68f,rare?.64f:.52f,secondary);
+            if(rare)
+            {
+                var celebration=new GameObject("Rare crystal multicolour fireworks");
+                celebration.transform.SetParent(transform,false);
+                celebration.AddComponent<CrystalFireworks>().Configure(this,n,profile.FireworkBursts);
+            }
+            Debug.Log("CRYSTAL_FX_PLAYED rare="+rare+" waves="+profile.Waves+
+                " fireworks="+profile.FireworkBursts);
+        }
+        private void MakeCrystalWave(string title,Vector3 direction,float radius,float duration,Color color)
+        {
+            var go=new GameObject(title);go.transform.SetParent(transform,false);
+            go.AddComponent<PaintWave>().Configure(direction,radius,duration,color);
+        }
+    }
+
+    /// <summary>Five staggered fountains make the rare crystal recognisable
+    /// without allocating a second particle system implementation.</summary>
+    public sealed class CrystalFireworks : MonoBehaviour
+    {
+        private static readonly Color[] Palette={
+            new Color(1f,.76f,.08f),new Color(1f,.24f,.62f),
+            new Color(.20f,.92f,1f),new Color(.50f,1f,.20f),
+            new Color(1f,.42f,.10f)};
+        private PlanetEffects effects;
+        private Vector3 center,tangentX,tangentY;
+        private int target,index;
+        private float age,nextBurst;
+        public void Configure(PlanetEffects source,Vector3 direction,int burstCount)
+        {
+            effects=source;center=direction.normalized;target=Mathf.Max(1,burstCount);
+            tangentX=Vector3.Cross(center,Vector3.up).normalized;
+            if(tangentX.sqrMagnitude<.1f)tangentX=Vector3.Cross(center,Vector3.forward).normalized;
+            tangentY=Vector3.Cross(center,tangentX).normalized;
+        }
+        private void Update()
+        {
+            age+=Time.deltaTime;
+            while(index<target&&age>=nextBurst)
+            {
+                float angle=index*2.399963f;
+                float spread=.028f+.012f*(index%2);
+                Vector3 side=tangentX*Mathf.Cos(angle)+tangentY*Mathf.Sin(angle);
+                Vector3 direction=(center*Mathf.Cos(spread)+side*Mathf.Sin(spread)).normalized;
+                effects.Burst(PlanetSurface.Point(direction,1.45f+index*.08f),
+                    Palette[index%Palette.Length],22,5.4f+index*.22f);
+                index++;nextBurst+=.12f;
+            }
+            if(index>=target&&age>.88f)Destroy(gameObject);
+        }
     }
     /// <summary>Short-lived copy of a cut trail: the gap opens at the hit and
     /// erases toward both ends before the victim reappears at home.</summary>
