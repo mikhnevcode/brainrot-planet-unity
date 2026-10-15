@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-15",
+  "series": 2,
+  "count": 13,
+  "generator": "built-in image_gen",
+  "status": "Concept art only, not 3D production models, registered names, or intellectual-property clearance.",
+  "visualReview": "All 13 images inspected for silhouette, defining features, readable face, full-body framing and absence of recognizable logos. Each is a distinct proposed creature rather than a costume of the first series.",
+  "characters": [
+    {
+      "filename": "14-chaylitka.png",
+      "bytes": 1894295,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "93828694bb15399324613d86743eef5149104be8826fcaef0b12472e8bada0c8",
+      "id": "14-chaylitka",
+      "name": "Чайлитка"
+    },
+    {
+      "filename": "15-kassetych.png",
+      "bytes": 1929417,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "7f2e3d38511509bb22336c615b81d63be70d6e1e9a333ec310b79bd399a1f6ed",
+      "id": "15-kassetych",
+      "name": "Кассетыч"
+    },
+    {
+      "filename": "16-lampochmel.png",
+      "bytes": 2040626,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "49369d162857921517273476999a8f71b7adfe9b84b687a12138bc5a388513f9",
+      "id": "16-lampochmel",
+      "name": "Лампочмель"
+    },
+    {
+      "filename": "17-noskoraket.png",
+      "bytes": 2393663,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "072d74b74cf0ab4cf4fc3fdbf4317690854bbf4b54507948231d0ce48148d44d",
+      "id": "17-noskoraket",
+      "name": "Носкоракет"
+    },
+    {
+      "filename": "18-khrusto-bron.png",
+      "bytes": 2377511,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "c86cf9ca90396dc976617ae22f3b7ee5240f8d748e79d05417def3326a9f4181",
+      "id": "18-khrusto-bron",
+      "name": "Хрусто-Бронь"
+    },
+    {
+      "filename": "19-magnitofyr.png",
+      "bytes": 2544788,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "2321ec831b9fe5a66cf4bf79872a578e5d3d6e22b25a512ef248ab872ff6ae20",
+      "id": "19-magnitofyr",
+      "name": "Магнитофыр"
+    },
+    {
+      "filename": "20-garmoshmyak.png",
+      "bytes": 2047247,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "931d890d9f8929bb2f0a0e4054e86f75a63d85313a42f5da29cc2890dd446eca",
+      "id": "20-garmoshmyak",
+      "name": "Гармошмяк"
+    },
+    {
+      "filename": "21-puzyryonysh.png",
+      "bytes": 1874491,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "a226871401a9e9336edda74541ab7bcca1eba3fb43b73934761013774907222e",
+      "id": "21-puzyryonysh",
+      "name": "Пузырёныш"
+    },
+    {
+      "filename": "22-klubkomot.png",
+      "bytes": 2571564,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "d42d2a053568ceaef8d1568db2faa3dfdce3175809b2fc888a55ceacc20f0bf8",
+      "id": "22-klubkomot",
+      "name": "Клубкомот"
+    },
+    {
+      "filename": "23-lunoplyukh.png",
+      "bytes": 1889334,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "6c88d2b99e19814692f2ec47aa5202b1f7fbe6bf40481c0e436925bcb1c29158",
+      "id": "23-lunoplyukh",
+      "name": "Луноплюх"
+    },
+    {
+      "filename": "24-kaktusifon.png",
+      "bytes": 1931660,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "9e20ed1692ba94986f07e8d5db2e68a59ce7b7b3911227f8033416319f35f2fb",
+      "id": "24-kaktusifon",
+      "name": "Кактусифон"
+    },
+    {
+      "filename": "25-pylekhvost.png",
+      "bytes": 2188547,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "be249c5a3bd1e840b63d46440d4fafc634c68b96b14a3f6421c96b52eafd4d33",
+      "id": "25-pylekhvost",
+      "name": "Пылехвост"
+    },
+    {
+      "filename": "26-popkorn-pykh.png",
+      "bytes": 2014204,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "9d73670288a9a1404d8a666d5e050f97b0f7d1eec19da7471ef5110f6bbdbe58",
+      "id": "26-popkorn-pykh",
+      "name": "Попкорн-Пых"
+    }
+  ]
+}
