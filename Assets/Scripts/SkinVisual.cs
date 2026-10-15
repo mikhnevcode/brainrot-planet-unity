@@ -40,7 +40,7 @@ namespace BrainrotPlanet
                     {
                         if(material.HasProperty("_Metallic"))material.SetFloat("_Metallic",patch.metallic);
                         if(material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",patch.smoothness);
-                        if(patch.glow){material.EnableKeyword("_EMISSION");material.SetColor("_EmissionColor",material.color*.5f);}
+                        if(patch.glow){material.EnableKeyword("_EMISSION");material.SetColor("_EmissionColor",material.color*(material.shader.name=="Brainrot/DetailedHeroSurface"?.12f:.5f));}
                     }
                     material.name="Cosmetic "+pack.id+" / "+original.name;
                     resources.owned.Add(material);materials[i]=material;

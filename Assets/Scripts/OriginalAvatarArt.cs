@@ -7,12 +7,13 @@ namespace BrainrotPlanet
     {
         private static readonly Dictionary<string,Material> Materials=new Dictionary<string,Material>();
         private static readonly GameObject[] Models=new GameObject[OriginalHeroCatalog.Count];
-        public static Material Palette(Material source)
+        public static Material Palette(Material source,int hero=-1)
         {
             if(source==null)throw new InvalidOperationException("Original cast material missing");
-            string key=source.name;
+            string key=(hero==0?"Rollo03|":"")+source.name;
             if(Materials.TryGetValue(key,out var existing)&&existing!=null)return existing;
-            string[] tokens=key.Split(' ');
+            if(hero==0){var detailed=DetailedHeroMaterials.Make(source);Materials[key]=detailed;return detailed;}
+            string[] tokens=source.name.Split(' ');
             if(tokens.Length<4||tokens[0]!="Orig26"||!ColorUtility.TryParseHtmlString(tokens[2],out var color))
                 throw new InvalidOperationException("Original palette format: "+key);
             var shader=Resources.Load<Shader>("OriginalHeroSurface");
@@ -42,7 +43,7 @@ namespace BrainrotPlanet
             foreach(var renderer in visual.GetComponentsInChildren<Renderer>(true))
             {
                 var palette=renderer.sharedMaterials;
-                for(int i=0;i<palette.Length;i++)palette[i]=Palette(palette[i]);
+                for(int i=0;i<palette.Length;i++)palette[i]=Palette(palette[i],hero);
                 renderer.sharedMaterials=palette;
             }
             var animator=visual.GetComponent<Animator>()??visual.AddComponent<Animator>();

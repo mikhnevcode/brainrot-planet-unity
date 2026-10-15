@@ -20,8 +20,8 @@ namespace BrainrotPlanet
     // entries are free. This validates content, not store receipts or ownership.
     public sealed class SkinCatalog : MonoBehaviour
     {
-        public const string BaseUrl="https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/original26/skins/";
-        public const string CatalogFile="catalog-original26-v1.json";
+        public const string BaseUrl="https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/rollo081/skins/";
+        public const string CatalogFile="catalog-original26-v2.json";
         public const int MaxPackBytes=2*1024*1024,MaxManifestBytes=131072,MemoryPackLimit=16;
         public SkinManifest Manifest {get;private set;}=new SkinManifest{schema=2,revision=0,skins=new SkinEntry[0]};
         public bool Busy=>refreshing||inFlight.Count>0;
@@ -142,12 +142,18 @@ namespace BrainrotPlanet
                 {Manifest=ReadManifest(File.ReadAllText(path));Generation++;Status="Скачанные образы доступны";Debug.Log("SKIN_CATALOG_CACHE revision="+Manifest.revision);}
             }
             catch(Exception){Status="Используется базовый образ";}
-            if(Manifest.skins.Length==0)
+            // A newer app bundle must not be masked by an older offline cache.
+            // A newer remote catalog still takes precedence over this bundle.
             {
-                var bundled=Resources.Load<TextAsset>("OriginalCast/Skins/catalog-original26-v1");
+                var bundled=Resources.Load<TextAsset>("OriginalCast/Skins/"+Path.GetFileNameWithoutExtension(CatalogFile));
                 if(bundled!=null)
                 {
-                    try{Manifest=ReadManifest(bundled.text);Generation++;Status="Встроенный гардероб доступен офлайн";}
+                    try
+                    {
+                        var candidate=ReadManifest(bundled.text);
+                        if(candidate.revision>Manifest.revision||Manifest.skins.Length==0)
+                        {Manifest=candidate;Generation++;Status="Встроенный гардероб доступен офлайн";}
+                    }
                     finally{Resources.UnloadAsset(bundled);}
                 }
             }

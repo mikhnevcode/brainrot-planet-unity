@@ -8,12 +8,13 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 source=ROOT/'Content/OriginalCast/Skins'
-manifest=json.loads((source/'catalog-original26-v1.json').read_text(encoding='utf-8'))
+catalog='catalog-original26-v2.json' if '--revision2' in sys.argv else 'catalog-original26-v1.json'
+manifest=json.loads((source/catalog).read_text(encoding='utf-8'))
 roster=json.loads((ROOT/'Characters/OriginalCast/roster.json').read_text(encoding='utf-8'))
 assert len(roster['heroes'])==26 and len(manifest['skins'])==130
 bundle=ROOT/'Assets/Resources/OriginalCast/Skins'
 bundle.mkdir(parents=True,exist_ok=True)
-expected={'catalog-original26-v1.json'}
+expected={catalog}
 for hero in range(26):assert sum(e['hero']==hero for e in manifest['skins'])==5
 for entry in manifest['skins']:
     assert entry['id'].startswith('orig_') and entry['file']==entry['id']+'-'+entry['sha256']+'.json'
@@ -26,13 +27,7 @@ for entry in manifest['skins']:
         assert all(abs(v)<5 for v in mesh['vertices'])
     shutil.copyfile(source/entry['file'],bundle/(entry['id']+'.json'))
     expected.add(entry['file'])
-shutil.copyfile(source/'catalog-original26-v1.json',bundle/'catalog-original26-v1.json')
-# These are our never-published intermediate exports, not installed/user content.
-drafts=ROOT/'Builds/OriginalCast_unpublished_pack_drafts'
-for file in source.glob('orig_*.json'):
-    if file.name not in expected:
-        drafts.mkdir(parents=True,exist_ok=True)
-        target=drafts/file.name
-        if not target.exists():file.rename(target)
+shutil.copyfile(source/catalog,bundle/catalog)
+# Published immutable packs belonging to previous manifests stay in place.
 subprocess.run([sys.executable,str(ROOT/'Server/build_store_catalog.py'),'--original26'],check=True)
 print('ORIGINAL_CONTENT_PASS heroes=26 skins=130 immutable_hashes=130 bundled=true')

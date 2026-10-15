@@ -199,11 +199,13 @@ def make():
     return body
 
 
-def studio():
+def studio(prefix='RolloBulk_v02',standard=False):
     scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=48;scene.cycles.use_denoising=True
     scene.render.resolution_x=1120;scene.render.resolution_y=1120;scene.render.resolution_percentage=100
     scene.render.image_settings.file_format='PNG';scene.world=bpy.data.worlds.new('Pastel studio');scene.world.color=(.36,.42,.46)
     scene.view_settings.view_transform='AgX';scene.view_settings.look='AgX - Medium High Contrast';scene.view_settings.exposure=-.25
+    if standard:
+        scene.view_settings.view_transform='Standard';scene.view_settings.look='None';scene.view_settings.exposure=-.7
     for location,power,size in [((4,5,7),1050,4.0),((-4,3,4),650,4.0),((2,-4,5),1250,3.0)]:
         data=bpy.data.lights.new('Softbox','AREA');data.energy=power;data.shape='DISK';data.size=size
         ob=bpy.data.objects.new('Softbox',data);bpy.context.collection.objects.link(ob);ob.location=location;ob.rotation_euler=(Vector((0,0,1.6))-ob.location).to_track_quat('-Z','Y').to_euler()
@@ -211,7 +213,7 @@ def studio():
     camdata=bpy.data.cameras.new('Art review');cam=bpy.data.objects.new('Art review',camdata);bpy.context.collection.objects.link(cam);scene.camera=cam;camdata.type='ORTHO';camdata.ortho_scale=4.25
     for suffix,offset in [('three-quarter',(4.5,8,3.0)),('front',(0,9,2.25)),('side',(9,.2,2.5))]:
         target=Vector((0,-.12,1.64));cam.location=target+Vector(offset);cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler()
-        scene.render.filepath=str(OUT/('RolloBulk_v02_'+suffix+'.png'));bpy.ops.render.render(write_still=True)
+        scene.render.filepath=str(OUT/(prefix+'_'+suffix+'.png'));bpy.ops.render.render(write_still=True)
 
 
 if __name__=='__main__':

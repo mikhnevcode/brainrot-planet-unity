@@ -22,7 +22,8 @@ namespace BrainrotPlanet.Editor
         {int split=value.LastIndexOf('|');return split<0?value:value.Substring(split+1);}
         private static void Prepare(OriginalHeroCatalog.Hero hero)
         {
-            string path="Assets/Resources/OriginalCast/"+hero.Id+"_v01.fbx";
+            int heroIndex=Array.IndexOf(OriginalHeroCatalog.All,hero);
+            string path="Assets/Resources/"+OriginalHeroCatalog.Resource(heroIndex)+".fbx";
             var importer=AssetImporter.GetAtPath(path) as ModelImporter;
             if(importer==null)throw new Exception("Missing original model "+path);
             importer.animationType=ModelImporterAnimationType.Generic;
@@ -83,7 +84,7 @@ namespace BrainrotPlanet.Editor
         {var tr=from.AddTransition(to);tr.hasExitTime=false;tr.duration=.08f;tr.AddCondition(mode,threshold,parameter);return tr;}
         public static void Smoke()
         {
-            var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/OriginalCast/Skins/catalog-original26-v1.json"));
+            var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/OriginalCast/Skins/"+SkinCatalog.CatalogFile));
             if(manifest.skins.Length!=130||OriginalHeroCatalog.Count!=26)throw new Exception("Original roster/catalog count");
             int skins=0,clips=0;
             for(int hero=0;hero<OriginalHeroCatalog.Count;hero++)

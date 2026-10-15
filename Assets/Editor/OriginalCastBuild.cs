@@ -10,6 +10,7 @@ namespace BrainrotPlanet.Editor
     public static class OriginalCastBuild
     {
         public static void Android()=>Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.8.0-original26-test.apk",false);
+        public static void AndroidRollo()=>Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.8.1-rollo-detail-test.apk",false,"0.8.1-rollo-detail-test",71);
         public static void Windows()=>Build(BuildTarget.StandaloneWindows64,"Builds/Original26Windows/BrainrotPlanet.exe",false);
         public static void Server()=>Build(BuildTarget.StandaloneLinux64,"Builds/Original26Server/BrainrotMatchServer.x86_64",true);
         // Preserve the old assets/GUIDs for history, but do not ship the retired
@@ -29,7 +30,7 @@ namespace BrainrotPlanet.Editor
         }
         public static void Regression()
         {
-            OriginalCastSetup.Smoke();HeroMenuSmoke.Run();StoreSmoke.Run();
+            OriginalCastSetup.Smoke();RolloDetailSetup.Smoke();HeroMenuSmoke.Run();StoreSmoke.Run();
             MatchProtocolSmoke.Run();PlayerRecordsSmoke.Run();AiBalanceSmoke.Run();
             GameplayFeedbackSmoke.Run();ExplosionAudioSmoke.Run();
             PlanetBiomeSmoke.Run();PlanetTerrainSmoke.Run();PlanetPaintEdgeSmoke.Run();
@@ -37,11 +38,11 @@ namespace BrainrotPlanet.Editor
             BiomeMovementSmoke.Run();TerritoryJoinSmoke.Run();MatchOutcomeSmoke.Run();ActorCollisionSmoke.Run();
             Debug.Log("ORIGINAL26_REGRESSION_PASS protocol="+MatchProtocol.Version+" heroes="+OriginalHeroCatalog.Count);
         }
-        private static void Build(BuildTarget target,string output,bool server)
+        private static void Build(BuildTarget target,string output,bool server,string version="0.8.0-original26-test",int code=70)
         {
             ArchiveLegacy();Regression();RuntimeShaderAssets.Ensure();
-            PlayerSettings.bundleVersion="0.8.0-original26-test";
-            PlayerSettings.Android.bundleVersionCode=70;
+            PlayerSettings.bundleVersion=version;
+            PlayerSettings.Android.bundleVersionCode=code;
             if(target==BuildTarget.Android)PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
             else PlayerSettings.SetScriptingBackend(server?NamedBuildTarget.Server:NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);
             Directory.CreateDirectory(Path.GetDirectoryName(output));

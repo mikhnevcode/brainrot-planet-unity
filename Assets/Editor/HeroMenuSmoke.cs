@@ -16,7 +16,7 @@ namespace BrainrotPlanet.Editor
             if(HeroPreviewFraming.DragAngles(new Vector2(0,10),new Vector2(9999,9999))!=new Vector2(80,18)||
                HeroPreviewFraming.DragAngles(new Vector2(0,10),new Vector2(-9999,-9999))!=new Vector2(-80,2))
                 throw new Exception("Unlimited hero portrait gesture");
-            var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/OriginalCast/Skins/catalog-original26-v1.json"));
+            var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/OriginalCast/Skins/"+SkinCatalog.CatalogFile));
             for(int hero=0;hero<SkinRigProfile.HeroCount;hero++)checks+=Check(hero,null);
             foreach(var entry in manifest.skins)checks+=Check(entry.hero,entry);
             foreach(var resolution in new[]{new Vector2(420,790),new Vector2(1080,2412),new Vector2(720,1600),new Vector2(960,540)})

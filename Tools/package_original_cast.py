@@ -43,11 +43,12 @@ def main():
                        'Assets/Resources/Characters.meta','Assets/Resources/MatchEndpoint.txt',
                        'Assets/Resources/StoreTestEndpoint.txt','Server/build_store_catalog.py',
                        'Server/test_store.py','Server/room_match_smoke.py','Server/store_wss_smoke.py'])
-    for directory in ['Assets/Scripts','Assets/Editor','Assets/Resources/OriginalCast',
+    for directory in ['Assets/Scripts','Assets/Editor','Assets/Resources/OriginalCast','Assets/Resources/OriginalCastDetail',
                       'Assets/LegacyCharacterArchive','Characters/OriginalCast','Content/OriginalCast']:
         candidates.update(p.relative_to(ROOT).as_posix() for p in (ROOT/directory).rglob('*') if p.is_file())
     candidates.update(['Assets/Resources/OriginalCast.meta','Assets/Resources/OriginalHeroSurface.shader',
                        'Assets/Resources/OriginalHeroSurface.shader.meta','Assets/LegacyCharacterArchive.meta',
+                       'Assets/Resources/OriginalCastDetail.meta','Assets/Resources/DetailedHeroSurface.shader','Assets/Resources/DetailedHeroSurface.shader.meta',
                        'Tools/prepare_original_content.py','Tools/package_original_cast.py'])
     changed=[];deleted=[]
     for name in sorted(candidates):

@@ -130,6 +130,7 @@ namespace BrainrotPlanet
             RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Flat;
             var sun=new GameObject("Colorful planet sun");
             var light=sun.AddComponent<Light>();light.type=LightType.Directional;
+            light.cullingMask&=~(1<<30); // Portraits have their own studio lights.
             light.intensity=1.1f;light.color=new Color(1f,.97f,.89f);
             sun.transform.rotation=Quaternion.Euler(35f,-43f,-18f);
         }

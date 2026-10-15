@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "version": "0.8.1-rollo-detail-test",
+  "versionCode": 71,
+  "apkSha256": "2e4a6bef1b69dca8d338f06e4ee35eb709c27ca8e9282b9cfa83e01d2d89059b",
+  "apkBytes": 69836711,
+  "apkFile": "BrainrotPlanet-v0.8.1-rollo-detail-test-2e4a6bef.apk",
+  "networkProtocol": 10,
+  "scope": "Detailed Rollo only; 25 other characters remain previous technical models.",
+  "masterTriangles": 425072,
+  "mobileTriangles": 42459,
+  "maps": 5,
+  "animations": 8,
+  "colorVariants": 5,
+  "source": "Blender authored mesh, voxel-fused sculpt, UV unwrap and albedo/normal bake. No projected concept image.",
+  "editor": "PASS: all 26 models, 208 clips and 130 skins; detailed drum/tail articulation and normalized weights.",
+  "device": "RMX2020",
+  "deviceMenu": "PASS: 26 heroes / 156 framing views",
+  "deviceRollo": "PASS: five color previews, skill, movement, jump, player victory and Rollo as AI winner upright.",
+  "gameplayProfileUnchanged": true,
+  "skinCatalogRevision": 3,
+  "network": "Cosmetic-only change, protocol 10 unchanged. Full network match was not rerun for 0.8.1.",
+  "limits": [
+    "Art remains an approximation of the approved concept",
+    "Long-run FPS/thermal measurements not performed",
+    "No iOS build in this iteration",
+    "No production billing or advertisements"
+  ],
+  "evidence": [
+    "Builds/rollo-v03-android-handoff-build.log",
+    "Builds/RolloDetail/device-menu.log",
+    "Builds/RolloDetail/device-final.log"
+  ]
+}
