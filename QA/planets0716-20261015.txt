@@ -1,0 +1,60 @@
+Brainrot Planet 0.7.16 ten-planet test - 2026-10-15
+
+APK: BrainrotPlanet-v0.7.16-ten-planets-test.apk
+Version code: 60. Unity 6000.2.7f2, Android IL2CPP Development, Activity entry.
+Bytes: 73628444
+SHA256: cb3fedc0f17facf299d0cc103310a8073b701bab22ef670547144d6977c6493e
+
+Changes
+- Ten stable map IDs: Tropical, Desert, Moon, Frost, Volcanic, Oceanic,
+  Crystal, Storm, Amber, Candy. Automatic rotation 0..9..0.
+- Separate terrain/sky palettes and non-colliding foliage, wind arrows or facets.
+  Terrain relief still uses the shared rounded-hill/crater mesh; bespoke landscape
+  geometry and more detailed biome art remain a later polish pass.
+- Temporary slows on Tropical/Oceanic, directional wind on Desert/Storm/Amber,
+  mild surface boosts on Frost/Volcanic/Crystal/Candy, distinct gravity/jump values.
+- Ten orbital destinations, one sun, two decorative planetary belts. Selected
+  battle world lies on its orbit. Background bodies clear the flight corridor.
+- Immediate camera motion; no 1.6-second overview hold. Total flight 6.2 seconds.
+- Equipped avatar leans/banks and waves arms/wings/fins, kicks legs, spins aircraft
+  props, moves within the frame and stays readable until the last .85-second settle.
+- Protocol 6 shares ten map IDs and the new deployment timer. Old protocol-5 room
+  gateway and other projects are not restarted or repointed.
+- Completed prior pending result fix: authoritative bodies freeze at result.
+  Bad-packet diagnostics log packet kind, size and reason without payloads.
+
+PASS - Android final build: Logs/ten-planets0716-android-final.log.
+PASS - Linux worker build: Logs/ten-planets0716-server.log.
+PASS - PlanetBiomeSmoke: 7761 checks; all ten maps round-trip through protocol.
+PASS - DeploymentFlightSmoke: all ten systems visible in initial portrait view,
+  immediate movement, continuous upright camera path and final follow-camera pose.
+PASS - BiomeMovementSmoke: 60 physical routes, worstStationary=0, no decor colliders.
+PASS - Existing protocol, balance, 99-product store, 65-skin catalog, 13-hero menu,
+  paint, territory, outcome and actor-collision build gates.
+
+Device: RMX2020 NBTK5TZTVC8T9TRG only.
+PASS - APK installed in place, no data reset.
+PASS - Final flight QA: all 13 heroes / all ten map IDs, full framing, actual limb
+  rotation between frames, visible screen movement, readable final approach,
+  upright handoff. 65 final flight screenshots captured and inspected by sampling.
+PASS - Biome QA: all ten maps and wrap to Tropical. Measured jump peaks (metres):
+  .77/.77/1.54/.77/.91/.77/.97/.90/.77/1.00.
+PASS - Full internet match on RMX2020: result winner1, 12 jump/skill action cycles,
+  same-room replay epoch2, offline return. No bad packet or disconnect reported.
+PASS - WSS quick/private four-peer smoke: common snapshots and separate rooms.
+PASS - Private two-peer result soak: 25-second result hold, 229 ended snapshots per
+  peer, identical frozen poses, valid finite numbers, replay map0 -> map1.
+PASS - Gateway tests: 4/4.
+PASS - Gameplay preference values unchanged (all 12 non-session XML entries).
+  Unity's four internal session metadata values changed normally across launches.
+PASS - Temporary QA markers removed; RMX2020 returned to its normal menu.
+
+Observed development-build network gameplay samples roughly 53-55 fps on RMX2020;
+scene creation and QA screenshots create larger frame-time spikes. This is not
+a release performance certification or an all-hero/all-planet balance audit.
+
+Isolated test gateway: loopback28280, workers28200..28203, max4 rooms.
+Runtime: /home/user/brainrot-match-test/ten-planets0716
+WSS: wss://outline-patents-futures-markets.trycloudflare.com/match
+The quick tunnel is temporary and must remain running for this APK's network test.
+Test page: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/test-v0.7.16.html

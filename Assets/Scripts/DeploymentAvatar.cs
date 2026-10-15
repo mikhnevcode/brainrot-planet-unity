@@ -12,8 +12,10 @@ namespace BrainrotPlanet
         private readonly List<Transform> limbs=new List<Transform>();
         private readonly List<Quaternion> rest=new List<Quaternion>();
         private readonly List<float> signs=new List<float>();
+        private readonly List<int> limbTypes=new List<int>();
         private readonly Vector3 center;
         private readonly Quaternion facing;
+        private readonly bool horizontalHero;
         public readonly float Distance;
         public Transform Root=>root;
         public int LimbCount=>limbs.Count;
@@ -21,6 +23,8 @@ namespace BrainrotPlanet
         {
             root=new GameObject("Flying equipped hero / no physics").transform;
             root.SetParent(parent,false);
+            int hero=actor.GetComponent<PlanetActor>()?.Character??0;
+            horizontalHero=hero==0||hero==1||hero==3||hero==9||hero==11;
             foreach(Transform child in actor)
                 Object.Instantiate(child.gameObject,root,false).name=child.name;
             foreach(var collider in root.GetComponentsInChildren<Collider>())collider.enabled=false;
@@ -34,29 +38,50 @@ namespace BrainrotPlanet
             foreach(var bone in root.GetComponentsInChildren<Transform>(true))
             {
                 string name=bone.name;int separator=name.LastIndexOf('|');if(separator>=0)name=name.Substring(separator+1);
+                int suffix=name.IndexOf('.');if(suffix>=0)name=name.Substring(0,suffix);
                 if(name=="Arm_L"||name=="Arm_R"||name=="Wing_L"||name=="Wing_R"||
                    name=="Fin_L"||name=="Fin_R"||name=="Leg_L"||name=="Leg_R"||
-                   name=="Thigh_L"||name=="Thigh_R")
-                {limbs.Add(bone);rest.Add(bone.localRotation);signs.Add(name.EndsWith("_L")?1:-1);}
+                   name=="Thigh_L"||name=="Thigh_R"||name=="Leg_C"||
+                   name=="Flap_L"||name=="Flap_R"||name=="Prop_L"||name=="Prop_R")
+                {
+                    limbs.Add(bone);rest.Add(bone.localRotation);signs.Add(name.EndsWith("_R")?-1:1);
+                    limbTypes.Add(name.StartsWith("Prop")?2:name.StartsWith("Leg")||name.StartsWith("Thigh")?1:0);
+                }
             }
             originals=actor.GetComponentsInChildren<Renderer>();originalVisibility=new bool[originals.Length];
             for(int i=0;i<originals.Length;i++){originalVisibility[i]=originals[i].enabled;originals[i].enabled=false;}
         }
         public void Pose(float seconds,Transform camera,Vector3 landing,Quaternion landedRotation)
         {
-            float land=DeploymentFlight.Ease((seconds-DeploymentFlight.TouchdownStart)/(DeploymentFlight.Duration-DeploymentFlight.TouchdownStart));
-            // Imported aircraft have no independent limbs. A gentle bank gives
-            // them a readable glide while the limb animation handles characters.
-            Quaternion glide=Quaternion.Euler(2.5f*Mathf.Sin(seconds*3.1f),0,
-                4f*Mathf.Sin(seconds*2.4f));
+            // Keep a readable hero ahead of the camera until it is close enough
+            // to the ground, then transfer the visual to the real landing spot.
+            const float settle=.85f;
+            float land=DeploymentFlight.Ease((seconds-(DeploymentFlight.Duration-settle))/settle);
+            float approach=Mathf.Clamp01(seconds/DeploymentFlight.TouchdownStart);
+            // Stand-up rigs lean into a belly-down glide. Aircraft and animals
+            // with naturally horizontal bodies bank rather than tipping nose-down.
+            Quaternion glide=Quaternion.Euler((horizontalHero?8f:43f)+7f*Mathf.Sin(seconds*2.6f),
+                9f*Mathf.Sin(seconds*1.8f),12f*Mathf.Sin(seconds*2.4f));
             Quaternion flight=Quaternion.LookRotation(camera.forward+camera.up*.16f,camera.up)*glide*facing;
             Quaternion rotation=Quaternion.Slerp(flight,landedRotation,land);
-            Vector3 flightCenter=camera.position+camera.forward*Distance-camera.up*(Distance*.10f);
+            // The hero dives and banks within the frame as well as travelling
+            // through the world, instead of being a motionless camera ornament.
+            float depth=Distance*Mathf.Lerp(1.22f,1f,DeploymentFlight.Ease(approach));
+            float side=Mathf.Lerp(-.055f,.035f,approach)+.02f*Mathf.Sin(seconds*2.2f);
+            float height=.07f-.17f*Mathf.Sin(approach*Mathf.PI*.8f);
+            Vector3 flightCenter=camera.position+camera.forward*depth+
+                camera.right*(depth*side)+camera.up*(depth*height);
             Vector3 position=Vector3.Lerp(flightCenter-flight*center,landing,land);
             root.SetPositionAndRotation(position,rotation);
             for(int i=0;i<limbs.Count;i++)
-                limbs[i].localRotation=rest[i]*Quaternion.Euler(signs[i]*(22+22*Mathf.Sin(seconds*7+i*.8f))*(1-land),0,
-                    signs[i]*(12+20*Mathf.Sin(seconds*9+i*.9f))*(1-land));
+            {
+                float phase=seconds*6.5f+signs[i]*.9f;
+                float kick=limbTypes[i]==1?34f*Mathf.Sin(phase):18f*Mathf.Sin(phase);
+                float spread=limbTypes[i]==1?12f:38f+12f*Mathf.Sin(seconds*4.8f);
+                if(limbTypes[i]==2)
+                    limbs[i].localRotation=rest[i]*Quaternion.Euler(0,0,seconds*950f*(1-land));
+                else limbs[i].localRotation=rest[i]*Quaternion.Euler(signs[i]*kick*(1-land),0,signs[i]*spread*(1-land));
+            }
         }
         public void Dispose()
         {

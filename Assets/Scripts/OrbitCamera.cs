@@ -63,7 +63,7 @@ namespace BrainrotPlanet
             if(!headless)flyingHero=new DeploymentAvatar(actor,actor.parent,view!=null?view.aspect:.5625f);
             DeploymentFlight.CameraPose(0,normal,tangentUp,planet,landingPosition,out Vector3 position,out Quaternion rotation);
             transform.SetPositionAndRotation(position,rotation);
-            if(view!=null){view.fieldOfView=GameplayFov;view.farClipPlane=1000;}
+            if(view!=null){view.fieldOfView=GameplayFov;view.farClipPlane=1600;}
             flyingHero?.Pose(0,transform,landingPosition,landingRotation);
             Debug.Log("DEPLOYMENT_BEGIN duration="+DescentDuration+" planet="+planet+" limbs="+(flyingHero?.LimbCount??0));
         }

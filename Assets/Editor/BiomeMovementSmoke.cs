@@ -54,7 +54,7 @@ namespace BrainrotPlanet.Editor
                 }
             }
             finally{UnityEngine.Object.DestroyImmediate(directorObject);Physics.simulationMode=previousMode;}
-            Debug.Log("BIOME_MOVEMENT_SMOKE_PASS routes="+routes+" worstStationary="+worst+" planets=3");
+            Debug.Log("BIOME_MOVEMENT_SMOKE_PASS routes="+routes+" worstStationary="+worst+" planets="+PlanetBiomeRules.Count);
         }
     }
 }

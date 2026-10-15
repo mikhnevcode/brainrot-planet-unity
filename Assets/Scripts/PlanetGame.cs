@@ -247,7 +247,7 @@ namespace BrainrotPlanet
             if(!DedicatedMatchServer)CreateStars();
             if(!DedicatedMatchServer)
             {
-                var solar=new GameObject("Sun, orbital paths and two other planets");
+                var solar=new GameObject("Sun and ten planetary destinations");
                 solar.transform.SetParent(worldRoot,false);
                 Vector3 opening=Player.SpawnDirection;
                 Vector3 up=Vector3.ProjectOnPlane(Vector3.up,opening);
@@ -306,7 +306,7 @@ namespace BrainrotPlanet
             stars.AddComponent<MeshFilter>().sharedMesh=mesh;
             stars.AddComponent<MeshRenderer>().sharedMaterial=material;
             stars.AddComponent<PlanetGeneratedArt>().Own(mesh,material);
-            // The other two planets are rendered by SolarSystemArt.
+            // The other nine planets are rendered by SolarSystemArt.
         }
         private void HandleCapture(int team,int changed,Vector3 direction)
         {
@@ -712,7 +712,15 @@ namespace BrainrotPlanet
             if(DedicatedMatchServer)
             {
                 networkWinner=winningTeam;
-                foreach(var pawn in players){pawn.Wish=Vector3.zero;pawn.Active=false;}
+                foreach(var pawn in players)
+                {
+                    pawn.Wish=Vector3.zero; pawn.Active=false;
+                    var body=pawn.GetComponent<Rigidbody>();
+                    if(body==null)continue;
+                    body.linearVelocity=Vector3.zero;
+                    body.angularVelocity=Vector3.zero;
+                    body.isKinematic=true;
+                }
                 State=MatchState.End;
                 Debug.Log("MATCH_SERVER_RESULT epoch="+networkEpoch+" winner="+winningTeam);
                 return;

@@ -18,7 +18,7 @@ namespace BrainrotPlanet
                 isWardrobeQa=true;selectedHero=0;lastBattlePlanet=-1;
                 yield return new WaitForSecondsRealtime(1.5f);
                 yield return CaptureWardrobeQa(Path.Combine(folder,"bright-menu.png"));
-                for(int planet=0;planet<3;planet++)
+                for(int planet=0;planet<PlanetBiomeRules.Count;planet++)
                 {
                     StartGame();
                     if((int)Arena.Kind!=planet)throw new Exception("Automatic planet rotation");
@@ -47,7 +47,7 @@ namespace BrainrotPlanet
                 }
                 ReturnToMenu();StartGame();
                 if(Arena.Kind!=BattlePlanet.Tropical)throw new Exception("Planet replay rotation wrap");
-                Debug.Log("PLANET_BIOME_QA_PASS maps=3 rotation=0_1_2_0 moonHigher=true progressUnchanged=true");
+                Debug.Log("PLANET_BIOME_QA_PASS maps="+PlanetBiomeRules.Count+" rotation=0_to_9_to_0 moonHigher=true progressUnchanged=true");
             }
             finally
             {

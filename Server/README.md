@@ -21,6 +21,11 @@ The authoritative server owns movement, jumps, hero powers, collision, capture,
 match result, and replay. Clients send input at 20 Hz and receive snapshots at
 10 Hz. No account, purchase, or advertising data goes through this gateway.
 
+The v0.7.16 ten-planet test uses match protocol 6 and a 6.2-second immediate
+deployment flight. Do not connect this client to protocol-5 workers: map IDs
+0-9 and the shared landing timer require the matching worker build. The prior
+v0.7.14 public-room test stays on its separate gateway.
+
 ## Build and isolated hosting
 
 Use Unity 6000.2.7f2 with Linux Dedicated Server Mono and Android IL2CPP.

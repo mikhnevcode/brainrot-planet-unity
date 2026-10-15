@@ -120,11 +120,8 @@ namespace BrainrotPlanet
             // Use the same clock as the camera so the visual hand-off is stable.
             dropElapsed=Mathf.Max(dropElapsed,game.DeploymentSeconds);
             if(heroMotion!=null)heroMotion.SetDropTime(dropElapsed);
-            // Delay visible fall until the approach has established the planet.
-            // Then accelerate downward, leaving time to see the descent clearly.
-            float progress=Mathf.Clamp01((dropElapsed-.65f)/
-                (OrbitCamera.DescentDuration-.65f));
-            float fall=progress*progress*(3f-2f*progress);
+            float progress=Mathf.Clamp01(dropElapsed/OrbitCamera.DescentDuration);
+            float fall=.35f*progress+.65f*DeploymentFlight.Ease(progress);
             body.MovePosition(Vector3.Lerp(dropStart,dropLanding,fall));
             if(dropElapsed>=nextDropDiagnostic)
             {

@@ -14,27 +14,25 @@ namespace BrainrotPlanet.Editor
             try
             {
                 var camera=go.AddComponent<Camera>();camera.aspect=720f/1600f;camera.fieldOfView=51f;
-                camera.nearClipPlane=.15f;camera.farClipPlane=1000;
-                for(int planet=0;planet<3;planet++)
+                camera.nearClipPlane=.15f;camera.farClipPlane=1600;
+                for(int planet=0;planet<PlanetBiomeRules.Count;planet++)
                 {
                     Vector3 sun=DeploymentFlight.Sun(normal,up,planet);
                     DeploymentFlight.CameraPose(0,normal,up,planet,landing,out Vector3 first,out Quaternion firstRotation);
                     go.transform.SetPositionAndRotation(first,firstRotation);
-                    Vector3 right=Vector3.Cross(up,normal).normalized;
-                    float[] angles={0,2.4f,4.4f};
-                    var bodies=new Vector3[4];bodies[0]=sun;bodies[1]=Vector3.zero;
-                    for(int i=0;i<2;i++)
-                    {
-                        int other=(planet+i+1)%3;
-                        float radius=(72+other*25)*Mathf.Sqrt(1+.42f*.42f);
-                        bodies[i+2]=sun+right*Mathf.Cos(angles[other])*radius+normal*Mathf.Sin(angles[other])*radius;
-                    }
+                    var bodies=new Vector3[PlanetBiomeRules.Count+1];bodies[0]=sun;
+                    for(int i=0;i<PlanetBiomeRules.Count;i++)
+                        bodies[i+1]=sun+DeploymentFlight.OrbitOffset(normal,up,i);
+                    if(bodies[planet+1].sqrMagnitude>.001f)throw new Exception("Selected planet off its orbit");
                     foreach(Vector3 body in bodies)
                     {
                         Vector3 point=camera.WorldToViewportPoint(body);
                         if(point.z<=0||point.x<.01f||point.x>.99f||point.y<.01f||point.y>.99f)
                             throw new Exception("Solar overview clipped planet="+planet+" body="+body+" screen="+point);
                     }
+                    DeploymentFlight.CameraPose(.1f,normal,up,planet,landing,out Vector3 early,out _);
+                    if(Vector3.Distance(early,first)<15f||Vector3.Distance(early,landing)>=Vector3.Distance(first,landing))
+                        throw new Exception("Opening flight paused instead of descending");
                     Vector3 previous=first;
                     for(float t=.1f;t<=DeploymentFlight.Duration+.01f;t+=.1f)
                     {
@@ -50,7 +48,7 @@ namespace BrainrotPlanet.Editor
                         throw new Exception("Hero would look sideways at landing map="+planet);
                     Debug.Log("DEPLOYMENT_FLIGHT_SMOKE_MAP_PASS planet="+planet+" sun="+sun);
                 }
-                Debug.Log("DEPLOYMENT_FLIGHT_SMOKE_PASS maps=3 duration="+DeploymentFlight.Duration);
+                Debug.Log("DEPLOYMENT_FLIGHT_SMOKE_PASS maps="+PlanetBiomeRules.Count+" immediate=true duration="+DeploymentFlight.Duration);
             }
             finally{UnityEngine.Object.DestroyImmediate(go);}
         }

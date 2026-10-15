@@ -170,12 +170,23 @@ namespace BrainrotPlanet
                 helloSent = true;
                 matchConnection.Send(MatchProtocol.Packet(MatchProtocol.Hello, w => { w.Write(MatchProtocol.Version); w.Write((byte)selectedHero); w.Write(ChosenSkinReference()); }));
             }
+            byte receivedKind=0;
+            int receivedLength=0;
             try
             {
                 for (int i = 0; i < 64 && matchConnection != null && matchConnection.TryReceive(out byte[] packet); i++)
-                { ReceiveServerPacket(packet); networkLastPacket = now; }
+                {
+                    receivedKind=packet.Length>0?packet[0]:(byte)0;
+                    receivedLength=packet.Length;
+                    ReceiveServerPacket(packet); networkLastPacket = now;
+                }
             }
-            catch (Exception e) { NetworkDisconnected("Ошибка сетевых данных: " + e.GetType().Name); }
+            catch (Exception e)
+            {
+                Debug.LogError("MATCH_BAD_SERVER_PACKET kind="+receivedKind+" bytes="+receivedLength+
+                    " reason="+e.Message);
+                NetworkDisconnected("Ошибка сетевых данных: " + e.GetType().Name);
+            }
             if (matchConnection != null && helloSent && networkEpoch>0 && now >= nextInput)
             {
                 nextInput = now+.05f;

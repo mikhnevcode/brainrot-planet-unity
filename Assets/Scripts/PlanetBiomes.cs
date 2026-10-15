@@ -3,7 +3,9 @@ using System.IO;
 using UnityEngine;
 namespace BrainrotPlanet
 {
-    public enum BattlePlanet : byte { Tropical, Desert, Moon }
+    // IDs are serialized in match packets: keep the original three stable.
+    public enum BattlePlanet : byte
+    { Tropical, Desert, Moon, Frost, Volcanic, Oceanic, Crystal, Storm, Amber, Candy }
     public sealed class PlanetBiomeRules
     {
         public readonly BattlePlanet Kind;
@@ -11,15 +13,48 @@ namespace BrainrotPlanet
         public readonly Vector3[] Zones;
         public const float ZoneRadius=.135f;
         public const float GrassDuration=.9f;
-        public float Gravity=>Kind==BattlePlanet.Moon?17f:23f;
-        public float JumpImpulse=>Kind==BattlePlanet.Moon?7.4f:6.2f;
-        public string Title=>Kind==BattlePlanet.Tropical?"ТРОПИЧЕСКАЯ ПЛАНЕТА":Kind==BattlePlanet.Desert?"ПЕСЧАНАЯ ПЛАНЕТА":"ЛУННАЯ ПЛАНЕТА";
-        public string Hint=>Kind==BattlePlanet.Tropical?"Трава ненадолго замедляет. Перепрыгивай островки!":Kind==BattlePlanet.Desert?"Попутный ветер немного ускоряет. Следуй светлым стрелкам!":"Низкая гравитация: прыжки выше, полёт дольше.";
-        public Color Sky=>Kind==BattlePlanet.Tropical?new Color(.045f,.16f,.22f):Kind==BattlePlanet.Desert?new Color(.27f,.12f,.14f):new Color(.055f,.06f,.18f);
-        public Color Accent=>Kind==BattlePlanet.Tropical?new Color(.28f,.9f,.65f):Kind==BattlePlanet.Desert?new Color(1f,.77f,.34f):new Color(.64f,.7f,1f);
-        public static int Next(int previous)=>previous<0?0:(previous+1)%3;
+        public const int Count=10;
+        private static readonly string[] Titles={
+            "ТРОПИЧЕСКАЯ ПЛАНЕТА","ПЕСЧАНАЯ ПЛАНЕТА","ЛУННАЯ ПЛАНЕТА",
+            "ЛЕДЯНАЯ ПЛАНЕТА","ВУЛКАНИЧЕСКАЯ ПЛАНЕТА","ОКЕАНСКАЯ ПЛАНЕТА",
+            "КРИСТАЛЬНАЯ ПЛАНЕТА","ГРОЗОВАЯ ПЛАНЕТА","ЯНТАРНАЯ ПЛАНЕТА",
+            "КАРАМЕЛЬНАЯ ПЛАНЕТА"};
+        private static readonly string[] Hints={
+            "Трава ненадолго замедляет. Перепрыгивай островки!",
+            "Попутный ветер ускоряет. Следуй светлым стрелкам!",
+            "Низкая гравитация: прыжки выше, полёт дольше.",
+            "Ледяные пятна слегка ускоряют движение.",
+            "Тёплые потоки ускоряют движение и делают прыжки выше.",
+            "Мелководье замедляет лишь на короткое время.",
+            "Кристальные дорожки ускоряют; прыжки выше обычного.",
+            "Попутные грозовые потоки ускоряют движение.",
+            "Следуй янтарным потокам для ускорения.",
+            "Пружинные поля ускоряют; прыгай выше!"};
+        private static readonly Color[] Skies={
+            new Color(.045f,.16f,.22f),new Color(.27f,.12f,.14f),new Color(.055f,.06f,.18f),
+            new Color(.07f,.18f,.28f),new Color(.24f,.075f,.09f),new Color(.035f,.14f,.24f),
+            new Color(.16f,.075f,.26f),new Color(.095f,.075f,.21f),new Color(.23f,.12f,.10f),
+            new Color(.24f,.12f,.25f)};
+        private static readonly Color[] Accents={
+            new Color(.28f,.9f,.65f),new Color(1f,.77f,.34f),new Color(.64f,.7f,1f),
+            new Color(.62f,.95f,1f),new Color(1f,.42f,.19f),new Color(.24f,.83f,1f),
+            new Color(.85f,.52f,1f),new Color(.55f,.72f,1f),new Color(1f,.68f,.25f),
+            new Color(1f,.63f,.80f)};
+        public float Gravity=>Kind==BattlePlanet.Moon?17f:Kind==BattlePlanet.Storm?20f:23f;
+        public float JumpImpulse=>Kind==BattlePlanet.Moon?7.4f:
+            Kind==BattlePlanet.Candy?7f:
+            Kind==BattlePlanet.Crystal?6.9f:
+            Kind==BattlePlanet.Volcanic?6.7f:6.2f;
+        public string Title=>Titles[(int)Kind];
+        public string Hint=>Hints[(int)Kind];
+        public Color Sky=>Skies[(int)Kind];
+        public Color Accent=>Accents[(int)Kind];
+        public static Color OrbitAccent(int planet)=>Accents[planet];
+        public bool HasFoliage=>Kind==BattlePlanet.Tropical||Kind==BattlePlanet.Oceanic||Kind==BattlePlanet.Candy;
+        public bool HasWind=>Kind==BattlePlanet.Desert||Kind==BattlePlanet.Storm||Kind==BattlePlanet.Amber;
+        public static int Next(int previous)=>previous<0?0:(previous+1)%Count;
         public static void Validate(BattlePlanet kind,int seed)
-        {if((int)kind>2||seed<=0)throw new InvalidDataException("Invalid battle planet");}
+        {if((int)kind>=Count||seed<=0)throw new InvalidDataException("Invalid battle planet");}
         public PlanetBiomeRules(BattlePlanet kind,int seed)
         {
             Validate(kind,seed);Kind=kind;Seed=seed;
@@ -80,13 +115,23 @@ namespace BrainrotPlanet
         {Basis(Zones[zone],out Vector3 east,out _);return east;}
         public Color Ground(Vector3 direction,float altitude,float noise)
         {
-            if(Kind==BattlePlanet.Moon)
-                return Color.Lerp(new Color(.49f,.54f,.67f),new Color(.79f,.83f,.89f),noise);
-            if(Kind==BattlePlanet.Desert)
-                return Color.Lerp(new Color(.78f,.48f,.24f),new Color(1f,.85f,.52f),noise);
-            Color ground=Color.Lerp(new Color(.26f,.66f,.52f),new Color(.62f,.87f,.72f),noise);
-            if(ZoneAt(direction,out float weight)>=0)ground=Color.Lerp(ground,new Color(.12f,.49f,.28f),weight*.55f);
-            if(altitude>1.95f)ground=Color.Lerp(ground,new Color(.71f,.79f,.72f),.55f);
+            Color dark,light,zone;
+            switch(Kind)
+            {
+                case BattlePlanet.Desert: dark=new Color(.78f,.48f,.24f);light=new Color(1f,.85f,.52f);zone=new Color(1f,.92f,.69f);break;
+                case BattlePlanet.Moon: dark=new Color(.49f,.54f,.67f);light=new Color(.79f,.83f,.89f);zone=light;break;
+                case BattlePlanet.Frost: dark=new Color(.25f,.58f,.73f);light=new Color(.83f,.96f,1f);zone=new Color(.42f,.87f,.95f);break;
+                case BattlePlanet.Volcanic: dark=new Color(.22f,.20f,.25f);light=new Color(.53f,.32f,.28f);zone=new Color(1f,.43f,.16f);break;
+                case BattlePlanet.Oceanic: dark=new Color(.10f,.49f,.68f);light=new Color(.42f,.80f,.77f);zone=new Color(.11f,.65f,.67f);break;
+                case BattlePlanet.Crystal: dark=new Color(.36f,.27f,.67f);light=new Color(.80f,.62f,.96f);zone=new Color(.86f,.77f,1f);break;
+                case BattlePlanet.Storm: dark=new Color(.28f,.31f,.52f);light=new Color(.60f,.65f,.83f);zone=new Color(.67f,.83f,1f);break;
+                case BattlePlanet.Amber: dark=new Color(.60f,.35f,.17f);light=new Color(1f,.78f,.39f);zone=new Color(1f,.88f,.53f);break;
+                case BattlePlanet.Candy: dark=new Color(.70f,.39f,.69f);light=new Color(1f,.77f,.79f);zone=new Color(.96f,.54f,.78f);break;
+                default: dark=new Color(.26f,.66f,.52f);light=new Color(.62f,.87f,.72f);zone=new Color(.12f,.49f,.28f);break;
+            }
+            Color ground=Color.Lerp(dark,light,noise);
+            if(ZoneAt(direction,out float weight)>=0)ground=Color.Lerp(ground,zone,weight*.50f);
+            if(altitude>1.95f)ground=Color.Lerp(ground,light,.48f);
             return ground;
         }
     }
@@ -100,15 +145,20 @@ namespace BrainrotPlanet
             if(rules==null||!grounded){Reset();return 1;}
             int zone=rules.ZoneAt(normal,out float weight);
             if(zone<0){Reset();return 1;}
-            if(rules.Kind==BattlePlanet.Desert)
+            if(rules.HasWind)
             {
                 float alignment=Vector3.Dot(wish.normalized,rules.WindDirection(zone));
-                return 1+.16f*weight*Mathf.Clamp01((alignment-.15f)/.85f);
+                float boost=rules.Kind==BattlePlanet.Storm?.20f:rules.Kind==BattlePlanet.Amber?.13f:.16f;
+                return 1+boost*weight*Mathf.Clamp01((alignment-.15f)/.85f);
             }
-            if(rules.Kind!=BattlePlanet.Tropical)return 1;
+            if(rules.Kind==BattlePlanet.Frost||rules.Kind==BattlePlanet.Volcanic||
+               rules.Kind==BattlePlanet.Crystal||rules.Kind==BattlePlanet.Candy)
+                return 1+(rules.Kind==BattlePlanet.Frost?.12f:.09f)*weight;
+            if(rules.Kind!=BattlePlanet.Tropical&&rules.Kind!=BattlePlanet.Oceanic)return 1;
             if(zone!=previousZone){previousZone=zone;grassTime=0;}
             grassTime+=Mathf.Max(0,dt);
-            return grassTime<PlanetBiomeRules.GrassDuration?1-.20f*weight:1;
+            float duration=rules.Kind==BattlePlanet.Oceanic?.65f:PlanetBiomeRules.GrassDuration;
+            return grassTime<duration?1-(rules.Kind==BattlePlanet.Oceanic?.14f:.20f)*weight:1;
         }
     }
 }

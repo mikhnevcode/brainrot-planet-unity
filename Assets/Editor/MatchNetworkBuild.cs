@@ -16,9 +16,9 @@ namespace BrainrotPlanet.Editor
             // Use the standard Java Activity: the native GameActivity entry froze
             // before scene Awake on repeated RMX3151 Android 13 cold starts.
             PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
-            PlayerSettings.bundleVersion="0.7.14-matchmaking-test";
-            PlayerSettings.Android.bundleVersionCode=58;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.14-matchmaking-test.apk",false);
+            PlayerSettings.bundleVersion="0.7.16-ten-planets-test";
+            PlayerSettings.Android.bundleVersionCode=60;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.16-ten-planets-test.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {

@@ -11,7 +11,7 @@ namespace BrainrotPlanet.Editor
         public static void Run()
         {
             count=0;
-            int previous=-1;for(int i=0;i<30;i++){int next=PlanetBiomeRules.Next(previous);Check(next>=0&&next<=2&&next!=previous,"rotation");previous=next;}
+            int previous=-1;for(int i=0;i<30;i++){int next=PlanetBiomeRules.Next(previous);Check(next==i%PlanetBiomeRules.Count&&next!=previous,"rotation");previous=next;}
             foreach(int seed in new[]{1,77,975,int.MaxValue})
             foreach(BattlePlanet kind in Enum.GetValues(typeof(BattlePlanet)))
             {
@@ -46,14 +46,15 @@ namespace BrainrotPlanet.Editor
             var moon=new PlanetBiomeRules(BattlePlanet.Moon,91);
             Check(moon.JumpImpulse*moon.JumpImpulse/(2*moon.Gravity)>6.2f*6.2f/(2*23f)*1.8f,"moon jump height");
             Check(2*moon.JumpImpulse/moon.Gravity>2*6.2f/23f*1.5f,"moon hang time");
-            foreach(var data in new[]{new byte[]{3,1,0,0,0},new byte[]{0,0,0,0,0},new byte[]{2,255,255,255,255},new byte[]{2}})
+            foreach(var data in new[]{new byte[]{10,1,0,0,0},new byte[]{0,0,0,0,0},new byte[]{2,255,255,255,255},new byte[]{2}})
             {
                 bool rejected=false;try{using var r=MatchProtocol.Reader(data);MatchProtocol.ReadPlanet(r,out _,out _);}
                 catch(InvalidDataException){rejected=true;}catch(EndOfStreamException){rejected=true;}
                 Check(rejected,"invalid planet packet rejected");
             }
-            foreach(BattlePlanet kind in new[]{BattlePlanet.Tropical,BattlePlanet.Desert})
+            foreach(BattlePlanet kind in Enum.GetValues(typeof(BattlePlanet)))
             {
+                if(kind==BattlePlanet.Moon)continue;
                 var go=new GameObject("Biome visual regression");
                 try
                 {
@@ -65,7 +66,7 @@ namespace BrainrotPlanet.Editor
                 }
                 finally{UnityEngine.Object.DestroyImmediate(go);}
             }
-            Debug.Log("PLANET_BIOME_SMOKE_PASS cases="+count+" planets=3 deterministic=true noBlockers=true transientGrass=true wind=true moon=true");
+            Debug.Log("PLANET_BIOME_SMOKE_PASS cases="+count+" planets="+PlanetBiomeRules.Count+" deterministic=true noBlockers=true transientGrass=true wind=true moon=true");
         }
     }
 }

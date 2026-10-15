@@ -1,34 +1,43 @@
 using UnityEngine;
 namespace BrainrotPlanet
 {
-    // Three visible destinations correspond to the three actual battle maps.
+    // Ten visible destinations correspond to the actual battle maps.
     // Pure decoration: no collider, rigidbody, navigation or random-state changes.
     public sealed class SolarSystemArt : MonoBehaviour
     {
         private Vector3 normal,up,sun;
         private float orbitStart;
         private OrbitCamera flightCamera;
-        private readonly Transform[] planets=new Transform[3];
-        private readonly LineRenderer[] rings=new LineRenderer[3];
-        private readonly float[] angles={0,2.4f,4.4f};
+        private Renderer[] flightArt;
+        private bool approachCleared;
+        private readonly Transform[] planets=new Transform[PlanetBiomeRules.Count];
+        private readonly LineRenderer[] rings=new LineRenderer[PlanetBiomeRules.Count];
         public void Build(Vector3 opening,Vector3 screenUp,int selected,OrbitCamera camera)
         {
             normal=opening;up=screenUp;sun=DeploymentFlight.Sun(normal,up,selected);
             flightCamera=camera;
             orbitStart=Time.time;
             Stars(selected);
-            Sphere("Sun",sun,15,new Color(1,.70f,.13f),new Color(1,.96f,.59f));
-            Sphere("Solar corona",sun,16,new Color(1,.49f,.06f),new Color(1,.82f,.14f));
-            for(int i=0;i<3;i++)
+            Sphere("Sun",sun,16,new Color(1,.59f,.06f),new Color(1,.96f,.59f));
+            for(int i=0;i<PlanetBiomeRules.Count;i++)
             {
-                float radius=(72+i*25)*Mathf.Sqrt(1+.42f*.42f);
-                rings[i]=Ring("Orbit "+i,sun,radius,new Color(.29f,.48f,.70f,.5f),.14f);
+                float radius=DeploymentFlight.OrbitRadius(i);
+                Color accent=PlanetBiomeRules.OrbitAccent(i);
+                rings[i]=Ring("Orbit "+i,sun,radius,Color.Lerp(accent,new Color(.22f,.35f,.55f),.55f),.14f);
                 if(i==selected)continue; // The walkable world at origin is this orbit's destination.
-                Color a=i==0?new Color(.12f,.65f,.41f):i==1?new Color(.88f,.34f,.10f):new Color(.48f,.55f,.72f);
-                Color b=i==0?new Color(.17f,.51f,.93f):i==1?new Color(1,.76f,.35f):new Color(.82f,.88f,.98f);
-                planets[i]=Sphere("Orbiting "+(BattlePlanet)i,Orbit(i,0),i==0?15:i==1?13:10,a,b);
+                var rules=new PlanetBiomeRules((BattlePlanet)i,13007+i*19);
+                Color a=rules.Ground(Vector3.up,.5f,.15f),b=rules.Ground(Vector3.up,.5f,.88f);
+                planets[i]=Sphere("Orbiting "+(BattlePlanet)i,Orbit(i,0),i==2?7:9+(i%4)*1.2f,a,b,i);
+                if(i==6||i==8)
+                {
+                    var belt=Ring("Planetary belt "+i,planets[i].position,16,accent,.6f);
+                    belt.useWorldSpace=false;
+                    for(int j=0;j<belt.positionCount;j++)belt.SetPosition(j,belt.GetPosition(j)-planets[i].position);
+                    belt.transform.SetParent(planets[i],false);
+                }
             }
-            Debug.Log("SOLAR_SYSTEM_READY planets=3 selected="+selected+" physics=false");
+            flightArt=GetComponentsInChildren<Renderer>();
+            Debug.Log("SOLAR_SYSTEM_READY planets="+PlanetBiomeRules.Count+" selected="+selected+" physics=false");
         }
         private static float Next(ref uint seed)
         {seed=seed*1664525u+1013904223u;return ((seed>>8)&0xffffff)/16777215f;}
@@ -61,35 +70,45 @@ namespace BrainrotPlanet
         }
         private Vector3 Orbit(int i,float seconds)
         {
-            float radius=(72+i*25)*Mathf.Sqrt(1+.42f*.42f),angle=angles[i]+seconds*(.025f/(i+1));
-            return sun+Vector3.Cross(up,normal).normalized*(Mathf.Cos(angle)*radius)+normal*(Mathf.Sin(angle)*radius);
+            return sun+DeploymentFlight.OrbitOffset(normal,up,i,seconds);
         }
         private void Update()
         {
-            for(int i=0;i<3;i++)if(planets[i]!=null)planets[i].position=Orbit(i,Time.time-orbitStart);
-            bool showOrbits=flightCamera!=null&&flightCamera.IsDescending&&flightCamera.DescentSeconds<4.7f;
-            for(int i=0;i<3;i++)if(rings[i]!=null)rings[i].enabled=showOrbits;
+            // The system is an opening vista. Clear decorative bodies before
+            // the flight corridor crosses an inner orbit; the selected planet
+            // itself stays visible and is never part of this art hierarchy.
+            if(!approachCleared&&flightCamera!=null&&flightCamera.DescentSeconds>=2.3f)
+            {
+                approachCleared=true;
+                foreach(var renderer in flightArt)renderer.enabled=false;
+            }
+            if(approachCleared)return;
+            for(int i=0;i<planets.Length;i++)if(planets[i]!=null)planets[i].position=Orbit(i,Time.time-orbitStart);
+            bool showOrbits=flightCamera!=null&&flightCamera.IsDescending&&flightCamera.DescentSeconds<2.7f;
+            for(int i=0;i<rings.Length;i++)if(rings[i]!=null)rings[i].enabled=showOrbits;
         }
         private LineRenderer Ring(string name,Vector3 center,float radius,Color color,float width)
         {
             var go=new GameObject(name);go.transform.SetParent(transform,false);
-            var line=go.AddComponent<LineRenderer>();line.positionCount=129;line.useWorldSpace=true;line.loop=false;
+            var line=go.AddComponent<LineRenderer>();line.positionCount=65;line.useWorldSpace=true;line.loop=false;
             var material=Colors.New(color,true);line.sharedMaterial=material;
             line.startWidth=line.endWidth=width;line.startColor=line.endColor=color;
             Vector3 right=Vector3.Cross(up,normal).normalized;
-            for(int j=0;j<=128;j++){float a=j/128f*Mathf.PI*2;line.SetPosition(j,center+right*(Mathf.Cos(a)*radius)+normal*(Mathf.Sin(a)*radius));}
+            for(int j=0;j<=64;j++){float a=j/64f*Mathf.PI*2;line.SetPosition(j,center+right*(Mathf.Cos(a)*radius)+normal*(Mathf.Sin(a)*radius));}
             go.AddComponent<PlanetGeneratedArt>().Own(null,material);
             return line;
         }
-        private Transform Sphere(string name,Vector3 position,float radius,Color a,Color b)
+        private Transform Sphere(string name,Vector3 position,float radius,Color a,Color b,int planet=-1)
         {
-            const int lon=48,lat=28;
+            const int lon=32,lat=18;
             var vertices=new Vector3[(lon+1)*(lat+1)];var normals=new Vector3[vertices.Length];var colors=new Color[vertices.Length];var triangles=new int[lon*lat*6];
             for(int y=0;y<=lat;y++)for(int x=0;x<=lon;x++)
             {
                 int k=y*(lon+1)+x;Vector3 n=PlanetMath.FromLonLat(x/(float)lon,y/(float)lat);
                 vertices[k]=n*radius;normals[k]=n;
                 float detail=Mathf.PerlinNoise(n.x*5+9,n.z*5+n.y*2+4);
+                if(planet==7||planet==8)detail=.5f+.5f*Mathf.Sin(n.y*27+n.x*3);
+                if(planet==3)detail=Mathf.Lerp(detail,1,Mathf.Abs(n.y)*Mathf.Abs(n.y));
                 colors[k]=Color.Lerp(a,b,Mathf.SmoothStep(0,1,(detail-.30f)*2.5f));
             }
             int index=0;for(int y=0;y<lat;y++)for(int x=0;x<lon;x++)
