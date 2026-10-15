@@ -31,7 +31,9 @@ def main():
     # Archive the authoritative historical bytes, not locally reserialized old
     # materials/import settings. Local rollback copies are left untouched.
     historical={}
-    with tarfile.open(fileobj=io.BytesIO(remote('git archive HEAD Assets/Resources/Characters Assets/Resources/Characters.meta Assets/Resources/HeroPortraits064.png Assets/Resources/HeroPortraits064.png.meta'))) as old:
+    archive_paths=('Assets/Resources/Characters Assets/Resources/Characters.meta Assets/Resources/HeroPortraits064.png Assets/Resources/HeroPortraits064.png.meta'
+                   if 'Assets/Resources/Characters.meta' in tracked else 'Assets/LegacyCharacterArchive')
+    with tarfile.open(fileobj=io.BytesIO(remote('git archive HEAD '+archive_paths))) as old:
         for member in old.getmembers():
             if member.isfile():historical[member.name.replace('Assets/Resources/','Assets/LegacyCharacterArchive/',1)]=old.extractfile(member).read()
     scoped=('Assets/Scripts/','Assets/Editor/','Assets/Resources/Characters/',

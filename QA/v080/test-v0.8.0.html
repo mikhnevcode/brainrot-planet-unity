@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="dark">
+<title>Brainrot Planet · 26 новых героев · 0.8.0</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1027;color:#f3f6ff;font:17px/1.6 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:36px 22px 70px}a{color:#76e4ef}h1{font-size:clamp(32px,6vw,60px);line-height:1.12;margin:15px 0 24px}h2{font-size:25px}.tag{display:inline-block;background:#28345b;border-radius:30px;padding:7px 15px;color:#cbd4ff}.lead{max-width:780px;color:#c2cde5}.download{display:inline-block;background:#71e7c8;color:#102236;text-decoration:none;font-weight:750;border-radius:40px;padding:17px 29px;margin:12px 0}.card{background:#151d39;border:1px solid #303c61;border-radius:24px;padding:22px;margin:24px 0}.atlas{display:block;width:100%;height:auto;border-radius:20px;background:#c8e7ef}.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.shots img{display:block;width:100%;height:auto;border-radius:16px}.muted{color:#aebed8;font-size:14px}code{overflow-wrap:anywhere;font-size:12px}li{margin:8px 0}@media(max-width:650px){.shots{grid-template-columns:1fr 1fr}.shots a:last-child{display:none}}
+</style>
+<main>
+<span class="tag">Тестовая Android-сборка · 0.8.0</span>
+<h1>Новая команда.<br>26 своих героев.</h1>
+<p class="lead">Первый мобильный 3D-проход по одобренным концептам: новые модели из Blender, анимации, цветовые образы и эффекты способностей. Это промежуточная версия для проверки, не релизное качество графики.</p>
+<a class="download" href="BrainrotPlanet-v0.8.0-original26-test.apk" download>Скачать APK для Android</a>
+<p class="muted">Устанавливается поверх предыдущей версии без очистки данных. Для совместной сетевой игры у всех должна быть версия 0.8.0. Старый сетевой тест работает отдельно.</p>
+<div class="card"><h2>Что изменилось</h2>
+<ul><li>Все 26 новых героев доступны в выборе без перелистывания страниц.</li><li>По пять вариантов палитры с объёмной эмблемой для каждого героя — 130 образов. Это пока не 130 отдельных костюмов.</li><li>Бег, прыжок, планирование, приземление, суперсила и победные анимации.</li><li>Цветные эффекты способностей и непрозрачные материалы моделей.</li><li>Магазин с тестовыми покупками. Реальных оплат и списаний нет; его закрытый тест требует приглашения на устройстве.</li></ul></div>
+<h2>Модели в игре</h2><p class="muted">Нажми на изображение, чтобы рассмотреть крупнее.</p>
+<a href="original26/portraits.png"><img class="atlas" src="original26/portraits.png" alt="Все 26 новых игровых моделей" width="1536" height="1280"></a>
+<p><a href="heroes/">Посмотреть одобренные концепты →</a></p>
+<h2>Проверка на RMX2020</h2>
+<div class="shots"><a href="original26/menu.png"><img src="original26/menu.png" alt="Выбор из 26 героев" loading="lazy"></a><a href="original26/wardrobe.png"><img src="original26/wardrobe.png" alt="Гардероб и новый образ" loading="lazy"></a><a href="original26/victory.png"><img src="original26/victory.png" alt="Победитель на ровной площадке" loading="lazy"></a></div>
+<div class="card"><h2>На что обратить внимание</h2><p>Узнаваемость и силуэт героев, движение деталей и украшений, читаемость эффектов, удобство выбора и стабильность матча. Если заметишь проблему, пришли скриншот, имя героя и название планеты.</p><p class="muted">Финальная художественная полировка и длительные замеры производительности ещё впереди. Реальная реклама и платежи не подключены.</p></div>
+<p class="muted" id="build">Контрольная сумма APK загружается…</p>
+</main>
+<script>
+fetch('original26/build.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(b=>{const p=document.getElementById('build');p.textContent='APK: '+(b.apkBytes/1048576).toFixed(1)+' МБ · SHA-256: ';const c=document.createElement('code');c.textContent=b.apkSha256;p.appendChild(c)}).catch(()=>{document.getElementById('build').textContent='Если загрузка APK прерывается, откройте эту страницу во внешнем браузере.'});
+</script>
+</html>

@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "version": "0.8.0-original26-test",
+  "androidVersionCode": 70,
+  "apkSha256": "24f9a4e03fe4c21b8a7e7ad08538c75e27fded5bc347110246d360c867975732",
+  "apkBytes": 63960541,
+  "device": "RMX2020",
+  "networkProtocol": 10,
+  "heroes": 26,
+  "clips": 208,
+  "skinVariants": 130,
+  "artStatus": "First mobile 3D pass. Variants are palettes with sculpted crests, not bespoke full costumes.",
+  "editorRegression": "PASS: 26 rigs, 208 clips, 130 applied skins, opaque materials, menu framing, store validation, terrain, poles, paint, deployment, collisions and outcomes.",
+  "deviceCast": "PASS: 130 wardrobe previews, 26 gameplay/skill/player-victory paths, AI winner upright.",
+  "deviceCastApkSha256": "86ef6cc9f94572f7c7d711adf083febba60c4a2441051fa2c2945d237c7269ce",
+  "finalApkDeltaAfterCastRun": "Shorter wardrobe labels and separate original26 test-store cache namespace; same 26 FBX models, controllers and 130 skin packs. Final APK store and full network match tested separately.",
+  "deviceStore": "PASS: cancel, error, pending, approve, duplicate, refund, restore, recovery, game cosmetics and victory; realMoney=0.",
+  "deviceNetwork": "PASS: authoritative match, result, replay and return to offline mode.",
+  "serverWss": "PASS: two quick peers and two invited-room peers, shared authoritative snapshots; new hero indices 13, 22 and 25 accepted.",
+  "storeUnitTests": 18,
+  "storeProducts": 177,
+  "freeTestSkinGrants": 26,
+  "remaining": [
+    "Art polish and bespoke outfits",
+    "Long-run FPS/thermal profiling",
+    "iOS build and device QA",
+    "Production billing, advertisements and release review are not part of this test build"
+  ],
+  "sourceLogs": [
+    "original26-android-handoff-build.log",
+    "original26-device-cast.log",
+    "original26-device-store.log",
+    "original26-device-network.log"
+  ]
+}

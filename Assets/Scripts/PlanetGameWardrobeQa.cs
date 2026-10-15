@@ -43,7 +43,10 @@ namespace BrainrotPlanet
                     if(Player==null||SkinRigProfile.Visual(Player.transform,hero)?.GetComponent<SkinVisual>()==null)
                     {Debug.LogError("CAST_WARDROBE_QA_FAIL actor="+hero);yield break;}
                     paused=false;autoMoving=true;savedSteering=new Vector2(.35f,.9f).normalized;
-                    RequestJump();UseSkill();yield return new WaitForSecondsRealtime(2.3f);
+                    // Ground-only powers must be tested before an ordinary jump.
+                    deadline=Time.unscaledTime+3;while(!Player.Grounded&&Time.unscaledTime<deadline)yield return null;
+                    UseSkill();if(skillCooldown<=0){Debug.LogError("CAST_WARDROBE_QA_FAIL skill="+hero);yield break;}
+                    yield return new WaitForSecondsRealtime(.2f);RequestJump();yield return new WaitForSecondsRealtime(2.1f);
                     yield return CaptureWardrobeQa(Path.Combine(folder,"hero"+hero.ToString("D2")+"-game.png"));
                     yield return new WaitForSecondsRealtime(.4f);
                     // Force a known player winner to exercise the actual stage and

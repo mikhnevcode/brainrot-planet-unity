@@ -93,7 +93,7 @@ namespace BrainrotPlanet
             foreach(var e in skinCatalog.Manifest.skins)
             {
                 if(e.hero!=selectedHero)continue;
-                WardrobeCard(new Rect(4,y,w-72,69),e.id,e.title,e.description,
+                WardrobeCard(new Rect(4,y,w-72,69),e.id,e.title,"Палитра + эмблема · без усилений",
                     string.IsNullOrEmpty(e.swatch)?new Color(.1f,.4f,.65f):SkinCatalog.ParseColor(e.swatch)*.62f);y+=78;
             }
             GUI.EndScrollView();
@@ -114,7 +114,9 @@ namespace BrainrotPlanet
             bool selected=previewSkin==id;
             if(selected)Rounded(new Rect(rect.x-3,rect.y-3,rect.width+6,rect.height+6),new Color(1f,.78f,.22f));
             string label=title+(equippedSkin==id&&OwnsSkin(id)?"  ✓":OwnsSkin(id)?"":" · МАГАЗИН")+"\n"+subtitle;
-            if(FlatButton(rect,label,color)){previewSkin=id;previewHero=-1;}
+            int font=clearButtonStyle.fontSize;clearButtonStyle.fontSize=15;
+            bool clicked=FlatButton(rect,label,color);clearButtonStyle.fontSize=font;
+            if(clicked){previewSkin=id;previewHero=-1;}
         }
     }
 }

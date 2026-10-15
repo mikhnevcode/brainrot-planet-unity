@@ -35,7 +35,9 @@ namespace BrainrotPlanet
         private string qaOriginalToken;
         private StoreSnapshot qaOriginalSnapshot;
         private float deadline;
-        private string FilePath(string name)=>Path.Combine(Application.persistentDataPath,name);
+        // The new catalog has its own sandbox ledger/cache namespace. Never
+        // overwrite an earlier cast's test session, pending transaction or grants.
+        private string FilePath(string name)=>Path.Combine(Application.persistentDataPath,name.Replace(".store-test-",".store-original26-test-"));
         public static bool Enabled
         {
             get
