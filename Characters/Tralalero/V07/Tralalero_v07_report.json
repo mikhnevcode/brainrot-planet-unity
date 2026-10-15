@@ -1,0 +1,413 @@
+{
+  "source": "Tralalero_v06.blend",
+  "output": "Tralalero_v07.blend",
+  "purpose": "remove floating shoe shells and use flush topology inlays",
+  "triangles": 30544,
+  "rest_skeleton_preserved": true,
+  "actions": [
+    "Drop",
+    "Idle",
+    "Jump",
+    "Land",
+    "Run",
+    "Special",
+    "Victory",
+    "VictoryShow"
+  ],
+  "shoes": [
+    {
+      "name": "Combined_Foot_L",
+      "vertices_before": 6825,
+      "vertices_after": 1440,
+      "removed_components": 20,
+      "removed_vertices": 5385,
+      "flush_lace_faces": 24,
+      "flush_sole_trim_faces": 270,
+      "removed": [
+        {
+          "vertices": 360,
+          "materials": [
+            "Ref63 solid #E0DECC"
+          ]
+        },
+        {
+          "vertices": 31,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 30,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 33,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 33,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 34,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 solid #D4D4B2"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 solid #D4D4B2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Combined_Foot_R",
+      "vertices_before": 6825,
+      "vertices_after": 1440,
+      "removed_components": 20,
+      "removed_vertices": 5385,
+      "flush_lace_faces": 24,
+      "flush_sole_trim_faces": 270,
+      "removed": [
+        {
+          "vertices": 360,
+          "materials": [
+            "Ref63 solid #E0DECC"
+          ]
+        },
+        {
+          "vertices": 31,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 30,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 33,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 33,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 34,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 solid #D4D4B2"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 solid #D4D4B2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Combined_Foot_Rear",
+      "vertices_before": 6825,
+      "vertices_after": 1440,
+      "removed_components": 20,
+      "removed_vertices": 5385,
+      "flush_lace_faces": 24,
+      "flush_sole_trim_faces": 270,
+      "removed": [
+        {
+          "vertices": 360,
+          "materials": [
+            "Ref63 solid #E0DECC"
+          ]
+        },
+        {
+          "vertices": 32,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 33,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 31,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 32,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 33,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 400,
+          "materials": [
+            "Ref63 solid #474233"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 cloth #ABD1D9"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 solid #D4D4B2"
+          ]
+        },
+        {
+          "vertices": 216,
+          "materials": [
+            "Ref63 solid #D4D4B2"
+          ]
+        }
+      ]
+    }
+  ],
+  "blender": "5.2.2 LTS"
+}

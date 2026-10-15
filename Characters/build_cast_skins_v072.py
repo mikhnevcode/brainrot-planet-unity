@@ -127,12 +127,9 @@ def tralalero(m):
         tube('Coral racing harness',[(s*.38,.45,1.81),(s*.57,.04,1.66),(s*.56,-.45,1.5),(s*.35,-.72,1.78)],.052,coral)
         tube('Pearl sewn piping',[(s*.43,.42,1.82),(s*.615,.02,1.63),(s*.60,-.42,1.49)],.018,cream)
         panel('Shark shoulder saddle',[(s*.18,-.55,1.90),(s*.44,-.34,1.92),(s*.47,-.65,1.84),(s*.23,-.83,1.83)],.035,navy)
-    for x,y,b in [(-.45,.44,'Foot_L'),(.45,.44,'Foot_R'),(0,-1.10,'Foot_Rear')]:
-        for s in (-1,1):
-            tube('Coral sneaker bumper',[(x+s*.17,y-.19,.16),(x+s*.23,y+.04,.16),(x+s*.20,y+.30,.15)],.025,coral,b)
-            tube('Ivory sneaker seam',[(x+s*.20,y-.16,.29),(x+s*.24,y+.05,.26),(x+s*.18,y+.25,.20)],.012,cream,b)
-        box('Sport shoe tongue',(x,y+.02,.37),(.12,.18,.027),coral,b,.02)
-        for j in range(3):tube('Sport lace',[(x-.09,y+.03+j*.045,.37-j*.016),(x+.09,y+.03+j*.045,.37-j*.016)],.009,cream,b)
+    # v07 footwear already contains flush colour inlays in the continuous upper
+    # and outsole.  Do not add free-standing bumpers/laces: they looked like
+    # detached pieces while the three feet moved in the victory dance.
     # Small asymmetric shell insignia, clear of face and dorsal fin.
     ring('Reef league crest',(.48,-.05,1.71),.095,.018,cream,rotation=(pi/2,0,pi/2))
 
@@ -359,7 +356,7 @@ def export(hero,variant=0):
         (OUT/'bombardiro_lava.entry.json').write_text(json.dumps(legacy,ensure_ascii=False,indent=2),encoding='utf-8',newline='\n')
         print('CAST_SKIN_REUSE Bombardiro bombardiro_lava')
         return
-    name=NAMES[hero];version='v06' if hero in (0,1) else 'v01' if hero==12 else 'v04'
+    name=NAMES[hero];version='v07' if hero==0 else 'v06' if hero==1 else 'v01' if hero==12 else 'v04'
     bpy.ops.wm.open_mainfile(filepath=str(ROOT/'Characters'/name/(name+'_'+version+'.blend')))
     COSMETICS.clear()
     for arm in [o for o in bpy.context.scene.objects if o.type=='ARMATURE']:

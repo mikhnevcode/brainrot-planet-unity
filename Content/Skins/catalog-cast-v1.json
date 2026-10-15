@@ -8,9 +8,9 @@
       "title": "РИФОВЫЙ ГОНЩИК",
       "titleEn": "Reef Racer",
       "description": "Коралловая сбруя · спортивные кроссовки",
-      "file": "tralalero_reef_racer-463cbabb1ffb4cc18c24fd043aa37d1c8f63712fd20cf1325e808da2c97c98ed.json",
-      "sha256": "463cbabb1ffb4cc18c24fd043aa37d1c8f63712fd20cf1325e808da2c97c98ed",
-      "bytes": 151582,
+      "file": "tralalero_reef_racer-523f32006fa6215fcd80a6da2d7fb03a5b2e800b94ebefc5a713f911e70f0f98.json",
+      "sha256": "523f32006fa6215fcd80a6da2d7fb03a5b2e800b94ebefc5a713f911e70f0f98",
+      "bytes": 45041,
       "swatch": "#FF7052"
     },
     {
@@ -19,9 +19,9 @@
       "title": "ЛЕДЯНОЙ СПРИНТЕР",
       "titleEn": "Ice Sprinter",
       "description": "Ледяные накладки · снежные кроссовки",
-      "file": "tralalero_ice_sprinter-215fd9ca8383a1f3c011809a6399f9f598c49708e66626749067db8b8cc46ba7.json",
-      "sha256": "215fd9ca8383a1f3c011809a6399f9f598c49708e66626749067db8b8cc46ba7",
-      "bytes": 172185,
+      "file": "tralalero_ice_sprinter-24388e9c36647ccf5306f4ffe2e620c416ee9da1dfdded2541af42cd31d3c545.json",
+      "sha256": "24388e9c36647ccf5306f4ffe2e620c416ee9da1dfdded2541af42cd31d3c545",
+      "bytes": 61438,
       "swatch": "#9AEAF5"
     },
     {
@@ -30,9 +30,9 @@
       "title": "ПИРАТ РИФОВ",
       "titleEn": "Reef Pirate",
       "description": "Треуголка · морские узлы на обуви",
-      "file": "tralalero_reef_pirate-8c8bea49eb46b877519d14e5b0973f543e3be61dba8bbadd82a8fd54b43cf0c5.json",
-      "sha256": "8c8bea49eb46b877519d14e5b0973f543e3be61dba8bbadd82a8fd54b43cf0c5",
-      "bytes": 193543,
+      "file": "tralalero_reef_pirate-732c318bf4ce66f5afd5112fdaf91b52a48411ac290e9d7ec84a1f55a0668f93.json",
+      "sha256": "732c318bf4ce66f5afd5112fdaf91b52a48411ac290e9d7ec84a1f55a0668f93",
+      "bytes": 56211,
       "swatch": "#CA9A5A"
     },
     {
@@ -41,9 +41,9 @@
       "title": "НЕОНОВЫЙ СЁРФЕР",
       "titleEn": "Neon Surfer",
       "description": "Волнистый визор · неоновые плавники",
-      "file": "tralalero_neon_surfer-9f37dc17a24ba0394fae765008dac17972113b18679b59674223d0781f0482ec.json",
-      "sha256": "9f37dc17a24ba0394fae765008dac17972113b18679b59674223d0781f0482ec",
-      "bytes": 168594,
+      "file": "tralalero_neon_surfer-c051199843e8b3cf1d1a60f91fa40d7d3d102d1fecc9093b8cd572494434d082.json",
+      "sha256": "c051199843e8b3cf1d1a60f91fa40d7d3d102d1fecc9093b8cd572494434d082",
+      "bytes": 60465,
       "swatch": "#EE74CB"
     },
     {
@@ -52,9 +52,9 @@
       "title": "КОСМИЧЕСКИЙ ПЛОВЕЦ",
       "titleEn": "Space Swimmer",
       "description": "Боковые турбины · звёздный визор",
-      "file": "tralalero_space_swimmer-e3fa05273c2e25404cfa2a0e35307abecdfa988f2c689e73a245645eda8f3770.json",
-      "sha256": "e3fa05273c2e25404cfa2a0e35307abecdfa988f2c689e73a245645eda8f3770",
-      "bytes": 206094,
+      "file": "tralalero_space_swimmer-237374b69a8e7acd167663260ae92dfa9f33bd0017a1c27d7d7ca4869504f916.json",
+      "sha256": "237374b69a8e7acd167663260ae92dfa9f33bd0017a1c27d7d7ca4869504f916",
+      "bytes": 99553,
       "swatch": "#F0AD52"
     },
     {

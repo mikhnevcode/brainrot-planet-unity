@@ -112,19 +112,15 @@ def add_details(hero,variant,m,g):
         if variant==1:
             for s,label in [(-1,'L'),(1,'R')]:
                 panel('Ice fin inlay',[(s*.38,.37,1.79),(s*.53,.03,1.62),(s*.48,-.25,1.68),(s*.27,.01,1.91)],.023,light)
-                for j in range(2):panel('Icy sneaker fin',[(s*.45-.08,.38+j*.1,.39),(s*.45+.08,.38+j*.1,.39),(s*.45,.37+j*.1,.50)],.018,energy,'Foot_'+label,.005)
             motif('snow',(0,1.08,1.78),.09)
         elif variant==2:
             panel('Low pirate tricorn',[(-.28,.86,1.98),(0,.84,2.12),(.28,.86,1.98),(.19,1.18,1.90),(-.19,1.18,1.90)],.04,dark)
             tube('Pirate hat gold stitching',[(-.24,.87,2.0),(0,.85,2.11),(.24,.87,2.0)],.015,accent)
-            for x,y,b in [(-.45,.44,'Foot_L'),(.45,.44,'Foot_R'),(0,-1.10,'Foot_Rear')]:
-                bow('Nautical shoe knot',(x,y+.13,.40),accent,light,b)
             motif('star',(0,1.13,1.98),.055)
         elif variant==3:
             tube('Surfer brow visor',[(-.37,1.18,1.75),(0,1.38,1.81),(.37,1.18,1.75)],.026,energy)
             for s,label in [(-1,'L'),(1,'R')]:
                 tube('Surf fin neon trim',[(s*.46,.54,1.09),(s*.58,.3,.81),(s*.52,.40,.51)],.018,energy,'Thigh_'+label)
-                motif('bolt',(s*.45,.73,.25),.055,'Foot_'+label)
         else:
             for s in (-1,1):
                 ell('Rounded swim thruster',(s*.51,-.72,1.50),(.12,.29,.14),light)
