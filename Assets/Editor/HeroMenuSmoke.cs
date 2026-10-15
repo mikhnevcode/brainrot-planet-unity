@@ -16,21 +16,22 @@ namespace BrainrotPlanet.Editor
             if(HeroPreviewFraming.DragAngles(new Vector2(0,10),new Vector2(9999,9999))!=new Vector2(80,18)||
                HeroPreviewFraming.DragAngles(new Vector2(0,10),new Vector2(-9999,-9999))!=new Vector2(-80,2))
                 throw new Exception("Unlimited hero portrait gesture");
-            var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/Skins/catalog-cast-v1.json"));
+            var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/OriginalCast/Skins/catalog-original26-v1.json"));
             for(int hero=0;hero<SkinRigProfile.HeroCount;hero++)checks+=Check(hero,null);
             foreach(var entry in manifest.skins)checks+=Check(entry.hero,entry);
             foreach(var resolution in new[]{new Vector2(420,790),new Vector2(1080,2412),new Vector2(720,1600),new Vector2(960,540)})
             {
                 float scale=Mathf.Max(.60f,Mathf.Min(resolution.x/420,resolution.y/790));
                 float w=resolution.x/scale,h=resolution.y/scale;
-                // Same four-column, thirteen-tile geometry as DrawHeroMenu, with
+                // Same six-column, twenty-six-tile geometry as DrawHeroMenu, with
                 // conservative 20 logical pixels reserved on each safe edge.
                 float top=20,bottom=h-28,extras=bottom-48-66-46,gridY=top+270;
-                float width=(w-40-24)/4,height=Mathf.Min(width,(extras-12-gridY-24)/4);
-                if(height<44||gridY+4*height+24>extras-11)throw new Exception("Hero grid overlaps controls "+resolution);
+                const int columns=6,rows=5;float width=(w-40-8*(columns-1))/columns;
+                float height=Mathf.Min(width,(extras-12-gridY-8*(rows-1))/rows);
+                if(height<44||gridY+rows*height+8*(rows-1)>extras-11)throw new Exception("Hero grid overlaps controls "+resolution);
                 checks++;
             }
-            Debug.Log("HERO_MENU_SMOKE_PASS heroes=13 skins=65 views="+checks+" footing=true fullBounds=true tiltLimited=true gridNoPages=true");
+            Debug.Log("HERO_MENU_SMOKE_PASS heroes=26 skins=130 views="+checks+" footing=true fullBounds=true tiltLimited=true gridNoPages=true");
         }
         private static int Check(int hero,SkinEntry entry)
         {
@@ -42,11 +43,10 @@ namespace BrainrotPlanet.Editor
                 HeroPreviewFraming.SampleIdle(root.transform);
                 if(entry!=null)
                 {
-                    string path="Content/Skins/Cast/"+entry.file;if(!File.Exists(path))path="Content/Skins/"+entry.file;
+                    string path="Content/OriginalCast/Skins/"+entry.file;
                     SkinVisual.Apply(root.transform,SkinCatalog.ReadPack(File.ReadAllBytes(path),entry));
                 }
-                root.transform.rotation=hero==1?Quaternion.Euler(0,148,0):
-                    Quaternion.AngleAxis(18,Vector3.up)*AvatarArt.AlignFacing(AvatarArt.LocalFacing(root.transform),Vector3.back);
+                root.transform.rotation=AvatarArt.AlignFacing(AvatarArt.LocalFacing(root.transform),Quaternion.Euler(0,28,0)*Vector3.back);
                 foreach(var renderer in root.GetComponentsInChildren<Renderer>())if(renderer.name=="Paint aura")renderer.enabled=false;
                 Bounds bounds=AvatarArt.PoseBounds(root.transform);
                 root.transform.position-=new Vector3(bounds.center.x,bounds.min.y,bounds.center.z);

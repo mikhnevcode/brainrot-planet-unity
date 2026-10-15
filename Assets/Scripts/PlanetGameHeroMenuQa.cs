@@ -11,12 +11,14 @@ namespace BrainrotPlanet
         private IEnumerator RunHeroMenuQa()
         {
             int original=selectedHero;
+            bool originalSetup=nicknameSetupOpen;
             var skins=(string[])equippedSkins.Clone();
             string folder=Path.Combine(Application.persistentDataPath,"hero-menu-qa");
             Directory.CreateDirectory(folder);
             int checks=0;
             try
             {
+                nicknameSetupOpen=false; // Exercise the menu, not the first-run overlay.
                 yield return new WaitForSecondsRealtime(1.5f);
                 for(int hero=0;hero<characters.Length;hero++)
                 {
@@ -41,11 +43,11 @@ namespace BrainrotPlanet
                 }
                 settingsOpen=true;
                 yield return CaptureWardrobeQa(Path.Combine(folder,"settings.png"));
-                Debug.Log("HERO_MENU_QA_PASS heroes=13 views="+checks+" profileUnchanged=true");
+                Debug.Log("HERO_MENU_QA_PASS heroes="+characters.Length+" views="+checks+" profileUnchanged=true");
             }
             finally
             {
-                selectedHero=original;Array.Copy(skins,equippedSkins,skins.Length);
+                selectedHero=original;nicknameSetupOpen=originalSetup;Array.Copy(skins,equippedSkins,skins.Length);
                 settingsOpen=false;previewHero=-1;
             }
         }

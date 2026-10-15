@@ -48,6 +48,11 @@ namespace BrainrotPlanet
         public void HeroAbility(int hero,Vector3 direction,Color teamColor)
         {
             if(softMaterial==null)return;
+            OriginalSignatureFx.Play(this,hero,direction,teamColor);
+        }
+        private void LegacyHeroAbility(int hero,Vector3 direction,Color teamColor)
+        {
+            if(softMaterial==null)return;
             Color accent;
             switch(hero)
             {

@@ -1,0 +1,95 @@
+{
+  "hero": 15,
+  "id": "Lampochmel",
+  "name": "Лампочмель",
+  "blender": "5.2.2 LTS",
+  "vertices": 9348,
+  "triangles": 18584,
+  "materials": 9,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_lampochmel_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Лампочмель · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 15,
+      "file": "orig_lampochmel_stellar-bc3b806c95cb415bd758b10651e1f87ca7164f36bcfa88a38cd29f8f854e7fe6.json",
+      "sha256": "bc3b806c95cb415bd758b10651e1f87ca7164f36bcfa88a38cd29f8f854e7fe6",
+      "bytes": 1998,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_lampochmel_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Лампочмель · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 15,
+      "file": "orig_lampochmel_candy-0d3b95febdf36b163ad1c56dcd37cac4fe8366a799152431b882e9210e94afe3.json",
+      "sha256": "0d3b95febdf36b163ad1c56dcd37cac4fe8366a799152431b882e9210e94afe3",
+      "bytes": 2141,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_lampochmel_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Лампочмель · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 15,
+      "file": "orig_lampochmel_neon-0c575d297014e503124adf082d773cae9f744e6cd53128316a9659774eaaccf8.json",
+      "sha256": "0c575d297014e503124adf082d773cae9f744e6cd53128316a9659774eaaccf8",
+      "bytes": 2137,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_lampochmel_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Лампочмель · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 15,
+      "file": "orig_lampochmel_tropical-58c32a8f46bea5fe253b24ad03cf93c72c77f2f80a31d14a316aa637e68b0e59.json",
+      "sha256": "58c32a8f46bea5fe253b24ad03cf93c72c77f2f80a31d14a316aa637e68b0e59",
+      "bytes": 2147,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_lampochmel_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Лампочмель · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 15,
+      "file": "orig_lampochmel_polar-ff85b9307fa1d417748dd463cf980f913598df810566fe02b3fb637d1f533cc5.json",
+      "sha256": "ff85b9307fa1d417748dd463cf980f913598df810566fe02b3fb637d1f533cc5",
+      "bytes": 2141,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1141484,
+  "status": "exported-not-yet-Unity-verified"
+}

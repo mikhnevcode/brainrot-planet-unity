@@ -1,0 +1,95 @@
+{
+  "hero": 24,
+  "id": "Pylekhvost",
+  "name": "Пылехвост",
+  "blender": "5.2.2 LTS",
+  "vertices": 13894,
+  "triangles": 27624,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_pylekhvost_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Пылехвост · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 24,
+      "file": "orig_pylekhvost_stellar-cc136c8bc01ee69a3f90b7334140eb021bcb8a45e49fba1d3263686221f23330.json",
+      "sha256": "cc136c8bc01ee69a3f90b7334140eb021bcb8a45e49fba1d3263686221f23330",
+      "bytes": 1892,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_pylekhvost_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Пылехвост · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 24,
+      "file": "orig_pylekhvost_candy-ee0d794d1a7c6e021b6b107d86592b6bda4899905cb609ce39ab46dd981ca76e.json",
+      "sha256": "ee0d794d1a7c6e021b6b107d86592b6bda4899905cb609ce39ab46dd981ca76e",
+      "bytes": 2036,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_pylekhvost_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Пылехвост · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 24,
+      "file": "orig_pylekhvost_neon-2486e714f1d7b21aae6c50eb27e8daccac5412d768d4a850c1d9ee905650a292.json",
+      "sha256": "2486e714f1d7b21aae6c50eb27e8daccac5412d768d4a850c1d9ee905650a292",
+      "bytes": 2032,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_pylekhvost_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Пылехвост · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 24,
+      "file": "orig_pylekhvost_tropical-6bbef731a3587feb9f4be9dc96707a9776feab4a37ab0566a1ae005738eba1c2.json",
+      "sha256": "6bbef731a3587feb9f4be9dc96707a9776feab4a37ab0566a1ae005738eba1c2",
+      "bytes": 2042,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_pylekhvost_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Пылехвост · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 24,
+      "file": "orig_pylekhvost_polar-f25b45a5aed45b2e9e232ef9696a0ebe3069defe2308a1969d75961f93a2985a.json",
+      "sha256": "f25b45a5aed45b2e9e232ef9696a0ebe3069defe2308a1969d75961f93a2985a",
+      "bytes": 2036,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1262716,
+  "status": "exported-not-yet-Unity-verified"
+}

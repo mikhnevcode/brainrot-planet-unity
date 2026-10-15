@@ -1,0 +1,95 @@
+{
+  "hero": 20,
+  "id": "Puzyryonysh",
+  "name": "Пузырёныш",
+  "blender": "5.2.2 LTS",
+  "vertices": 8528,
+  "triangles": 16904,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_puzyryonysh_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Пузырёныш · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 20,
+      "file": "orig_puzyryonysh_stellar-5c4449cc642eccd245203e025c3e69d80b2c87ff434509237fbc5c8508bc8677.json",
+      "sha256": "5c4449cc642eccd245203e025c3e69d80b2c87ff434509237fbc5c8508bc8677",
+      "bytes": 1763,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_puzyryonysh_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Пузырёныш · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 20,
+      "file": "orig_puzyryonysh_candy-ca49b81e317f2922cd142ab5091e70397263aa3ac4d144b7703df570e61c7aed.json",
+      "sha256": "ca49b81e317f2922cd142ab5091e70397263aa3ac4d144b7703df570e61c7aed",
+      "bytes": 1910,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_puzyryonysh_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Пузырёныш · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 20,
+      "file": "orig_puzyryonysh_neon-c8bfe51ddecb058e38405929be6a27dd5f626abbd87d9e565df5aea45656692e.json",
+      "sha256": "c8bfe51ddecb058e38405929be6a27dd5f626abbd87d9e565df5aea45656692e",
+      "bytes": 1906,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_puzyryonysh_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Пузырёныш · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 20,
+      "file": "orig_puzyryonysh_tropical-a2a028aaf9e30b5e1618cef732f53088c1b069306be53438dae1d366a626bd93.json",
+      "sha256": "a2a028aaf9e30b5e1618cef732f53088c1b069306be53438dae1d366a626bd93",
+      "bytes": 1916,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_puzyryonysh_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Пузырёныш · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 20,
+      "file": "orig_puzyryonysh_polar-e95e12bd0cce0952c9da87253ea35486c2a0d7a99c92a14465f93fa83b74e246.json",
+      "sha256": "e95e12bd0cce0952c9da87253ea35486c2a0d7a99c92a14465f93fa83b74e246",
+      "bytes": 1910,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1084588,
+  "status": "exported-not-yet-Unity-verified"
+}

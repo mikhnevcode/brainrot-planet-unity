@@ -21,7 +21,8 @@ async def main():
             assert reply['request']==request and reply['mode']=='test'
             await asyncio.sleep(.6)
             return reply
-        reply=await command('hello');assert len(reply['catalog']['products'])==99
+        reply=await command('hello');assert len(reply['catalog']['products'])==177
+        assert len(reply['owned'])==26
         tx=uuid.uuid4().hex
         reply=await command('purchase',product='trail.stars',scenario='pending',tx=tx);assert 'trail:stars' not in reply['owned']
         reply=await command('approve',tx=tx);assert 'trail:stars' in reply['owned']
@@ -33,7 +34,7 @@ async def main():
             raise AssertionError('Unauthenticated store accepted')
     except InvalidStatus as error:
         assert error.response.status_code==401
-    print('STORE_WSS_SMOKE_PASS catalog99 pending approve duplicate refund restore unauthorized401 realMoney=0')
+    print('STORE_WSS_SMOKE_PASS catalog177 pending approve duplicate refund restore unauthorized401 realMoney=0')
 
 
 if __name__=='__main__':asyncio.run(main())

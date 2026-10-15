@@ -1,0 +1,95 @@
+{
+  "hero": 21,
+  "id": "Klubkomot",
+  "name": "Клубкомот",
+  "blender": "5.2.2 LTS",
+  "vertices": 19110,
+  "triangles": 38000,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_klubkomot_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Клубкомот · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 21,
+      "file": "orig_klubkomot_stellar-2e02250aea555802d1b597243cca9fa6f9776bee72424479302b3f7be55e2c12.json",
+      "sha256": "2e02250aea555802d1b597243cca9fa6f9776bee72424479302b3f7be55e2c12",
+      "bytes": 1888,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_klubkomot_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Клубкомот · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 21,
+      "file": "orig_klubkomot_candy-2af28977b5e03ba36193f2ffc5cd80f15fcacade64963800d40408acc4a4a034.json",
+      "sha256": "2af28977b5e03ba36193f2ffc5cd80f15fcacade64963800d40408acc4a4a034",
+      "bytes": 2034,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_klubkomot_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Клубкомот · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 21,
+      "file": "orig_klubkomot_neon-ee2fc98cebd098b263c594748937f2d0e9c63c432cbf06d5c9b363de21f9a219.json",
+      "sha256": "ee2fc98cebd098b263c594748937f2d0e9c63c432cbf06d5c9b363de21f9a219",
+      "bytes": 2030,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_klubkomot_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Клубкомот · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 21,
+      "file": "orig_klubkomot_tropical-b09b291e12b4048f7564ffa77c38a8bbbb9fdf40b24f8322243ee5cb69ea996a.json",
+      "sha256": "b09b291e12b4048f7564ffa77c38a8bbbb9fdf40b24f8322243ee5cb69ea996a",
+      "bytes": 2040,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_klubkomot_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Клубкомот · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 21,
+      "file": "orig_klubkomot_polar-63497a921a07047d2a91f36ded8bd1f9f494f99ab80241ffd7b423b7f44c085c.json",
+      "sha256": "63497a921a07047d2a91f36ded8bd1f9f494f99ab80241ffd7b423b7f44c085c",
+      "bytes": 2034,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1773132,
+  "status": "exported-not-yet-Unity-verified"
+}

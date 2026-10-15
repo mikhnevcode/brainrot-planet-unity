@@ -1,0 +1,95 @@
+{
+  "hero": 1,
+  "id": "Pelmolyot",
+  "name": "Пельмолёт",
+  "blender": "5.2.2 LTS",
+  "vertices": 10948,
+  "triangles": 21712,
+  "materials": 12,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_pelmolyot_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Пельмолёт · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 1,
+      "file": "orig_pelmolyot_stellar-c4d27a1505b632139aa84d53e8b5f11d8efa17917dd6eb25259e8625eb7736e5.json",
+      "sha256": "c4d27a1505b632139aa84d53e8b5f11d8efa17917dd6eb25259e8625eb7736e5",
+      "bytes": 2311,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_pelmolyot_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Пельмолёт · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 1,
+      "file": "orig_pelmolyot_candy-3495b620cf952e8221c5e104d0fc8469cc68bbc6f431d5112d0ae81aafb151f4.json",
+      "sha256": "3495b620cf952e8221c5e104d0fc8469cc68bbc6f431d5112d0ae81aafb151f4",
+      "bytes": 2431,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_pelmolyot_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Пельмолёт · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 1,
+      "file": "orig_pelmolyot_neon-511943dfd8fa72c4fafc002e722e628e7fb7af5684178dfc84ebf0dcc2ed9110.json",
+      "sha256": "511943dfd8fa72c4fafc002e722e628e7fb7af5684178dfc84ebf0dcc2ed9110",
+      "bytes": 2427,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_pelmolyot_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Пельмолёт · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 1,
+      "file": "orig_pelmolyot_tropical-b55e1d5e77588eba10f3c8e8068c3446a1a979c63d3b44d400d6ba3c0b521a0e.json",
+      "sha256": "b55e1d5e77588eba10f3c8e8068c3446a1a979c63d3b44d400d6ba3c0b521a0e",
+      "bytes": 2437,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_pelmolyot_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Пельмолёт · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 1,
+      "file": "orig_pelmolyot_polar-c080af8139ea159ba9a16848c3f9026d75c157e45d319bb11b6b0b82b7ac3009.json",
+      "sha256": "c080af8139ea159ba9a16848c3f9026d75c157e45d319bb11b6b0b82b7ac3009",
+      "bytes": 2431,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1182668,
+  "status": "exported-not-yet-Unity-verified"
+}

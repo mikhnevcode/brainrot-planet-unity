@@ -9,10 +9,10 @@ namespace BrainrotPlanet.Editor
         public static void Run()
         {
             int cases=0;
-            var catalog=JsonUtility.FromJson<StoreCatalog>(File.ReadAllText("Content/Store/catalog-test-v1.json"));
+            var catalog=JsonUtility.FromJson<StoreCatalog>(File.ReadAllText("Content/OriginalCast/Store/catalog-original26-test-v1.json"));
             var snapshot=new StoreSnapshot{schema=1,mode="test",ok=true,catalog=catalog,owned=catalog.free,transactions=Array.Empty<StoreTransaction>()};
             TestStoreClient.Validate(snapshot);cases++;
-            if(catalog.products.Length!=99||catalog.free.Length!=13)throw new Exception("Store collection count");cases++;
+            if(catalog.products.Length!=177||catalog.free.Length!=26)throw new Exception("Store collection count");cases++;
             foreach(var p in catalog.products){snapshot.owned=p.grants;TestStoreClient.Validate(snapshot);cases++;}
             snapshot.owned=new[]{"damage:boost"};Invalid(snapshot);cases++;
             snapshot.owned=Array.Empty<string>();snapshot.mode="production";Invalid(snapshot);cases++;snapshot.mode="test";
@@ -31,7 +31,7 @@ namespace BrainrotPlanet.Editor
                 }
             }
             finally{UnityEngine.Object.DestroyImmediate(root);}
-            Debug.Log("STORE_SMOKE_PASS cases="+cases+" products=99 cosmeticsOnly=true");
+            Debug.Log("STORE_SMOKE_PASS cases="+cases+" products=177 cosmeticsOnly=true");
         }
         private static void Invalid(StoreSnapshot s){try{TestStoreClient.Validate(s);}catch(InvalidDataException){return;}throw new Exception("Invalid store snapshot accepted");}
     }

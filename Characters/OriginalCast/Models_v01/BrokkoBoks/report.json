@@ -1,0 +1,95 @@
+{
+  "hero": 6,
+  "id": "BrokkoBoks",
+  "name": "Брокко-Бокс",
+  "blender": "5.2.2 LTS",
+  "vertices": 16344,
+  "triangles": 32312,
+  "materials": 9,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_brokkoboks_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Брокко-Бокс · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 6,
+      "file": "orig_brokkoboks_stellar-4bd0367a97d37a9cd774ae02147e876bedce050cfc4740862f5200300b928391.json",
+      "sha256": "4bd0367a97d37a9cd774ae02147e876bedce050cfc4740862f5200300b928391",
+      "bytes": 1994,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_brokkoboks_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Брокко-Бокс · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 6,
+      "file": "orig_brokkoboks_candy-11834573f50d90f30fcb4b1cd54a6a8add799647f0fe757d139686a0a29fea71.json",
+      "sha256": "11834573f50d90f30fcb4b1cd54a6a8add799647f0fe757d139686a0a29fea71",
+      "bytes": 2143,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_brokkoboks_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Брокко-Бокс · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 6,
+      "file": "orig_brokkoboks_neon-6f413d9085047c59cd301068169fc95801499ab1165be5f82bf8c525ced84417.json",
+      "sha256": "6f413d9085047c59cd301068169fc95801499ab1165be5f82bf8c525ced84417",
+      "bytes": 2139,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_brokkoboks_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Брокко-Бокс · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 6,
+      "file": "orig_brokkoboks_tropical-7efde6484f0f43b05e6bbaf2e5f066f1966fac7f1f27cbffefb07df41f4e9fcf.json",
+      "sha256": "7efde6484f0f43b05e6bbaf2e5f066f1966fac7f1f27cbffefb07df41f4e9fcf",
+      "bytes": 2149,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_brokkoboks_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Брокко-Бокс · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 6,
+      "file": "orig_brokkoboks_polar-a61497b6d05fec987abaf63aefa3e6f664d4c1d759466f4b76488a06df2ff8c4.json",
+      "sha256": "a61497b6d05fec987abaf63aefa3e6f664d4c1d759466f4b76488a06df2ff8c4",
+      "bytes": 2143,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1365084,
+  "status": "exported-not-yet-Unity-verified"
+}

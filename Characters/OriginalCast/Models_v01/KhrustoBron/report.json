@@ -1,0 +1,95 @@
+{
+  "hero": 17,
+  "id": "KhrustoBron",
+  "name": "Хрусто-Бронь",
+  "blender": "5.2.2 LTS",
+  "vertices": 14746,
+  "triangles": 29344,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_khrustobron_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Хрусто-Бронь · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 17,
+      "file": "orig_khrustobron_stellar-6bc181e2f5a34c96bba5e0023c2def1d74750e10f8280c6c6f621a8a37d52e46.json",
+      "sha256": "6bc181e2f5a34c96bba5e0023c2def1d74750e10f8280c6c6f621a8a37d52e46",
+      "bytes": 1893,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_khrustobron_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Хрусто-Бронь · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 17,
+      "file": "orig_khrustobron_candy-d832c2c58d0ac167513c804da08a84ea7d2455dc1917c17f7e776783707c7eed.json",
+      "sha256": "d832c2c58d0ac167513c804da08a84ea7d2455dc1917c17f7e776783707c7eed",
+      "bytes": 2029,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_khrustobron_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Хрусто-Бронь · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 17,
+      "file": "orig_khrustobron_neon-c5bd18d4c02c772728d2f299537ee8281756426bf81ebe239c5a751bc519c17e.json",
+      "sha256": "c5bd18d4c02c772728d2f299537ee8281756426bf81ebe239c5a751bc519c17e",
+      "bytes": 2025,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_khrustobron_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Хрусто-Бронь · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 17,
+      "file": "orig_khrustobron_tropical-534162c96a395a0795a9134c967812e1a5e0f9843cd693cc7cbe2a78ce11d3f9.json",
+      "sha256": "534162c96a395a0795a9134c967812e1a5e0f9843cd693cc7cbe2a78ce11d3f9",
+      "bytes": 2035,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_khrustobron_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Хрусто-Бронь · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 17,
+      "file": "orig_khrustobron_polar-327854619c9022da9c13e8fc7890da4eddc294da0a0474d0a256981c692a40ca.json",
+      "sha256": "327854619c9022da9c13e8fc7890da4eddc294da0a0474d0a256981c692a40ca",
+      "bytes": 2029,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1300860,
+  "status": "exported-not-yet-Unity-verified"
+}

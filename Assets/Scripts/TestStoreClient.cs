@@ -118,7 +118,7 @@ namespace BrainrotPlanet
             var ids=new HashSet<string>();var grants=new HashSet<string>();
             foreach(var p in s.catalog.products)
             {
-                if(p==null||!ValidProductId(p.id)||!ids.Add(p.id)||!ValidKind(p.kind)||string.IsNullOrEmpty(p.title)||p.title.Length>80||p.hero< -1||p.hero>12||p.priceTest<0||p.priceTest>10000||p.grants==null||p.grants.Length<1||p.grants.Length>32||(!string.IsNullOrEmpty(p.skin)&&!SkinCatalog.ValidId(p.skin)))throw new InvalidDataException();
+                if(p==null||!ValidProductId(p.id)||!ids.Add(p.id)||!ValidKind(p.kind)||string.IsNullOrEmpty(p.title)||p.title.Length>80||p.hero< -1||p.hero>=SkinRigProfile.HeroCount||p.priceTest<0||p.priceTest>10000||p.grants==null||p.grants.Length<1||p.grants.Length>32||(!string.IsNullOrEmpty(p.skin)&&!SkinCatalog.ValidId(p.skin)))throw new InvalidDataException();
                 foreach(var g in p.grants){if(!ShopCosmetics.ValidGrant(g))throw new InvalidDataException();grants.Add(g);}
             }
             foreach(var g in s.owned)if(!grants.Contains(g))throw new InvalidDataException();

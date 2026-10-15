@@ -1,0 +1,95 @@
+{
+  "hero": 12,
+  "id": "Bublikopotam",
+  "name": "Бубликопотам",
+  "blender": "5.2.2 LTS",
+  "vertices": 14172,
+  "triangles": 28120,
+  "materials": 9,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_bublikopotam_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Бубликопотам · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 12,
+      "file": "orig_bublikopotam_stellar-7eb11001eb3cafeb60470b7f312f4aafc49dfedc9cbb74685b46d2296d917bff.json",
+      "sha256": "7eb11001eb3cafeb60470b7f312f4aafc49dfedc9cbb74685b46d2296d917bff",
+      "bytes": 2013,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_bublikopotam_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Бубликопотам · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 12,
+      "file": "orig_bublikopotam_candy-34594cbb1bcd8b63ac8c462c815f235b0d26246c0170caac75ec2a6437a286cf.json",
+      "sha256": "34594cbb1bcd8b63ac8c462c815f235b0d26246c0170caac75ec2a6437a286cf",
+      "bytes": 2156,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_bublikopotam_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Бубликопотам · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 12,
+      "file": "orig_bublikopotam_neon-467f3985a18469ff45e0c3313037a47c2a07b148a04d08a0eb6c362cf7db68f5.json",
+      "sha256": "467f3985a18469ff45e0c3313037a47c2a07b148a04d08a0eb6c362cf7db68f5",
+      "bytes": 2152,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_bublikopotam_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Бубликопотам · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 12,
+      "file": "orig_bublikopotam_tropical-dae3d9416d734dcce556093c076e3fe05189ce775a91d0374a6e75078fef5e82.json",
+      "sha256": "dae3d9416d734dcce556093c076e3fe05189ce775a91d0374a6e75078fef5e82",
+      "bytes": 2162,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_bublikopotam_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Бубликопотам · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 12,
+      "file": "orig_bublikopotam_polar-4a481d39a5c901a33360aa3d3bca4ec75bca156c9413e0fb3f5e3f684cc9c79d.json",
+      "sha256": "4a481d39a5c901a33360aa3d3bca4ec75bca156c9413e0fb3f5e3f684cc9c79d",
+      "bytes": 2156,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1288380,
+  "status": "exported-not-yet-Unity-verified"
+}

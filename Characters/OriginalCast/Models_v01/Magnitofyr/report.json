@@ -1,0 +1,95 @@
+{
+  "hero": 18,
+  "id": "Magnitofyr",
+  "name": "Магнитофыр",
+  "blender": "5.2.2 LTS",
+  "vertices": 7788,
+  "triangles": 15452,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_magnitofyr_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Магнитофыр · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 18,
+      "file": "orig_magnitofyr_stellar-527e8ccaa89b63b489ae6975971f0923edeb38bb1d7faa6f926e5232eab16b2d.json",
+      "sha256": "527e8ccaa89b63b489ae6975971f0923edeb38bb1d7faa6f926e5232eab16b2d",
+      "bytes": 1868,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_magnitofyr_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Магнитофыр · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 18,
+      "file": "orig_magnitofyr_candy-560241b470cc913c4aa447cc5089ad67fec9f5fd6f1ecf6568ea72d2b12d9339.json",
+      "sha256": "560241b470cc913c4aa447cc5089ad67fec9f5fd6f1ecf6568ea72d2b12d9339",
+      "bytes": 2014,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_magnitofyr_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Магнитофыр · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 18,
+      "file": "orig_magnitofyr_neon-d1b528233321daf97b65b9d1ac682bf0bff44db3b2d5bee42ff4ce819ffb132a.json",
+      "sha256": "d1b528233321daf97b65b9d1ac682bf0bff44db3b2d5bee42ff4ce819ffb132a",
+      "bytes": 2010,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_magnitofyr_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Магнитофыр · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 18,
+      "file": "orig_magnitofyr_tropical-40fb629aaccc5cd486c5770f4009267cb2fb8990f40f93daa944012dffda13ba.json",
+      "sha256": "40fb629aaccc5cd486c5770f4009267cb2fb8990f40f93daa944012dffda13ba",
+      "bytes": 2020,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_magnitofyr_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Магнитофыр · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 18,
+      "file": "orig_magnitofyr_polar-223afcf23e1037f39dd6f1f8791a316b99d6420458b2a9b0bbe0d57cb148def8.json",
+      "sha256": "223afcf23e1037f39dd6f1f8791a316b99d6420458b2a9b0bbe0d57cb148def8",
+      "bytes": 2014,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1056492,
+  "status": "exported-not-yet-Unity-verified"
+}

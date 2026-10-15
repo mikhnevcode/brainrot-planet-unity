@@ -1,0 +1,95 @@
+{
+  "hero": 19,
+  "id": "Garmoshmyak",
+  "name": "Гармошмяк",
+  "blender": "5.2.2 LTS",
+  "vertices": 9696,
+  "triangles": 19248,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_garmoshmyak_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Гармошмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 19,
+      "file": "orig_garmoshmyak_stellar-d71bafbfa2806b9dd428036a771d3f96a37214b81e30db3d1610c584c0c03503.json",
+      "sha256": "d71bafbfa2806b9dd428036a771d3f96a37214b81e30db3d1610c584c0c03503",
+      "bytes": 1763,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_garmoshmyak_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Гармошмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 19,
+      "file": "orig_garmoshmyak_candy-5062141a60891a75f09ebdbc893e304e5f69d6ecfad77104f0578bd306e0b6a3.json",
+      "sha256": "5062141a60891a75f09ebdbc893e304e5f69d6ecfad77104f0578bd306e0b6a3",
+      "bytes": 1894,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_garmoshmyak_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Гармошмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 19,
+      "file": "orig_garmoshmyak_neon-5d248fbbadf8cea96abcd9403d8490aed9bd0fdc17738df81e02557fef2676a9.json",
+      "sha256": "5d248fbbadf8cea96abcd9403d8490aed9bd0fdc17738df81e02557fef2676a9",
+      "bytes": 1890,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_garmoshmyak_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Гармошмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 19,
+      "file": "orig_garmoshmyak_tropical-a25bfdab14d0bcd7764c7a08336cd2ff3f58d428972cf273527dc61122822293.json",
+      "sha256": "a25bfdab14d0bcd7764c7a08336cd2ff3f58d428972cf273527dc61122822293",
+      "bytes": 1900,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_garmoshmyak_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Гармошмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 19,
+      "file": "orig_garmoshmyak_polar-657fbbf996faa5ca5ec56e0aafd6ff8c037eb6c1973b982fe69df1ea1aa8ae3e.json",
+      "sha256": "657fbbf996faa5ca5ec56e0aafd6ff8c037eb6c1973b982fe69df1ea1aa8ae3e",
+      "bytes": 1894,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1102044,
+  "status": "exported-not-yet-Unity-verified"
+}

@@ -18,20 +18,7 @@ namespace BrainrotPlanet
         private GUIStyle numberStyle,captionStyle;
         private Texture2D roundedPanelTexture;
         private GUIStyle roundedPanelStyle;
-        private static readonly string[] SkillHelp={
-            "Рывок на 3,5 секунды. Быстро вернись к своей краске или перехвати чужой след.",
-            "Три бомбы летят вперёд веером. Закрась площадку на пути и расширь владения.",
-            "Ледяная волна замедляет соседних соперников. Применяй, когда твоей петле угрожают.",
-            "Турбины дают ускорение на 4 секунды. Используй для рискованной петли и возвращения.",
-            "Пируэт закрашивает круг вокруг тебя. Помогает расширить владения возле границы.",
-            "Теневой рывок даёт скорость и небольшую область краски. Подходит для внезапной атаки.",
-            "Корни закрашивают землю и замедляют соседей. Защищай территорию и свой след.",
-            "Барабанный удар закрашивает круг и замедляет врагов. Дождись их приближения.",
-            "Кактусная буря закрашивает землю и мешает соседним соперникам.",
-            "Воздушный танец помогает ускориться и обойти соперника.",
-            "Пружина подбрасывает героя. При приземлении возникает круг краски.",
-            "Три креветочных всплеска покрывают землю. Расширяй владения в выбранном направлении.",
-            "Брюшной плеск закрашивает круг. Используй у края своей территории."};
+        private static readonly string[] SkillHelp=OriginalHeroCatalog.Helps();
 
         public void ShowBiomeMotion(BiomeMotionEffect effect,float multiplier,int zone)
         {
@@ -76,7 +63,7 @@ namespace BrainrotPlanet
             var light=fill.AddComponent<Light>();light.type=LightType.Directional;
             light.color=new Color(.75f,.85f,1f);light.intensity=.72f;light.shadows=LightShadows.None;
             light.cullingMask=~(1<<30);
-            portraitAtlas=Resources.Load<Texture2D>("HeroPortraits064");
+            portraitAtlas=Resources.Load<Texture2D>("OriginalCast/HeroPortraits080");
         }
         private bool IsTrailProtected(int team)=>DedicatedMatchServer?networkGrace[team]>0f:
             team==LocalTeam?playerLandingGrace>0f:offlineBotGrace[team]>0f;
@@ -126,7 +113,7 @@ namespace BrainrotPlanet
         private void Portrait(Rect r,int hero)
         {
             if(portraitAtlas==null)return;
-            GUI.DrawTextureWithTexCoords(r,portraitAtlas,new Rect((hero%4)/4f,(3-hero/4)/4f,.25f,.25f),true);
+            GUI.DrawTextureWithTexCoords(r,portraitAtlas,new Rect((hero%6)/6f,(4-hero/6)/5f,1f/6f,.2f),true);
         }
         private void DrawMenuPolish(float w,float h)
         {

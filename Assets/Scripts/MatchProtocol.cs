@@ -6,7 +6,7 @@ namespace BrainrotPlanet
 {
     public static class MatchProtocol
     {
-        public const int Version = 9, Port = 27766, MaxTrail = 280;
+        public const int Version = 10, Port = 27766, MaxTrail = 280;
         public const byte Hello = 1, Lobby = 2, Start = 3, Input = 4, Snapshot = 5, Effect = 6,
                           RoomInfo = 7;
         public static bool ValidRoomCode(string code)

@@ -1,0 +1,95 @@
+{
+  "hero": 8,
+  "id": "Arbuzub",
+  "name": "Арбузуб",
+  "blender": "5.2.2 LTS",
+  "vertices": 19090,
+  "triangles": 38000,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_arbuzub_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Арбузуб · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 8,
+      "file": "orig_arbuzub_stellar-c2f46ffa37e3da6866e01855df0531750a32dc2b6a507f1555369c0ecb7843f1.json",
+      "sha256": "c2f46ffa37e3da6866e01855df0531750a32dc2b6a507f1555369c0ecb7843f1",
+      "bytes": 1889,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_arbuzub_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Арбузуб · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 8,
+      "file": "orig_arbuzub_candy-2902b5698826f9b72204316d018be2fd5c24ae68935b40673dbb90fc81939686.json",
+      "sha256": "2902b5698826f9b72204316d018be2fd5c24ae68935b40673dbb90fc81939686",
+      "bytes": 2035,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_arbuzub_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Арбузуб · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 8,
+      "file": "orig_arbuzub_neon-4111e72bd16deb418b0fed2b1548b226ce9820c37752537693f1f9604feb3fab.json",
+      "sha256": "4111e72bd16deb418b0fed2b1548b226ce9820c37752537693f1f9604feb3fab",
+      "bytes": 2031,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_arbuzub_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Арбузуб · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 8,
+      "file": "orig_arbuzub_tropical-4f7a3fbaa1549f55a200ec59d80d46a19f0435410ba651c826778be4db3dd93a.json",
+      "sha256": "4f7a3fbaa1549f55a200ec59d80d46a19f0435410ba651c826778be4db3dd93a",
+      "bytes": 2041,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_arbuzub_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Арбузуб · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 8,
+      "file": "orig_arbuzub_polar-5ae834648770d3ee10f1986eccddd60644ea59f1e76124e903bb265a2e225e78.json",
+      "sha256": "5ae834648770d3ee10f1986eccddd60644ea59f1e76124e903bb265a2e225e78",
+      "bytes": 2035,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1574876,
+  "status": "exported-not-yet-Unity-verified"
+}

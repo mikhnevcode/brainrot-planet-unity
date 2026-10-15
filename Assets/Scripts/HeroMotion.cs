@@ -11,6 +11,7 @@ namespace BrainrotPlanet
     {
         private PlanetActor actor;
         private Animator animator;
+        private bool originalRig;
         private int hero;
         private Transform torso, head, armL, armR, legL, legR, tail, accessoryL, accessoryR;
         private Quaternion restRotation;
@@ -28,7 +29,8 @@ namespace BrainrotPlanet
         {
             actor = owner;
             animator = source;
-            hero = Mathf.Clamp(owner.Character,0,12);
+            hero = Mathf.Clamp(owner.Character,0,OriginalHeroCatalog.Count-1);
+            originalRig=source.GetComponent<OriginalRigTag>()!=null;
             restRotation = transform.localRotation;
             restPosition = transform.localPosition;
             motionOffset = hero*.53f;
@@ -98,6 +100,9 @@ namespace BrainrotPlanet
         private void LateUpdate()
         {
             if(actor==null || animator==null)return;
+            // New rigs have complete Blender-authored motion. Never layer a legacy
+            // anatomy/spin on top, which can detach accessories or turn the body over.
+            if(originalRig){transform.localPosition=restPosition;transform.localRotation=restRotation;return;}
             if(!actor.Active)
             {
                 // The stage uses its own Blender clip; no second whole-body spin.

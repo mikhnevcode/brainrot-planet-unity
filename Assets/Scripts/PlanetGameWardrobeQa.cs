@@ -13,14 +13,16 @@ namespace BrainrotPlanet
         {
             isWardrobeQa=true;Application.runInBackground=true;
             int originalHero=selectedHero;bool hadHero=PlayerPrefs.HasKey("BrainrotSelectedHero");
+            bool originalSetup=nicknameSetupOpen;
             int savedHero=PlayerPrefs.GetInt("BrainrotSelectedHero",0);
             var originalSkins=(string[])equippedSkins.Clone();
             string folder=Path.Combine(Application.persistentDataPath,"cast-qa");Directory.CreateDirectory(folder);
             try
             {
+                nicknameSetupOpen=false;
                 float deadline=Time.unscaledTime+35f;
-                while(skinCatalog.Manifest.skins.Length<65&&Time.unscaledTime<deadline)yield return null;
-                if(skinCatalog.Manifest.skins.Length<65){Debug.LogError("CAST_WARDROBE_QA_FAIL catalog");yield break;}
+                while(skinCatalog.Manifest.skins.Length<130&&Time.unscaledTime<deadline)yield return null;
+                if(skinCatalog.Manifest.skins.Length<130){Debug.LogError("CAST_WARDROBE_QA_FAIL catalog");yield break;}
                 for(int hero=0;hero<SkinRigProfile.HeroCount;hero++)
                 {
                     ReturnToMenu();selectedHero=hero;networkPanel=false;previewHero=-1;wardrobeOpen=true;
@@ -53,13 +55,23 @@ namespace BrainrotPlanet
                     yield return new WaitForSecondsRealtime(.6f);
                     if(victoryActor==null||SkinRigProfile.Visual(victoryActor.transform,hero)?.GetComponent<SkinVisual>()==null)
                     {Debug.LogError("CAST_WARDROBE_QA_FAIL stage="+hero);yield break;}
+                    if(Vector3.Dot(victoryActor.transform.up,Vector3.up)<.99f)
+                    {Debug.LogError("CAST_WARDROBE_QA_FAIL stage_up="+hero);yield break;}
                     Debug.Log("CAST_WARDROBE_QA_HERO_PASS hero="+hero+" id="+entry.id+" preview_game_jump_skill_victory=true");
                 }
-                Debug.Log("CAST_WARDROBE_QA_PASS heroes=13 skins=65 profileRewardsUnchanged=true");
+                ReturnToMenu();wardrobeOpen=false;StartGame();
+                float aiDeadline=Time.unscaledTime+15;while(IsLanding&&Time.unscaledTime<aiDeadline)yield return null;
+                var aiOwners=new byte[PlanetMath.CellCount];for(int i=0;i<aiOwners.Length;i++)aiOwners[i]=2;
+                Territory.ApplyNetworkOwners(aiOwners);Finish();yield return new WaitForSecondsRealtime(1.4f);
+                if(victoryActor==null||victoryActor.Team!=2||Vector3.Dot(victoryActor.transform.up,Vector3.up)<.99f)
+                {Debug.LogError("CAST_WARDROBE_QA_FAIL ai_stage");yield break;}
+                yield return CaptureWardrobeQa(Path.Combine(folder,"ai-winner.png"));
+                Debug.Log("ORIGINAL_AI_WINNER_QA_PASS upright=true team=2");
+                Debug.Log("CAST_WARDROBE_QA_PASS heroes=26 skins=130 profileRewardsUnchanged=true");
             }
             finally
             {
-                ReturnToMenu();wardrobeOpen=false;selectedHero=originalHero;previewHero=-1;
+                ReturnToMenu();nicknameSetupOpen=originalSetup;wardrobeOpen=false;selectedHero=originalHero;previewHero=-1;
                 Array.Copy(originalSkins,equippedSkins,equippedSkins.Length);
                 if(hadHero)PlayerPrefs.SetInt("BrainrotSelectedHero",savedHero);else PlayerPrefs.DeleteKey("BrainrotSelectedHero");
                 PlayerPrefs.Save();isWardrobeQa=false;

@@ -1,0 +1,95 @@
+{
+  "hero": 5,
+  "id": "ShurshunPaketych",
+  "name": "Шуршун Пакетыч",
+  "blender": "5.2.2 LTS",
+  "vertices": 6678,
+  "triangles": 13232,
+  "materials": 5,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_shurshunpaketych_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Шуршун Пакетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 5,
+      "file": "orig_shurshunpaketych_stellar-999e0216146073fc03f4bb7de837e446a2023c375e9c0f22fc2d9fc25958194a.json",
+      "sha256": "999e0216146073fc03f4bb7de837e446a2023c375e9c0f22fc2d9fc25958194a",
+      "bytes": 1556,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_shurshunpaketych_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Шуршун Пакетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 5,
+      "file": "orig_shurshunpaketych_candy-7b346640ed95e69c60affcd3a698a75dc6c865083afeee1d993465dcf7450e33.json",
+      "sha256": "7b346640ed95e69c60affcd3a698a75dc6c865083afeee1d993465dcf7450e33",
+      "bytes": 1701,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_shurshunpaketych_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Шуршун Пакетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 5,
+      "file": "orig_shurshunpaketych_neon-7b82fc10e631700d474ae2cbd4c49e011448f7b21e18e3fd0697f9ffd9a54b31.json",
+      "sha256": "7b82fc10e631700d474ae2cbd4c49e011448f7b21e18e3fd0697f9ffd9a54b31",
+      "bytes": 1697,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_shurshunpaketych_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Шуршун Пакетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 5,
+      "file": "orig_shurshunpaketych_tropical-8cec217e9b0314956d571103a96d84b4ac7a831e93c2505395b1983c92a20411.json",
+      "sha256": "8cec217e9b0314956d571103a96d84b4ac7a831e93c2505395b1983c92a20411",
+      "bytes": 1707,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_shurshunpaketych_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Шуршун Пакетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 5,
+      "file": "orig_shurshunpaketych_polar-2ca270cce7f805e265453b3a9c2644e221e6722764fc8cb20917cbf558660a17.json",
+      "sha256": "2ca270cce7f805e265453b3a9c2644e221e6722764fc8cb20917cbf558660a17",
+      "bytes": 1701,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1025516,
+  "status": "exported-not-yet-Unity-verified"
+}

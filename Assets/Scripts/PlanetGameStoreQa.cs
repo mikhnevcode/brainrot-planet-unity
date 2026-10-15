@@ -20,17 +20,20 @@ namespace BrainrotPlanet
             // Dedicated random TEST account. User's test profile, preferences and
             // gameplay rewards are restored; no receipt or real payment occurs.
             int originalHero=selectedHero;var originalSkins=(string[])equippedSkins.Clone();
+            bool originalSetup=nicknameSetupOpen;
             bool hadHero=PlayerPrefs.HasKey("BrainrotSelectedHero");int savedHero=PlayerPrefs.GetInt("BrainrotSelectedHero",0);
             string[] previous=new string[6];bool[] had=new bool[6];string[] kinds={"trail","spawn","dance","stage","emote","profile"};
             for(int i=0;i<6;i++){had[i]=PlayerPrefs.HasKey("BrainrotTestCosmetic_"+kinds[i]);previous[i]=PlayerPrefs.GetString("BrainrotTestCosmetic_"+kinds[i],"");}
             string folder=Path.Combine(Application.persistentDataPath,"store-qa");Directory.CreateDirectory(folder);
             try
             {
+                nicknameSetupOpen=false;
                 ConnectStore();yield return WaitStoreQa();store.BeginTemporaryQa();yield return WaitStoreQa();
-                StoreAssert(store.Catalog.products.Length==99,"catalog99");
+                StoreAssert(store.Catalog.products.Length==177,"catalog177");
                 string product=File.ReadAllText(Path.Combine(Application.persistentDataPath,".store-qa")).Trim();
                 StoreProduct chosen=null;foreach(var p in store.Catalog.products)if(p.id==product)chosen=p;
-                if(chosen==null){product="skin.troppa_polar_fisher";foreach(var p in store.Catalog.products)if(p.id==product)chosen=p;}
+                if(chosen==null){product="skin.orig_popkornpykh_polar";foreach(var p in store.Catalog.products)if(p.id==product)chosen=p;}
+                if(chosen==null)throw new Exception("original_skin_product_missing");
                 string grant=chosen.grants[0];selectedHero=chosen.hero;
                 StoreAssert(!store.Owned(grant),"initially_locked");
                 store.Purchase(product,"cancel");yield return WaitStoreQa();StoreAssert(!store.Owned(grant),"cancel_no_grant");
@@ -63,12 +66,12 @@ namespace BrainrotPlanet
                 yield return new WaitForSecondsRealtime(1.5f);
                 StoreAssert(worldRoot.GetComponent<CosmeticStageArt>()!=null&&victoryActor.GetComponentInChildren<CosmeticVictoryMotion>()!=null,"victory_stage_dance");
                 yield return CaptureWardrobeQa(Path.Combine(folder,"victory.png"));
-                Debug.Log("STORE_QA_PASS catalog99 cancel_error_pending_approve_duplicate_refund_restore_game_victory=true realMoney=0");
+                Debug.Log("STORE_QA_PASS catalog177 cancel_error_pending_approve_duplicate_refund_restore_game_victory=true realMoney=0");
             }
             finally
             {
-                ReturnToMenu();shopOpen=false;shopHistory=false;shopDialog=false;isWardrobeQa=false;selectedHero=originalHero;previewHero=-1;
-                for(int i=0;i<13;i++){equippedSkins[i]=originalSkins[i];if(string.IsNullOrEmpty(originalSkins[i]))PlayerPrefs.DeleteKey("BrainrotSkin"+i);else PlayerPrefs.SetString("BrainrotSkin"+i,originalSkins[i]);}
+                ReturnToMenu();nicknameSetupOpen=originalSetup;shopOpen=false;shopHistory=false;shopDialog=false;isWardrobeQa=false;selectedHero=originalHero;previewHero=-1;
+                for(int i=0;i<originalSkins.Length;i++){equippedSkins[i]=originalSkins[i];if(string.IsNullOrEmpty(originalSkins[i]))PlayerPrefs.DeleteKey("BrainrotSkin"+i);else PlayerPrefs.SetString("BrainrotSkin"+i,originalSkins[i]);}
                 for(int i=0;i<6;i++){if(had[i])PlayerPrefs.SetString("BrainrotTestCosmetic_"+kinds[i],previous[i]);else PlayerPrefs.DeleteKey("BrainrotTestCosmetic_"+kinds[i]);}
                 if(hadHero)PlayerPrefs.SetInt("BrainrotSelectedHero",savedHero);else PlayerPrefs.DeleteKey("BrainrotSelectedHero");PlayerPrefs.Save();store?.EndTemporaryQa();
             }

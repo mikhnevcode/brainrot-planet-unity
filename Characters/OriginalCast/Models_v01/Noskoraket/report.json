@@ -1,0 +1,95 @@
+{
+  "hero": 16,
+  "id": "Noskoraket",
+  "name": "Носкоракет",
+  "blender": "5.2.2 LTS",
+  "vertices": 8818,
+  "triangles": 17548,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_noskoraket_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Носкоракет · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 16,
+      "file": "orig_noskoraket_stellar-fdae691d0b9dd7fc897d6c80c0c507f1f9c806901a507932f008891722c69718.json",
+      "sha256": "fdae691d0b9dd7fc897d6c80c0c507f1f9c806901a507932f008891722c69718",
+      "bytes": 1885,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_noskoraket_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Носкоракет · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 16,
+      "file": "orig_noskoraket_candy-f020a9a555274d7717c7f74c0b568d7ffdd79c0f6e2ffca807538aa2ab228339.json",
+      "sha256": "f020a9a555274d7717c7f74c0b568d7ffdd79c0f6e2ffca807538aa2ab228339",
+      "bytes": 2039,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_noskoraket_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Носкоракет · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 16,
+      "file": "orig_noskoraket_neon-7eec0e15f91fff3725da76e2595b15655dce4ad18971084e989affd6a23aa3e6.json",
+      "sha256": "7eec0e15f91fff3725da76e2595b15655dce4ad18971084e989affd6a23aa3e6",
+      "bytes": 2035,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_noskoraket_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Носкоракет · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 16,
+      "file": "orig_noskoraket_tropical-94abc97c76900c2f0214c36cdebdc781469f04859be8a7b8873bc0e3f24e1b47.json",
+      "sha256": "94abc97c76900c2f0214c36cdebdc781469f04859be8a7b8873bc0e3f24e1b47",
+      "bytes": 2045,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_noskoraket_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Носкоракет · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 16,
+      "file": "orig_noskoraket_polar-cf0421cd272a83166628db13f7256527f8662abf0f00581f75bbc54ba51cd033.json",
+      "sha256": "cf0421cd272a83166628db13f7256527f8662abf0f00581f75bbc54ba51cd033",
+      "bytes": 2039,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1092092,
+  "status": "exported-not-yet-Unity-verified"
+}

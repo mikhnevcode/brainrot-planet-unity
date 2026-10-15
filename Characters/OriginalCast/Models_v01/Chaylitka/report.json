@@ -1,0 +1,95 @@
+{
+  "hero": 13,
+  "id": "Chaylitka",
+  "name": "Чайлитка",
+  "blender": "5.2.2 LTS",
+  "vertices": 5672,
+  "triangles": 11288,
+  "materials": 6,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_chaylitka_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Чайлитка · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 13,
+      "file": "orig_chaylitka_stellar-53b2d7702f11bca17d3a4431236ad515cacacf101ab287904560799974fdfa1a.json",
+      "sha256": "53b2d7702f11bca17d3a4431236ad515cacacf101ab287904560799974fdfa1a",
+      "bytes": 1678,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_chaylitka_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Чайлитка · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 13,
+      "file": "orig_chaylitka_candy-1273181cdb34a38287d060ec258dd46c85c3810a90af6332b27464c87846556d.json",
+      "sha256": "1273181cdb34a38287d060ec258dd46c85c3810a90af6332b27464c87846556d",
+      "bytes": 1816,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_chaylitka_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Чайлитка · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 13,
+      "file": "orig_chaylitka_neon-848e9d75adc81e20e21e8ba2c0d9a2d44b65228d19bd71d0628261e91225c906.json",
+      "sha256": "848e9d75adc81e20e21e8ba2c0d9a2d44b65228d19bd71d0628261e91225c906",
+      "bytes": 1812,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_chaylitka_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Чайлитка · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 13,
+      "file": "orig_chaylitka_tropical-14d426b074ce61a437d6b34654dc0b9eb4eba60c63c4fcd5b2fdfdbf85cca7a6.json",
+      "sha256": "14d426b074ce61a437d6b34654dc0b9eb4eba60c63c4fcd5b2fdfdbf85cca7a6",
+      "bytes": 1822,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_chaylitka_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Чайлитка · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 13,
+      "file": "orig_chaylitka_polar-d40a777f8361e5ad4f9f3dc40bdb08db54b128db54972c289e00c7e88011ae1f.json",
+      "sha256": "d40a777f8361e5ad4f9f3dc40bdb08db54b128db54972c289e00c7e88011ae1f",
+      "bytes": 1816,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 988812,
+  "status": "exported-not-yet-Unity-verified"
+}

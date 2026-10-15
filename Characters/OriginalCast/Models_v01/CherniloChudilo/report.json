@@ -1,0 +1,95 @@
+{
+  "hero": 11,
+  "id": "CherniloChudilo",
+  "name": "Чернило Чудило",
+  "blender": "5.2.2 LTS",
+  "vertices": 13926,
+  "triangles": 27608,
+  "materials": 11,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_chernilochudilo_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Чернило Чудило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 11,
+      "file": "orig_chernilochudilo_stellar-18cb59be0f0fa4b3fa140350d9ce8a34866c95579d6cda7bba0d4b44554a6029.json",
+      "sha256": "18cb59be0f0fa4b3fa140350d9ce8a34866c95579d6cda7bba0d4b44554a6029",
+      "bytes": 2219,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_chernilochudilo_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Чернило Чудило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 11,
+      "file": "orig_chernilochudilo_candy-15b6c0c41b78eaaf705dd45a3db57d6a0125cc248aea2de0ca6043a1ac5330be.json",
+      "sha256": "15b6c0c41b78eaaf705dd45a3db57d6a0125cc248aea2de0ca6043a1ac5330be",
+      "bytes": 2350,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_chernilochudilo_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Чернило Чудило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 11,
+      "file": "orig_chernilochudilo_neon-9131ec5b065723f7d09b75dc4f3024ea2dccc9e34aed44ccd7c7f28a1a55a296.json",
+      "sha256": "9131ec5b065723f7d09b75dc4f3024ea2dccc9e34aed44ccd7c7f28a1a55a296",
+      "bytes": 2346,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_chernilochudilo_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Чернило Чудило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 11,
+      "file": "orig_chernilochudilo_tropical-3599789f162079c73ec989ac134308e76fb7c95791275aebd71aeaa391f04e99.json",
+      "sha256": "3599789f162079c73ec989ac134308e76fb7c95791275aebd71aeaa391f04e99",
+      "bytes": 2356,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_chernilochudilo_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Чернило Чудило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 11,
+      "file": "orig_chernilochudilo_polar-e0e9a1488498735e9efa33950e5916f1afef9579c831bfdf6d13c3bb037c1b1e.json",
+      "sha256": "e0e9a1488498735e9efa33950e5916f1afef9579c831bfdf6d13c3bb037c1b1e",
+      "bytes": 2350,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1293852,
+  "status": "exported-not-yet-Unity-verified"
+}

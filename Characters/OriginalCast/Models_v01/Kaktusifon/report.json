@@ -1,0 +1,95 @@
+{
+  "hero": 23,
+  "id": "Kaktusifon",
+  "name": "Кактусифон",
+  "blender": "5.2.2 LTS",
+  "vertices": 8218,
+  "triangles": 16308,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_kaktusifon_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Кактусифон · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 23,
+      "file": "orig_kaktusifon_stellar-6572fc58778220c45b2605d20391fb50149e44fadb9ba9d87af55e1a7f4d6527.json",
+      "sha256": "6572fc58778220c45b2605d20391fb50149e44fadb9ba9d87af55e1a7f4d6527",
+      "bytes": 1881,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_kaktusifon_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Кактусифон · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 23,
+      "file": "orig_kaktusifon_candy-9f2d366da49c74ecf03c23549151e68a1369aa03dd612213ebeb114dfbceb0ed.json",
+      "sha256": "9f2d366da49c74ecf03c23549151e68a1369aa03dd612213ebeb114dfbceb0ed",
+      "bytes": 2013,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_kaktusifon_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Кактусифон · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 23,
+      "file": "orig_kaktusifon_neon-c90e9e7282b84a23a2ec1965ec04fabf4444813e9d33b5315ebdbba1b3ce2de2.json",
+      "sha256": "c90e9e7282b84a23a2ec1965ec04fabf4444813e9d33b5315ebdbba1b3ce2de2",
+      "bytes": 2009,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_kaktusifon_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Кактусифон · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 23,
+      "file": "orig_kaktusifon_tropical-c3fd36a1b7cd0ec5297361cfb510d07bcce5199ea09d01109906610c398d3561.json",
+      "sha256": "c3fd36a1b7cd0ec5297361cfb510d07bcce5199ea09d01109906610c398d3561",
+      "bytes": 2019,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_kaktusifon_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Кактусифон · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 23,
+      "file": "orig_kaktusifon_polar-1db2d0bec483c04ec12ed9fa87e1ec63f35736c8d66feaa118bf3ba63c45c157.json",
+      "sha256": "1db2d0bec483c04ec12ed9fa87e1ec63f35736c8d66feaa118bf3ba63c45c157",
+      "bytes": 2013,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1075180,
+  "status": "exported-not-yet-Unity-verified"
+}

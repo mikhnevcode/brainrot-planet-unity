@@ -1,0 +1,95 @@
+{
+  "hero": 2,
+  "id": "MorzhoMorozho",
+  "name": "Моржо-Морожо",
+  "blender": "5.2.2 LTS",
+  "vertices": 15312,
+  "triangles": 30408,
+  "materials": 8,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_morzhomorozho_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Моржо-Морожо · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 2,
+      "file": "orig_morzhomorozho_stellar-5b9bbed34d7c4217d797973db0d16b77720f7e23c7ced3b3290f65e207e329f8.json",
+      "sha256": "5b9bbed34d7c4217d797973db0d16b77720f7e23c7ced3b3290f65e207e329f8",
+      "bytes": 1897,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_morzhomorozho_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Моржо-Морожо · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 2,
+      "file": "orig_morzhomorozho_candy-cbe6ec34267e9e9dcd795cc800577cda4f5d52c7d176bc714ef588348e42257c.json",
+      "sha256": "cbe6ec34267e9e9dcd795cc800577cda4f5d52c7d176bc714ef588348e42257c",
+      "bytes": 2039,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_morzhomorozho_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Моржо-Морожо · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 2,
+      "file": "orig_morzhomorozho_neon-e19ce28d7cf5cc8841d939ced7b6561e1f76c34dc479758ce98cbcb270d8eaf5.json",
+      "sha256": "e19ce28d7cf5cc8841d939ced7b6561e1f76c34dc479758ce98cbcb270d8eaf5",
+      "bytes": 2035,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_morzhomorozho_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Моржо-Морожо · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 2,
+      "file": "orig_morzhomorozho_tropical-f25bab7ed9e0c4180371f507b1aba9e9fbcaf2bee916c8a20e2b028f10aff409.json",
+      "sha256": "f25bab7ed9e0c4180371f507b1aba9e9fbcaf2bee916c8a20e2b028f10aff409",
+      "bytes": 2045,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_morzhomorozho_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Моржо-Морожо · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 2,
+      "file": "orig_morzhomorozho_polar-d147f1bf2ee71a81999b53377f2f65e45c642e8464dbb4a8f7c12b34f75d8869.json",
+      "sha256": "d147f1bf2ee71a81999b53377f2f65e45c642e8464dbb4a8f7c12b34f75d8869",
+      "bytes": 2039,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1348348,
+  "status": "exported-not-yet-Unity-verified"
+}

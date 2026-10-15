@@ -18,13 +18,13 @@ def dotnet_string(value):
     return bytes((len(encoded),)) + encoded
 
 
-async def join(base, route):
+async def join(base, route, hero=25):
     ws = await connect(base.rstrip("/") + route, max_size=196608,
                        compression=None, proxy=None)
     packet = await asyncio.wait_for(ws.recv(), 10)
     assert packet[0] == 7 and packet[1] == len(packet)-2, "missing RoomInfo"
     code = packet[2:].decode("ascii")
-    await ws.send(struct.pack("<BiB", 1, 9, 0) + b"\0" +
+    await ws.send(struct.pack("<BiB", 1, 10, hero) + b"\0" +
                   dotnet_string("QA-PLAYER"))
     return ws, code
 
@@ -62,9 +62,9 @@ async def observe(ws, seconds=18):
 
 async def main(base):
     quick_a, quick_code = await join(base, "/quick")
-    quick_b, second_code = await join(base, "/quick")
+    quick_b, second_code = await join(base, "/quick", 13)
     private_a, private_code = await join(base, "/create")
-    private_b, friend_code = await join(base, "/join/" + private_code)
+    private_b, friend_code = await join(base, "/join/" + private_code, 22)
     peers = (quick_a, quick_b, private_a, private_b)
     try:
         assert quick_code == second_code == ""

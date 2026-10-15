@@ -145,7 +145,7 @@ namespace BrainrotPlanet
             if(kind==0)
             {
                 var actor=players[team-1]; actor.PlaySpecial(); Effects.HeroAbility(actor.Character,direction,Colors.Team(team));
-                if(team==LocalTeam && actor.Character!=1)GameSound.Play(GameCue.Power);
+                if(team==LocalTeam && OriginalHeroCatalog.Mechanic(actor.Character)!=1)GameSound.PlayHeroPower(actor.Character);
             }
             else if(kind==1)
             {

@@ -1,0 +1,95 @@
+{
+  "hero": 7,
+  "id": "BudiloBegemotilo",
+  "name": "Будило-Бегемотило",
+  "blender": "5.2.2 LTS",
+  "vertices": 10702,
+  "triangles": 21224,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_budilobegemotilo_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Будило-Бегемотило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 7,
+      "file": "orig_budilobegemotilo_stellar-e82e9830860e9d06a898c41a36faab665a40489877cc80e5b611b3bb01723869.json",
+      "sha256": "e82e9830860e9d06a898c41a36faab665a40489877cc80e5b611b3bb01723869",
+      "bytes": 1790,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_budilobegemotilo_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Будило-Бегемотило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 7,
+      "file": "orig_budilobegemotilo_candy-2c11347a820591a1d4f1ad07144ea71d9da33c28b6d9741049e27cab51542ab8.json",
+      "sha256": "2c11347a820591a1d4f1ad07144ea71d9da33c28b6d9741049e27cab51542ab8",
+      "bytes": 1941,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_budilobegemotilo_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Будило-Бегемотило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 7,
+      "file": "orig_budilobegemotilo_neon-0e2a479e020f10607a94f745d3c5980531c7bf02d89d03be3d376930e95a4fc5.json",
+      "sha256": "0e2a479e020f10607a94f745d3c5980531c7bf02d89d03be3d376930e95a4fc5",
+      "bytes": 1937,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_budilobegemotilo_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Будило-Бегемотило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 7,
+      "file": "orig_budilobegemotilo_tropical-1c4774e1dc119cf4b5033d56cb38123c72335b5687c18e49611c4bcd5488b5d7.json",
+      "sha256": "1c4774e1dc119cf4b5033d56cb38123c72335b5687c18e49611c4bcd5488b5d7",
+      "bytes": 1947,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_budilobegemotilo_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Будило-Бегемотило · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 7,
+      "file": "orig_budilobegemotilo_polar-9923fedc042b2fb21ec5615fb2e2a0836f93ef81e533eac42127ceefb69127df.json",
+      "sha256": "9923fedc042b2fb21ec5615fb2e2a0836f93ef81e533eac42127ceefb69127df",
+      "bytes": 1941,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1166700,
+  "status": "exported-not-yet-Unity-verified"
+}

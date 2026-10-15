@@ -428,6 +428,10 @@ namespace BrainrotPlanet
             return true;
         }
         public static void Make(Transform root,int character,Color territoryColor)
+            =>OriginalAvatarArt.Make(root,character,territoryColor);
+
+        // Source archive only. Production avatars never fall back to third-party characters.
+        private static void MakeLegacyPreview(Transform root,int character,Color territoryColor)
         {
             Transform art=new GameObject("Brainrot avatar / animated").transform;
             art.SetParent(root,false);

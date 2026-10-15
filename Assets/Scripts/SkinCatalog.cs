@@ -20,8 +20,8 @@ namespace BrainrotPlanet
     // entries are free. This validates content, not store receipts or ownership.
     public sealed class SkinCatalog : MonoBehaviour
     {
-        public const string BaseUrl="https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/skins/";
-        public const string CatalogFile="catalog-cast-v1.json";
+        public const string BaseUrl="https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/original26/skins/";
+        public const string CatalogFile="catalog-original26-v1.json";
         public const int MaxPackBytes=2*1024*1024,MaxManifestBytes=131072,MemoryPackLimit=16;
         public SkinManifest Manifest {get;private set;}=new SkinManifest{schema=2,revision=0,skins=new SkinEntry[0]};
         public bool Busy=>refreshing||inFlight.Count>0;
@@ -51,8 +51,14 @@ namespace BrainrotPlanet
             string path=Path.Combine(CacheDir,e.file);
             try
             {
-                if(!File.Exists(path)||new FileInfo(path).Length!=e.bytes)return null;
-                p=ReadPack(File.ReadAllBytes(path),e);Remember(reference,p);return p;
+                if(File.Exists(path)&&new FileInfo(path).Length==e.bytes)p=ReadPack(File.ReadAllBytes(path),e);
+                else
+                {
+                    var bundled=Resources.Load<TextAsset>("OriginalCast/Skins/"+e.id);
+                    if(bundled==null)return null;
+                    try{p=ReadPack(bundled.bytes,e);}finally{Resources.UnloadAsset(bundled);}
+                }
+                Remember(reference,p);return p;
             }
             catch(Exception){return null;}
         }
@@ -71,7 +77,7 @@ namespace BrainrotPlanet
         {
             if(json==null||Encoding.UTF8.GetByteCount(json)>MaxManifestBytes)throw new InvalidDataException("Catalog size");
             var m=JsonUtility.FromJson<SkinManifest>(json);
-            if(m==null||(m.schema!=1&&m.schema!=2)||m.revision<1||m.skins==null||m.skins.Length>128)throw new InvalidDataException("Catalog schema");
+            if(m==null||m.schema!=2||m.revision<1||m.skins==null||m.skins.Length>256)throw new InvalidDataException("Catalog schema");
             var ids=new HashSet<string>();
             foreach(var e in m.skins)
             {
@@ -136,6 +142,15 @@ namespace BrainrotPlanet
                 {Manifest=ReadManifest(File.ReadAllText(path));Generation++;Status="Скачанные образы доступны";Debug.Log("SKIN_CATALOG_CACHE revision="+Manifest.revision);}
             }
             catch(Exception){Status="Используется базовый образ";}
+            if(Manifest.skins.Length==0)
+            {
+                var bundled=Resources.Load<TextAsset>("OriginalCast/Skins/catalog-original26-v1");
+                if(bundled!=null)
+                {
+                    try{Manifest=ReadManifest(bundled.text);Generation++;Status="Встроенный гардероб доступен офлайн";}
+                    finally{Resources.UnloadAsset(bundled);}
+                }
+            }
             Refresh();
         }
         public void Refresh(){if(!refreshing)StartCoroutine(Fetch());}

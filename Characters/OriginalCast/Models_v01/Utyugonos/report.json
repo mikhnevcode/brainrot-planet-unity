@@ -1,0 +1,95 @@
+{
+  "hero": 3,
+  "id": "Utyugonos",
+  "name": "Утюгонос",
+  "blender": "5.2.2 LTS",
+  "vertices": 9360,
+  "triangles": 18592,
+  "materials": 6,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_utyugonos_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Утюгонос · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 3,
+      "file": "orig_utyugonos_stellar-f08e486f16e00a6ec5287798e0af12b148d9f5565a105f675409125e1d67f64b.json",
+      "sha256": "f08e486f16e00a6ec5287798e0af12b148d9f5565a105f675409125e1d67f64b",
+      "bytes": 1675,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_utyugonos_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Утюгонос · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 3,
+      "file": "orig_utyugonos_candy-1e5f7c3b59febb0608b4ccb7ac669d1aa498e4a474888b752d5db2d53e57e156.json",
+      "sha256": "1e5f7c3b59febb0608b4ccb7ac669d1aa498e4a474888b752d5db2d53e57e156",
+      "bytes": 1805,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_utyugonos_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Утюгонос · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 3,
+      "file": "orig_utyugonos_neon-5c0308b27f60468915b3d38e48eed7279a5a51390a2ad046e9954e7e1ffa149d.json",
+      "sha256": "5c0308b27f60468915b3d38e48eed7279a5a51390a2ad046e9954e7e1ffa149d",
+      "bytes": 1801,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_utyugonos_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Утюгонос · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 3,
+      "file": "orig_utyugonos_tropical-2e6d2f36c252013243afeb2f6afd6e13a0a23fa01378c6013ea60d79b7557de6.json",
+      "sha256": "2e6d2f36c252013243afeb2f6afd6e13a0a23fa01378c6013ea60d79b7557de6",
+      "bytes": 1811,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_utyugonos_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Утюгонос · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 3,
+      "file": "orig_utyugonos_polar-62a3a470d71ca023250913fc3c00b80d3ef3ba11a2984ab1ffac6d0ab8b62995.json",
+      "sha256": "62a3a470d71ca023250913fc3c00b80d3ef3ba11a2984ab1ffac6d0ab8b62995",
+      "bytes": 1805,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1127788,
+  "status": "exported-not-yet-Unity-verified"
+}

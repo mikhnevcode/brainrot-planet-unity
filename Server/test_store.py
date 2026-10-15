@@ -9,10 +9,13 @@ CATALOG=Path(__file__).resolve().parent.parent/'Content/Store/catalog-test-v1.js
 
 
 class StoreTests(unittest.TestCase):
+    catalog=CATALOG
+    expected_products=99
+    expected_free=13
     def setUp(self):
         self.folder=tempfile.TemporaryDirectory()
         self.database=Path(self.folder.name)/'store.sqlite3'
-        self.store=StoreService(self.database,CATALOG)
+        self.store=StoreService(self.database,self.catalog)
         self.token=uuid.uuid4().hex
         self.command('hello')
 
@@ -27,8 +30,8 @@ class StoreTests(unittest.TestCase):
         return self.command('purchase',product=product,scenario=scenario,tx=tx or uuid.uuid4().hex)
 
     def test_catalog_all_99_products(self):
-        self.assertEqual(len(self.store.products),99)
-        self.assertEqual(len(self.command('restore')['owned']),13)
+        self.assertEqual(len(self.store.products),self.expected_products)
+        self.assertEqual(len(self.command('restore')['owned']),self.expected_free)
         for p in self.store.products.values():
             reply=self.buy(p['id']);self.assertTrue(reply['ok'])
             self.assertTrue(set(p['grants'])<=set(reply['owned']))
@@ -63,7 +66,7 @@ class StoreTests(unittest.TestCase):
         self.command('hello',token='b'*32)
         self.assertNotIn('trail:stars',self.command('restore',token='b'*32)['owned'])
         self.assertFalse(self.command('refund',token='b'*32,tx=tx)['ok'])
-        self.store.close();self.store=StoreService(self.database,CATALOG)
+        self.store.close();self.store=StoreService(self.database,self.catalog)
         self.assertIn('trail:stars',self.command('restore')['owned'])
 
     def test_no_client_price_or_receipt_authority(self):
@@ -82,6 +85,12 @@ class StoreTests(unittest.TestCase):
         for _ in range(499):self.buy('trail.bubbles','cancel')
         self.assertFalse(self.buy('trail.petals')['ok'])
         self.assertIn('trail:stars',self.command('restore')['owned'])
+
+
+class OriginalCastStoreTests(StoreTests):
+    catalog=CATALOG.parent.parent/'OriginalCast/Store/catalog-original26-test-v1.json'
+    expected_products=177
+    expected_free=26
 
 
 if __name__=='__main__':unittest.main()

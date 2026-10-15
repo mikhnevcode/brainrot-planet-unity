@@ -39,7 +39,8 @@ namespace BrainrotPlanet
             bool outsideOwnLand, float nearestOpponentDegrees,
             float nearestTrailDegrees, bool grounded)
         {
-            switch(hero)
+            if(!OriginalHeroCatalog.Valid(hero))return false;
+            switch(OriginalHeroCatalog.Mechanic(hero))
             {
                 case 0: case 3: case 5: case 9:
                     return mode==AiObjective.HuntTrail ||

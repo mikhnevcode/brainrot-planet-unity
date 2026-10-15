@@ -1,0 +1,95 @@
+{
+  "hero": 25,
+  "id": "PopkornPykh",
+  "name": "Попкорн-Пых",
+  "blender": "5.2.2 LTS",
+  "vertices": 11646,
+  "triangles": 22932,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_popkornpykh_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Попкорн-Пых · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 25,
+      "file": "orig_popkornpykh_stellar-c4535fa03c7dea09568a964388d820b1c28a8c1727feccad1bbe3cd9f29308b1.json",
+      "sha256": "c4535fa03c7dea09568a964388d820b1c28a8c1727feccad1bbe3cd9f29308b1",
+      "bytes": 1787,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_popkornpykh_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Попкорн-Пых · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 25,
+      "file": "orig_popkornpykh_candy-8882cb4aa258d90c67bdbd8e685a3ba529251dd8ff25a35b300ff3fe926eba48.json",
+      "sha256": "8882cb4aa258d90c67bdbd8e685a3ba529251dd8ff25a35b300ff3fe926eba48",
+      "bytes": 1938,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_popkornpykh_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Попкорн-Пых · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 25,
+      "file": "orig_popkornpykh_neon-bb8ebedabbd20ada2b29b6de478113ef7d9e298542cf5584661538a3e0da3fe5.json",
+      "sha256": "bb8ebedabbd20ada2b29b6de478113ef7d9e298542cf5584661538a3e0da3fe5",
+      "bytes": 1934,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_popkornpykh_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Попкорн-Пых · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 25,
+      "file": "orig_popkornpykh_tropical-b1b9b4ff6fb9e4fb69fcc68f89a80d48796f2b89b6364dc909eaab4b894f5275.json",
+      "sha256": "b1b9b4ff6fb9e4fb69fcc68f89a80d48796f2b89b6364dc909eaab4b894f5275",
+      "bytes": 1944,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_popkornpykh_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Попкорн-Пых · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 25,
+      "file": "orig_popkornpykh_polar-8755537f73408537ac31e2db343f4e5145759ce4c17dd5f852eedd1c13fb45fa.json",
+      "sha256": "8755537f73408537ac31e2db343f4e5145759ce4c17dd5f852eedd1c13fb45fa",
+      "bytes": 1938,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1202044,
+  "status": "exported-not-yet-Unity-verified"
+}

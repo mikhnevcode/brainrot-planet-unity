@@ -120,7 +120,7 @@ namespace BrainrotPlanet
             float onlineY=bottom-48,botsY=onlineY-66,extrasY=botsY-46;
             float gridY=top+270;
             GUI.Label(new Rect(20,top+242,w-40,23),"ВЫБЕРИ ГЕРОЯ · "+characters.Length,smallStyle);
-            int columns=4,rows=(characters.Length+columns-1)/columns;
+            int columns=6,rows=(characters.Length+columns-1)/columns;
             float gap=8,width=(w-40-gap*(columns-1))/columns;
             float height=Mathf.Min(width,(extrasY-12-gridY-gap*(rows-1))/rows);
             for(int i=0;i<characters.Length;i++)

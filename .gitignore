@@ -18,3 +18,5 @@ Characters/LegacyUnityFBX/
 /Server/.venv/
 __pycache__/
 *.key
+*.blend1
+*.blend2

@@ -1,0 +1,95 @@
+{
+  "hero": 4,
+  "id": "Makaronika",
+  "name": "Макароника",
+  "blender": "5.2.2 LTS",
+  "vertices": 11638,
+  "triangles": 23116,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_makaronika_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Макароника · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 4,
+      "file": "orig_makaronika_stellar-5ff4ff79d538a6cbc3e27e6a18f22205b2cb67a8e14df4abe7da4946a721bd7f.json",
+      "sha256": "5ff4ff79d538a6cbc3e27e6a18f22205b2cb67a8e14df4abe7da4946a721bd7f",
+      "bytes": 1788,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_makaronika_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Макароника · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 4,
+      "file": "orig_makaronika_candy-de6f5dc8124f5412a823bd6a19ff8ee75f43c61e01614123fd44464037e2c4e6.json",
+      "sha256": "de6f5dc8124f5412a823bd6a19ff8ee75f43c61e01614123fd44464037e2c4e6",
+      "bytes": 1927,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_makaronika_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Макароника · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 4,
+      "file": "orig_makaronika_neon-5efa582ec2f88201bdbdb6f52bccbe4684a1dbe454508c7f8fce3ee4096f1713.json",
+      "sha256": "5efa582ec2f88201bdbdb6f52bccbe4684a1dbe454508c7f8fce3ee4096f1713",
+      "bytes": 1923,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_makaronika_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Макароника · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 4,
+      "file": "orig_makaronika_tropical-5f00497d6342ee3a4aa472f1ea2191af1969779cb3b9777297ee37233b81dbd4.json",
+      "sha256": "5f00497d6342ee3a4aa472f1ea2191af1969779cb3b9777297ee37233b81dbd4",
+      "bytes": 1933,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_makaronika_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Макароника · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 4,
+      "file": "orig_makaronika_polar-34b45624b83ac435b1fe22a4512290dd36b67f2bcaf22367e57d0bd9cd21fc6e.json",
+      "sha256": "34b45624b83ac435b1fe22a4512290dd36b67f2bcaf22367e57d0bd9cd21fc6e",
+      "bytes": 1927,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1198972,
+  "status": "exported-not-yet-Unity-verified"
+}

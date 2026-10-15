@@ -24,7 +24,7 @@ namespace BrainrotPlanet
             root=new GameObject("Flying equipped hero / no physics").transform;
             root.SetParent(parent,false);
             int hero=actor.GetComponent<PlanetActor>()?.Character??0;
-            horizontalHero=hero==0||hero==1||hero==3||hero==9||hero==11;
+            horizontalHero=hero==1||hero==15||hero==16||hero==25;
             foreach(Transform child in actor)
                 Object.Instantiate(child.gameObject,root,false).name=child.name;
             foreach(var collider in root.GetComponentsInChildren<Collider>())collider.enabled=false;

@@ -1,0 +1,95 @@
+{
+  "hero": 10,
+  "id": "ZheleZhmyak",
+  "name": "Желе-Жмяк",
+  "blender": "5.2.2 LTS",
+  "vertices": 5752,
+  "triangles": 11360,
+  "materials": 6,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_zhelezhmyak_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Желе-Жмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 10,
+      "file": "orig_zhelezhmyak_stellar-e0ae7d26da5169ed39899908a4a3737a5a091153c55bed2aa2dbb93487589345.json",
+      "sha256": "e0ae7d26da5169ed39899908a4a3737a5a091153c55bed2aa2dbb93487589345",
+      "bytes": 1681,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_zhelezhmyak_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Желе-Жмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 10,
+      "file": "orig_zhelezhmyak_candy-62dd674f3a48fd55dc503845d352a08bf40c7a87889a1d13d15c151ed408e918.json",
+      "sha256": "62dd674f3a48fd55dc503845d352a08bf40c7a87889a1d13d15c151ed408e918",
+      "bytes": 1835,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_zhelezhmyak_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Желе-Жмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 10,
+      "file": "orig_zhelezhmyak_neon-7787038449315507f4f21edb24a3244798901e9e70fa7b16a316b9e29577d200.json",
+      "sha256": "7787038449315507f4f21edb24a3244798901e9e70fa7b16a316b9e29577d200",
+      "bytes": 1831,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_zhelezhmyak_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Желе-Жмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 10,
+      "file": "orig_zhelezhmyak_tropical-296ce10f29c5ca9129ec54e2c493b0dfba78c5b69621a3c1023e327dd487aac2.json",
+      "sha256": "296ce10f29c5ca9129ec54e2c493b0dfba78c5b69621a3c1023e327dd487aac2",
+      "bytes": 1841,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_zhelezhmyak_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Желе-Жмяк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 10,
+      "file": "orig_zhelezhmyak_polar-4ac04c3bd86fcb21045493e22f3ef0a896edd70528de957942ccaddc25de86e7.json",
+      "sha256": "4ac04c3bd86fcb21045493e22f3ef0a896edd70528de957942ccaddc25de86e7",
+      "bytes": 1835,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 980188,
+  "status": "exported-not-yet-Unity-verified"
+}

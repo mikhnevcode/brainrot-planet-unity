@@ -1,0 +1,95 @@
+{
+  "hero": 9,
+  "id": "FenikFuFu",
+  "name": "Феник Фу-Фу",
+  "blender": "5.2.2 LTS",
+  "vertices": 7700,
+  "triangles": 15296,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_fenikfufu_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Феник Фу-Фу · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 9,
+      "file": "orig_fenikfufu_stellar-c9e1a3ec66c10a9c0aa8df536d8959aacf472803a5f8af1e70981c4a5b7545f6.json",
+      "sha256": "c9e1a3ec66c10a9c0aa8df536d8959aacf472803a5f8af1e70981c4a5b7545f6",
+      "bytes": 1786,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_fenikfufu_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Феник Фу-Фу · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 9,
+      "file": "orig_fenikfufu_candy-ae7a947413959538e26eaf181531ce51e1ef6bb420fed2eafc251ad87cf3d113.json",
+      "sha256": "ae7a947413959538e26eaf181531ce51e1ef6bb420fed2eafc251ad87cf3d113",
+      "bytes": 1937,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_fenikfufu_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Феник Фу-Фу · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 9,
+      "file": "orig_fenikfufu_neon-a894ceb96df2cd0a2c136515e8b8e79bb6200dab89e47b4d23a56d2c841a97f7.json",
+      "sha256": "a894ceb96df2cd0a2c136515e8b8e79bb6200dab89e47b4d23a56d2c841a97f7",
+      "bytes": 1933,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_fenikfufu_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Феник Фу-Фу · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 9,
+      "file": "orig_fenikfufu_tropical-97278cca876f72991ceef2c46819dbf52817d27f1ec05991f8fae890b2c7ad50.json",
+      "sha256": "97278cca876f72991ceef2c46819dbf52817d27f1ec05991f8fae890b2c7ad50",
+      "bytes": 1943,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_fenikfufu_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Феник Фу-Фу · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 9,
+      "file": "orig_fenikfufu_polar-a1a75b1807c1b6d5bfb6ea0cf24aa16be1b81256fcc2e9bf51cc862617d4d921.json",
+      "sha256": "a1a75b1807c1b6d5bfb6ea0cf24aa16be1b81256fcc2e9bf51cc862617d4d921",
+      "bytes": 1937,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1054108,
+  "status": "exported-not-yet-Unity-verified"
+}

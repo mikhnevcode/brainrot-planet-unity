@@ -1,0 +1,2101 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "mode": "test",
+  "products": [
+    {
+      "id": "skin.orig_rollobulk_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_rollobulk_stellar"
+      ],
+      "skin": "orig_rollobulk_stellar"
+    },
+    {
+      "id": "skin.orig_rollobulk_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_rollobulk_candy"
+      ],
+      "skin": "orig_rollobulk_candy"
+    },
+    {
+      "id": "skin.orig_rollobulk_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_rollobulk_neon"
+      ],
+      "skin": "orig_rollobulk_neon"
+    },
+    {
+      "id": "skin.orig_rollobulk_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_rollobulk_tropical"
+      ],
+      "skin": "orig_rollobulk_tropical"
+    },
+    {
+      "id": "skin.orig_rollobulk_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 0,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_rollobulk_polar"
+      ],
+      "skin": "orig_rollobulk_polar"
+    },
+    {
+      "id": "skin.orig_pelmolyot_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pelmolyot_stellar"
+      ],
+      "skin": "orig_pelmolyot_stellar"
+    },
+    {
+      "id": "skin.orig_pelmolyot_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pelmolyot_candy"
+      ],
+      "skin": "orig_pelmolyot_candy"
+    },
+    {
+      "id": "skin.orig_pelmolyot_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pelmolyot_neon"
+      ],
+      "skin": "orig_pelmolyot_neon"
+    },
+    {
+      "id": "skin.orig_pelmolyot_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pelmolyot_tropical"
+      ],
+      "skin": "orig_pelmolyot_tropical"
+    },
+    {
+      "id": "skin.orig_pelmolyot_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 1,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pelmolyot_polar"
+      ],
+      "skin": "orig_pelmolyot_polar"
+    },
+    {
+      "id": "skin.orig_morzhomorozho_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_morzhomorozho_stellar"
+      ],
+      "skin": "orig_morzhomorozho_stellar"
+    },
+    {
+      "id": "skin.orig_morzhomorozho_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_morzhomorozho_candy"
+      ],
+      "skin": "orig_morzhomorozho_candy"
+    },
+    {
+      "id": "skin.orig_morzhomorozho_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_morzhomorozho_neon"
+      ],
+      "skin": "orig_morzhomorozho_neon"
+    },
+    {
+      "id": "skin.orig_morzhomorozho_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_morzhomorozho_tropical"
+      ],
+      "skin": "orig_morzhomorozho_tropical"
+    },
+    {
+      "id": "skin.orig_morzhomorozho_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 2,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_morzhomorozho_polar"
+      ],
+      "skin": "orig_morzhomorozho_polar"
+    },
+    {
+      "id": "skin.orig_utyugonos_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_utyugonos_stellar"
+      ],
+      "skin": "orig_utyugonos_stellar"
+    },
+    {
+      "id": "skin.orig_utyugonos_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_utyugonos_candy"
+      ],
+      "skin": "orig_utyugonos_candy"
+    },
+    {
+      "id": "skin.orig_utyugonos_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_utyugonos_neon"
+      ],
+      "skin": "orig_utyugonos_neon"
+    },
+    {
+      "id": "skin.orig_utyugonos_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_utyugonos_tropical"
+      ],
+      "skin": "orig_utyugonos_tropical"
+    },
+    {
+      "id": "skin.orig_utyugonos_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 3,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_utyugonos_polar"
+      ],
+      "skin": "orig_utyugonos_polar"
+    },
+    {
+      "id": "skin.orig_makaronika_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_makaronika_stellar"
+      ],
+      "skin": "orig_makaronika_stellar"
+    },
+    {
+      "id": "skin.orig_makaronika_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_makaronika_candy"
+      ],
+      "skin": "orig_makaronika_candy"
+    },
+    {
+      "id": "skin.orig_makaronika_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_makaronika_neon"
+      ],
+      "skin": "orig_makaronika_neon"
+    },
+    {
+      "id": "skin.orig_makaronika_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_makaronika_tropical"
+      ],
+      "skin": "orig_makaronika_tropical"
+    },
+    {
+      "id": "skin.orig_makaronika_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 4,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_makaronika_polar"
+      ],
+      "skin": "orig_makaronika_polar"
+    },
+    {
+      "id": "skin.orig_shurshunpaketych_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_shurshunpaketych_stellar"
+      ],
+      "skin": "orig_shurshunpaketych_stellar"
+    },
+    {
+      "id": "skin.orig_shurshunpaketych_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_shurshunpaketych_candy"
+      ],
+      "skin": "orig_shurshunpaketych_candy"
+    },
+    {
+      "id": "skin.orig_shurshunpaketych_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_shurshunpaketych_neon"
+      ],
+      "skin": "orig_shurshunpaketych_neon"
+    },
+    {
+      "id": "skin.orig_shurshunpaketych_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_shurshunpaketych_tropical"
+      ],
+      "skin": "orig_shurshunpaketych_tropical"
+    },
+    {
+      "id": "skin.orig_shurshunpaketych_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 5,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_shurshunpaketych_polar"
+      ],
+      "skin": "orig_shurshunpaketych_polar"
+    },
+    {
+      "id": "skin.orig_brokkoboks_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_brokkoboks_stellar"
+      ],
+      "skin": "orig_brokkoboks_stellar"
+    },
+    {
+      "id": "skin.orig_brokkoboks_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_brokkoboks_candy"
+      ],
+      "skin": "orig_brokkoboks_candy"
+    },
+    {
+      "id": "skin.orig_brokkoboks_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_brokkoboks_neon"
+      ],
+      "skin": "orig_brokkoboks_neon"
+    },
+    {
+      "id": "skin.orig_brokkoboks_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_brokkoboks_tropical"
+      ],
+      "skin": "orig_brokkoboks_tropical"
+    },
+    {
+      "id": "skin.orig_brokkoboks_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 6,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_brokkoboks_polar"
+      ],
+      "skin": "orig_brokkoboks_polar"
+    },
+    {
+      "id": "skin.orig_budilobegemotilo_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_budilobegemotilo_stellar"
+      ],
+      "skin": "orig_budilobegemotilo_stellar"
+    },
+    {
+      "id": "skin.orig_budilobegemotilo_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_budilobegemotilo_candy"
+      ],
+      "skin": "orig_budilobegemotilo_candy"
+    },
+    {
+      "id": "skin.orig_budilobegemotilo_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_budilobegemotilo_neon"
+      ],
+      "skin": "orig_budilobegemotilo_neon"
+    },
+    {
+      "id": "skin.orig_budilobegemotilo_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_budilobegemotilo_tropical"
+      ],
+      "skin": "orig_budilobegemotilo_tropical"
+    },
+    {
+      "id": "skin.orig_budilobegemotilo_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 7,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_budilobegemotilo_polar"
+      ],
+      "skin": "orig_budilobegemotilo_polar"
+    },
+    {
+      "id": "skin.orig_arbuzub_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_arbuzub_stellar"
+      ],
+      "skin": "orig_arbuzub_stellar"
+    },
+    {
+      "id": "skin.orig_arbuzub_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_arbuzub_candy"
+      ],
+      "skin": "orig_arbuzub_candy"
+    },
+    {
+      "id": "skin.orig_arbuzub_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_arbuzub_neon"
+      ],
+      "skin": "orig_arbuzub_neon"
+    },
+    {
+      "id": "skin.orig_arbuzub_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_arbuzub_tropical"
+      ],
+      "skin": "orig_arbuzub_tropical"
+    },
+    {
+      "id": "skin.orig_arbuzub_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 8,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_arbuzub_polar"
+      ],
+      "skin": "orig_arbuzub_polar"
+    },
+    {
+      "id": "skin.orig_fenikfufu_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_fenikfufu_stellar"
+      ],
+      "skin": "orig_fenikfufu_stellar"
+    },
+    {
+      "id": "skin.orig_fenikfufu_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_fenikfufu_candy"
+      ],
+      "skin": "orig_fenikfufu_candy"
+    },
+    {
+      "id": "skin.orig_fenikfufu_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_fenikfufu_neon"
+      ],
+      "skin": "orig_fenikfufu_neon"
+    },
+    {
+      "id": "skin.orig_fenikfufu_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_fenikfufu_tropical"
+      ],
+      "skin": "orig_fenikfufu_tropical"
+    },
+    {
+      "id": "skin.orig_fenikfufu_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 9,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_fenikfufu_polar"
+      ],
+      "skin": "orig_fenikfufu_polar"
+    },
+    {
+      "id": "skin.orig_zhelezhmyak_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_zhelezhmyak_stellar"
+      ],
+      "skin": "orig_zhelezhmyak_stellar"
+    },
+    {
+      "id": "skin.orig_zhelezhmyak_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_zhelezhmyak_candy"
+      ],
+      "skin": "orig_zhelezhmyak_candy"
+    },
+    {
+      "id": "skin.orig_zhelezhmyak_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_zhelezhmyak_neon"
+      ],
+      "skin": "orig_zhelezhmyak_neon"
+    },
+    {
+      "id": "skin.orig_zhelezhmyak_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_zhelezhmyak_tropical"
+      ],
+      "skin": "orig_zhelezhmyak_tropical"
+    },
+    {
+      "id": "skin.orig_zhelezhmyak_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 10,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_zhelezhmyak_polar"
+      ],
+      "skin": "orig_zhelezhmyak_polar"
+    },
+    {
+      "id": "skin.orig_chernilochudilo_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chernilochudilo_stellar"
+      ],
+      "skin": "orig_chernilochudilo_stellar"
+    },
+    {
+      "id": "skin.orig_chernilochudilo_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chernilochudilo_candy"
+      ],
+      "skin": "orig_chernilochudilo_candy"
+    },
+    {
+      "id": "skin.orig_chernilochudilo_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chernilochudilo_neon"
+      ],
+      "skin": "orig_chernilochudilo_neon"
+    },
+    {
+      "id": "skin.orig_chernilochudilo_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chernilochudilo_tropical"
+      ],
+      "skin": "orig_chernilochudilo_tropical"
+    },
+    {
+      "id": "skin.orig_chernilochudilo_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 11,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chernilochudilo_polar"
+      ],
+      "skin": "orig_chernilochudilo_polar"
+    },
+    {
+      "id": "skin.orig_bublikopotam_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_bublikopotam_stellar"
+      ],
+      "skin": "orig_bublikopotam_stellar"
+    },
+    {
+      "id": "skin.orig_bublikopotam_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_bublikopotam_candy"
+      ],
+      "skin": "orig_bublikopotam_candy"
+    },
+    {
+      "id": "skin.orig_bublikopotam_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_bublikopotam_neon"
+      ],
+      "skin": "orig_bublikopotam_neon"
+    },
+    {
+      "id": "skin.orig_bublikopotam_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_bublikopotam_tropical"
+      ],
+      "skin": "orig_bublikopotam_tropical"
+    },
+    {
+      "id": "skin.orig_bublikopotam_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 12,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_bublikopotam_polar"
+      ],
+      "skin": "orig_bublikopotam_polar"
+    },
+    {
+      "id": "skin.orig_chaylitka_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 13,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chaylitka_stellar"
+      ],
+      "skin": "orig_chaylitka_stellar"
+    },
+    {
+      "id": "skin.orig_chaylitka_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 13,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chaylitka_candy"
+      ],
+      "skin": "orig_chaylitka_candy"
+    },
+    {
+      "id": "skin.orig_chaylitka_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 13,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chaylitka_neon"
+      ],
+      "skin": "orig_chaylitka_neon"
+    },
+    {
+      "id": "skin.orig_chaylitka_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 13,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chaylitka_tropical"
+      ],
+      "skin": "orig_chaylitka_tropical"
+    },
+    {
+      "id": "skin.orig_chaylitka_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 13,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_chaylitka_polar"
+      ],
+      "skin": "orig_chaylitka_polar"
+    },
+    {
+      "id": "skin.orig_kassetych_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 14,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kassetych_stellar"
+      ],
+      "skin": "orig_kassetych_stellar"
+    },
+    {
+      "id": "skin.orig_kassetych_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 14,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kassetych_candy"
+      ],
+      "skin": "orig_kassetych_candy"
+    },
+    {
+      "id": "skin.orig_kassetych_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 14,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kassetych_neon"
+      ],
+      "skin": "orig_kassetych_neon"
+    },
+    {
+      "id": "skin.orig_kassetych_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 14,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kassetych_tropical"
+      ],
+      "skin": "orig_kassetych_tropical"
+    },
+    {
+      "id": "skin.orig_kassetych_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 14,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kassetych_polar"
+      ],
+      "skin": "orig_kassetych_polar"
+    },
+    {
+      "id": "skin.orig_lampochmel_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 15,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lampochmel_stellar"
+      ],
+      "skin": "orig_lampochmel_stellar"
+    },
+    {
+      "id": "skin.orig_lampochmel_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 15,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lampochmel_candy"
+      ],
+      "skin": "orig_lampochmel_candy"
+    },
+    {
+      "id": "skin.orig_lampochmel_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 15,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lampochmel_neon"
+      ],
+      "skin": "orig_lampochmel_neon"
+    },
+    {
+      "id": "skin.orig_lampochmel_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 15,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lampochmel_tropical"
+      ],
+      "skin": "orig_lampochmel_tropical"
+    },
+    {
+      "id": "skin.orig_lampochmel_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 15,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lampochmel_polar"
+      ],
+      "skin": "orig_lampochmel_polar"
+    },
+    {
+      "id": "skin.orig_noskoraket_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 16,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_noskoraket_stellar"
+      ],
+      "skin": "orig_noskoraket_stellar"
+    },
+    {
+      "id": "skin.orig_noskoraket_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 16,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_noskoraket_candy"
+      ],
+      "skin": "orig_noskoraket_candy"
+    },
+    {
+      "id": "skin.orig_noskoraket_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 16,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_noskoraket_neon"
+      ],
+      "skin": "orig_noskoraket_neon"
+    },
+    {
+      "id": "skin.orig_noskoraket_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 16,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_noskoraket_tropical"
+      ],
+      "skin": "orig_noskoraket_tropical"
+    },
+    {
+      "id": "skin.orig_noskoraket_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 16,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_noskoraket_polar"
+      ],
+      "skin": "orig_noskoraket_polar"
+    },
+    {
+      "id": "skin.orig_khrustobron_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 17,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_khrustobron_stellar"
+      ],
+      "skin": "orig_khrustobron_stellar"
+    },
+    {
+      "id": "skin.orig_khrustobron_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 17,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_khrustobron_candy"
+      ],
+      "skin": "orig_khrustobron_candy"
+    },
+    {
+      "id": "skin.orig_khrustobron_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 17,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_khrustobron_neon"
+      ],
+      "skin": "orig_khrustobron_neon"
+    },
+    {
+      "id": "skin.orig_khrustobron_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 17,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_khrustobron_tropical"
+      ],
+      "skin": "orig_khrustobron_tropical"
+    },
+    {
+      "id": "skin.orig_khrustobron_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 17,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_khrustobron_polar"
+      ],
+      "skin": "orig_khrustobron_polar"
+    },
+    {
+      "id": "skin.orig_magnitofyr_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 18,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_magnitofyr_stellar"
+      ],
+      "skin": "orig_magnitofyr_stellar"
+    },
+    {
+      "id": "skin.orig_magnitofyr_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 18,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_magnitofyr_candy"
+      ],
+      "skin": "orig_magnitofyr_candy"
+    },
+    {
+      "id": "skin.orig_magnitofyr_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 18,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_magnitofyr_neon"
+      ],
+      "skin": "orig_magnitofyr_neon"
+    },
+    {
+      "id": "skin.orig_magnitofyr_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 18,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_magnitofyr_tropical"
+      ],
+      "skin": "orig_magnitofyr_tropical"
+    },
+    {
+      "id": "skin.orig_magnitofyr_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 18,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_magnitofyr_polar"
+      ],
+      "skin": "orig_magnitofyr_polar"
+    },
+    {
+      "id": "skin.orig_garmoshmyak_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 19,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_garmoshmyak_stellar"
+      ],
+      "skin": "orig_garmoshmyak_stellar"
+    },
+    {
+      "id": "skin.orig_garmoshmyak_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 19,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_garmoshmyak_candy"
+      ],
+      "skin": "orig_garmoshmyak_candy"
+    },
+    {
+      "id": "skin.orig_garmoshmyak_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 19,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_garmoshmyak_neon"
+      ],
+      "skin": "orig_garmoshmyak_neon"
+    },
+    {
+      "id": "skin.orig_garmoshmyak_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 19,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_garmoshmyak_tropical"
+      ],
+      "skin": "orig_garmoshmyak_tropical"
+    },
+    {
+      "id": "skin.orig_garmoshmyak_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 19,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_garmoshmyak_polar"
+      ],
+      "skin": "orig_garmoshmyak_polar"
+    },
+    {
+      "id": "skin.orig_puzyryonysh_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 20,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_puzyryonysh_stellar"
+      ],
+      "skin": "orig_puzyryonysh_stellar"
+    },
+    {
+      "id": "skin.orig_puzyryonysh_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 20,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_puzyryonysh_candy"
+      ],
+      "skin": "orig_puzyryonysh_candy"
+    },
+    {
+      "id": "skin.orig_puzyryonysh_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 20,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_puzyryonysh_neon"
+      ],
+      "skin": "orig_puzyryonysh_neon"
+    },
+    {
+      "id": "skin.orig_puzyryonysh_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 20,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_puzyryonysh_tropical"
+      ],
+      "skin": "orig_puzyryonysh_tropical"
+    },
+    {
+      "id": "skin.orig_puzyryonysh_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 20,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_puzyryonysh_polar"
+      ],
+      "skin": "orig_puzyryonysh_polar"
+    },
+    {
+      "id": "skin.orig_klubkomot_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 21,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_klubkomot_stellar"
+      ],
+      "skin": "orig_klubkomot_stellar"
+    },
+    {
+      "id": "skin.orig_klubkomot_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 21,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_klubkomot_candy"
+      ],
+      "skin": "orig_klubkomot_candy"
+    },
+    {
+      "id": "skin.orig_klubkomot_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 21,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_klubkomot_neon"
+      ],
+      "skin": "orig_klubkomot_neon"
+    },
+    {
+      "id": "skin.orig_klubkomot_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 21,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_klubkomot_tropical"
+      ],
+      "skin": "orig_klubkomot_tropical"
+    },
+    {
+      "id": "skin.orig_klubkomot_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 21,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_klubkomot_polar"
+      ],
+      "skin": "orig_klubkomot_polar"
+    },
+    {
+      "id": "skin.orig_lunoplyukh_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 22,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lunoplyukh_stellar"
+      ],
+      "skin": "orig_lunoplyukh_stellar"
+    },
+    {
+      "id": "skin.orig_lunoplyukh_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 22,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lunoplyukh_candy"
+      ],
+      "skin": "orig_lunoplyukh_candy"
+    },
+    {
+      "id": "skin.orig_lunoplyukh_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 22,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lunoplyukh_neon"
+      ],
+      "skin": "orig_lunoplyukh_neon"
+    },
+    {
+      "id": "skin.orig_lunoplyukh_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 22,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lunoplyukh_tropical"
+      ],
+      "skin": "orig_lunoplyukh_tropical"
+    },
+    {
+      "id": "skin.orig_lunoplyukh_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 22,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_lunoplyukh_polar"
+      ],
+      "skin": "orig_lunoplyukh_polar"
+    },
+    {
+      "id": "skin.orig_kaktusifon_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 23,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kaktusifon_stellar"
+      ],
+      "skin": "orig_kaktusifon_stellar"
+    },
+    {
+      "id": "skin.orig_kaktusifon_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 23,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kaktusifon_candy"
+      ],
+      "skin": "orig_kaktusifon_candy"
+    },
+    {
+      "id": "skin.orig_kaktusifon_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 23,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kaktusifon_neon"
+      ],
+      "skin": "orig_kaktusifon_neon"
+    },
+    {
+      "id": "skin.orig_kaktusifon_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 23,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kaktusifon_tropical"
+      ],
+      "skin": "orig_kaktusifon_tropical"
+    },
+    {
+      "id": "skin.orig_kaktusifon_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 23,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_kaktusifon_polar"
+      ],
+      "skin": "orig_kaktusifon_polar"
+    },
+    {
+      "id": "skin.orig_pylekhvost_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 24,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pylekhvost_stellar"
+      ],
+      "skin": "orig_pylekhvost_stellar"
+    },
+    {
+      "id": "skin.orig_pylekhvost_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 24,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pylekhvost_candy"
+      ],
+      "skin": "orig_pylekhvost_candy"
+    },
+    {
+      "id": "skin.orig_pylekhvost_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 24,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pylekhvost_neon"
+      ],
+      "skin": "orig_pylekhvost_neon"
+    },
+    {
+      "id": "skin.orig_pylekhvost_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 24,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pylekhvost_tropical"
+      ],
+      "skin": "orig_pylekhvost_tropical"
+    },
+    {
+      "id": "skin.orig_pylekhvost_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 24,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_pylekhvost_polar"
+      ],
+      "skin": "orig_pylekhvost_polar"
+    },
+    {
+      "id": "skin.orig_popkornpykh_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 25,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_popkornpykh_stellar"
+      ],
+      "skin": "orig_popkornpykh_stellar"
+    },
+    {
+      "id": "skin.orig_popkornpykh_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 25,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_popkornpykh_candy"
+      ],
+      "skin": "orig_popkornpykh_candy"
+    },
+    {
+      "id": "skin.orig_popkornpykh_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 25,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_popkornpykh_neon"
+      ],
+      "skin": "orig_popkornpykh_neon"
+    },
+    {
+      "id": "skin.orig_popkornpykh_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 25,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_popkornpykh_tropical"
+      ],
+      "skin": "orig_popkornpykh_tropical"
+    },
+    {
+      "id": "skin.orig_popkornpykh_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "kind": "skin",
+      "hero": 25,
+      "priceTest": 149,
+      "grants": [
+        "skin:orig_popkornpykh_polar"
+      ],
+      "skin": "orig_popkornpykh_polar"
+    },
+    {
+      "id": "trail.bubbles",
+      "title": "Пузырьковый след",
+      "kind": "trail",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "trail:bubbles"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "trail.petals",
+      "title": "Лепестковый след",
+      "kind": "trail",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "trail:petals"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "trail.stars",
+      "title": "Звёздный след",
+      "kind": "trail",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "trail:stars"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "spawn.ocean",
+      "title": "Океанское появление",
+      "kind": "spawn",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "spawn:ocean"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "spawn.bloom",
+      "title": "Цветочное появление",
+      "kind": "spawn",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "spawn:bloom"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "spawn.space",
+      "title": "Космическое появление",
+      "kind": "spawn",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "spawn:space"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "dance.disco",
+      "title": "Победное диско",
+      "kind": "dance",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "dance:disco"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "dance.robot",
+      "title": "Танец робота",
+      "kind": "dance",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "dance:robot"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "dance.sway",
+      "title": "Праздничный кач",
+      "kind": "dance",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "dance:sway"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "stage.coral",
+      "title": "Коралловый подиум",
+      "kind": "stage",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "stage:coral"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "stage.garden",
+      "title": "Цветочная сцена",
+      "kind": "stage",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "stage:garden"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "stage.orbital",
+      "title": "Орбитальная сцена",
+      "kind": "stage",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "stage:orbital"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "emote.hello",
+      "title": "Привет!",
+      "kind": "emote",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "emote:hello"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "emote.great",
+      "title": "Отлично!",
+      "kind": "emote",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "emote:great"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "emote.again",
+      "title": "Ещё матч!",
+      "kind": "emote",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "emote:again"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "profile.coral",
+      "title": "Коралловая карточка",
+      "kind": "profile",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "profile:coral"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "profile.bloom",
+      "title": "Цветочная карточка",
+      "kind": "profile",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "profile:bloom"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "profile.space",
+      "title": "Космическая карточка",
+      "kind": "profile",
+      "hero": -1,
+      "priceTest": 79,
+      "grants": [
+        "profile:space"
+      ],
+      "skin": ""
+    },
+    {
+      "id": "bundle.original26.hero0",
+      "title": "Полный гардероб героя 1",
+      "kind": "bundle",
+      "hero": 0,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_rollobulk_stellar",
+        "skin:orig_rollobulk_candy",
+        "skin:orig_rollobulk_neon",
+        "skin:orig_rollobulk_tropical",
+        "skin:orig_rollobulk_polar"
+      ],
+      "skin": "orig_rollobulk_polar"
+    },
+    {
+      "id": "bundle.original26.hero1",
+      "title": "Полный гардероб героя 2",
+      "kind": "bundle",
+      "hero": 1,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_pelmolyot_stellar",
+        "skin:orig_pelmolyot_candy",
+        "skin:orig_pelmolyot_neon",
+        "skin:orig_pelmolyot_tropical",
+        "skin:orig_pelmolyot_polar"
+      ],
+      "skin": "orig_pelmolyot_polar"
+    },
+    {
+      "id": "bundle.original26.hero2",
+      "title": "Полный гардероб героя 3",
+      "kind": "bundle",
+      "hero": 2,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_morzhomorozho_stellar",
+        "skin:orig_morzhomorozho_candy",
+        "skin:orig_morzhomorozho_neon",
+        "skin:orig_morzhomorozho_tropical",
+        "skin:orig_morzhomorozho_polar"
+      ],
+      "skin": "orig_morzhomorozho_polar"
+    },
+    {
+      "id": "bundle.original26.hero3",
+      "title": "Полный гардероб героя 4",
+      "kind": "bundle",
+      "hero": 3,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_utyugonos_stellar",
+        "skin:orig_utyugonos_candy",
+        "skin:orig_utyugonos_neon",
+        "skin:orig_utyugonos_tropical",
+        "skin:orig_utyugonos_polar"
+      ],
+      "skin": "orig_utyugonos_polar"
+    },
+    {
+      "id": "bundle.original26.hero4",
+      "title": "Полный гардероб героя 5",
+      "kind": "bundle",
+      "hero": 4,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_makaronika_stellar",
+        "skin:orig_makaronika_candy",
+        "skin:orig_makaronika_neon",
+        "skin:orig_makaronika_tropical",
+        "skin:orig_makaronika_polar"
+      ],
+      "skin": "orig_makaronika_polar"
+    },
+    {
+      "id": "bundle.original26.hero5",
+      "title": "Полный гардероб героя 6",
+      "kind": "bundle",
+      "hero": 5,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_shurshunpaketych_stellar",
+        "skin:orig_shurshunpaketych_candy",
+        "skin:orig_shurshunpaketych_neon",
+        "skin:orig_shurshunpaketych_tropical",
+        "skin:orig_shurshunpaketych_polar"
+      ],
+      "skin": "orig_shurshunpaketych_polar"
+    },
+    {
+      "id": "bundle.original26.hero6",
+      "title": "Полный гардероб героя 7",
+      "kind": "bundle",
+      "hero": 6,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_brokkoboks_stellar",
+        "skin:orig_brokkoboks_candy",
+        "skin:orig_brokkoboks_neon",
+        "skin:orig_brokkoboks_tropical",
+        "skin:orig_brokkoboks_polar"
+      ],
+      "skin": "orig_brokkoboks_polar"
+    },
+    {
+      "id": "bundle.original26.hero7",
+      "title": "Полный гардероб героя 8",
+      "kind": "bundle",
+      "hero": 7,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_budilobegemotilo_stellar",
+        "skin:orig_budilobegemotilo_candy",
+        "skin:orig_budilobegemotilo_neon",
+        "skin:orig_budilobegemotilo_tropical",
+        "skin:orig_budilobegemotilo_polar"
+      ],
+      "skin": "orig_budilobegemotilo_polar"
+    },
+    {
+      "id": "bundle.original26.hero8",
+      "title": "Полный гардероб героя 9",
+      "kind": "bundle",
+      "hero": 8,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_arbuzub_stellar",
+        "skin:orig_arbuzub_candy",
+        "skin:orig_arbuzub_neon",
+        "skin:orig_arbuzub_tropical",
+        "skin:orig_arbuzub_polar"
+      ],
+      "skin": "orig_arbuzub_polar"
+    },
+    {
+      "id": "bundle.original26.hero9",
+      "title": "Полный гардероб героя 10",
+      "kind": "bundle",
+      "hero": 9,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_fenikfufu_stellar",
+        "skin:orig_fenikfufu_candy",
+        "skin:orig_fenikfufu_neon",
+        "skin:orig_fenikfufu_tropical",
+        "skin:orig_fenikfufu_polar"
+      ],
+      "skin": "orig_fenikfufu_polar"
+    },
+    {
+      "id": "bundle.original26.hero10",
+      "title": "Полный гардероб героя 11",
+      "kind": "bundle",
+      "hero": 10,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_zhelezhmyak_stellar",
+        "skin:orig_zhelezhmyak_candy",
+        "skin:orig_zhelezhmyak_neon",
+        "skin:orig_zhelezhmyak_tropical",
+        "skin:orig_zhelezhmyak_polar"
+      ],
+      "skin": "orig_zhelezhmyak_polar"
+    },
+    {
+      "id": "bundle.original26.hero11",
+      "title": "Полный гардероб героя 12",
+      "kind": "bundle",
+      "hero": 11,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_chernilochudilo_stellar",
+        "skin:orig_chernilochudilo_candy",
+        "skin:orig_chernilochudilo_neon",
+        "skin:orig_chernilochudilo_tropical",
+        "skin:orig_chernilochudilo_polar"
+      ],
+      "skin": "orig_chernilochudilo_polar"
+    },
+    {
+      "id": "bundle.original26.hero12",
+      "title": "Полный гардероб героя 13",
+      "kind": "bundle",
+      "hero": 12,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_bublikopotam_stellar",
+        "skin:orig_bublikopotam_candy",
+        "skin:orig_bublikopotam_neon",
+        "skin:orig_bublikopotam_tropical",
+        "skin:orig_bublikopotam_polar"
+      ],
+      "skin": "orig_bublikopotam_polar"
+    },
+    {
+      "id": "bundle.original26.hero13",
+      "title": "Полный гардероб героя 14",
+      "kind": "bundle",
+      "hero": 13,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_chaylitka_stellar",
+        "skin:orig_chaylitka_candy",
+        "skin:orig_chaylitka_neon",
+        "skin:orig_chaylitka_tropical",
+        "skin:orig_chaylitka_polar"
+      ],
+      "skin": "orig_chaylitka_polar"
+    },
+    {
+      "id": "bundle.original26.hero14",
+      "title": "Полный гардероб героя 15",
+      "kind": "bundle",
+      "hero": 14,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_kassetych_stellar",
+        "skin:orig_kassetych_candy",
+        "skin:orig_kassetych_neon",
+        "skin:orig_kassetych_tropical",
+        "skin:orig_kassetych_polar"
+      ],
+      "skin": "orig_kassetych_polar"
+    },
+    {
+      "id": "bundle.original26.hero15",
+      "title": "Полный гардероб героя 16",
+      "kind": "bundle",
+      "hero": 15,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_lampochmel_stellar",
+        "skin:orig_lampochmel_candy",
+        "skin:orig_lampochmel_neon",
+        "skin:orig_lampochmel_tropical",
+        "skin:orig_lampochmel_polar"
+      ],
+      "skin": "orig_lampochmel_polar"
+    },
+    {
+      "id": "bundle.original26.hero16",
+      "title": "Полный гардероб героя 17",
+      "kind": "bundle",
+      "hero": 16,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_noskoraket_stellar",
+        "skin:orig_noskoraket_candy",
+        "skin:orig_noskoraket_neon",
+        "skin:orig_noskoraket_tropical",
+        "skin:orig_noskoraket_polar"
+      ],
+      "skin": "orig_noskoraket_polar"
+    },
+    {
+      "id": "bundle.original26.hero17",
+      "title": "Полный гардероб героя 18",
+      "kind": "bundle",
+      "hero": 17,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_khrustobron_stellar",
+        "skin:orig_khrustobron_candy",
+        "skin:orig_khrustobron_neon",
+        "skin:orig_khrustobron_tropical",
+        "skin:orig_khrustobron_polar"
+      ],
+      "skin": "orig_khrustobron_polar"
+    },
+    {
+      "id": "bundle.original26.hero18",
+      "title": "Полный гардероб героя 19",
+      "kind": "bundle",
+      "hero": 18,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_magnitofyr_stellar",
+        "skin:orig_magnitofyr_candy",
+        "skin:orig_magnitofyr_neon",
+        "skin:orig_magnitofyr_tropical",
+        "skin:orig_magnitofyr_polar"
+      ],
+      "skin": "orig_magnitofyr_polar"
+    },
+    {
+      "id": "bundle.original26.hero19",
+      "title": "Полный гардероб героя 20",
+      "kind": "bundle",
+      "hero": 19,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_garmoshmyak_stellar",
+        "skin:orig_garmoshmyak_candy",
+        "skin:orig_garmoshmyak_neon",
+        "skin:orig_garmoshmyak_tropical",
+        "skin:orig_garmoshmyak_polar"
+      ],
+      "skin": "orig_garmoshmyak_polar"
+    },
+    {
+      "id": "bundle.original26.hero20",
+      "title": "Полный гардероб героя 21",
+      "kind": "bundle",
+      "hero": 20,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_puzyryonysh_stellar",
+        "skin:orig_puzyryonysh_candy",
+        "skin:orig_puzyryonysh_neon",
+        "skin:orig_puzyryonysh_tropical",
+        "skin:orig_puzyryonysh_polar"
+      ],
+      "skin": "orig_puzyryonysh_polar"
+    },
+    {
+      "id": "bundle.original26.hero21",
+      "title": "Полный гардероб героя 22",
+      "kind": "bundle",
+      "hero": 21,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_klubkomot_stellar",
+        "skin:orig_klubkomot_candy",
+        "skin:orig_klubkomot_neon",
+        "skin:orig_klubkomot_tropical",
+        "skin:orig_klubkomot_polar"
+      ],
+      "skin": "orig_klubkomot_polar"
+    },
+    {
+      "id": "bundle.original26.hero22",
+      "title": "Полный гардероб героя 23",
+      "kind": "bundle",
+      "hero": 22,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_lunoplyukh_stellar",
+        "skin:orig_lunoplyukh_candy",
+        "skin:orig_lunoplyukh_neon",
+        "skin:orig_lunoplyukh_tropical",
+        "skin:orig_lunoplyukh_polar"
+      ],
+      "skin": "orig_lunoplyukh_polar"
+    },
+    {
+      "id": "bundle.original26.hero23",
+      "title": "Полный гардероб героя 24",
+      "kind": "bundle",
+      "hero": 23,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_kaktusifon_stellar",
+        "skin:orig_kaktusifon_candy",
+        "skin:orig_kaktusifon_neon",
+        "skin:orig_kaktusifon_tropical",
+        "skin:orig_kaktusifon_polar"
+      ],
+      "skin": "orig_kaktusifon_polar"
+    },
+    {
+      "id": "bundle.original26.hero24",
+      "title": "Полный гардероб героя 25",
+      "kind": "bundle",
+      "hero": 24,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_pylekhvost_stellar",
+        "skin:orig_pylekhvost_candy",
+        "skin:orig_pylekhvost_neon",
+        "skin:orig_pylekhvost_tropical",
+        "skin:orig_pylekhvost_polar"
+      ],
+      "skin": "orig_pylekhvost_polar"
+    },
+    {
+      "id": "bundle.original26.hero25",
+      "title": "Полный гардероб героя 26",
+      "kind": "bundle",
+      "hero": 25,
+      "priceTest": 399,
+      "grants": [
+        "skin:orig_popkornpykh_stellar",
+        "skin:orig_popkornpykh_candy",
+        "skin:orig_popkornpykh_neon",
+        "skin:orig_popkornpykh_tropical",
+        "skin:orig_popkornpykh_polar"
+      ],
+      "skin": "orig_popkornpykh_polar"
+    },
+    {
+      "id": "bundle.ocean",
+      "title": "Океанский комплект",
+      "kind": "bundle",
+      "hero": -1,
+      "priceTest": 299,
+      "skin": "",
+      "grants": [
+        "trail:bubbles",
+        "spawn:ocean",
+        "stage:coral",
+        "dance:disco",
+        "emote:hello",
+        "profile:coral"
+      ]
+    },
+    {
+      "id": "bundle.bloom",
+      "title": "Цветочный комплект",
+      "kind": "bundle",
+      "hero": -1,
+      "priceTest": 299,
+      "skin": "",
+      "grants": [
+        "trail:petals",
+        "spawn:bloom",
+        "stage:garden",
+        "dance:sway",
+        "emote:great",
+        "profile:bloom"
+      ]
+    },
+    {
+      "id": "bundle.space",
+      "title": "Космический комплект",
+      "kind": "bundle",
+      "hero": -1,
+      "priceTest": 299,
+      "skin": "",
+      "grants": [
+        "trail:stars",
+        "spawn:space",
+        "stage:orbital",
+        "dance:robot",
+        "emote:again",
+        "profile:space"
+      ]
+    }
+  ],
+  "free": [
+    "skin:orig_rollobulk_stellar",
+    "skin:orig_pelmolyot_stellar",
+    "skin:orig_morzhomorozho_stellar",
+    "skin:orig_utyugonos_stellar",
+    "skin:orig_makaronika_stellar",
+    "skin:orig_shurshunpaketych_stellar",
+    "skin:orig_brokkoboks_stellar",
+    "skin:orig_budilobegemotilo_stellar",
+    "skin:orig_arbuzub_stellar",
+    "skin:orig_fenikfufu_stellar",
+    "skin:orig_zhelezhmyak_stellar",
+    "skin:orig_chernilochudilo_stellar",
+    "skin:orig_bublikopotam_stellar",
+    "skin:orig_chaylitka_stellar",
+    "skin:orig_kassetych_stellar",
+    "skin:orig_lampochmel_stellar",
+    "skin:orig_noskoraket_stellar",
+    "skin:orig_khrustobron_stellar",
+    "skin:orig_magnitofyr_stellar",
+    "skin:orig_garmoshmyak_stellar",
+    "skin:orig_puzyryonysh_stellar",
+    "skin:orig_klubkomot_stellar",
+    "skin:orig_lunoplyukh_stellar",
+    "skin:orig_kaktusifon_stellar",
+    "skin:orig_pylekhvost_stellar",
+    "skin:orig_popkornpykh_stellar"
+  ]
+}

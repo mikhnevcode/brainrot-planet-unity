@@ -1,0 +1,95 @@
+{
+  "hero": 14,
+  "id": "Kassetych",
+  "name": "Кассетыч",
+  "blender": "5.2.2 LTS",
+  "vertices": 5062,
+  "triangles": 10060,
+  "materials": 9,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_kassetych_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Кассетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 14,
+      "file": "orig_kassetych_stellar-46d5bc62468ae88d8394153e3f73b5749a14a95082ac17a016f963b6d55a4dec.json",
+      "sha256": "46d5bc62468ae88d8394153e3f73b5749a14a95082ac17a016f963b6d55a4dec",
+      "bytes": 1995,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_kassetych_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Кассетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 14,
+      "file": "orig_kassetych_candy-950d3500632ed49a278fb5cab20cbfae9ddfdf3447f031efaff3762d085e72a5.json",
+      "sha256": "950d3500632ed49a278fb5cab20cbfae9ddfdf3447f031efaff3762d085e72a5",
+      "bytes": 2124,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_kassetych_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Кассетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 14,
+      "file": "orig_kassetych_neon-b90bdb78460deca602d345717f66b20cabbe1f3d5a7df0a99f99e4a67a77283c.json",
+      "sha256": "b90bdb78460deca602d345717f66b20cabbe1f3d5a7df0a99f99e4a67a77283c",
+      "bytes": 2120,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_kassetych_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Кассетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 14,
+      "file": "orig_kassetych_tropical-10e4911ee2eb1d394a207bde3e7bead5a2ce9db389bb1616db4c8d8ff1d8941f.json",
+      "sha256": "10e4911ee2eb1d394a207bde3e7bead5a2ce9db389bb1616db4c8d8ff1d8941f",
+      "bytes": 2130,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_kassetych_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Кассетыч · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 14,
+      "file": "orig_kassetych_polar-06d4521e6b3b8e243e95efdaffaebd235b6a3e827edc4869b123445545b371e4.json",
+      "sha256": "06d4521e6b3b8e243e95efdaffaebd235b6a3e827edc4869b123445545b371e4",
+      "bytes": 2124,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 948924,
+  "status": "exported-not-yet-Unity-verified"
+}

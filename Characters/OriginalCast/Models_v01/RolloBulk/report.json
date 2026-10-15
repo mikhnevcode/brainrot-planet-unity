@@ -1,0 +1,95 @@
+{
+  "hero": 0,
+  "id": "RolloBulk",
+  "name": "Ролло Бульк",
+  "blender": "5.2.2 LTS",
+  "vertices": 9774,
+  "triangles": 19428,
+  "materials": 7,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "actions": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "skins": [
+    {
+      "id": "orig_rollobulk_stellar",
+      "title": "ЗВЁЗДНЫЙ ОБРАЗ",
+      "titleEn": "Stellar Edition",
+      "description": "Ролло Бульк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 0,
+      "file": "orig_rollobulk_stellar-7082eec261317f86291b590611a7b103c8b1438db82d34a4157d32704ffdb5a7.json",
+      "sha256": "7082eec261317f86291b590611a7b103c8b1438db82d34a4157d32704ffdb5a7",
+      "bytes": 1786,
+      "swatch": "#6CDEE7"
+    },
+    {
+      "id": "orig_rollobulk_candy",
+      "title": "КОНФЕТНЫЙ ОБРАЗ",
+      "titleEn": "Candy Edition",
+      "description": "Ролло Бульк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 0,
+      "file": "orig_rollobulk_candy-d00655a15f346699c222f7974c278573f088844228d38d41491d7d7b26493ed3.json",
+      "sha256": "d00655a15f346699c222f7974c278573f088844228d38d41491d7d7b26493ed3",
+      "bytes": 1931,
+      "swatch": "#8EE1D2"
+    },
+    {
+      "id": "orig_rollobulk_neon",
+      "title": "НЕОНОВЫЙ ОБРАЗ",
+      "titleEn": "Neon Edition",
+      "description": "Ролло Бульк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 0,
+      "file": "orig_rollobulk_neon-c11320d85bf63cb9318b25c5e5cd47834969cb6ec86b4398ee5dfeedca8558bd.json",
+      "sha256": "c11320d85bf63cb9318b25c5e5cd47834969cb6ec86b4398ee5dfeedca8558bd",
+      "bytes": 1927,
+      "swatch": "#64F0CD"
+    },
+    {
+      "id": "orig_rollobulk_tropical",
+      "title": "ТРОПИЧЕСКИЙ ОБРАЗ",
+      "titleEn": "Tropical Edition",
+      "description": "Ролло Бульк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 0,
+      "file": "orig_rollobulk_tropical-ee2bbb66deb9b435465e6cf891a9a7e7adbb55b16e4b986a12bc75ea61923128.json",
+      "sha256": "ee2bbb66deb9b435465e6cf891a9a7e7adbb55b16e4b986a12bc75ea61923128",
+      "bytes": 1937,
+      "swatch": "#F5B45D"
+    },
+    {
+      "id": "orig_rollobulk_polar",
+      "title": "ПОЛЯРНЫЙ ОБРАЗ",
+      "titleEn": "Polar Edition",
+      "description": "Ролло Бульк · новая палитра и объёмная эмблема · только внешний вид",
+      "hero": 0,
+      "file": "orig_rollobulk_polar-84039ffb5f417af2b7c16a7070ee99811134036bbe35f9fe749cd5280027113a.json",
+      "sha256": "84039ffb5f417af2b7c16a7070ee99811134036bbe35f9fe749cd5280027113a",
+      "bytes": 1931,
+      "swatch": "#B8A7E4"
+    }
+  ],
+  "fbxBytes": 1149964,
+  "status": "exported-not-yet-Unity-verified"
+}
