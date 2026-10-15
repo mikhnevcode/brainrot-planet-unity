@@ -23,7 +23,7 @@ async def main():
     async def peer(index):
         async with connect(sys.argv[1], additional_headers={"X-Brainrot-Test-Key": auth_key},
                            max_size=196608, compression=None, proxy=None) as ws:
-            await ws.send(struct.pack("<BiB", 1, 7, index) + b"\0")
+            await ws.send(struct.pack("<BiB", 1, 8, index) + b"\0")
             epoch, sequence = 0, 0
             began = time.monotonic()
 

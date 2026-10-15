@@ -13,6 +13,8 @@ namespace BrainrotPlanet
         private IEnumerator Start()
         {
             if(DedicatedMatchServer)yield break;
+            if(File.Exists(Path.Combine(Application.persistentDataPath,".pole-paint-qa")))
+            {yield return RunPolePaintQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".flight-qa")))
             {yield return RunDeploymentFlightQa();yield break;}
             if(File.Exists(Path.Combine(Application.persistentDataPath,".respawn-qa")))

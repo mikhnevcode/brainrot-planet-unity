@@ -32,17 +32,30 @@ namespace BrainrotPlanet
             Vector2 uv = ToUV(point);
             int x = Mathf.Clamp((int)(uv.x * Width), 0, Width - 1);
             int y = Mathf.Clamp((int)(uv.y * Height), 0, Height - 1);
-            return y * Width + x;
+            return CanonicalCell(y * Width + x);
         }
+        public static bool IsPolarRow(int y)=>y==0||y==Height-1;
+        public static int CanonicalCell(int cell)
+        {
+            int y=cell/Width;
+            return IsPolarRow(y)?y*Width:cell;
+        }
+        public static bool IsLogicalCell(int cell)=>CanonicalCell(cell)==cell;
         public static Vector3 CellDirection(int cell)
         {
+            int y=cell/Width;
+            if(y==0)return Vector3.down;
+            if(y==Height-1)return Vector3.up;
             return FromLonLat(((cell % Width) + .5f) / Width,
-                              ((cell / Width) + .5f) / Height);
+                              (y + .5f) / Height);
         }
         public static float CellAreaWeight(int cell)
         {
-            float v = ((cell / Width) + .5f) / Height;
-            return Mathf.Max(.001f, Mathf.Sin(v * Mathf.PI));
+            int y=cell/Width;
+            if(IsPolarRow(y))
+                return cell%Width==0?Width*Mathf.Sin(((y+.5f)/Height)*Mathf.PI):0;
+            float v = (y + .5f) / Height;
+            return Mathf.Sin(v * Mathf.PI);
         }
         public static Vector3 Tangent(Vector3 at, Vector3 goal)
         {

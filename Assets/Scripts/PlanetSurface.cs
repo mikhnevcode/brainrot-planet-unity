@@ -161,12 +161,19 @@ namespace BrainrotPlanet
         {
             Vector2 uv=PlanetMath.ToUV(n);
             float cx=uv.x*VisualWidth,cy=uv.y*VisualHeight;
+            const float outer=.72f,inner=.39f;
+            float metresY=Mathf.PI*PlanetMath.Radius/VisualHeight;
+            int rangeY=Mathf.CeilToInt(outer/metresY)+1;
+            // Longitude has no meaning at a pole. Sample the small polar cap in
+            // world angles so a geodesic stroke cannot collapse into one spoke.
+            float poleAngle=Mathf.Acos(Mathf.Clamp(Mathf.Abs(n.y),0,1));
+            if(poleAngle<outer/PlanetMath.Radius+2f*Mathf.PI/VisualHeight)
+            {
+                StampPolarStrokePoint(team,n,cy,rangeY,outer,inner);return;
+            }
             float metresX=2f*Mathf.PI*PlanetMath.Radius*
                 Mathf.Max(.08f,Mathf.Sqrt(Mathf.Max(0f,1f-n.y*n.y)))/VisualWidth;
-            float metresY=Mathf.PI*PlanetMath.Radius/VisualHeight;
-            const float outer=.72f,inner=.39f;
             int rangeX=Mathf.Min(12,Mathf.CeilToInt(outer/metresX)+1);
-            int rangeY=Mathf.CeilToInt(outer/metresY)+1;
             int centerX=Mathf.FloorToInt(cx),centerY=Mathf.FloorToInt(cy);
             for(int dy=-rangeY;dy<=rangeY;dy++)
             {
@@ -182,6 +189,27 @@ namespace BrainrotPlanet
                     byte coverage=(byte)Mathf.RoundToInt(255f*Mathf.Clamp01((outer-distance)/(outer-inner)));
                     int wrapped=(x+VisualWidth)%VisualWidth;
                     int pixel=y*VisualWidth+wrapped;
+                    if(strokeOwner[pixel]!=team||coverage>strokeCoverage[pixel])
+                    {strokeOwner[pixel]=(byte)team;strokeCoverage[pixel]=coverage;}
+                }
+            }
+        }
+        private void StampPolarStrokePoint(int team,Vector3 n,float cy,int rangeY,float outer,float inner)
+        {
+            int centerY=Mathf.FloorToInt(cy);
+            float cosOuter=Mathf.Cos(outer/PlanetMath.Radius);
+            for(int dy=-rangeY;dy<=rangeY;dy++)
+            {
+                int y=centerY+dy;if(y<0||y>=VisualHeight)continue;
+                float v=(y+.5f)/VisualHeight;
+                int row=y*VisualWidth;
+                for(int x=0;x<VisualWidth;x++)
+                {
+                    Vector3 sample=PlanetMath.FromLonLat((x+.5f)/VisualWidth,v);
+                    float dot=Vector3.Dot(n,sample);if(dot<=cosOuter)continue;
+                    float distance=Mathf.Acos(Mathf.Clamp(dot,-1,1))*PlanetMath.Radius;
+                    byte coverage=(byte)Mathf.RoundToInt(255f*Mathf.Clamp01((outer-distance)/(outer-inner)));
+                    int pixel=row+x;
                     if(strokeOwner[pixel]!=team||coverage>strokeCoverage[pixel])
                     {strokeOwner[pixel]=(byte)team;strokeCoverage[pixel]=coverage;}
                 }
@@ -355,10 +383,10 @@ namespace BrainrotPlanet
                     int weightOffset=(row+x)*5;
                     for(int dy=-1;dy<=1;dy++)
                     {
-                        int neighborRow=Mathf.Clamp(y+dy,0,h-1)*w;
+                        int neighborY=Mathf.Clamp(y+dy,0,h-1),neighborRow=neighborY*w;
                         for(int dx=-1;dx<=1;dx++)
                         {
-                            int neighbor=neighborRow+(x+dx+w)%w;
+                            int neighbor=PlanetMath.CanonicalCell(neighborRow+(x+dx+w)%w);
                             byte neighborOwner=owners==null?(byte)0:owners[neighbor];
                             if(neighborOwner>=5)neighborOwner=0;
                             int vote=dx==0&&dy==0?10:dx==0||dy==0?2:1;
@@ -373,7 +401,7 @@ namespace BrainrotPlanet
                         {bestScore=score;best=team;}
                     }
                     int cell=row+x;
-                    byte owner=owners==null?(byte)0:owners[cell];
+                    byte owner=owners==null?(byte)0:owners[PlanetMath.CanonicalCell(cell)];
                     sourcePixels[cell]=owner>0&&owner<5?
                         Tone(teamColors[owner],reliefTone[cell]):unpainted[cell];
                     uniformOwner[cell]=bestScore==22?(byte)best:(byte)255;
@@ -438,6 +466,18 @@ namespace BrainrotPlanet
                     pixels[outrow+x]=new Color32((byte)r,(byte)g,(byte)b2,255);
                 }
             }
+            // Every mesh vertex at v=0 or v=1 occupies the same physical
+            // point. Keep those texture rows identical even when the adjacent
+            // latitude ring contains several teams, otherwise bilinear
+            // sampling turns the pole into longitude-shaped wedges.
+            Color32 southPole=sourcePixels[0];
+            int northCell=(h-1)*w,northRow=(VisualHeight-1)*VisualWidth;
+            Color32 northPole=sourcePixels[northCell];
+            for(int x=0;x<VisualWidth;x++)
+            {
+                pixels[x]=southPole;
+                pixels[northRow+x]=northPole;
+            }
             // Preserve the true vector trail as a smooth, lasting paint mark.
             // It never changes ownership, and a later takeover erases stale ink.
             if(hasStrokes&&owners!=null)
@@ -449,7 +489,7 @@ namespace BrainrotPlanet
                     {
                         int pixel=row+x,team=strokeOwner[pixel];
                         if(team==0)continue;
-                        int cell=cellRow+x/2;
+                        int cell=PlanetMath.CanonicalCell(cellRow+x/2);
                         if(owners[cell]!=team)
                         {strokeOwner[pixel]=0;strokeCoverage[pixel]=0;continue;}
                         Color32 target=Tone(teamColors[team],reliefTone[cell]);

@@ -58,11 +58,12 @@ namespace BrainrotPlanet
             Array.Clear(pendingNetworkCapture,0,pendingNetworkCapture.Length);
             for(int cell=0;cell<owner.Length;cell++)
             {
+                if(!PlanetMath.IsLogicalCell(cell))continue;
                 int team=source[cell];
                 if(team>0&&team<5&&owner[cell]!=team&&trailVisualDirections[team].Count>=3)
                     pendingNetworkCapture[team]=true;
             }
-            Array.Copy(source,owner,owner.Length); dirty=true;
+            Array.Copy(source,owner,owner.Length);NormalizePoleOwners();dirty=true;
         }
         public void ApplyNetworkTrail(int team,IReadOnlyList<Vector3> directions)
         {
@@ -176,16 +177,20 @@ namespace BrainrotPlanet
                 trailOrder[team].Add(id);
                 trailVisualDirections[team].Add(direction);
                 int x=id%PlanetMath.Width,y=id/PlanetMath.Width;
-                Trails[team].Add(id);
-                Trails[team].Add(y*PlanetMath.Width+(x+1)%PlanetMath.Width);
-                Trails[team].Add(y*PlanetMath.Width+(x+PlanetMath.Width-1)%PlanetMath.Width);
-                if(y>0)Trails[team].Add(id-PlanetMath.Width);
-                if(y<PlanetMath.Height-1)Trails[team].Add(id+PlanetMath.Width);
+                AddTrailCell(team,id);
+                if(!PlanetMath.IsPolarRow(y))
+                {
+                    AddTrailCell(team,y*PlanetMath.Width+(x+1)%PlanetMath.Width);
+                    AddTrailCell(team,y*PlanetMath.Width+(x+PlanetMath.Width-1)%PlanetMath.Width);
+                    if(y>0)AddTrailCell(team,id-PlanetMath.Width);
+                    if(y<PlanetMath.Height-1)AddTrailCell(team,id+PlanetMath.Width);
+                }
                 // Trail is displayed with a continuous LineRenderer, so it
                 // no longer needs a per-cell texture upload for every step.
                 if(trailOrder[team].Count>2000)ClearTrail(team);
             }
         }
+        private void AddTrailCell(int team,int cell)=>Trails[team].Add(PlanetMath.CanonicalCell(cell));
         private void ClearTrail(int team)
         {
             Trails[team].Clear();trailCenters[team].Clear();
@@ -205,18 +210,15 @@ namespace BrainrotPlanet
             var weights=new List<float>();
             for(int i=0;i<seen.Length;i++)
             {
-                if(seen[i]!=0||owner[i]==team||Trails[team].Contains(i))continue;
+                if(!PlanetMath.IsLogicalCell(i)||seen[i]!=0||owner[i]==team||Trails[team].Contains(i))continue;
                 var region=new List<int>(256);
                 int head=0,tail=0;queue[tail++]=i;seen[i]=1;
                 float area=0;
                 while(head<tail)
                 {
-                    int k=queue[head++],x=k%PlanetMath.Width,y=k/PlanetMath.Width;
+                    int k=queue[head++];
                     region.Add(k);area+=PlanetMath.CellAreaWeight(k);
-                    Visit(y*PlanetMath.Width+(x+1)%PlanetMath.Width,team,ref tail);
-                    Visit(y*PlanetMath.Width+(x+PlanetMath.Width-1)%PlanetMath.Width,team,ref tail);
-                    if(y>0)Visit(k-PlanetMath.Width,team,ref tail);
-                    if(y+1<PlanetMath.Height)Visit(k+PlanetMath.Width,team,ref tail);
+                    VisitNeighbours(k,team,ref tail);
                 }
                 components.Add(region);weights.Add(area);
             }
@@ -252,6 +254,7 @@ namespace BrainrotPlanet
             }
             int seamCells=RepairCaptureSeams(team,territoryBeforeCapture);
             changed+=seamCells;
+            NormalizePoleOwners();
             surface?.AddCapturedStroke(team,trailVisualDirections[team],hit);
             ClearTrail(team);
             dirty=true;
@@ -281,21 +284,39 @@ namespace BrainrotPlanet
             int width=PlanetMath.Width,height=PlanetMath.Height;
             for(int cell=0;cell<owner.Length;cell++)
             {
-                if(owner[cell]!=0)continue;
+                if(!PlanetMath.IsLogicalCell(cell)||owner[cell]!=0)continue;
                 int x=cell%width,y=cell/width;
                 bool nearOld=false,nearNew=false;
-                for(int dy=-reach;dy<=reach && !(nearOld&&nearNew);dy++)
+                if(PlanetMath.IsPolarRow(y))
                 {
-                    int yy=y+dy;
-                    if(yy<0 || yy>=height)continue;
-                    int row=yy*width;
-                    for(int dx=-reach;dx<=reach;dx++)
+                    int start=y==0?0:height-1-reach,end=y==0?reach:height-1;
+                    for(int yy=start;yy<=end && !(nearOld&&nearNew);yy++)
                     {
-                        int xx=(x+dx+width)%width;
-                        int nearby=row+xx;
-                        if(oldLand[nearby]!=0)nearOld=true;
-                        if(owner[nearby]==team && oldLand[nearby]==0)nearNew=true;
-                        if(nearOld&&nearNew)break;
+                        int row=yy*width;
+                        for(int xx=0;xx<width;xx++)
+                        {
+                            int nearby=PlanetMath.CanonicalCell(row+xx);
+                            if(oldLand[nearby]!=0)nearOld=true;
+                            if(owner[nearby]==team && oldLand[nearby]==0)nearNew=true;
+                            if(nearOld&&nearNew)break;
+                        }
+                    }
+                }
+                else
+                {
+                    for(int dy=-reach;dy<=reach && !(nearOld&&nearNew);dy++)
+                    {
+                        int yy=y+dy;
+                        if(yy<0 || yy>=height)continue;
+                        int row=yy*width;
+                        for(int dx=-reach;dx<=reach;dx++)
+                        {
+                            int xx=(x+dx+width)%width;
+                            int nearby=PlanetMath.CanonicalCell(row+xx);
+                            if(oldLand[nearby]!=0)nearOld=true;
+                            if(owner[nearby]==team && oldLand[nearby]==0)nearNew=true;
+                            if(nearOld&&nearNew)break;
+                        }
                     }
                 }
                 if(nearOld&&nearNew && !ProtectedByOtherCore(team,cell))
@@ -346,7 +367,7 @@ namespace BrainrotPlanet
             var filled=new List<int>();
             for(int id=0;id<owner.Length;id++)
             {
-                if(owner[id]==team||Trails[team].Contains(id))continue;
+                if(!PlanetMath.IsLogicalCell(id)||owner[id]==team||Trails[team].Contains(id))continue;
                 Vector3 normal=PlanetMath.CellDirection(id);
                 float depth=Vector3.Dot(normal,centre);
                 if(depth<.35f)continue;
@@ -366,8 +387,24 @@ namespace BrainrotPlanet
         }
         private void Visit(int id,int team,ref int tail)
         {
+            id=PlanetMath.CanonicalCell(id);
             if(seen[id]!=0||owner[id]==team||Trails[team].Contains(id))return;
             seen[id]=1;queue[tail++]=id;
+        }
+        private void VisitNeighbours(int cell,int team,ref int tail)
+        {
+            int width=PlanetMath.Width,height=PlanetMath.Height;
+            int x=cell%width,y=cell/width;
+            if(PlanetMath.IsPolarRow(y))
+            {
+                int adjacent=y==0?width:(height-2)*width;
+                for(int xx=0;xx<width;xx++)Visit(adjacent+xx,team,ref tail);
+                return;
+            }
+            Visit(y*width+(x+1)%width,team,ref tail);
+            Visit(y*width+(x+width-1)%width,team,ref tail);
+            Visit(y==1?0:cell-width,team,ref tail);
+            Visit(y==height-2?(height-1)*width:cell+width,team,ref tail);
         }
         private bool ProtectedByOtherCore(int team,int id)
         {
@@ -380,6 +417,7 @@ namespace BrainrotPlanet
             float d=Mathf.Cos(angularRadius);
             for(int i=0;i<owner.Length;i++)
             {
+                if(!PlanetMath.IsLogicalCell(i))continue;
                 if(ProtectedByOtherCore(team,i))continue;
                 if(Vector3.Dot(PlanetMath.CellDirection(i),center)<d)continue;
                 if(owner[i]==team)continue;
@@ -387,10 +425,18 @@ namespace BrainrotPlanet
             }
             if(count>0)
             {
-                dirty=true;
+                NormalizePoleOwners();dirty=true;
                 if(fireCapture)OnCapture?.Invoke(team,count,center);
             }
             return count;
+        }
+        private void NormalizePoleOwners()
+        {
+            for(int row=0;row<=PlanetMath.Height-1;row+=PlanetMath.Height-1)
+            {
+                int start=row*PlanetMath.Width;byte value=owner[start];
+                for(int x=1;x<PlanetMath.Width;x++)owner[start+x]=value;
+            }
         }
         public void Update(float dt)
         {

@@ -1,0 +1,62 @@
+Brainrot Planet v0.7.18 polar paint QA - 2026-10-15
+
+Scope
+-----
+Make the latitude-grid poles behave as single logical caps so territory,
+captured-stroke paint and network snapshots cannot split into longitude
+sectors or jump across the UV seam.
+
+Build gates
+-----------
+PASS - Unity 6000.2.7f2 Linux dedicated-server build.
+PASS - Unity 6000.2.7f2 Android development build.
+PASS - PLANET_POLE_PAINT_SMOKE: north/south ownership mirrored, area counted
+       once, geodesic trail connected and captured stroke had no polar spoke.
+PASS - Existing paint-edge, captured-stroke, biome, terrain, movement,
+       collision, territory-join, match outcome, hero, skin and store gates.
+PASS - Room gateway unit tests: 4/4.
+
+Isolated network deployment
+---------------------------
+Protocol: 8 (not compatible with protocol-7 pole topology).
+Gateway: 127.0.0.1:28480; workers: 127.0.0.1:28400..28403; max rooms: 4.
+Runtime: /home/user/brainrot-match-test/polar-paint0718
+Temporary WSS: wss://comprehensive-editorial-functional-briefs.trycloudflare.com/match
+PASS - ROOM_WSS_PASS: quick and private rooms, distinct team slots and
+       authoritative snapshots.
+PASS - ROOM_RESULT_SOAK_PASS: endFrames=(233,233), maps=(0,1), result held 25 s.
+Earlier v0.7.17 and other isolated services were not restarted or repointed.
+
+RMX2020 device validation
+-------------------------
+Serial: NBTK5TZTVC8T9TRG only. RMX3151 was not operated.
+Installed: versionName=0.7.18-polar-paint-test, versionCode=62.
+PASS - POLE_PAINT_QA_PASS north=true south=true sectors=0
+       progressUnchanged=true.
+Visual PASS - north and south captures are round continuous paint areas with
+              no radial sector, UV seam or longitude jump.
+Evidence: QA/v0718/pole-paint-RMX2020/north-pole.png
+          QA/v0718/pole-paint-RMX2020/south-pole.png
+PASS - MATCH_QA_PASS result_replay_offline; input, jump, ability, authoritative
+       result, replay and return to the bot menu completed without exception.
+PASS - Normal menu relaunched after QA and the game process remained alive.
+Evidence: QA/v0718/normal-menu-RMX2020.png
+
+Persistence
+-----------
+PlayerPrefs were backed up before install and after all automated scenarios.
+No game preference changed. Four Unity connection/session metadata fields
+changed as expected for a new application run.
+
+Published Android artifact
+--------------------------
+APK: BrainrotPlanet-v0.7.18-polar-cap-test.apk
+Bytes: 73708160
+SHA-256: 1d67143f0f744cc26b1505036eda243460d0359c220303cec0ea6db8b2d31d9c
+HTTPS download was fetched back in full and matched this SHA-256.
+Page: https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/test-v0.7.18.html
+
+Limit
+-----
+The trycloudflare WSS address is temporary test infrastructure. A durable
+domain, supervised services and load/abuse testing are still release work.
