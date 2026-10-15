@@ -42,7 +42,9 @@ namespace BrainrotPlanet.Editor
             Check(motion.Tick(tropical,at,Vector3.right,true,.02f)==.8f,"landing resets grass");
             var desert=new PlanetBiomeRules(BattlePlanet.Desert,91);at=desert.Zones[0];
             Check(Mathf.Abs(motion.Tick(desert,at,desert.WindDirection(0),true,.02f)-1.16f)<.001f,"tailwind");
-            Check(motion.Tick(desert,at,-desert.WindDirection(0),true,.02f)==1,"headwind never traps");
+            Check(motion.Effect==BiomeMotionEffect.Tailwind,"tailwind feedback");
+            Check(Mathf.Abs(motion.Tick(desert,at,-desert.WindDirection(0),true,.02f)-.92f)<.001f,"headwind mild slow");
+            Check(motion.Effect==BiomeMotionEffect.Headwind,"headwind feedback");
             var moon=new PlanetBiomeRules(BattlePlanet.Moon,91);
             Check(moon.JumpImpulse*moon.JumpImpulse/(2*moon.Gravity)>6.2f*6.2f/(2*23f)*1.8f,"moon jump height");
             Check(2*moon.JumpImpulse/moon.Gravity>2*6.2f/23f*1.5f,"moon hang time");
@@ -65,7 +67,7 @@ namespace BrainrotPlanet.Editor
                 }
                 finally{UnityEngine.Object.DestroyImmediate(go);}
             }
-            Debug.Log("PLANET_BIOME_SMOKE_PASS cases="+count+" planets="+PlanetBiomeRules.Count+" deterministic=true noBlockers=true transientGrass=true wind=true moon=true");
+            Debug.Log("PLANET_BIOME_SMOKE_PASS cases="+count+" planets="+PlanetBiomeRules.Count+" deterministic=true noBlockers=true transientGrass=true wind=true headwind=true feedback=true moon=true");
         }
     }
 }

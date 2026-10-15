@@ -327,7 +327,10 @@ namespace BrainrotPlanet
             }
             Vector3 walk=Vector3.ProjectOnPlane(Wish,n).normalized;
             float speed=6.5f*(SlowSeconds>0?.46f:1f)*(SpeedSeconds>0?1.85f:1f);
-            speed*=biomeMotion.Tick(game!=null?game.Arena:null,n,walk,Grounded,dt);
+            float biomeMultiplier=biomeMotion.Tick(game!=null?game.Arena:null,n,walk,Grounded,dt);
+            speed*=biomeMultiplier;
+            if(game!=null&&Team==game.LocalTeam&&!game.DedicatedMatchServer)
+                game.ShowBiomeMotion(biomeMotion.Effect,biomeMultiplier,biomeMotion.CurrentZone);
             if(Grounded)
             {
                 float incline=colliderContact?Vector3.Angle(ground.normal,n):0f;
@@ -381,6 +384,13 @@ namespace BrainrotPlanet
                 float blend=1f-Mathf.Exp(-18f*Time.unscaledDeltaTime);
                 transform.SetPositionAndRotation(Vector3.Lerp(transform.position,networkPosition,blend),
                     Quaternion.Slerp(transform.rotation,networkRotation,blend));
+                if(Team==game.LocalTeam)
+                {
+                    Vector3 n=transform.position.normalized;
+                    Vector3 walk=Vector3.ProjectOnPlane(Wish,n).normalized;
+                    float multiplier=biomeMotion.Tick(game.Arena,n,walk,Grounded,Time.unscaledDeltaTime);
+                    game.ShowBiomeMotion(biomeMotion.Effect,multiplier,biomeMotion.CurrentZone);
+                }
             }
             if(body==null||!Active||game==null||game.State!=MatchState.Playing)return;
             if(visualAnimator!=null && visualAnimator.runtimeAnimatorController!=null)

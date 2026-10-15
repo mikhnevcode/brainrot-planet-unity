@@ -6,6 +6,11 @@ namespace BrainrotPlanet
     {
         public bool IsPaused=>paused;
         private bool paused,newRecord;
+        private string biomeMotionNotice="";
+        private float biomeMotionNoticeUntil;
+        private BiomeMotionEffect shownBiomeMotion;
+        private int shownBiomeZone=-1,shownBiomePercent;
+        private Color biomeMotionColor;
         private int capturesThisMatch,captureStreak,tutorialStep;
         private float bestCapture,captureReward,captureRewardTime,damageFlash;
         private string finishReason="ВРЕМЯ ВЫШЛО";
@@ -27,6 +32,39 @@ namespace BrainrotPlanet
             "Пружина подбрасывает героя. При приземлении возникает круг краски.",
             "Три креветочных всплеска покрывают землю. Расширяй владения в выбранном направлении.",
             "Брюшной плеск закрашивает круг. Используй у края своей территории."};
+
+        public void ShowBiomeMotion(BiomeMotionEffect effect,float multiplier,int zone)
+        {
+            if(DedicatedMatchServer)return;
+            int percent=Mathf.RoundToInt(Mathf.Abs(multiplier-1f)*100f);
+            if(effect==BiomeMotionEffect.None||percent<2)
+            {shownBiomeMotion=BiomeMotionEffect.None;shownBiomeZone=zone;shownBiomePercent=0;return;}
+            if(effect==shownBiomeMotion&&zone==shownBiomeZone&&
+               Mathf.Abs(percent-shownBiomePercent)<3)return;
+            shownBiomeMotion=effect;shownBiomeZone=zone;shownBiomePercent=percent;
+            string title;
+            switch(effect)
+            {
+                case BiomeMotionEffect.Tailwind:title="ПОПУТНЫЙ ВЕТЕР  +"+percent+"%";break;
+                case BiomeMotionEffect.Headwind:title="ВСТРЕЧНЫЙ ВЕТЕР  −"+percent+"%";break;
+                case BiomeMotionEffect.GrassSlow:title="ГУСТАЯ РАСТИТЕЛЬНОСТЬ  −"+percent+"%";break;
+                default:
+                    title=Arena!=null&&Arena.Kind==BattlePlanet.Frost?"ЛЕДЯНАЯ ЗОНА":
+                          Arena!=null&&Arena.Kind==BattlePlanet.Volcanic?"ТЁПЛЫЙ ПОТОК":
+                          Arena!=null&&Arena.Kind==BattlePlanet.Crystal?"КРИСТАЛЬНЫЙ РАЗГОН":"ПРУЖИННАЯ ЗОНА";
+                    title+="  +"+percent+"%";break;
+            }
+            biomeMotionNotice=title;
+            biomeMotionColor=effect==BiomeMotionEffect.Headwind||effect==BiomeMotionEffect.GrassSlow
+                ?new Color(.58f,.14f,.20f,.92f):new Color(.06f,.43f,.48f,.92f);
+            biomeMotionNoticeUntil=Time.unscaledTime+1.8f;
+            Debug.Log("BIOME_MOTION_NOTICE effect="+effect+" percent="+percent+" zone="+zone);
+        }
+        private void ResetBiomeMotionNotice()
+        {
+            shownBiomeMotion=BiomeMotionEffect.None;shownBiomeZone=-1;shownBiomePercent=0;
+            biomeMotionNotice="";biomeMotionNoticeUntil=0;
+        }
 
         private void SetupPolish()
         {
@@ -140,6 +178,11 @@ namespace BrainrotPlanet
             else if(tutorialStep==1)hint="ВЫЙДИ ИЗ СВОЕЙ ЗОНЫ И ВЕРНИСЬ";
             else if(annTime>0)hint=announcement.Trim();
             if(hint.Length>0){Rounded(new Rect(22,safeTop+76,w-44,32),hintColor);GUI.Label(new Rect(27,safeTop+77,w-54,29),hint,captionStyle);}
+            if(Time.unscaledTime<biomeMotionNoticeUntil)
+            {
+                Rounded(new Rect(52,safeTop+113,w-104,28),biomeMotionColor);
+                GUI.Label(new Rect(58,safeTop+113,w-116,27),biomeMotionNotice,captionStyle);
+            }
             DrawPlanetIntro(w,safeTop);
             if(captureRewardTime>0)
             {

@@ -16,6 +16,7 @@ namespace BrainrotPlanet
                 planetSeed=Random.Range(1,int.MaxValue);
             }
             Arena=new PlanetBiomeRules(battlePlanet,planetSeed);
+            ResetBiomeMotionNotice();
             planetIntroAt=Time.unscaledTime;
             if(worldCamera!=null)worldCamera.backgroundColor=Arena.Sky;
             Debug.Log("BATTLE_PLANET_READY id="+(int)battlePlanet+" seed="+planetSeed+" epoch="+networkEpoch+" authority="+!IsNetworkReplica);

@@ -16,9 +16,9 @@ namespace BrainrotPlanet.Editor
             // Use the standard Java Activity: the native GameActivity entry froze
             // before scene Awake on repeated RMX3151 Android 13 cold starts.
             PlayerSettings.Android.applicationEntry=AndroidApplicationEntry.Activity;
-            PlayerSettings.bundleVersion="0.7.22-crystal-fx-test";
-            PlayerSettings.Android.bundleVersionCode=66;
-            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.22-crystal-fx-test.apk",false);
+            PlayerSettings.bundleVersion="0.7.23-wind-feedback-test";
+            PlayerSettings.Android.bundleVersionCode=67;
+            Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.7.23-wind-feedback-test.apk",false);
         }
         private static void Build(BuildTarget target,string output,bool server)
         {

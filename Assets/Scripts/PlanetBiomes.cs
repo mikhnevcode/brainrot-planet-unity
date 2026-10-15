@@ -22,14 +22,14 @@ namespace BrainrotPlanet
             "КАРАМЕЛЬНАЯ ПЛАНЕТА"};
         private static readonly string[] Hints={
             "Пальмы и луговые холмы. Трава ненадолго замедляет.",
-            "Песчаные холмы. Попутный ветер ускоряет движение.",
+            "Песчаные холмы. Попутный ветер ускоряет, встречный слегка замедляет.",
             "Ударные кратеры. Прыжки выше, полёт дольше.",
             "Снежные купола. Ледяные пятна слегка ускоряют.",
             "Пологие кальдеры. Тёплые потоки ускоряют и усиливают прыжки.",
             "Песчаные островки. Мелководье замедляет ненадолго.",
             "Кристальные склоны. Разгоняйся и прыгай выше.",
-            "Грозовые прожилки. Попутные потоки ускоряют.",
-            "Янтарные холмы и золотистые камни. Следуй ветру.",
+            "Грозовые прожилки. По ветру быстрее, против ветра медленнее.",
+            "Янтарные холмы и золотистые камни. Следуй ветру для ускорения.",
             "Глазурные купола. Пружинные поля ускоряют и усиливают прыжки."};
         private static readonly Color[] Skies={
             new Color(.045f,.16f,.22f),new Color(.27f,.12f,.14f),new Color(.055f,.06f,.18f),
@@ -136,11 +136,17 @@ namespace BrainrotPlanet
             return Terrain.ColorDetail(direction,altitude,ground);
         }
     }
+    public enum BiomeMotionEffect { None, Tailwind, Headwind, GrassSlow, SurfaceBoost }
     public sealed class PlanetZoneMotion
     {
         private int previousZone=-1;
         private float grassTime;
-        public void Reset(){previousZone=-1;grassTime=0;}
+        public BiomeMotionEffect Effect {get;private set;}
+        public int CurrentZone {get;private set;}=-1;
+        public float Multiplier {get;private set;}=1f;
+        private float Result(BiomeMotionEffect effect,int zone,float multiplier)
+        {Effect=effect;CurrentZone=zone;Multiplier=multiplier;return multiplier;}
+        public void Reset(){previousZone=-1;grassTime=0;Effect=BiomeMotionEffect.None;CurrentZone=-1;Multiplier=1f;}
         public float Tick(PlanetBiomeRules rules,Vector3 normal,Vector3 wish,bool grounded,float dt)
         {
             if(rules==null||!grounded){Reset();return 1;}
@@ -150,16 +156,30 @@ namespace BrainrotPlanet
             {
                 float alignment=Vector3.Dot(wish.normalized,rules.WindDirection(zone));
                 float boost=rules.Kind==BattlePlanet.Storm?.20f:rules.Kind==BattlePlanet.Amber?.13f:.16f;
-                return 1+boost*weight*Mathf.Clamp01((alignment-.15f)/.85f);
+                if(alignment>.15f)
+                    return Result(BiomeMotionEffect.Tailwind,zone,
+                        1+boost*weight*Mathf.Clamp01((alignment-.15f)/.85f));
+                if(alignment<-.15f)
+                {
+                    float drag=rules.Kind==BattlePlanet.Storm?.10f:rules.Kind==BattlePlanet.Amber?.07f:.08f;
+                    return Result(BiomeMotionEffect.Headwind,zone,
+                        1-drag*weight*Mathf.Clamp01((-alignment-.15f)/.85f));
+                }
+                return Result(BiomeMotionEffect.None,zone,1);
             }
             if(rules.Kind==BattlePlanet.Frost||rules.Kind==BattlePlanet.Volcanic||
                rules.Kind==BattlePlanet.Crystal||rules.Kind==BattlePlanet.Candy)
-                return 1+(rules.Kind==BattlePlanet.Frost?.12f:.09f)*weight;
-            if(rules.Kind!=BattlePlanet.Tropical&&rules.Kind!=BattlePlanet.Oceanic)return 1;
+                return Result(BiomeMotionEffect.SurfaceBoost,zone,
+                    1+(rules.Kind==BattlePlanet.Frost?.12f:.09f)*weight);
+            if(rules.Kind!=BattlePlanet.Tropical&&rules.Kind!=BattlePlanet.Oceanic)
+                return Result(BiomeMotionEffect.None,zone,1);
             if(zone!=previousZone){previousZone=zone;grassTime=0;}
             grassTime+=Mathf.Max(0,dt);
             float duration=rules.Kind==BattlePlanet.Oceanic?.65f:PlanetBiomeRules.GrassDuration;
-            return grassTime<duration?1-(rules.Kind==BattlePlanet.Oceanic?.14f:.20f)*weight:1;
+            return grassTime<duration
+                ?Result(BiomeMotionEffect.GrassSlow,zone,
+                    1-(rules.Kind==BattlePlanet.Oceanic?.14f:.20f)*weight)
+                :Result(BiomeMotionEffect.None,zone,1);
         }
     }
 }
