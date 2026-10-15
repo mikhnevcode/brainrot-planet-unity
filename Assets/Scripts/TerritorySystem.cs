@@ -232,13 +232,17 @@ namespace BrainrotPlanet
                 float best=float.MaxValue;
                 for(int i=0;i<components.Count;i++)if(weights[i]<best){selected=i;best=weights[i];}
             }
-            // Even with high-speed or diagonal cell transitions, a visible closed
-            // loop should create a filled area. Fall back to a local tangent-plane
-            // polygon if the discrete 4-neighbor wall failed to separate the sphere.
-            List<int> polygonCells=selected>=0 ? null : PolygonFallback(team);
-            // Existing painted land participates in the closure boundary.
-            // Prefer flood-fill against old land + new trail to avoid wedges.
-            List<int> enclosedCells = selected>=0 ? components[selected] : polygonCells;
+            // The current drawn loop is the authoritative boundary. Selecting the
+            // globally smallest flood-fill component is unsafe after several
+            // captures: an unrelated old one-cell pocket can be smaller than the
+            // new loop and steal the fill. The local projection follows the actual
+            // visible contour and also fills every pocket lying inside it.
+            List<int> polygonCells=PolygonFallback(team);
+            // Keep the spherical flood fill as a fallback for unusually wide loops
+            // which cannot be represented safely in one tangent plane.
+            List<int> enclosedCells=polygonCells!=null
+                ? polygonCells
+                : selected>=0 ? components[selected] : null;
             int changed=0, enclosed=0;
             Vector3 effectCenter=Vector3.zero;
             foreach(int i in Trails[team])
@@ -270,7 +274,7 @@ namespace BrainrotPlanet
             }
             Debug.Log("TERRITORY_CAPTURE team="+team+" areaCells="+enclosed+
                 " totalNewCells="+changed+" seamCells="+seamCells+" selection="+
-                (selected>=0?"old-land+trail":polygonCells!=null?"polygon":"none"));
+                (polygonCells!=null?"drawn-contour":selected>=0?"old-land+trail":"none"));
             if(changed>3)
                 OnCapture?.Invoke(team,changed,
                     effectCenter.sqrMagnitude>.001f ? effectCenter.normalized : hit);

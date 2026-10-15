@@ -117,12 +117,36 @@ namespace BrainrotPlanet.Editor
                 throw new Exception("Sparse airborne loop did not fill: "+
                     jumpBefore.ToString("F2")+" -> "+jumpAfter.ToString("F2")+
                     " events="+jumpEvents);
+
+            // A tiny unrelated hole elsewhere on the planet must not steal a
+            // later, much larger contour. This reproduced partial/offset fills
+            // after several rounds of play when the globally smallest component
+            // happened to be an old raster pocket.
+            var pocketCapture=new TerritorySystem(null);
+            pocketCapture.Seed(1,start);
+            var pocketOwners=(byte[])type.GetField("owner",
+                BindingFlags.NonPublic|BindingFlags.Instance).GetValue(pocketCapture);
+            int pocket=PlanetMath.ToCell(PlanetMath.FromLonLat(-2.30f,-.45f));
+            int pocketX=pocket%PlanetMath.Width,pocketY=pocket/PlanetMath.Width;
+            if(pocketY<2||pocketY>PlanetMath.Height-3)
+                throw new Exception("Bad pocket test latitude");
+            for(int dy=-1;dy<=1;dy++)
+            for(int dx=-1;dx<=1;dx++)
+            {
+                int x=(pocketX+dx+PlanetMath.Width)%PlanetMath.Width;
+                pocketOwners[(pocketY+dy)*PlanetMath.Width+x]=(byte)(dx==0&&dy==0?0:1);
+            }
+            for(int i=0;i<path.Length;i++)pocketCapture.TraceStep(1,path[i]);
+            Vector3 loopInterior=PlanetMath.FromLonLat(.61f,.52f);
+            if(pocketCapture.OwnerAt(loopInterior)!=1)
+                throw new Exception("Unrelated tiny pocket stole the drawn contour fill");
             Debug.Log("TERRITORY_JOIN_SMOKE_PASS seam="+added+
                 " oldPercent="+before.ToString("F2")+
                 " capturedPercent="+after.ToString("F2")+
                 " events="+events+" airbornePoints="+airbornePath.Count+
                 " airborneWorstCellStep="+worstCellStep+
-                " sparseCapture="+jumpAfter.ToString("F2"));
+                " sparseCapture="+jumpAfter.ToString("F2")+
+                " pocketGuard=ok");
         }
     }
 }
