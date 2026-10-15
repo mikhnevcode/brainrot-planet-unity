@@ -21,6 +21,7 @@ namespace BrainrotPlanet.Editor
             Check(PlayerRecords.ValidateNicknameInput("сука",out _)==NicknameIssue.Inappropriate,"ru profanity");
             Check(PlayerRecords.ValidateNicknameInput("f4ck",out _)==NicknameIssue.Inappropriate,"leetspeak profanity");
             Check(PlayerRecords.ValidPlayerLabel(PlayerRecords.BotName(2)),"official bot label");
+            Check(PlayerRecords.ValidPlayerLabel("Я")&&!PlayerRecords.ValidNickname("Я"),"legacy roster compatibility");
             float[] scores={0,12,25,25,4};int[] order=PlayerRecords.Ranking(scores);
             Check(order[0]==2&&order[1]==3&&order[2]==1&&order[3]==4,"stable score ranking");
             Check(PlayerRecords.Rank(scores,1)==3,"local rank");

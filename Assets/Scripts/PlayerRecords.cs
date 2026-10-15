@@ -108,7 +108,14 @@ namespace BrainrotPlanet
             return issue==NicknameIssue.None&&clean==value;
         }
         public static bool ValidPlayerLabel(string value)
-        {return IsOfficialBotName(value)||ValidNickname(value);}
+        {
+            // Protocol 9 clients that predate local moderation may still have a
+            // structurally valid one-character or now-blocked guest name. The
+            // local input remains strict, while an already accepted roster must
+            // stay readable instead of disconnecting the whole match.
+            return !string.IsNullOrEmpty(value)&&value.Length<=MaxNicknameLength&&
+                   FilterNickname(value)==value;
+        }
         public static string NicknameIssueMessage(NicknameIssue issue)
         {
             switch(issue)
@@ -126,11 +133,6 @@ namespace BrainrotPlanet
             if(value==null||value.Length!=10||!value.StartsWith("ИГРОК ",StringComparison.Ordinal))return false;
             for(int i=6;i<10;i++)if(!char.IsDigit(value[i]))return false;
             return true;
-        }
-        private static bool IsOfficialBotName(string value)
-        {
-            for(int i=1;i<BotNames.Length;i++)if(value==BotNames[i])return true;
-            return false;
         }
         private static bool IsReservedNickname(string value)
         {
