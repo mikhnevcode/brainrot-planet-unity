@@ -1,5 +1,5 @@
 """Validate the v0.8.2 handoff using this iteration's actual evidence."""
-import hashlib,json,subprocess,xml.etree.ElementTree as ET
+import hashlib,json,subprocess,sys,xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -27,8 +27,13 @@ def main():
     def profile(root):
         return {e.attrib['name']:(e.tag,e.attrib.get('value'),e.text or '') for e in root if not e.attrib['name'].startswith('unity')}
     before=ET.parse(BASE/'DeviceBackup/playerprefs.xml').getroot()
-    current=subprocess.check_output(['C:/adb/adb.exe','-s','NBTK5TZTVC8T9TRG','exec-out','run-as','com.mikhnevcode.brainrotplanet','cat','shared_prefs/com.mikhnevcode.brainrotplanet.v2.playerprefs.xml'])
+    snapshot=BASE/'DeviceBackup/post-qa-playerprefs.xml'
+    live='--live' in sys.argv or not snapshot.exists()
+    current=subprocess.check_output(['C:/adb/adb.exe','-s','NBTK5TZTVC8T9TRG','exec-out','run-as','com.mikhnevcode.brainrotplanet','cat','shared_prefs/com.mikhnevcode.brainrotplanet.v2.playerprefs.xml']) if live else snapshot.read_bytes()
     if profile(before)!=profile(ET.fromstring(current)):raise RuntimeError('Gameplay profile changed')
+    # Freeze the verified QA boundary. An ordinary later launch, onboarding or
+    # the user's next match must not invalidate a completed historical report.
+    if live:snapshot.write_bytes(current)
     apk=ROOT/'Builds/Android/BrainrotPlanet-v0.8.2-rollo-refine-test.apk'
     digest=hashlib.sha256(apk.read_bytes()).hexdigest()
     model=json.loads((ROOT/'Characters/OriginalCast/Models_v04/RolloBulk/mobile-report.json').read_text())
@@ -41,7 +46,7 @@ def main():
         'editor':'PASS all 26 models, 208 clips, 130 skins; drum/tail articulation; normalized weights; gameplay regression.',
         'device':'RMX2020 NBTK5TZTVC8T9TRG','menu':'PASS 26 heroes / 156 framing views',
         'wardrobe':'PASS five skin previews, movement, jump, ability, player victory and Rollo AI victory.',
-        'gameplayProfileUnchanged':True,'evidence':list(gates),
+        'gameplayProfileUnchanged':True,'profileSnapshotSha256':hashlib.sha256(current).hexdigest(),'evidence':list(gates),
         'limits':['Visual likeness still requires user art approval','Not a measured FPS/thermal endurance test','No new full network-match test: cosmetic update, protocol unchanged','No iOS build or production billing changes']}
     output=ROOT/'QA/v082/rollo-refine-report.json';output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

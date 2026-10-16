@@ -25,6 +25,7 @@
   "menu": "PASS 26 heroes / 156 framing views",
   "wardrobe": "PASS five skin previews, movement, jump, ability, player victory and Rollo AI victory.",
   "gameplayProfileUnchanged": true,
+  "profileSnapshotSha256": "9451a695ecbeca49fa908ddb4a05a7a4e1716ee3d89f2dfd54f1556c23dfe5d3",
   "evidence": [
     "Builds/rollo-v04-face-winding.log",
     "Builds/rollo-v04-unity-prepare.log",
