@@ -1,0 +1,97 @@
+{
+  "status": "art-review-only-not-runtime",
+  "iteration": "009",
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Material only: broader irregular dark markings, warmer cream, narrower belly mask, shifted muzzle mask and wet skin finish. Geometry/pose/camera unchanged."
+  ],
+  "projectedLandmarks": {
+    "hubNear": [
+      383.06856071949005,
+      869.0546118021011
+    ],
+    "hubFar": [
+      1066.1835347414017,
+      869.0546865463257
+    ],
+    "eyeNear": [
+      706.7635234594345,
+      130.04433703422546
+    ],
+    "eyeFar": [
+      879.2060734033585,
+      165.06275367736816
+    ],
+    "nose": [
+      840.6064367294312,
+      196.36645710468292
+    ],
+    "crown": [
+      726.3006173372269,
+      33.95899200439453
+    ],
+    "bellyBottom": [
+      790.8763386011124,
+      706.4316591024399
+    ],
+    "flipperNearRoot": [
+      588.3976351618767,
+      392.53267443180084
+    ],
+    "flipperNearTip": [
+      301.1958113014698,
+      601.6707519292831
+    ],
+    "flipperFarRoot": [
+      965.0716406106949,
+      453.22849774360657
+    ],
+    "flipperFarTip": [
+      1154.1701935529709,
+      632.6944261193275
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "source": "ArtReview/RolloReferenceMatch/source-009.blend"
+}

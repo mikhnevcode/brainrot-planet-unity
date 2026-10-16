@@ -1,0 +1,106 @@
+{
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Facial proportions only: raised muzzle and mouth, reduced lateral eye spacing, narrower cheeks. Same camera/pose/body/flippers/roller."
+  ],
+  "sourceLandmarks": {
+    "hubNear": [
+      1.2999999523162842,
+      0.7900000214576721,
+      0.550000011920929
+    ],
+    "hubFar": [
+      -1.2999999523162842,
+      0.7900000214576721,
+      0.550000011920929
+    ],
+    "eyeNear": [
+      0.3489151895046234,
+      1.0142779350280762,
+      3.0302622318267822
+    ],
+    "eyeFar": [
+      -0.3489152193069458,
+      1.0149269104003906,
+      3.0302622318267822
+    ],
+    "nose": [
+      1.8341222984830097e-10,
+      1.3978044986724854,
+      2.878016471862793
+    ],
+    "crown": [
+      -0.0007553274626843631,
+      0.34075504541397095,
+      3.4203784465789795
+    ],
+    "bellyBottom": [
+      0.0,
+      1.2999999523162842,
+      1.1200000047683716
+    ],
+    "flipperNearRoot": [
+      0.7191400527954102,
+      0.8592210412025452,
+      2.142336845397949
+    ],
+    "flipperNearTip": [
+      1.7000000476837158,
+      0.7900000214576721,
+      1.4199999570846558
+    ],
+    "flipperFarRoot": [
+      -0.9700000286102295,
+      0.5400000214576721,
+      2.1500000953674316
+    ],
+    "flipperFarTip": [
+      -1.7599999904632568,
+      0.9599999785423279,
+      1.3700000047683716
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "landmarkMethod": "Approximate manual pixel landmarks, 1254px concept; diagnostic only; no likeness score.",
+  "master": "ArtReview/RolloReferenceMatch/source-004.blend"
+}

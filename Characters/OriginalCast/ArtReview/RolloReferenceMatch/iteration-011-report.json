@@ -1,0 +1,97 @@
+{
+  "status": "art-review-only-not-runtime",
+  "iteration": "011",
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Cream surface boundaries only: connected chest, narrower whisker-pad marking, teal shoulder/flipper masks, crisper irregular spotting and finer wet skin relief."
+  ],
+  "projectedLandmarks": {
+    "hubNear": [
+      382.82638943195343,
+      892.3782107234001
+    ],
+    "hubFar": [
+      1065.941363453865,
+      892.3782854676247
+    ],
+    "eyeNear": [
+      706.7635234594345,
+      130.04433703422546
+    ],
+    "eyeFar": [
+      879.2060734033585,
+      165.06275367736816
+    ],
+    "nose": [
+      840.6064367294312,
+      196.36645710468292
+    ],
+    "crown": [
+      726.3006173372269,
+      33.95899200439453
+    ],
+    "bellyBottom": [
+      790.5585261583328,
+      737.0438289642334
+    ],
+    "flipperNearRoot": [
+      588.3976351618767,
+      392.53267443180084
+    ],
+    "flipperNearTip": [
+      301.1958113014698,
+      601.6707519292831
+    ],
+    "flipperFarRoot": [
+      965.0716406106949,
+      453.22849774360657
+    ],
+    "flipperFarTip": [
+      1154.1701935529709,
+      632.6944261193275
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "source": "ArtReview/RolloReferenceMatch/source-011.blend"
+}

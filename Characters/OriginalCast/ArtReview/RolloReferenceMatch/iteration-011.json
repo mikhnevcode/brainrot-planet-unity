@@ -1,0 +1,106 @@
+{
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Cream surface boundaries only: connected chest, narrower whisker-pad marking, teal shoulder/flipper masks, crisper irregular spotting and finer wet skin relief."
+  ],
+  "sourceLandmarks": {
+    "hubNear": [
+      1.3,
+      0.79,
+      0.47
+    ],
+    "hubFar": [
+      -1.3,
+      0.79,
+      0.47
+    ],
+    "eyeNear": [
+      0.35000014305114746,
+      0.9090757966041565,
+      3.038498878479004
+    ],
+    "eyeFar": [
+      -0.35000014305114746,
+      0.9089398980140686,
+      3.038498878479004
+    ],
+    "nose": [
+      -1.3452437774841286e-10,
+      1.2790344953536987,
+      2.8775017261505127
+    ],
+    "crown": [
+      -0.0007553274626843631,
+      0.34075504541397095,
+      3.4203784465789795
+    ],
+    "bellyBottom": [
+      0,
+      1.3,
+      1.015
+    ],
+    "flipperNearRoot": [
+      0.68,
+      1.02,
+      2.14
+    ],
+    "flipperNearTip": [
+      1.68,
+      0.91,
+      1.47
+    ],
+    "flipperFarRoot": [
+      -1.06,
+      0.48,
+      1.99
+    ],
+    "flipperFarTip": [
+      -1.64,
+      0.76,
+      1.36
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "landmarkMethod": "Approximate manual pixel landmarks, 1254px concept; diagnostic only; no likeness score.",
+  "master": "ArtReview/RolloReferenceMatch/source-011.blend"
+}

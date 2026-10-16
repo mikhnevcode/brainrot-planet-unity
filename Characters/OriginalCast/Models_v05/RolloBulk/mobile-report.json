@@ -1,0 +1,41 @@
+{
+  "status": "baked-export-awaiting-Unity-QA",
+  "masterTriangles": 978870,
+  "mobileTriangles": 42475,
+  "vertices": 21407,
+  "materials": 10,
+  "bones": [
+    "Body",
+    "Head",
+    "Arm_L",
+    "Arm_R",
+    "Leg_L",
+    "Leg_R",
+    "Tail",
+    "Appendage_0",
+    "Appendage_1",
+    "Appendage_2",
+    "Appendage_3",
+    "Appendage_4",
+    "Appendage_5",
+    "Appendage_6",
+    "Appendage_7"
+  ],
+  "animations": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Land",
+    "Victory",
+    "Drop",
+    "Special",
+    "VictoryShow"
+  ],
+  "textures": {
+    "body": 2048,
+    "roller": 1024
+  },
+  "fbxBytes": 2103084,
+  "skinCatalogRevision": 5,
+  "facialCapsFacingOutward": true
+}

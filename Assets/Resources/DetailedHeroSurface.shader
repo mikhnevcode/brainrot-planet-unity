@@ -7,6 +7,7 @@ Shader "Brainrot/DetailedHeroSurface"
         _MainTex ("Baked sculpt color", 2D) = "white" {}
         _TintMask ("Cosmetic region", 2D) = "white" {}
         _BumpMap ("Baked sculpt normal", 2D) = "bump" {}
+        _OcclusionMap ("Sculpt contact occlusion", 2D) = "white" {}
         _BumpScale ("Normal strength", Range(0,1)) = .55
         _Glossiness ("Smoothness", Range(0,1)) = .35
         _Metallic ("Metallic", Range(0,1)) = 0
@@ -20,7 +21,7 @@ Shader "Brainrot/DetailedHeroSurface"
         CGPROGRAM
         #pragma surface surf Standard fullforwardshadows
         #pragma target 3.0
-        sampler2D _MainTex,_TintMask,_BumpMap;
+        sampler2D _MainTex,_TintMask,_BumpMap,_OcclusionMap;
         fixed4 _Color,_BaseTint,_EmissionColor;
         half _BumpScale,_Glossiness,_Metallic;
         struct Input {float2 uv_MainTex;};
@@ -31,9 +32,11 @@ Shader "Brainrot/DetailedHeroSurface"
             half detail=dot(authored,half3(.2126,.7152,.0722))/max(.02,dot(_BaseTint.rgb,half3(.2126,.7152,.0722)));
             half changed=saturate(length(_Color.rgb-_BaseTint.rgb)*1000);
             o.Albedo=saturate(lerp(authored,_Color.rgb*detail,mask*changed));
+            half ao=tex2D(_OcclusionMap,IN.uv_MainTex).r;
+            o.Albedo*=lerp(.72h,1.0h,ao);o.Occlusion=lerp(.25h,1.0h,ao);
             half3 normal=UnpackNormal(tex2D(_BumpMap,IN.uv_MainTex));
             normal.xy*=_BumpScale;o.Normal=normalize(normal);
-            o.Smoothness=_Glossiness;o.Metallic=_Metallic;
+            o.Smoothness=lerp(min(_Glossiness,.30h),_Glossiness,mask);o.Metallic=_Metallic;
             o.Emission=_EmissionColor.rgb;o.Alpha=1;
         }
         ENDCG

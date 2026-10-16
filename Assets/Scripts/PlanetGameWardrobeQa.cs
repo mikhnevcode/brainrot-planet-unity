@@ -17,7 +17,7 @@ namespace BrainrotPlanet
             int savedHero=PlayerPrefs.GetInt("BrainrotSelectedHero",0);
             var originalSkins=(string[])equippedSkins.Clone();
             string marker=Path.Combine(Application.persistentDataPath,".wardrobe-cast-qa");
-            bool rolloOnly=File.Exists(marker)&&(File.ReadAllText(marker).Trim()=="rollo03"||File.ReadAllText(marker).Trim()=="rollo04");
+            bool rolloOnly=File.Exists(marker)&&(File.ReadAllText(marker).Trim()=="rollo03"||File.ReadAllText(marker).Trim()=="rollo04"||File.ReadAllText(marker).Trim()=="rollo05"||File.ReadAllText(marker).Trim()=="rollo06");
             int heroCount=rolloOnly?1:SkinRigProfile.HeroCount;
             string folder=Path.Combine(Application.persistentDataPath,rolloOnly?"rollo-detail-qa":"cast-qa");Directory.CreateDirectory(folder);
             try

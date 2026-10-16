@@ -1,0 +1,97 @@
+{
+  "status": "art-review-only-not-runtime",
+  "iteration": "000",
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": 0,
+    "headYaw": 0,
+    "leanForward": 0
+  },
+  "changed": [
+    "Matched camera, scale and framing only"
+  ],
+  "projectedLandmarks": {
+    "hubNear": [
+      384.15661239624023,
+      863.57343095541
+    ],
+    "hubFar": [
+      1067.2715864181519,
+      863.5735430717468
+    ],
+    "eyeNear": [
+      620.2273510694504,
+      159.45200371742249
+    ],
+    "eyeFar": [
+      862.0270103216171,
+      159.45200371742249
+    ],
+    "nose": [
+      812.0079510211945,
+      249.51393592357635
+    ],
+    "crown": [
+      669.0581266880035,
+      26.490997552871704
+    ],
+    "bellyBottom": [
+      790.2574564218521,
+      697.3456016778946
+    ],
+    "flipperNearRoot": [
+      439.22075736522675,
+      396.96881890296936
+    ],
+    "flipperNearTip": [
+      284.8122323155403,
+      624.4385901689529
+    ],
+    "flipperFarRoot": [
+      948.9296536445618,
+      396.9688936471939
+    ],
+    "flipperFarTip": [
+      1209.6448338031769,
+      624.4386649131775
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "source": "Models_v05/RolloBulk/RolloBulk_v05_master.blend"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "art-review-only-not-runtime",
+  "changed": [
+    "Near foreflipper control path and section widths only"
+  ],
+  "unchanged": [
+    "Head and facial sculpt",
+    "Far flipper",
+    "Roller",
+    "Materials",
+    "Reference camera"
+  ],
+  "replaces": "Rejected local-grab experiment 002, which pinched the shoulder surface."
+}

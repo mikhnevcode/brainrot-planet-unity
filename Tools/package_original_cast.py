@@ -67,6 +67,7 @@ def main():
         # milestone. Keep the authoritative GUID files byte-for-byte unchanged.
         if name in {'Assets/Scripts/GameplayFeedback.cs.meta','Assets/Editor/GameplayFeedbackSmoke.cs.meta'}:continue
         if name.endswith(('.blend1','.blend2','.pyc')) or '/__pycache__/' in name or Path(name).name.startswith('.remotecommand-'):continue
+        if name.startswith('Characters/OriginalCast/ArtReview/RolloReferenceMatch/') and name.endswith('.blend'):continue
         path=ROOT/name
         if not path.is_file():
             if name in tracked:deleted.append({'path':name,'oldBlob':tracked[name]})

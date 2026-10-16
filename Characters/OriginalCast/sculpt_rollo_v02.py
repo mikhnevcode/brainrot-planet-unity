@@ -199,8 +199,8 @@ def make():
     return body
 
 
-def studio(prefix='RolloBulk_v02',standard=False):
-    scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=48;scene.cycles.use_denoising=True
+def studio(prefix='RolloBulk_v02',standard=False,samples=48,views=None):
+    scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=samples;scene.cycles.use_denoising=True
     scene.render.resolution_x=1120;scene.render.resolution_y=1120;scene.render.resolution_percentage=100
     scene.render.image_settings.file_format='PNG';scene.world=bpy.data.worlds.new('Pastel studio');scene.world.color=(.36,.42,.46)
     scene.view_settings.view_transform='AgX';scene.view_settings.look='AgX - Medium High Contrast';scene.view_settings.exposure=-.25
@@ -211,8 +211,11 @@ def studio(prefix='RolloBulk_v02',standard=False):
         ob=bpy.data.objects.new('Softbox',data);bpy.context.collection.objects.link(ob);ob.location=location;ob.rotation_euler=(Vector((0,0,1.6))-ob.location).to_track_quat('-Z','Y').to_euler()
     bpy.ops.mesh.primitive_plane_add(size=200,location=(0,0,-.008));bpy.context.object.name='Review floor';bpy.context.object.data.materials.append(G.material('studio','#BBDDE3','solid'))
     camdata=bpy.data.cameras.new('Art review');cam=bpy.data.objects.new('Art review',camdata);bpy.context.collection.objects.link(cam);scene.camera=cam;camdata.type='ORTHO';camdata.ortho_scale=4.25
-    for suffix,offset in [('three-quarter',(4.5,8,3.0)),('front',(0,9,2.25)),('side',(9,.2,2.5))]:
+    for suffix,offset in (views or [('three-quarter',(4.5,8,3.0)),('front',(0,9,2.25)),('side',(9,.2,2.5))]):
         target=Vector((0,-.12,1.64));cam.location=target+Vector(offset);cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler()
+        inverse=cam.rotation_euler.to_quaternion().inverted()
+        corners=[inverse@(ob.matrix_world@Vector(corner)-target) for ob in scene.objects if ob.type=='MESH' and ob.name!='Review floor' for corner in ob.bound_box]
+        camdata.ortho_scale=2.16*max(max(abs(p.x),abs(p.y)) for p in corners)
         scene.render.filepath=str(OUT/(prefix+'_'+suffix+'.png'));bpy.ops.render.render(write_still=True)
 
 

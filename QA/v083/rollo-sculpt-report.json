@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "version": "0.8.3-rollo-sculpt-test",
+  "versionCode": 73,
+  "apkFile": "BrainrotPlanet-v0.8.3-rollo-sculpt-test-9187e817.apk",
+  "apkSha256": "9187e817f40e06b5bfd7a64d6373a2e87d834cdb739310c699d7e33d49ce32ce",
+  "apkBytes": 88869491,
+  "scope": "Rollo reference-led facial/anatomical refinement; other 25 models unchanged",
+  "networkProtocol": 10,
+  "skinCatalogRevision": 6,
+  "mobileTriangles": 42468,
+  "masterTriangles": 949870,
+  "animations": 8,
+  "bakedMaps": 6,
+  "skins": 5,
+  "device": "RMX2020 NBTK5TZTVC8T9TRG",
+  "menuViews": 156,
+  "editor": "PASS all 26 models / 208 clips / 130 skins; drum and tail articulation, normalized weights, outward mouth/tongue; Run/Jump/Drop/VictoryShow renders",
+  "deviceChecks": "PASS all 26 menu previews, five Rollo skins, movement/jump/ability, player and Rollo AI victory",
+  "gameplayProfileUnchanged": true,
+  "profileSnapshots": {
+    "menu": "9013b39714b6624d0c3b6aca0c404178cd15b7f7b1355ac8e10ee6de1afbd4e1",
+    "wardrobe": "db72a1292a44919a7340c2850e79833c3b01db0edcfb562999503226933fa64a"
+  },
+  "evidence": [
+    "Builds/rollo-v06-export.log",
+    "Builds/rollo-v06-unity-prepare.log",
+    "Builds/rollo-v06-android-build.log",
+    "Builds/RolloSculpt/device-menu.log",
+    "Builds/RolloSculpt/device-wardrobe.log"
+  ],
+  "artReview": "Characters/OriginalCast/ArtReview/RolloReferenceMatch/status.json",
+  "limits": [
+    "Not pixel-identical to the concept; user art approval remains separate",
+    "Procedural anatomical sculpture, not manual brush sculpting",
+    "Not a sustained FPS/thermal test",
+    "No new full online-match test; protocol unchanged",
+    "No iOS or production billing changes"
+  ]
+}

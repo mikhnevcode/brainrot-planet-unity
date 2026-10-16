@@ -20,4 +20,6 @@ __pycache__/
 *.key
 *.blend1
 *.blend2
+# Reproducible per-step art caches; keep production masters and mobile rigs.
+/Characters/OriginalCast/ArtReview/RolloReferenceMatch/*.blend
 .remotecommand-*.part

@@ -1,0 +1,11 @@
+{
+  "status": "reference-led-production-candidate",
+  "triangles": 949870,
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "review": "ArtReview/RolloReferenceMatch/iteration-014.json",
+  "technique": "Continuous voxel-fused anatomical mesh, scripted local sculpture; not manual brush sculpting",
+  "limits": [
+    "Not a pixel-identical reconstruction of the concept",
+    "User artistic approval remains separate from technical QA"
+  ]
+}

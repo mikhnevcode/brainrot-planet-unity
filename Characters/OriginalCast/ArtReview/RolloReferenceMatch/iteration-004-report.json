@@ -1,0 +1,97 @@
+{
+  "status": "art-review-only-not-runtime",
+  "iteration": "004",
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Facial proportions only: raised muzzle and mouth, reduced lateral eye spacing, narrower cheeks. Same camera/pose/body/flippers/roller."
+  ],
+  "projectedLandmarks": {
+    "hubNear": [
+      383.06856071949005,
+      869.0546118021011
+    ],
+    "hubFar": [
+      1066.1835347414017,
+      869.0546865463257
+    ],
+    "eyeNear": [
+      722.316152215004,
+      133.19555354118347
+    ],
+    "eyeFar": [
+      894.3410314321518,
+      168.11067366600037
+    ],
+    "nose": [
+      858.3196220397949,
+      197.04393875598907
+    ],
+    "crown": [
+      726.3006173372269,
+      33.95899200439453
+    ],
+    "bellyBottom": [
+      790.8763386011124,
+      706.4316591024399
+    ],
+    "flipperNearRoot": [
+      556.6717389822006,
+      389.71885335445404
+    ],
+    "flipperNearTip": [
+      280.6073651611805,
+      615.4109827280045
+    ],
+    "flipperFarRoot": [
+      945.1666556596756,
+      422.0192710161209
+    ],
+    "flipperFarTip": [
+      1211.032759308815,
+      631.1740538477898
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "source": "ArtReview/RolloReferenceMatch/source-004.blend"
+}

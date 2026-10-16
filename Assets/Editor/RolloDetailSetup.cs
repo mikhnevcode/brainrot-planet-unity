@@ -10,10 +10,10 @@ namespace BrainrotPlanet.Editor
         public static void Prepare()
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
-            foreach(string path in Directory.GetFiles("Assets/Resources/OriginalCastDetail/RolloBulk_v04","*.png"))
+            foreach(string path in Directory.GetFiles("Assets/Resources/OriginalCastDetail/RolloBulk_v06","*.png"))
             {
                 var importer=(TextureImporter)AssetImporter.GetAtPath(path);
-                bool normal=path.Contains("_Normal"),mask=path.Contains("_TintMask");
+                bool normal=path.Contains("_Normal"),mask=path.Contains("_TintMask")||path.Contains("_AO");
                 importer.textureType=normal?TextureImporterType.NormalMap:TextureImporterType.Default;
                 importer.sRGBTexture=!normal&&!mask;importer.alphaSource=TextureImporterAlphaSource.None;
                 importer.mipmapEnabled=true;importer.wrapMode=TextureWrapMode.Clamp;importer.anisoLevel=2;
@@ -22,7 +22,7 @@ namespace BrainrotPlanet.Editor
                 importer.SaveAndReimport();
             }
             OriginalCastSetup.PrepareAndRender();Smoke();RenderReview();
-            Debug.Log("ROLLO_DETAIL_UNITY_PREPARE_PASS bakedMaps=5 skinVariants=5 animations=8 opaque=true");
+            Debug.Log("ROLLO_DETAIL_UNITY_PREPARE_PASS bakedMaps=6 skinVariants=5 animations=8 opaque=true");
         }
         public static void Smoke()
         {
@@ -54,7 +54,20 @@ namespace BrainrotPlanet.Editor
                         Vector3 average=Vector3.zero;
                         foreach(int vertex in renderer.sharedMesh.GetIndices(submesh))average+=normals[vertex];
                         average=root.transform.InverseTransformDirection(renderer.transform.TransformDirection(average.normalized));
-                        if(Vector3.Dot(average,AvatarArt.LocalFacing(root.transform))<.2f)
+                        float front=Vector3.Dot(average,AvatarArt.LocalFacing(root.transform));
+                        if(name.Contains(" tongue "))
+                        {
+                            // A solid tongue has outward normals in all directions.
+                            // Require a front-facing surface instead of treating
+                            // its closed volume as an open planar facial cap.
+                            front=-1;
+                            foreach(int vertex in renderer.sharedMesh.GetIndices(submesh))
+                            {
+                                var n=root.transform.InverseTransformDirection(renderer.transform.TransformDirection(normals[vertex]));
+                                front=Mathf.Max(front,Vector3.Dot(n,AvatarArt.LocalFacing(root.transform)));
+                            }
+                        }
+                        if(front<.2f)
                             throw new Exception("Back-facing detailed Rollo facial cap: "+name);
                         facialCaps++;
                     }
@@ -67,7 +80,7 @@ namespace BrainrotPlanet.Editor
         }
         public static void RenderReview()
         {
-            Directory.CreateDirectory("Builds/RolloRefine");
+            Directory.CreateDirectory("Builds/RolloSculpt");
             var oldAmbient=RenderSettings.ambientLight;var oldMode=RenderSettings.ambientMode;
             RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Flat;RenderSettings.ambientLight=new Color(.42f,.48f,.55f);
             var cameraObject=new GameObject("Detailed Rollo review camera");var camera=cameraObject.AddComponent<Camera>();
@@ -117,7 +130,7 @@ namespace BrainrotPlanet.Editor
                 bounds=AvatarArt.PoseBounds(root.transform);HeroPreviewFraming.Place(camera,bounds,0,8,1.02f);
                 camera.orthographic=true;camera.orthographicSize=Mathf.Max(bounds.extents.y,bounds.extents.x)*1.12f;camera.Render();
                 var previous=RenderTexture.active;RenderTexture.active=target;var image=new Texture2D(target.width,target.height,TextureFormat.RGB24,false);
-                try{image.ReadPixels(new Rect(0,0,target.width,target.height),0,0);image.Apply();File.WriteAllBytes("Builds/RolloRefine/Unity-"+label+".png",image.EncodeToPNG());}
+                try{image.ReadPixels(new Rect(0,0,target.width,target.height),0,0);image.Apply();File.WriteAllBytes("Builds/RolloSculpt/Unity-"+label+".png",image.EncodeToPNG());}
                 finally{RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(image);}
                 Debug.Log("ROLLO_DETAIL_RENDER_PASS variant="+label+" triangles="+triangles+" shader="+root.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.shader.name);
             }
