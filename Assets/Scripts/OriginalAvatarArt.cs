@@ -10,7 +10,7 @@ namespace BrainrotPlanet
         public static Material Palette(Material source,int hero=-1)
         {
             if(source==null)throw new InvalidOperationException("Original cast material missing");
-            string key=(hero==0?"Rollo03|":"")+source.name;
+            string key=(hero==0?"Rollo04|":"")+source.name;
             if(Materials.TryGetValue(key,out var existing)&&existing!=null)return existing;
             if(hero==0){var detailed=DetailedHeroMaterials.Make(source);Materials[key]=detailed;return detailed;}
             string[] tokens=source.name.Split(' ');

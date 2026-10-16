@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "version": "0.8.2-rollo-refine-test",
+  "versionCode": 72,
+  "apkFile": "BrainrotPlanet-v0.8.2-rollo-refine-test-7c35b857.apk",
+  "apkSha256": "7c35b857a7817ce0a781857f0bcee32ad08cd5dcf72624d11b342c0cbb12e682",
+  "apkBytes": 76116453,
+  "networkProtocol": 10,
+  "skinCatalogRevision": 4,
+  "scope": "Rollo reference-led anatomy refinement only; other 25 characters unchanged.",
+  "anatomy": [
+    "Heavy pear-shaped belly and shoulders",
+    "Broader paired whisker pads",
+    "Smaller inset almond eye caps with brown iris rims",
+    "Thicker larger flippers",
+    "Visible offset forked tail",
+    "Monotonic roller geometry: ivory discs no longer buried by cubic overshoot"
+  ],
+  "mobileTriangles": 42472,
+  "animations": 8,
+  "bakedMaps": 5,
+  "colorVariants": 5,
+  "editor": "PASS all 26 models, 208 clips, 130 skins; drum/tail articulation; normalized weights; gameplay regression.",
+  "device": "RMX2020 NBTK5TZTVC8T9TRG",
+  "menu": "PASS 26 heroes / 156 framing views",
+  "wardrobe": "PASS five skin previews, movement, jump, ability, player victory and Rollo AI victory.",
+  "gameplayProfileUnchanged": true,
+  "evidence": [
+    "Builds/rollo-v04-face-winding.log",
+    "Builds/rollo-v04-unity-prepare.log",
+    "Builds/rollo-v04-android-build.log",
+    "Builds/RolloRefine/device-menu.log",
+    "Builds/RolloRefine/device-final.log"
+  ],
+  "limits": [
+    "Visual likeness still requires user art approval",
+    "Not a measured FPS/thermal endurance test",
+    "No new full network-match test: cosmetic update, protocol unchanged",
+    "No iOS build or production billing changes"
+  ]
+}

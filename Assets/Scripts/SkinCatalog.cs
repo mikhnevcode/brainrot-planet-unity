@@ -20,8 +20,8 @@ namespace BrainrotPlanet
     // entries are free. This validates content, not store receipts or ownership.
     public sealed class SkinCatalog : MonoBehaviour
     {
-        public const string BaseUrl="https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/rollo081/skins/";
-        public const string CatalogFile="catalog-original26-v2.json";
+        public const string BaseUrl="https://loadfiles.testmkn.ru/downloads/brainrot-planet/cast/rollo082/skins/";
+        public const string CatalogFile="catalog-original26-v3.json";
         public const int MaxPackBytes=2*1024*1024,MaxManifestBytes=131072,MemoryPackLimit=16;
         public SkinManifest Manifest {get;private set;}=new SkinManifest{schema=2,revision=0,skins=new SkinEntry[0]};
         public bool Busy=>refreshing||inFlight.Count>0;

@@ -6,6 +6,8 @@ credentials, .blend backups, old APKs, or unrelated untracked project files.
 import hashlib
 import io
 import json
+import shlex
+import sys
 from pathlib import Path
 import subprocess
 import tarfile
@@ -36,6 +38,15 @@ def main():
     with tarfile.open(fileobj=io.BytesIO(remote('git archive HEAD '+archive_paths))) as old:
         for member in old.getmembers():
             if member.isfile():historical[member.name.replace('Assets/Resources/','Assets/LegacyCharacterArchive/',1)]=old.extractfile(member).read()
+    # The all-cast editor fixture reserializes state-machine IDs even when its
+    # clips/transitions are unchanged. This milestone changes only Rollo's rig;
+    # keep the other 25 authoritative controllers byte-for-byte in the package.
+    controllers=[p for p in tracked if p.startswith('Assets/Resources/OriginalCast/')
+                 and p.endswith('.controller') and not p.endswith('/RolloBulk.controller')]
+    if '--rollo-only' in sys.argv and controllers:
+        with tarfile.open(fileobj=io.BytesIO(remote('git archive HEAD '+' '.join(shlex.quote(p) for p in controllers)))) as old:
+            for member in old.getmembers():
+                if member.isfile():historical[member.name]=old.extractfile(member).read()
     scoped=('Assets/Scripts/','Assets/Editor/','Assets/Resources/Characters/',
             'Assets/Resources/HeroPortraits064.png')
     candidates={p for p in tracked if p.startswith(scoped)}

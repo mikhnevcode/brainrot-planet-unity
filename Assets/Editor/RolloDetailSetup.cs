@@ -10,7 +10,7 @@ namespace BrainrotPlanet.Editor
         public static void Prepare()
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
-            foreach(string path in Directory.GetFiles("Assets/Resources/OriginalCastDetail/RolloBulk_v03","*.png"))
+            foreach(string path in Directory.GetFiles("Assets/Resources/OriginalCastDetail/RolloBulk_v04","*.png"))
             {
                 var importer=(TextureImporter)AssetImporter.GetAtPath(path);
                 bool normal=path.Contains("_Normal"),mask=path.Contains("_TintMask");
@@ -40,19 +40,34 @@ namespace BrainrotPlanet.Editor
                 run.SampleAnimation(visual.gameObject,run.length*.43f);
                 if(Quaternion.Angle(drumRest,drum.localRotation)<100||Quaternion.Angle(tailRest,tail.localRotation)>20)
                     throw new Exception("Detailed Rollo drum/tail articulation mismatch");
+                int facialCaps=0;
                 foreach(var renderer in visual.GetComponentsInChildren<SkinnedMeshRenderer>())
                 {
                     if(renderer.sharedMesh.triangles.Length/3>45000)throw new Exception("Detailed Rollo triangle budget");
                     foreach(var weight in renderer.sharedMesh.boneWeights)
                         if(Mathf.Abs(weight.weight0+weight.weight1+weight.weight2+weight.weight3-1)>.002f)throw new Exception("Detailed Rollo unbound vertex");
+                    var normals=renderer.sharedMesh.normals;
+                    for(int submesh=0;submesh<renderer.sharedMaterials.Length;submesh++)
+                    {
+                        string name=renderer.sharedMaterials[submesh].name;
+                        if(!name.Contains(" mouth ")&&!name.Contains(" tongue "))continue;
+                        Vector3 average=Vector3.zero;
+                        foreach(int vertex in renderer.sharedMesh.GetIndices(submesh))average+=normals[vertex];
+                        average=root.transform.InverseTransformDirection(renderer.transform.TransformDirection(average.normalized));
+                        if(Vector3.Dot(average,AvatarArt.LocalFacing(root.transform))<.2f)
+                            throw new Exception("Back-facing detailed Rollo facial cap: "+name);
+                        facialCaps++;
+                    }
                 }
+                if(facialCaps!=2)throw new Exception("Detailed Rollo facial caps missing");
+                Debug.Log("ROLLO_DETAIL_FACE_SMOKE_PASS mouthOutward=true tongueOutward=true");
                 Debug.Log("ROLLO_DETAIL_MOTION_SMOKE_PASS drumRotates=true tailDoesNotSpin=true weightsNormalized=true");
             }
             finally{UnityEngine.Object.DestroyImmediate(root);}
         }
         public static void RenderReview()
         {
-            Directory.CreateDirectory("Builds/RolloDetail");
+            Directory.CreateDirectory("Builds/RolloRefine");
             var oldAmbient=RenderSettings.ambientLight;var oldMode=RenderSettings.ambientMode;
             RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Flat;RenderSettings.ambientLight=new Color(.42f,.48f,.55f);
             var cameraObject=new GameObject("Detailed Rollo review camera");var camera=cameraObject.AddComponent<Camera>();
@@ -70,6 +85,7 @@ namespace BrainrotPlanet.Editor
                 var manifest=SkinCatalog.ReadManifest(File.ReadAllText("Content/OriginalCast/Skins/"+SkinCatalog.CatalogFile));
                 Render(camera,target,null,"classic");
                 foreach(var entry in manifest.skins)if(entry.hero==0)Render(camera,target,entry,entry.id);
+                foreach(string pose in new[]{"Run","Jump","Drop","VictoryShow"})Render(camera,target,null,"pose-"+pose,pose);
             }
             finally
             {
@@ -78,14 +94,22 @@ namespace BrainrotPlanet.Editor
                 RenderSettings.ambientLight=oldAmbient;RenderSettings.ambientMode=oldMode;
             }
         }
-        private static void Render(Camera camera,RenderTexture target,SkinEntry entry,string label)
+        private static void Render(Camera camera,RenderTexture target,SkinEntry entry,string label,string pose=null)
         {
             var root=new GameObject("Detailed Rollo "+label);
             try
             {
                 AvatarArt.Make(root.transform,0,Color.cyan);HeroPreviewFraming.SampleIdle(root.transform);
+                if(pose!=null)
+                {
+                    var visual=SkinRigProfile.Visual(root.transform,0);
+                    bool found=false;
+                    foreach(var clip in visual.GetComponent<Animator>().runtimeAnimatorController.animationClips)
+                        if(clip.name==pose){clip.SampleAnimation(visual.gameObject,clip.length*.43f);found=true;break;}
+                    if(!found)throw new Exception("Detailed Rollo pose missing: "+pose);
+                }
                 if(entry!=null)SkinVisual.Apply(root.transform,SkinCatalog.ReadPack(File.ReadAllBytes("Content/OriginalCast/Skins/"+entry.file),entry));
-                root.transform.rotation=AvatarArt.AlignFacing(AvatarArt.LocalFacing(root.transform),Quaternion.Euler(0,28,0)*Vector3.back);
+                root.transform.rotation=AvatarArt.AlignFacing(AvatarArt.LocalFacing(root.transform),Quaternion.Euler(0,-28,0)*Vector3.back);
                 foreach(var node in root.GetComponentsInChildren<Transform>(true))node.gameObject.layer=30;
                 int triangles=0;foreach(var renderer in root.GetComponentsInChildren<SkinnedMeshRenderer>())triangles+=renderer.sharedMesh.triangles.Length/3;
                 if(triangles>45000)throw new Exception("Detailed Rollo topology exceeds budget "+triangles);
@@ -93,7 +117,7 @@ namespace BrainrotPlanet.Editor
                 bounds=AvatarArt.PoseBounds(root.transform);HeroPreviewFraming.Place(camera,bounds,0,8,1.02f);
                 camera.orthographic=true;camera.orthographicSize=Mathf.Max(bounds.extents.y,bounds.extents.x)*1.12f;camera.Render();
                 var previous=RenderTexture.active;RenderTexture.active=target;var image=new Texture2D(target.width,target.height,TextureFormat.RGB24,false);
-                try{image.ReadPixels(new Rect(0,0,target.width,target.height),0,0);image.Apply();File.WriteAllBytes("Builds/RolloDetail/Unity-"+label+".png",image.EncodeToPNG());}
+                try{image.ReadPixels(new Rect(0,0,target.width,target.height),0,0);image.Apply();File.WriteAllBytes("Builds/RolloRefine/Unity-"+label+".png",image.EncodeToPNG());}
                 finally{RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(image);}
                 Debug.Log("ROLLO_DETAIL_RENDER_PASS variant="+label+" triangles="+triangles+" shader="+root.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.shader.name);
             }

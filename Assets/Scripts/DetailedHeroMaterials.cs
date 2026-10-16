@@ -13,10 +13,10 @@ namespace BrainrotPlanet
             if(shader==null)throw new InvalidOperationException("Detailed hero shader missing");
             var material=new Material(shader){name=source.name,color=color};
             string role=tokens[1],prefix=role=="main"?"Body":role=="accent"?"Roller":null;
-            material.SetFloat("_Glossiness",role=="eye"?.78f:role=="nose"?.56f:role=="accent"?.22f:.35f);
+            material.SetFloat("_Glossiness",role=="eye"||role=="iris"?.70f:role=="nose"?.56f:role=="accent"?.22f:.35f);
             if(prefix!=null)
             {
-                const string folder="OriginalCastDetail/RolloBulk_v03/";
+                const string folder="OriginalCastDetail/RolloBulk_v04/";
                 var albedo=Resources.Load<Texture2D>(folder+prefix+"_Albedo");
                 var normal=Resources.Load<Texture2D>(folder+prefix+"_Normal");
                 if(albedo==null||normal==null)throw new InvalidOperationException("Detailed hero maps missing: "+prefix);
