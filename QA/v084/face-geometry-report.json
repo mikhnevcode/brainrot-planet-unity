@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "source": "RolloBulk_v07_master.blend",
+  "rollerGeometryByteIdenticalToV06": true,
+  "tongueClosed": true,
+  "tongueNonManifoldEdges": 0,
+  "tongueSectionThickness": 0.032,
+  "tongueSectionWidth": 0.24,
+  "tongueThicknessToWidth": 0.1333,
+  "eyeOpeningHeightToWidth": 0.7144,
+  "eyes": 2,
+  "raisedLowerLids": 2,
+  "taperedBrows": 2,
+  "catchlights": 2,
+  "limits": [
+    "Geometry checks, not a measured likeness or happiness score",
+    "Flippers are part of the fused body; their authoring paths are unchanged, not a byte-identical separated mesh claim"
+  ]
+}

@@ -13,6 +13,7 @@ namespace BrainrotPlanet.Editor
         public static void AndroidRollo()=>Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.8.1-rollo-detail-test.apk",false,"0.8.1-rollo-detail-test",71);
         public static void AndroidRolloRefine()=>Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.8.2-rollo-refine-test.apk",false,"0.8.2-rollo-refine-test",72);
         public static void AndroidRolloSculpt()=>Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.8.3-rollo-sculpt-test.apk",false,"0.8.3-rollo-sculpt-test",73);
+        public static void AndroidRolloFace()=>Build(BuildTarget.Android,"Builds/Android/BrainrotPlanet-v0.8.4-rollo-face-test.apk",false,"0.8.4-rollo-face-test",74);
         public static void Windows()=>Build(BuildTarget.StandaloneWindows64,"Builds/Original26Windows/BrainrotPlanet.exe",false);
         public static void Server()=>Build(BuildTarget.StandaloneLinux64,"Builds/Original26Server/BrainrotMatchServer.x86_64",true);
         // Preserve the old assets/GUIDs for history, but do not ship the retired

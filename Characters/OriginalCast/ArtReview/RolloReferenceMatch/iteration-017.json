@@ -1,0 +1,106 @@
+{
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Expression only: horizontally elongated eye openings, lifted lower lids, more visible brown iris edge and arched/tapered brows with a lower inner end."
+  ],
+  "sourceLandmarks": {
+    "hubNear": [
+      1.3,
+      0.79,
+      0.55
+    ],
+    "hubFar": [
+      -1.3,
+      0.79,
+      0.55
+    ],
+    "eyeNear": [
+      0.3500000238418579,
+      0.9152412414550781,
+      3.0442006587982178
+    ],
+    "eyeFar": [
+      -0.3500000834465027,
+      0.9150567054748535,
+      3.044200897216797
+    ],
+    "nose": [
+      -1.3452437774841286e-10,
+      1.2784392833709717,
+      2.8775017261505127
+    ],
+    "crown": [
+      -0.0007549119181931019,
+      0.34075456857681274,
+      3.420381546020508
+    ],
+    "bellyBottom": [
+      0,
+      1.3,
+      1.12
+    ],
+    "flipperNearRoot": [
+      0.97,
+      0.54,
+      2.15
+    ],
+    "flipperNearTip": [
+      1.76,
+      0.96,
+      1.37
+    ],
+    "flipperFarRoot": [
+      -0.97,
+      0.54,
+      2.15
+    ],
+    "flipperFarTip": [
+      -1.76,
+      0.96,
+      1.37
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "landmarkMethod": "Approximate manual pixel landmarks, 1254px concept; diagnostic only; no likeness score.",
+  "master": "ArtReview/RolloReferenceMatch/source-017.blend"
+}

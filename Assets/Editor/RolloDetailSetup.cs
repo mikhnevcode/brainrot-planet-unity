@@ -10,7 +10,7 @@ namespace BrainrotPlanet.Editor
         public static void Prepare()
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
-            foreach(string path in Directory.GetFiles("Assets/Resources/OriginalCastDetail/RolloBulk_v06","*.png"))
+            foreach(string path in Directory.GetFiles("Assets/Resources/OriginalCastDetail/RolloBulk_v07","*.png"))
             {
                 var importer=(TextureImporter)AssetImporter.GetAtPath(path);
                 bool normal=path.Contains("_Normal"),mask=path.Contains("_TintMask")||path.Contains("_AO");
@@ -80,7 +80,7 @@ namespace BrainrotPlanet.Editor
         }
         public static void RenderReview()
         {
-            Directory.CreateDirectory("Builds/RolloSculpt");
+            Directory.CreateDirectory("Builds/RolloFace");
             var oldAmbient=RenderSettings.ambientLight;var oldMode=RenderSettings.ambientMode;
             RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Flat;RenderSettings.ambientLight=new Color(.42f,.48f,.55f);
             var cameraObject=new GameObject("Detailed Rollo review camera");var camera=cameraObject.AddComponent<Camera>();
@@ -130,7 +130,7 @@ namespace BrainrotPlanet.Editor
                 bounds=AvatarArt.PoseBounds(root.transform);HeroPreviewFraming.Place(camera,bounds,0,8,1.02f);
                 camera.orthographic=true;camera.orthographicSize=Mathf.Max(bounds.extents.y,bounds.extents.x)*1.12f;camera.Render();
                 var previous=RenderTexture.active;RenderTexture.active=target;var image=new Texture2D(target.width,target.height,TextureFormat.RGB24,false);
-                try{image.ReadPixels(new Rect(0,0,target.width,target.height),0,0);image.Apply();File.WriteAllBytes("Builds/RolloSculpt/Unity-"+label+".png",image.EncodeToPNG());}
+                try{image.ReadPixels(new Rect(0,0,target.width,target.height),0,0);image.Apply();File.WriteAllBytes("Builds/RolloFace/Unity-"+label+".png",image.EncodeToPNG());}
                 finally{RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(image);}
                 Debug.Log("ROLLO_DETAIL_RENDER_PASS variant="+label+" triangles="+triangles+" shader="+root.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.shader.name);
             }

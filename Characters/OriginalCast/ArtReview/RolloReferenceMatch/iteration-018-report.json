@@ -1,0 +1,97 @@
+{
+  "status": "art-review-only-not-runtime",
+  "iteration": "018",
+  "camera": {
+    "yaw": 25.71932308172176,
+    "pitch": 3.85686628572655e-11,
+    "scale": 4.300000000000001,
+    "shiftX": 0.014129398951842068,
+    "shiftY": -0.07878687652915584
+  },
+  "pose": {
+    "headRoll": -9.999999999999998,
+    "headYaw": 4.999999999999999,
+    "leanForward": 1.3705287221286306
+  },
+  "changed": [
+    "Soften the over-constricted neck; retain broad shoulder silhouette but recess throat below a forward jaw. Extend paired muzzle pads and bridge. Retain 016 tongue/017 expression."
+  ],
+  "projectedLandmarks": {
+    "hubNear": [
+      383.06856071949005,
+      869.0546118021011
+    ],
+    "hubFar": [
+      1066.1835347414017,
+      869.0546865463257
+    ],
+    "eyeNear": [
+      707.8301235437393,
+      128.4442126750946
+    ],
+    "eyeFar": [
+      880.2597427368164,
+      163.46180713176727
+    ],
+    "nose": [
+      845.2140444517136,
+      196.58142149448395
+    ],
+    "crown": [
+      726.3006173372269,
+      33.9581698179245
+    ],
+    "bellyBottom": [
+      790.8763386011124,
+      706.4316591024399
+    ],
+    "flipperNearRoot": [
+      449.5005174279213,
+      379.0806573629379
+    ],
+    "flipperNearTip": [
+      286.2001391351223,
+      631.1739417314529
+    ],
+    "flipperFarRoot": [
+      945.1666556596756,
+      422.0192710161209
+    ],
+    "flipperFarTip": [
+      1211.032759308815,
+      631.1740538477898
+    ]
+  },
+  "referenceLandmarks": {
+    "hubNear": [
+      379,
+      884
+    ],
+    "hubFar": [
+      1063,
+      877
+    ],
+    "eyeNear": [
+      727,
+      129
+    ],
+    "eyeFar": [
+      897,
+      167
+    ],
+    "nose": [
+      838,
+      193
+    ],
+    "crown": [
+      760,
+      31
+    ],
+    "bellyBottom": [
+      782,
+      768
+    ]
+  },
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "source": "ArtReview/RolloReferenceMatch/source-018.blend"
+}

@@ -1,0 +1,24 @@
+{
+  "status": "facial-refinement-production-candidate",
+  "triangles": 974450,
+  "reference": "OriginalConcepts_20261015_v1/01-rollo-bulk.png",
+  "review": "ArtReview/RolloReferenceMatch/iteration-018.json",
+  "features": [
+    "Soft short throat below forward jaw",
+    "Deeper paired muzzle pads and nose bridge",
+    "Thin bent tongue with rounded tip and center groove",
+    "Almond eye opening and lifted lower lid",
+    "Shorter tapered curved brows"
+  ],
+  "unchanged": [
+    "Roller",
+    "Flippers",
+    "Tail",
+    "Skin palette and spotting"
+  ],
+  "technique": "Real mesh anatomy, voxel fusion and scripted local sculpture; not manual brush sculpting",
+  "limits": [
+    "Not pixel-identical to concept",
+    "Art approval separate from technical QA"
+  ]
+}

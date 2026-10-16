@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "version": "0.8.4-rollo-face-test",
+  "versionCode": 74,
+  "apkFile": "BrainrotPlanet-v0.8.4-rollo-face-test-3edae471.apk",
+  "apkSha256": "3edae47197efbbd89828ad2375f89a879760a8567184fbe6f6feb850d39778e6",
+  "apkBytes": 95779707,
+  "scope": "Rollo throat/jaw, paired muzzle, real thin tongue, smiling eye openings and curved tapered brows; other 25 models unchanged",
+  "networkProtocol": 10,
+  "skinCatalogRevision": 7,
+  "mobileTriangles": 42478,
+  "masterTriangles": 974450,
+  "materials": 11,
+  "animations": 8,
+  "bakedMaps": 6,
+  "skins": 5,
+  "device": "RMX2020 NBTK5TZTVC8T9TRG",
+  "menuViews": 156,
+  "editor": "PASS 26 models / 208 clips / 130 skins; normalized weights; outward mouth/tongue; four action renders",
+  "deviceChecks": "PASS 26 menu previews, five Rollo skins, movement/jump/ability, player and Rollo AI victory",
+  "gameplayProfileUnchanged": true,
+  "profileSnapshots": {
+    "menu": "5b6862c56e6cd32fc931c40cde75a3f2c883b199e3808ec0c19ba424db2abbe1",
+    "wardrobe": "006d864d8f1902217d74a256942fd15d2b9acea22a0a4eb818ade97ca65479af"
+  },
+  "geometry": {
+    "schema": 1,
+    "source": "RolloBulk_v07_master.blend",
+    "rollerGeometryByteIdenticalToV06": true,
+    "tongueClosed": true,
+    "tongueNonManifoldEdges": 0,
+    "tongueSectionThickness": 0.032,
+    "tongueSectionWidth": 0.24,
+    "tongueThicknessToWidth": 0.1333,
+    "eyeOpeningHeightToWidth": 0.7144,
+    "eyes": 2,
+    "raisedLowerLids": 2,
+    "taperedBrows": 2,
+    "catchlights": 2,
+    "limits": [
+      "Geometry checks, not a measured likeness or happiness score",
+      "Flippers are part of the fused body; their authoring paths are unchanged, not a byte-identical separated mesh claim"
+    ]
+  },
+  "evidence": [
+    "Builds/rollo-v07-geometry.log",
+    "Builds/rollo-v07-export.log",
+    "Builds/rollo-v07-unity-prepare.log",
+    "Builds/rollo-v07-android-build.log",
+    "Builds/RolloFace/device-menu.log",
+    "Builds/RolloFace/device-wardrobe.log"
+  ],
+  "artReview": "Characters/OriginalCast/ArtReview/RolloReferenceMatch/iteration-018.json",
+  "limits": [
+    "Not pixel-identical; user artistic approval separate from technical QA",
+    "Scripted anatomical sculpture, not manual brush sculpting",
+    "Not a sustained FPS/thermal test",
+    "No new full online-match test; protocol unchanged",
+    "No iOS or production billing changes"
+  ]
+}

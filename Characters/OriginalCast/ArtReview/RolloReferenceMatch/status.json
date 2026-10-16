@@ -1,17 +1,18 @@
 {
   "schema": 1,
-  "candidate": "014",
+  "candidate": "018",
   "reference": "Characters/OriginalConcepts_20261015_v1/01-rollo-bulk.png",
-  "productionSource": "Characters/OriginalCast/sculpt_rollo_v06.py",
-  "productionModel": "Characters/OriginalCast/Models_v06/RolloBulk/RolloBulk_v06_master.blend",
+  "productionSource": "Characters/OriginalCast/sculpt_rollo_v07.py",
+  "productionModel": "Characters/OriginalCast/Models_v07/RolloBulk/RolloBulk_v07_master.blend",
   "cameraPolicy": "Same camera, pose and framing from 001 onward; no per-iteration auto-fit.",
   "technique": "Real Blender mesh, continuous voxel fusion, scripted anatomical sculpture and local mesh edits. No concept projection; no manual brush sculpting claim.",
   "rejected": {
     "002": "Shoulder grab pinched the skin.",
     "004": "Facial vertical warp folded the mesh below the eyes.",
-    "006": "Eye surface sampling hit the upper cheek and folded the cornea."
+    "006": "Eye surface sampling hit the upper cheek and folded the cornea.",
+    "015": "Neck too constricted; softened in 018 while preserving the jaw/throat distinction."
   },
-  "acceptedForTechnicalTesting": ["005", "007", "008", "009", "010", "011", "012", "013", "014"],
+  "retainedSteps": ["005", "007", "008", "009", "010", "011", "012", "013", "014", "016", "017", "018"],
   "steps": {
     "005": "Rebuild face proportions, not a vertical stretch.",
     "007": "Separate upper cheek from lower eyelid; smaller mouth.",
@@ -21,7 +22,10 @@
     "011": "Connect chest marking and preserve teal flippers.",
     "012": "Lower flipper shoulders, broaden near tip.",
     "013": "Shorter, wider tongue and shallower mouth.",
-    "014": "Denser irregular seal markings."
+    "014": "Denser irregular seal markings.",
+    "016": "Replace inflated ellipsoid with thin bent tongue, rounded end and center groove.",
+    "017": "Almond eye openings, lifted lower lids, iris/catchlights, shorter curved tapered brows.",
+    "018": "Soft short throat below jaw, forward paired muzzle and bridge; retained tongue/expression."
   },
   "limits": [
     "Not pixel-identical to the approved concept: silhouette, tail, flipper contour and facial expression still differ.",

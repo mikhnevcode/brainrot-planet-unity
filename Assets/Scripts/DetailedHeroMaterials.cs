@@ -16,7 +16,7 @@ namespace BrainrotPlanet
             material.SetFloat("_Glossiness",role=="eye"||role=="iris"?.77f:role=="nose"?.52f:role=="accent"?.18f:role=="main"?.58f:role=="tongue"?.45f:.35f);
             if(prefix!=null)
             {
-                const string folder="OriginalCastDetail/RolloBulk_v06/";
+                const string folder="OriginalCastDetail/RolloBulk_v07/";
                 var albedo=Resources.Load<Texture2D>(folder+prefix+"_Albedo");
                 var normal=Resources.Load<Texture2D>(folder+prefix+"_Normal");
                 if(albedo==null||normal==null)throw new InvalidOperationException("Detailed hero maps missing: "+prefix);

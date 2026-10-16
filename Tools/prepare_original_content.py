@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 source=ROOT/'Content/OriginalCast/Skins'
-catalog='catalog-original26-v5.json' if '--revision5' in sys.argv else 'catalog-original26-v4.json' if '--revision4' in sys.argv else 'catalog-original26-v3.json' if '--revision3' in sys.argv else 'catalog-original26-v2.json' if '--revision2' in sys.argv else 'catalog-original26-v1.json'
+catalog='catalog-original26-v6.json' if '--revision6' in sys.argv else 'catalog-original26-v5.json' if '--revision5' in sys.argv else 'catalog-original26-v4.json' if '--revision4' in sys.argv else 'catalog-original26-v3.json' if '--revision3' in sys.argv else 'catalog-original26-v2.json' if '--revision2' in sys.argv else 'catalog-original26-v1.json'
 manifest=json.loads((source/catalog).read_text(encoding='utf-8'))
 roster=json.loads((ROOT/'Characters/OriginalCast/roster.json').read_text(encoding='utf-8'))
 assert len(roster['heroes'])==26 and len(manifest['skins'])==130

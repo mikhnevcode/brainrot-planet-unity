@@ -47,7 +47,7 @@ namespace BrainrotPlanet
         public static Hero Get(int hero)
         {if(!Valid(hero))throw new ArgumentOutOfRangeException(nameof(hero));return All[hero];}
         public static int Mechanic(int hero)=>Get(hero).Mechanic;
-        public static string Resource(int hero)=>hero==0?"OriginalCastDetail/RolloBulk_v06":"OriginalCast/"+Get(hero).Id+"_v01";
+        public static string Resource(int hero)=>hero==0?"OriginalCastDetail/RolloBulk_v07":"OriginalCast/"+Get(hero).Id+"_v01";
         public static string[] Names()
         {var values=new string[Count];for(int i=0;i<Count;i++)values[i]=All[i].Name;return values;}
         public static string[] Skills()
